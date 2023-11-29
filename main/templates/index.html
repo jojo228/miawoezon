@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE HTML>
 <html lang="en">
     <head>
@@ -9,12 +10,12 @@
         <meta name="keywords" content=""/>
         <meta name="description" content=""/>
         <!--=============== css  ===============-->
-        <link type="text/css" rel="stylesheet" href="css/reset.css">
-        <link type="text/css" rel="stylesheet" href="css/plugins.css">
-        <link type="text/css" rel="stylesheet" href="css/style.css">
-        <link type="text/css" rel="stylesheet" href="css/color.css">
+        <link type="text/css" rel="stylesheet" href="{% static 'css/reset' %}">
+        <link type="text/css" rel="stylesheet" href="{% static 'css/plugins' %}">
+        <link type="text/css" rel="stylesheet" href="{% static 'css/style' %}">
+        <link type="text/css" rel="stylesheet" href="{% static 'css/color' %}">
         <!--=============== favicons ===============-->
-        <link rel="shortcut icon" href="images/favicon.ico">
+        <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}">
     </head>
     <body>
         <!--loader-->
@@ -32,17 +33,17 @@
                 <div class="header-top fl-wrap">
                     <div class="container">
                         <div class="logo-holder">
-                            <a href="index.html"><img src="images/log.png" alt=""></a>
+                            <a href="index.html"><img src="{% static 'images/log' %}" alt=""></a>
                         </div>
                         <a href="dashboard-add-listing.html" class="add-hotel">Add Your Hotel <span><i class="far fa-plus"></i></span></a>                     
                         <div class="show-reg-form modal-open"><i class="fa fa-sign-in"></i>Sign In</div>
                         <div class="lang-wrap">
-                            <div class="show-lang"><img src="images/lan/1.png" alt=""> <span>Eng</span><i class="fa fa-caret-down"></i></div>
+                            <div class="show-lang"><img src="{% static 'images/lan/1' %}" alt=""> <span>Eng</span><i class="fa fa-caret-down"></i></div>
                             <ul class="lang-tooltip green-bg">
-                                <li><a href="#"><img src="images/lan/4.png" alt=""> De</a></li>
-                                <li><a href="#"><img src="images/lan/5.png" alt=""> It</a></li>
-                                <li><a href="#"><img src="images/lan/2.png" alt=""> Fr</a></li>
-                                <li><a href="#"><img src="images/lan/3.png" alt=""> Es</a></li>
+                                <li><a href="#"><img src="{% static 'images/lan/4' %}" alt=""> De</a></li>
+                                <li><a href="#"><img src="{% static 'images/lan/5' %}" alt=""> It</a></li>
+                                <li><a href="#"><img src="{% static 'images/lan/2' %}" alt=""> Fr</a></li>
+                                <li><a href="#"><img src="{% static 'images/lan/3' %}" alt=""> Es</a></li>
                             </ul>
                         </div>
                         <div class="currency-wrap">
@@ -63,7 +64,7 @@
                         <div class="wishlist-link"><i class="fal fa-heart"></i><span class="wl_counter">3</span></div>
                         <div class="header-user-menu">
                             <div class="header-user-name">
-                                <span><img src="images/avatar/1.jpg" alt=""></span>
+                                <span><img src="{% static 'images/avatar/1.jpg' %}" alt=""></span>
                                 My account
                             </div>
                             <ul>
@@ -154,7 +155,7 @@
                                 <div class="widget-posts fl-wrap">
                                     <ul>
                                         <li class="clearfix">
-                                            <a href="#"  class="widget-posts-img"><img src="images/gal/1.jpg" class="respimg" alt=""></a>
+                                            <a href="#"  class="widget-posts-img"><img src="{% static 'images/gal/1.jpg' %}" class="respimg" alt=""></a>
                                             <div class="widget-posts-descr">
                                                 <a href="#" title="">Park Central</a>
                                                 <div class="listing-rating card-popup-rainingvis" data-starrating2="5"></div>
@@ -163,7 +164,7 @@
                                             </div>
                                         </li>
                                         <li class="clearfix">
-                                            <a href="#"  class="widget-posts-img"><img src="images/gal/1.jpg" class="respimg" alt=""></a>
+                                            <a href="#"  class="widget-posts-img"><img src="{% static 'images/gal/1.jpg' %}" class="respimg" alt=""></a>
                                             <div class="widget-posts-descr">
                                                 <a href="#" title="">Holiday Home</a>
                                                 <div class="listing-rating card-popup-rainingvis" data-starrating2="3"></div>
@@ -172,7 +173,7 @@
                                             </div>
                                         </li>
                                         <li class="clearfix">
-                                            <a href="#"  class="widget-posts-img"><img src="images/gal/1.jpg" class="respimg" alt=""></a>
+                                            <a href="#"  class="widget-posts-img"><img src="{% static 'images/gal/1.jpg' %}" class="respimg" alt=""></a>
                                             <div class="widget-posts-descr">
                                                 <a href="#" title="">Moonlight Hotel</a>
                                                 <div class="listing-rating card-popup-rainingvis" data-starrating2="4"></div>
@@ -256,7 +257,7 @@
                     <!--section -->
                     <section class="hero-section" data-scrollax-parent="true" id="sec1">
                         <div class="hero-parallax">
-                            <div class="bg"  data-bg="images/bg/1.jpg" data-scrollax="properties: { translateY: '200px' }"></div>
+                            <div class="bg"  data-bg="{% static 'images/bg/1.jpg' %}" data-scrollax="properties: { translateY: '200px' }"></div>
                             <div class="overlay op7"></div>
                         </div>
                         <div class="hero-section-wrap fl-wrap">
@@ -323,7 +324,7 @@
                                     <div class="grid-item-holder">
                                         <div class="listing-item-grid">
                                             <div class="listing-counter"><span>79 </span> Hotels</div>
-                                            <img  src="images/city/1.jpg"   alt="">
+                                            <img  src="{% static 'images/city/1.jpg' %}"   alt="">
                                             <div class="listing-item-cat">
                                                 <h3><a href="listing.html">Rome</a></h3>
                                                 <div class="weather-grid"   data-grcity="Rome"></div>
@@ -338,7 +339,7 @@
                                 <div class="gallery-item gallery-item-second">
                                     <div class="grid-item-holder">
                                         <div class="listing-item-grid">
-                                            <img  src="images/city/3.jpg"   alt="">
+                                            <img  src="{% static 'images/city/3.jpg' %}"   alt="">
                                             <div class="listing-counter"><span>43 </span> Hotels</div>
                                             <div class="listing-item-cat">
                                                 <h3><a href="listing.html">Paris</a></h3>
@@ -355,7 +356,7 @@
                                     <div class="grid-item-holder">
                                         <div class="listing-item-grid">
                                             <div class="listing-counter"><span>23 </span> Hotels</div>
-                                            <img  src="images/city/1.jpg"   alt="">
+                                            <img  src="{% static 'images/city/1.jpg' %}"   alt="">
                                             <div class="listing-item-cat">
                                                 <h3><a href="listing.html">London</a></h3>
                                                 <div class="weather-grid"   data-grcity="London"></div>
@@ -371,7 +372,7 @@
                                     <div class="grid-item-holder">
                                         <div class="listing-item-grid">
                                             <div class="listing-counter"><span>57</span> Hotels</div>
-                                            <img  src="images/city/1.jpg"   alt="">
+                                            <img  src="{% static 'images/city/1.jpg' %}"   alt="">
                                             <div class="listing-item-cat">
                                                 <h3><a href="listing.html">Dubai</a></h3>
                                                 <div class="weather-grid"   data-grcity="Dubai"></div>
@@ -387,7 +388,7 @@
                                     <div class="grid-item-holder">
                                         <div class="listing-item-grid">
                                             <div class="listing-counter"><span>122</span> Hotels</div>
-                                            <img  src="images/city/1.jpg"   alt="">
+                                            <img  src="{% static 'images/city/1.jpg' %}"   alt="">
                                             <div class="listing-item-cat">
                                                 <h3><a href="listing.html">New York</a></h3>
                                                 <div class="weather-grid"   data-grcity="New York"></div>
@@ -425,8 +426,8 @@
                                     <div class="listing-item">
                                         <article class="geodir-category-listing fl-wrap">
                                             <div class="geodir-category-img">
-                                                <a href="listing-single.html"><img src="images/gal/1.jpg" alt=""></a>
-                                                <div class="listing-avatar"><a href="author-single.html"><img src="images/avatar/1.jpg" alt=""></a>
+                                                <a href="listing-single.html"><img src="{% static 'images/gal/1.jpg' %}" alt=""></a>
+                                                <div class="listing-avatar"><a href="author-single.html"><img src="{% static 'images/avatar/1.jpg' %}" alt=""></a>
                                                     <span class="avatar-tooltip">Added By  <strong>Alisa Noory</strong></span>
                                                 </div>
                                                 <div class="sale-window">Sale 20%</div>
@@ -472,8 +473,8 @@
                                     <div class="listing-item">
                                         <article class="geodir-category-listing fl-wrap">
                                             <div class="geodir-category-img">
-                                                <a href="listing-single.html"><img src="images/gal/1.jpg" alt=""></a>
-                                                <div class="listing-avatar"><a href="author-single.html"><img src="images/avatar/1.jpg" alt=""></a>
+                                                <a href="listing-single.html"><img src="{% static 'images/gal/1.jpg' %}" alt=""></a>
+                                                <div class="listing-avatar"><a href="author-single.html"><img src="{% static 'images/avatar/1.jpg' %}" alt=""></a>
                                                     <span class="avatar-tooltip">Added By  <strong>Julie Cramp</strong></span>
                                                 </div>
                                                 <div class="sale-window big-sale">Sale 50%</div>
@@ -521,8 +522,8 @@
                                     <div class="listing-item">
                                         <article class="geodir-category-listing fl-wrap">
                                             <div class="geodir-category-img">
-                                                <a href="listing-single.html"><img src="images/gal/1.jpg" alt=""></a>
-                                                <div class="listing-avatar"><a href="author-single.html"><img src="images/avatar/1.jpg" alt=""></a>
+                                                <a href="listing-single.html"><img src="{% static 'images/gal/1.jpg' %}" alt=""></a>
+                                                <div class="listing-avatar"><a href="author-single.html"><img src="{% static 'images/avatar/1.jpg' %}" alt=""></a>
                                                     <span class="avatar-tooltip">Added By  <strong>Andy Moore</strong></span>
                                                 </div>
                                                 <div class="geodir-category-opt">
@@ -569,8 +570,8 @@
                                     <div class="listing-item">
                                         <article class="geodir-category-listing fl-wrap">
                                             <div class="geodir-category-img">
-                                                <a href="listing-single.html"><img src="images/gal/1.jpg" alt=""></a>
-                                                <div class="listing-avatar"><a href="author-single.html"><img src="images/avatar/1.jpg" alt=""></a>
+                                                <a href="listing-single.html"><img src="{% static 'images/gal/1.jpg' %}" alt=""></a>
+                                                <div class="listing-avatar"><a href="author-single.html"><img src="{% static 'images/avatar/1.jpg' %}" alt=""></a>
                                                     <span class="avatar-tooltip">Added By  <strong>Mary Jones</strong></span>
                                                 </div>
                                                 <div class="sale-window">Sale 20%</div>
@@ -618,8 +619,8 @@
                                     <div class="listing-item">
                                         <article class="geodir-category-listing fl-wrap">
                                             <div class="geodir-category-img">
-                                                <a href="listing-single.html"><img src="images/gal/1.jpg" alt=""></a>
-                                                <div class="listing-avatar"><a href="author-single.html"><img src="images/avatar/1.jpg" alt=""></a>
+                                                <a href="listing-single.html"><img src="{% static 'images/gal/1.jpg' %}" alt=""></a>
+                                                <div class="listing-avatar"><a href="author-single.html"><img src="{% static 'images/avatar/1.jpg' %}" alt=""></a>
                                                     <span class="avatar-tooltip">Added By  <strong>Fider Mamby</strong></span>
                                                 </div>
                                                 <div class="sale-window">Sale 10%</div>
@@ -667,8 +668,8 @@
                                     <div class="listing-item">
                                         <article class="geodir-category-listing fl-wrap">
                                             <div class="geodir-category-img">
-                                                <a href="listing-single.html"><img src="images/gal/1.jpg" alt=""></a>
-                                                <div class="listing-avatar"><a href="author-single.html"><img src="images/avatar/1.jpg" alt=""></a>
+                                                <a href="listing-single.html"><img src="{% static 'images/gal/1.jpg' %}" alt=""></a>
+                                                <div class="listing-avatar"><a href="author-single.html"><img src="{% static 'images/avatar/1.jpg' %}" alt=""></a>
                                                     <span class="avatar-tooltip">Added By  <strong>Alisa Noory</strong></span>
                                                 </div>
                                                 <div class="sale-window big-sale">Sale 70%</div>
@@ -720,7 +721,7 @@
                     <!-- section end -->
                     <!--section -->
                     <section class="parallax-section" data-scrollax-parent="true">
-                        <div class="bg"  data-bg="images/bg/1.jpg" data-scrollax="properties: { translateY: '100px' }"></div>
+                        <div class="bg"  data-bg="{% static 'images/bg/1.jpg' %}" data-scrollax="properties: { translateY: '100px' }"></div>
                         <div class="overlay op7"></div>
                         <!--container-->
                         <div class="container">
@@ -743,7 +744,7 @@
                                             <div class="slick-slide-item">
                                                 <div class="hotel-card fl-wrap title-sin_item">
                                                     <div class="geodir-category-img card-post">
-                                                        <a href="listing-single.html"><img src="images/gal/1.jpg" alt=""></a>
+                                                        <a href="listing-single.html"><img src="{% static 'images/gal/1.jpg' %}" alt=""></a>
                                                         <div class="listing-counter">Awg/Night <strong>$85</strong></div>
                                                         <div class="sale-window">Sale 20%</div>
                                                         <div class="geodir-category-opt">
@@ -763,7 +764,7 @@
                                             <div class="slick-slide-item">
                                                 <div class="hotel-card fl-wrap title-sin_item">
                                                     <div class="geodir-category-img">
-                                                        <a href="listing-single.html"><img src="images/gal/1.jpg" alt=""></a>
+                                                        <a href="listing-single.html"><img src="{% static 'images/gal/1.jpg' %}" alt=""></a>
                                                         <div class="listing-counter">Awg/Night <strong>$80</strong></div>
                                                         <div class="sale-window big-sale">Sale 50%</div>
                                                         <div class="geodir-category-opt">
@@ -783,7 +784,7 @@
                                             <div class="slick-slide-item">
                                                 <div class="hotel-card fl-wrap title-sin_item">
                                                     <div class="geodir-category-img">
-                                                        <a href="listing-single.html"><img src="images/gal/1.jpg" alt=""></a>
+                                                        <a href="listing-single.html"><img src="{% static 'images/gal/1.jpg' %}" alt=""></a>
                                                         <div class="listing-counter">Awg/Night <strong>$120</strong></div>
                                                         <div class="sale-window">Sale 10%</div>
                                                         <div class="geodir-category-opt">
@@ -929,11 +930,11 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="collage-image">
-                                        <img src="images/api.png" class="main-collage-image" alt="">
+                                        <img src="{% static 'images/api' %}" class="main-collage-image" alt="">
                                         <div class="images-collage-title color3-bg">Easy<span>Book</span></div>
-                                        <div class="collage-image-min cim_1"><img src="images/api/1.jpg" alt=""></div>
-                                        <div class="collage-image-min cim_2"><img src="images/api/1.jpg" alt=""></div>
-                                        <div class="collage-image-min cim_3"><img src="images/api/1.jpg" alt=""></div>
+                                        <div class="collage-image-min cim_1"><img src="{% static 'images/api/1.jpg' %}" alt=""></div>
+                                        <div class="collage-image-min cim_2"><img src="{% static 'images/api/1.jpg' %}" alt=""></div>
+                                        <div class="collage-image-min cim_3"><img src="{% static 'images/api/1.jpg' %}" alt=""></div>
                                         <div class="collage-image-input">Search <i class="fa fa-search"></i></div>
                                         <div class="collage-image-btn color2-bg">Booking now</div>
                                     </div>
@@ -961,7 +962,7 @@
                                 <!--slick-item -->
                                 <div class="slick-item">
                                     <div class="text-carousel-item">
-                                        <div class="popup-avatar"><img src="images/avatar/1.jpg" alt=""></div>
+                                        <div class="popup-avatar"><img src="{% static 'images/avatar/1.jpg' %}" alt=""></div>
                                         <div class="listing-rating card-popup-rainingvis" data-starrating2="5"> </div>
                                         <div class="review-owner fl-wrap">Milka Antony  - <span>Happy Client</span></div>
                                         <p> "In ut odio libero, at vulputate urna. Nulla tristique mi a massa convallis cursus. Nulla eu mi magna. Etiam suscipit commodo gravida. Lorem ipsum dolor sit amet, conse ctetuer adipiscing elit, sed diam nonu mmy nibh euismod tincidunt ut laoreet dolore magna aliquam erat."</p>
@@ -972,7 +973,7 @@
                                 <!--slick-item -->
                                 <div class="slick-item">
                                     <div class="text-carousel-item">
-                                        <div class="popup-avatar"><img src="images/avatar/1.jpg" alt=""></div>
+                                        <div class="popup-avatar"><img src="{% static 'images/avatar/1.jpg' %}" alt=""></div>
                                         <div class="listing-rating card-popup-rainingvis" data-starrating2="4"> </div>
                                         <div class="review-owner fl-wrap">Milka Antony  - <span>Happy Client</span></div>
                                         <p> "In ut odio libero, at vulputate urna. Nulla tristique mi a massa convallis cursus. Nulla eu mi magna. Etiam suscipit commodo gravida. Lorem ipsum dolor sit amet, conse ctetuer adipiscing elit, sed diam nonu mmy nibh euismod tincidunt ut laoreet dolore magna aliquam erat."</p>
@@ -983,7 +984,7 @@
                                 <!--slick-item -->
                                 <div class="slick-item">
                                     <div class="text-carousel-item">
-                                        <div class="popup-avatar"><img src="images/avatar/1.jpg" alt=""></div>
+                                        <div class="popup-avatar"><img src="{% static 'images/avatar/1.jpg' %}" alt=""></div>
                                         <div class="listing-rating card-popup-rainingvis" data-starrating2="5"> </div>
                                         <div class="review-owner fl-wrap">Milka Antony  - <span>Happy Client</span></div>
                                         <p> "In ut odio libero, at vulputate urna. Nulla tristique mi a massa convallis cursus. Nulla eu mi magna. Etiam suscipit commodo gravida. Lorem ipsum dolor sit amet, conse ctetuer adipiscing elit, sed diam nonu mmy nibh euismod tincidunt ut laoreet dolore magna aliquam erat."</p>
@@ -994,7 +995,7 @@
                                 <!--slick-item -->
                                 <div class="slick-item">
                                     <div class="text-carousel-item">
-                                        <div class="popup-avatar"><img src="images/avatar/1.jpg" alt=""></div>
+                                        <div class="popup-avatar"><img src="{% static 'images/avatar/1.jpg' %}" alt=""></div>
                                         <div class="listing-rating card-popup-rainingvis" data-starrating2="5"> </div>
                                         <div class="review-owner fl-wrap">Milka Antony  - <span>Happy Client</span></div>
                                         <p> "In ut odio libero, at vulputate urna. Nulla tristique mi a massa convallis cursus. Nulla eu mi magna. Etiam suscipit commodo gravida. Lorem ipsum dolor sit amet, conse ctetuer adipiscing elit, sed diam nonu mmy nibh euismod tincidunt ut laoreet dolore magna aliquam erat."</p>
@@ -1008,7 +1009,7 @@
                     </section>
                     <!-- section end-->
                     <section class="parallax-section" data-scrollax-parent="true">
-                        <div class="bg"  data-bg="images/bg/1.jpg" data-scrollax="properties: { translateY: '100px' }"></div>
+                        <div class="bg"  data-bg="{% static 'images/bg/1.jpg' %}" data-scrollax="properties: { translateY: '100px' }"></div>
                         <div class="overlay"></div>
                         <!--container-->
                         <div class="container">
@@ -1041,12 +1042,12 @@
                                 <div class="col-md-4">
                                     <article class="card-post">
                                         <div class="card-post-img fl-wrap">
-                                            <a href="blog-single.html"><img  src="images/all/1.jpg"   alt=""></a>
+                                            <a href="blog-single.html"><img  src="{% static 'images/all/1.jpg' %}"   alt=""></a>
                                         </div>
                                         <div class="card-post-content fl-wrap">
                                             <h3><a href="blog-single.html">Blog Post Title.</a></h3>
                                             <p>In ut odio libero, at vulputate urna. Nulla tristique mi a massa convallis cursus. Nulla eu mi magna. Etiam suscipit commodo gravida. </p>
-                                            <div class="post-author"><a href="#"><img src="images/avatar/1.jpg" alt=""><span>By , Mery Lynn</span></a></div>
+                                            <div class="post-author"><a href="#"><img src="{% static 'images/avatar/1.jpg' %}" alt=""><span>By , Mery Lynn</span></a></div>
                                             <div class="post-opt">
                                                 <ul>
                                                     <li><i class="fal fa-calendar"></i> <span>25 April 2018</span></li>
@@ -1063,9 +1064,9 @@
                                             <div class="list-single-main-media fl-wrap">
                                                 <div class="single-slider-wrapper fl-wrap">
                                                     <div class="single-slider fl-wrap"  >
-                                                        <div class="slick-slide-item"><img src="images/all/1.jpg" alt=""></div>
-                                                        <div class="slick-slide-item"><img src="images/all/1.jpg" alt=""></div>
-                                                        <div class="slick-slide-item"><img src="images/all/1.jpg" alt=""></div>
+                                                        <div class="slick-slide-item"><img src="{% static 'images/all/1.jpg' %}" alt=""></div>
+                                                        <div class="slick-slide-item"><img src="{% static 'images/all/1.jpg' %}" alt=""></div>
+                                                        <div class="slick-slide-item"><img src="{% static 'images/all/1.jpg' %}" alt=""></div>
                                                     </div>
                                                     <div class="swiper-button-prev sw-btn"><i class="fa fa-long-arrow-left"></i></div>
                                                     <div class="swiper-button-next sw-btn"><i class="fa fa-long-arrow-right"></i></div>
@@ -1075,7 +1076,7 @@
                                         <div class="card-post-content fl-wrap">
                                             <h3><a href="blog-single.html">Blog Post Title.</a></h3>
                                             <p>In ut odio libero, at vulputate urna. Nulla tristique mi a massa convallis cursus. Nulla eu mi magna. Etiam suscipit commodo gravida. </p>
-                                            <div class="post-author"><a href="#"><img src="images/avatar/1.jpg" alt=""><span>By , Mery Lynn</span></a></div>
+                                            <div class="post-author"><a href="#"><img src="{% static 'images/avatar/1.jpg' %}" alt=""><span>By , Mery Lynn</span></a></div>
                                             <div class="post-opt">
                                                 <ul>
                                                     <li><i class="fal fa-calendar"></i> <span>25 April 2018</span></li>
@@ -1089,12 +1090,12 @@
                                 <div class="col-md-4">
                                     <article class="card-post">
                                         <div class="card-post-img fl-wrap">
-                                            <a href="blog-single.html"><img  src="images/all/1.jpg"   alt=""></a>
+                                            <a href="blog-single.html"><img  src="{% static 'images/all/1.jpg' %}"   alt=""></a>
                                         </div>
                                         <div class="card-post-content fl-wrap">
                                             <h3><a href="blog-single.html">Blog Post Title.</a></h3>
                                             <p>In ut odio libero, at vulputate urna. Nulla tristique mi a massa convallis cursus. Nulla eu mi magna. Etiam suscipit commodo gravida. </p>
-                                            <div class="post-author"><a href="#"><img src="images/avatar/1.jpg" alt=""><span>By , Mery Lynn</span></a></div>
+                                            <div class="post-author"><a href="#"><img src="{% static 'images/avatar/1.jpg' %}" alt=""><span>By , Mery Lynn</span></a></div>
                                             <div class="post-opt">
                                                 <ul>
                                                     <li><i class="fal fa-calendar"></i> <span>25 April 2018</span></li>
@@ -1163,32 +1164,32 @@
                                         <div class="footer-carousel fl-wrap">
                                             <!--footer-carousel-item-->
                                             <div class="footer-carousel-item">
-                                                <a href="#"><img src="images/partners/1.png" alt=""></a>
+                                                <a href="#"><img src="{% static 'images/partners/1' %}" alt=""></a>
                                             </div>
                                             <!--footer-carousel-item end-->
                                             <!--footer-carousel-item-->
                                             <div class="footer-carousel-item">
-                                                <a href="#"><img src="images/partners/1.png" alt=""></a>
+                                                <a href="#"><img src="{% static 'images/partners/1' %}" alt=""></a>
                                             </div>
                                             <!--footer-carousel-item end-->                             
                                             <!--footer-carousel-item-->
                                             <div class="footer-carousel-item">
-                                                <a href="#"><img src="images/partners/1.png" alt=""></a>
+                                                <a href="#"><img src="{% static 'images/partners/1' %}" alt=""></a>
                                             </div>
                                             <!--footer-carousel-item end-->
                                             <!--footer-carousel-item-->
                                             <div class="footer-carousel-item">
-                                                <a href="#"><img src="images/partners/1.png" alt=""></a>
+                                                <a href="#"><img src="{% static 'images/partners/1' %}" alt=""></a>
                                             </div>
                                             <!--footer-carousel-item end-->      
                                             <!--footer-carousel-item-->
                                             <div class="footer-carousel-item">
-                                                <a href="#"><img src="images/partners/1.png" alt=""></a>
+                                                <a href="#"><img src="{% static 'images/partners/1' %}" alt=""></a>
                                             </div>
                                             <!--footer-carousel-item end-->
                                             <!--footer-carousel-item-->
                                             <div class="footer-carousel-item">
-                                                <a href="#"><img src="images/partners/1.png" alt=""></a>
+                                                <a href="#"><img src="{% static 'images/partners/1' %}" alt=""></a>
                                             </div>
                                             <!--footer-carousel-item end-->                                     
                                         </div>
@@ -1232,21 +1233,21 @@
                                     <div class="widget-posts fl-wrap">
                                         <ul>
                                             <li class="clearfix">
-                                                <a href="#"  class="widget-posts-img"><img src="images/all/1.jpg" class="respimg" alt=""></a>
+                                                <a href="#"  class="widget-posts-img"><img src="{% static 'images/all/1.jpg' %}" class="respimg" alt=""></a>
                                                 <div class="widget-posts-descr">
                                                     <a href="#" title="">Vivamus dapibus rutrum</a>
                                                     <span class="widget-posts-date"> 21 Mar 09.05 </span>
                                                 </div>
                                             </li>
                                             <li class="clearfix">
-                                                <a href="#"  class="widget-posts-img"><img src="images/all/1.jpg" class="respimg" alt=""></a>
+                                                <a href="#"  class="widget-posts-img"><img src="{% static 'images/all/1.jpg' %}" class="respimg" alt=""></a>
                                                 <div class="widget-posts-descr">
                                                     <a href="#" title=""> In hac habitasse platea</a>
                                                     <span class="widget-posts-date"> 7 Mar 18.21 </span>
                                                 </div>
                                             </li>
                                             <li class="clearfix">
-                                                <a href="#"  class="widget-posts-img"><img src="images/all/1.jpg" class="respimg" alt=""></a>
+                                                <a href="#"  class="widget-posts-img"><img src="{% static 'images/all/1.jpg' %}" class="respimg" alt=""></a>
                                                 <div class="widget-posts-descr">
                                                     <a href="#" title="">Tortor tempor in porta</a>
                                                     <span class="widget-posts-date"> 7 Mar 16.42 </span>
@@ -1403,10 +1404,10 @@
         </div>
         <!-- Main end -->
         <!--=============== scripts  ===============-->
-        <script type="text/javascript" src="js/jquery.min.js"></script>
-        <script type="text/javascript" src="js/plugins.js"></script>
-        <script type="text/javascript" src="js/scripts.js"></script>
+        <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/plugins.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/scripts.js' %}"></script>
         <script src="https://maps.googleapis.com/maps/api/js?key=YOURAPIKEYHERE&libraries=places&callback=initAutocomplete"></script> 
-        <script type="text/javascript" src="js/map-single.js"></script>         
+        <script type="text/javascript" src="{% static 'js/map-single.js' %}"></script>         
     </body>
 </html>
