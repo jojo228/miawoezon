@@ -10,10 +10,10 @@
         <meta name="keywords" content=""/>
         <meta name="description" content=""/>
         <!--=============== css  ===============-->
-        <link type="text/css" rel="stylesheet" href="{% static 'css/reset' %}">
-        <link type="text/css" rel="stylesheet" href="{% static 'css/plugins' %}">
-        <link type="text/css" rel="stylesheet" href="{% static 'css/style' %}">
-        <link type="text/css" rel="stylesheet" href="{% static 'css/color' %}">
+        <link type="text/css" rel="stylesheet" href="{% static 'css/reset.css' %}">
+        <link type="text/css" rel="stylesheet" href="{% static 'css/plugins.css' %}">
+        <link type="text/css" rel="stylesheet" href="{% static 'css/style.css' %}">
+        <link type="text/css" rel="stylesheet" href="{% static 'css/color.css' %}">
         <!--=============== favicons ===============-->
         <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}">
     </head>
@@ -35,7 +35,7 @@
                         <div class="logo-holder">
                             <a href="index.html"><img src="{% static 'images/log' %}" alt=""></a>
                         </div>
-                        <a href="dashboard-add-listing.html" class="add-hotel">Add Your Hotel <span><i class="far fa-plus"></i></span></a>                     
+                        <a href="{% url 'dashboard-add-listing' %}" class="add-hotel">Add Your Hotel <span><i class="far fa-plus"></i></span></a>                     
                         <div class="show-reg-form modal-open"><i class="fa fa-sign-in"></i>Sign In</div>
                         <div class="lang-wrap">
                             <div class="show-lang"><img src="{% static 'images/lan/1' %}" alt=""> <span>Eng</span><i class="fa fa-caret-down"></i></div>
@@ -68,14 +68,14 @@
                                 My account
                             </div>
                             <ul>
-                                <li><a href="dashboard-myprofile.html"> Edit profile</a></li>
-                                <li><a href="dashboard-add-listing.html"> Add Listing</a></li>
-                                <li><a href="dashboard-bookings.html">  Bookings  </a></li>
-                                <li><a href="dashboard-review.html"> Reviews </a></li>
+                                <li><a href="{% url 'dashboard-myprofile' %}"> Edit profile</a></li>
+                                <li><a href="{% url 'dashboard-add-listing' %}"> Add Listing</a></li>
+                                <li><a href="{% url 'dashboard-bookings' %}">  Bookings  </a></li>
+                                <li><a href="{% url 'dashboard-review' %}"> Reviews </a></li>
                                 <li><a href="#">Log Out</a></li>
                             </ul>
                         </div>
-                        <div class="home-btn"><a href="index.html"><i class="fas fa-home"></i></a></div>
+                        <div class="home-btn"><a href="{% url 'home' %}"><i class="fas fa-home"></i></a></div>
                         <!-- nav-button-wrap-->
                         <div class="nav-button-wrap color-bg">
                             <div class="nav-button">
@@ -88,13 +88,13 @@
                             <nav>
                                 <ul>
                                     <li>
-                                        <a href="#" class="act-link">Home <i class="fas fa-caret-down"></i></a>
+                                        <a href="{% url 'home' %}" class="act-link">Home <i class="fas fa-caret-down"></i></a>
                                         <!--second level -->
                                         <ul>
-                                            <li><a href="index.html">Parallax Image</a></li>
-                                            <li><a href="index2.html">Slider</a></li>
-                                            <li><a href="index3.html">Video</a></li>
-                                            <li><a href="index4.html">Slideshow</a></li>
+                                            <li><a href="{% url 'home' %}">Parallax Image</a></li>
+                                            <li><a href="{% url 'index2' %}">Slider</a></li>
+                                            <li><a href="{% url 'index3' %}">Video</a></li>
+                                            <li><a href="{% url 'index4' %}">Slideshow</a></li>
                                         </ul>
                                         <!--second level end-->
                                     </li>
@@ -102,20 +102,20 @@
                                         <a href="#">Listings <i class="fas fa-caret-down"></i></a>
                                         <!--second level -->
                                         <ul>
-                                            <li><a href="listing.html">Column map</a></li>
-                                            <li><a href="listing6.html">Column map 2</a></li>
-                                            <li><a href="listing2.html">Fullwidth Map</a></li>
-                                            <li><a href="listing3.html">Fullwidth Map 2</a></li>
-                                            <li><a href="listing4.html">Without Map</a></li>
-                                            <li><a href="listing5.html">Without Map 2</a></li>
+                                            <li><a href="{% url 'listing' %}">Column map</a></li>
+                                            <li><a href="{% url 'listing6' %}">Column map 2</a></li>
+                                            <li><a href="{% url 'listing2' %}">Fullwidth Map</a></li>
+                                            <li><a href="{% url 'listing3' %}">Fullwidth Map 2</a></li>
+                                            <li><a href="{% url 'listing4' %}">Without Map</a></li>
+                                            <li><a href="{% url 'listing5' %}">Without Map 2</a></li>
                                             <li>
                                                 <a href="#">Single <i class="fas fa-caret-down"></i></a>
                                                 <!--third  level  -->
                                                 <ul>
-                                                    <li><a href="listing-single.html">Style 1</a></li>
-                                                    <li><a href="listing-single2.html">Style 2</a></li>
-                                                    <li><a href="listing-single3.html">Style 3</a></li>
-                                                    <li><a href="listing-single4.html">Style 4</a></li>
+                                                    <li><a href="{% url 'listing-single' %}">Style 1</a></li>
+                                                    <li><a href="{% url 'listing-single2' %}">Style 2</a></li>
+                                                    <li><a href="{% url 'listing-single3' %}">Style 3</a></li>
+                                                    <li><a href="{% url 'listing-single4' %}">Style 4</a></li>
                                                 </ul>
                                                 <!--third  level end-->
                                             </li>
@@ -123,25 +123,25 @@
                                         <!--second level end-->
                                     </li>
                                     <li>
-                                        <a href="blog.html">News</a>
+                                        <a href="{% url 'blog' %}">News</a>
                                     </li>
                                     <li>
                                         <a href="#">Pages <i class="fas fa-caret-down"></i></a>
                                         <!--second level -->
                                         <ul>
-                                            <li><a href="about.html">About</a></li>
-                                            <li><a href="contacts.html">Contacts</a></li>
-                                            <li><a href="author-single.html">User single</a></li>
-                                            <li><a href="help.html">Help FAQ</a></li>
-                                            <li><a href="pricing-tables.html">Pricing</a></li>
-                                            <li><a href="booking-single.html">Booking</a></li>
-                                            <li><a href="dashboard.html">User Dashboard</a></li>
-                                            <li><a href="blog2.html">Blog Classik</a></li>
-                                            <li><a href="blog-single.html">Blog Single</a></li>
-                                            <li><a href="dashboard-add-listing.html">Add Listing</a></li>
-                                            <li><a href="404.html">404</a></li>
-                                            <li><a href="invoice.html">Invoice</a></li>
-                                            <li><a href="coming-soon.html">Coming Soon</a></li>
+                                            <li><a href="{% url 'about' %}">About</a></li>
+                                            <li><a href="{% url 'contacts' %}">Contacts</a></li>
+                                            <li><a href="{% url 'author-single' %}">User single</a></li>
+                                            <li><a href="{% url 'help' %}">Help FAQ</a></li>
+                                            <li><a href="{% url 'pricing-tables' %}">Pricing</a></li>
+                                            <li><a href="{% url 'booking-single' %}">Booking</a></li>
+                                            <li><a href="{% url 'dashboard' %}">User Dashboard</a></li>
+                                            <li><a href="{% url 'blog2' %}">Blog Classik</a></li>
+                                            <li><a href="{% url 'blog-single' %}">Blog Single</a></li>
+                                            <li><a href="{% url 'dashboard-add-listing' %}">Add Listing</a></li>
+                                            <li><a href="{% url 'error-page' %}">404</a></li>
+                                            <li><a href="{% url 'invoice' %}">Invoice</a></li>
+                                            <li><a href="{% url 'coming-soon' %}">Coming Soon</a></li>
                                         </ul>
                                         <!--second level end-->
                                     </li>
@@ -249,6 +249,7 @@
                 </div>
                 <!-- header-search  end -->
             </header>
+            {% block content  %}
             <!--  header end -->
             <!--  wrapper  -->
             <div id="wrapper">
@@ -297,7 +298,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <button class="main-search-button color2-bg" onclick="window.location.href='listing.html'">Search <i class="fal fa-search"></i></button>
+                                        <button class="main-search-button color2-bg" onclick="window.location.href='{% url 'listing' %}'">Search <i class="fal fa-search"></i></button>
+
                                     </div>
                                 </div>
                             </div>
@@ -326,7 +328,7 @@
                                             <div class="listing-counter"><span>79 </span> Hotels</div>
                                             <img  src="{% static 'images/city/1.jpg' %}"   alt="">
                                             <div class="listing-item-cat">
-                                                <h3><a href="listing.html">Rome</a></h3>
+                                                <h3><a href="{% url 'listing' %}">Rome</a></h3>
                                                 <div class="weather-grid"   data-grcity="Rome"></div>
                                                 <div class="clearfix"></div>
                                                 <p>Constant care and attention to the patients makes good record</p>
@@ -342,7 +344,7 @@
                                             <img  src="{% static 'images/city/3.jpg' %}"   alt="">
                                             <div class="listing-counter"><span>43 </span> Hotels</div>
                                             <div class="listing-item-cat">
-                                                <h3><a href="listing.html">Paris</a></h3>
+                                                <h3><a href="{% url 'listing' %}">Paris</a></h3>
                                                 <div class="weather-grid"   data-grcity="Paris"></div>
                                                 <div class="clearfix"></div>
                                                 <p>Constant care and attention to the patients makes good record</p>
@@ -358,7 +360,7 @@
                                             <div class="listing-counter"><span>23 </span> Hotels</div>
                                             <img  src="{% static 'images/city/1.jpg' %}"   alt="">
                                             <div class="listing-item-cat">
-                                                <h3><a href="listing.html">London</a></h3>
+                                                <h3><a href="{% url 'listing' %}">London</a></h3>
                                                 <div class="weather-grid"   data-grcity="London"></div>
                                                 <div class="clearfix"></div>
                                                 <p>Constant care and attention to the patients makes good record</p>
@@ -374,7 +376,7 @@
                                             <div class="listing-counter"><span>57</span> Hotels</div>
                                             <img  src="{% static 'images/city/1.jpg' %}"   alt="">
                                             <div class="listing-item-cat">
-                                                <h3><a href="listing.html">Dubai</a></h3>
+                                                <h3><a href="{% url 'listing' %}">Dubai</a></h3>
                                                 <div class="weather-grid"   data-grcity="Dubai"></div>
                                                 <div class="clearfix"></div>
                                                 <p>Constant care and attention to the patients makes good record</p>
@@ -390,7 +392,7 @@
                                             <div class="listing-counter"><span>122</span> Hotels</div>
                                             <img  src="{% static 'images/city/1.jpg' %}"   alt="">
                                             <div class="listing-item-cat">
-                                                <h3><a href="listing.html">New York</a></h3>
+                                                <h3><a href="{% url 'listing' %}">New York</a></h3>
                                                 <div class="weather-grid"   data-grcity="New York"></div>
                                                 <div class="clearfix"></div>
                                                 <p>Constant care and attention to the patients makes good record</p>
@@ -401,7 +403,7 @@
                                 <!-- gallery-item end-->
                             </div>
                             <!-- portfolio end -->
-                            <a href="listing.html" class="btn    color-bg">Explore All Cities<i class="fas fa-caret-right"></i></a>
+                            <a href="{% url 'listing' %}" class="btn    color-bg">Explore All Cities<i class="fas fa-caret-right"></i></a>
                     </section>
                     <!-- section end -->
                     <!-- section-->
@@ -426,8 +428,8 @@
                                     <div class="listing-item">
                                         <article class="geodir-category-listing fl-wrap">
                                             <div class="geodir-category-img">
-                                                <a href="listing-single.html"><img src="{% static 'images/gal/1.jpg' %}" alt=""></a>
-                                                <div class="listing-avatar"><a href="author-single.html"><img src="{% static 'images/avatar/1.jpg' %}" alt=""></a>
+                                                <a href="{% url 'listing-single' %}"><img src="{% static 'images/gal/1.jpg' %}" alt=""></a>
+                                                <div class="listing-avatar"><a href="{% url 'author-single' %}"><img src="{% static 'images/avatar/1.jpg' %}" alt=""></a>
                                                     <span class="avatar-tooltip">Added By  <strong>Alisa Noory</strong></span>
                                                 </div>
                                                 <div class="sale-window">Sale 20%</div>
@@ -442,7 +444,7 @@
                                             <div class="geodir-category-content fl-wrap title-sin_item">
                                                 <div class="geodir-category-content-title fl-wrap">
                                                     <div class="geodir-category-content-title-item">
-                                                        <h3 class="title-sin_map"><a href="listing-single.html">Premium Plaza Hotel</a></h3>
+                                                        <h3 class="title-sin_map"><a href="{% url 'listing-single' %}">Premium Plaza Hotel</a></h3>
                                                         <div class="geodir-category-location fl-wrap"><a href="#" class="map-item"><i class="fas fa-map-marker-alt"></i> 27th Brooklyn New York, USA</a></div>
                                                     </div>
                                                 </div>
@@ -473,8 +475,8 @@
                                     <div class="listing-item">
                                         <article class="geodir-category-listing fl-wrap">
                                             <div class="geodir-category-img">
-                                                <a href="listing-single.html"><img src="{% static 'images/gal/1.jpg' %}" alt=""></a>
-                                                <div class="listing-avatar"><a href="author-single.html"><img src="{% static 'images/avatar/1.jpg' %}" alt=""></a>
+                                                <a href="{% url 'listing-single' %}"><img src="{% static 'images/gal/1.jpg' %}" alt=""></a>
+                                                <div class="listing-avatar"><a href="{% url 'author-single' %}"><img src="{% static 'images/avatar/1.jpg' %}" alt=""></a>
                                                     <span class="avatar-tooltip">Added By  <strong>Julie Cramp</strong></span>
                                                 </div>
                                                 <div class="sale-window big-sale">Sale 50%</div>
@@ -489,7 +491,7 @@
                                             <div class="geodir-category-content fl-wrap title-sin_item">
                                                 <div class="geodir-category-content-title fl-wrap">
                                                     <div class="geodir-category-content-title-item">
-                                                        <h3 class="title-sin_map"><a href="listing-single.html">Grand Hero Palace</a></h3>
+                                                        <h3 class="title-sin_map"><a href="{% url 'listing-single' %}">Grand Hero Palace</a></h3>
                                                         <div class="geodir-category-location fl-wrap"><a href="#" class="map-item"><i class="fas fa-map-marker-alt"></i> W 85th St, New York,  USA</a></div>
                                                     </div>
                                                 </div>
@@ -522,7 +524,7 @@
                                     <div class="listing-item">
                                         <article class="geodir-category-listing fl-wrap">
                                             <div class="geodir-category-img">
-                                                <a href="listing-single.html"><img src="{% static 'images/gal/1.jpg' %}" alt=""></a>
+                                                <a href="{% url 'listing-single' %}"><img src="{% static 'images/gal/1.jpg' %}" alt=""></a>
                                                 <div class="listing-avatar"><a href="author-single.html"><img src="{% static 'images/avatar/1.jpg' %}" alt=""></a>
                                                     <span class="avatar-tooltip">Added By  <strong>Andy Moore</strong></span>
                                                 </div>
@@ -537,7 +539,7 @@
                                             <div class="geodir-category-content fl-wrap title-sin_item">
                                                 <div class="geodir-category-content-title fl-wrap">
                                                     <div class="geodir-category-content-title-item">
-                                                        <h3 class="title-sin_map"><a href="listing-single.html">Park Central</a></h3>
+                                                        <h3 class="title-sin_map"><a href="{% url 'listing-single' %}">Park Central</a></h3>
                                                         <div class="geodir-category-location fl-wrap"><a href="#" class="map-item"><i class="fas fa-map-marker-alt"></i>40 Journal Square Plaza, NJ,  USA</a></div>
                                                     </div>
                                                 </div>
@@ -570,8 +572,8 @@
                                     <div class="listing-item">
                                         <article class="geodir-category-listing fl-wrap">
                                             <div class="geodir-category-img">
-                                                <a href="listing-single.html"><img src="{% static 'images/gal/1.jpg' %}" alt=""></a>
-                                                <div class="listing-avatar"><a href="author-single.html"><img src="{% static 'images/avatar/1.jpg' %}" alt=""></a>
+                                                <a href="{% url 'listing-single' %}"><img src="{% static 'images/gal/1.jpg' %}" alt=""></a>
+                                                <div class="listing-avatar"><a href="{% url 'author-single' %}.html"><img src="{% static 'images/avatar/1.jpg' %}" alt=""></a>
                                                     <span class="avatar-tooltip">Added By  <strong>Mary Jones</strong></span>
                                                 </div>
                                                 <div class="sale-window">Sale 20%</div>
@@ -586,7 +588,7 @@
                                             <div class="geodir-category-content fl-wrap title-sin_item">
                                                 <div class="geodir-category-content-title fl-wrap">
                                                     <div class="geodir-category-content-title-item">
-                                                        <h3 class="title-sin_map"><a href="listing-single.html">Holiday Home</a></h3>
+                                                        <h3 class="title-sin_map"><a href="{% url 'listing-single' %}">Holiday Home</a></h3>
                                                         <div class="geodir-category-location fl-wrap"><a href="#" class="map-item"><i class="fas fa-map-marker-alt"></i> 75 Prince St,  NY, USA</a></div>
                                                     </div>
                                                 </div>
@@ -619,8 +621,8 @@
                                     <div class="listing-item">
                                         <article class="geodir-category-listing fl-wrap">
                                             <div class="geodir-category-img">
-                                                <a href="listing-single.html"><img src="{% static 'images/gal/1.jpg' %}" alt=""></a>
-                                                <div class="listing-avatar"><a href="author-single.html"><img src="{% static 'images/avatar/1.jpg' %}" alt=""></a>
+                                                <a href="{% url 'listing-single' %}"><img src="{% static 'images/gal/1.jpg' %}" alt=""></a>
+                                                <div class="listing-avatar"><a href="{% url 'author-single' %}"><img src="{% static 'images/avatar/1.jpg' %}" alt=""></a>
                                                     <span class="avatar-tooltip">Added By  <strong>Fider Mamby</strong></span>
                                                 </div>
                                                 <div class="sale-window">Sale 10%</div>
@@ -635,7 +637,7 @@
                                             <div class="geodir-category-content fl-wrap title-sin_item">
                                                 <div class="geodir-category-content-title fl-wrap">
                                                     <div class="geodir-category-content-title-item">
-                                                        <h3 class="title-sin_map"><a href="listing-single.html">Gold Plaza Hotel</a></h3>
+                                                        <h3 class="title-sin_map"><a href="{% url 'listing-single' %}">Gold Plaza Hotel</a></h3>
                                                         <div class="geodir-category-location fl-wrap"><a href="#" class="map-item"><i class="fas fa-map-marker-alt"></i> 34-42 Montgomery St , NY, USA</a></div>
                                                     </div>
                                                 </div>
@@ -668,8 +670,8 @@
                                     <div class="listing-item">
                                         <article class="geodir-category-listing fl-wrap">
                                             <div class="geodir-category-img">
-                                                <a href="listing-single.html"><img src="{% static 'images/gal/1.jpg' %}" alt=""></a>
-                                                <div class="listing-avatar"><a href="author-single.html"><img src="{% static 'images/avatar/1.jpg' %}" alt=""></a>
+                                                <a href="{% url 'listing-single' %}"><img src="{% static 'images/gal/1.jpg' %}" alt=""></a>
+                                                <div class="listing-avatar"><a href="{% url 'author-single' %}"><img src="{% static 'images/avatar/1.jpg' %}" alt=""></a>
                                                     <span class="avatar-tooltip">Added By  <strong>Alisa Noory</strong></span>
                                                 </div>
                                                 <div class="sale-window big-sale">Sale 70%</div>
@@ -684,7 +686,7 @@
                                             <div class="geodir-category-content fl-wrap title-sin_item">
                                                 <div class="geodir-category-content-title fl-wrap">
                                                     <div class="geodir-category-content-title-item">
-                                                        <h3 class="title-sin_map"><a href="listing-single.html">Moonlight Hotel</a></h3>
+                                                        <h3 class="title-sin_map"><a href="{% url 'listing-single' %}">Moonlight Hotel</a></h3>
                                                         <div class="geodir-category-location fl-wrap"><a href="#" class="map-item"><i class="fas fa-map-marker-alt"></i> 70 Bright St New York, USA</a></div>
                                                     </div>
                                                 </div>
@@ -731,7 +733,7 @@
                                         <div class="colomn-text-title">
                                             <h3>Most Popular Hotels</h3>
                                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla finibus lobortis pulvinar.</p>
-                                            <a href="listing.html" class="btn  color2-bg float-btn">View All Hotels<i class="fas fa-caret-right"></i></a>
+                                            <a href="{% url 'listing' %}" class="btn  color2-bg float-btn">View All Hotels<i class="fas fa-caret-right"></i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -744,12 +746,12 @@
                                             <div class="slick-slide-item">
                                                 <div class="hotel-card fl-wrap title-sin_item">
                                                     <div class="geodir-category-img card-post">
-                                                        <a href="listing-single.html"><img src="{% static 'images/gal/1.jpg' %}" alt=""></a>
+                                                        <a href="{% url 'listing-single' %}"><img src="{% static 'images/gal/1.jpg' %}" alt=""></a>
                                                         <div class="listing-counter">Awg/Night <strong>$85</strong></div>
                                                         <div class="sale-window">Sale 20%</div>
                                                         <div class="geodir-category-opt">
                                                             <div class="listing-rating card-popup-rainingvis" data-starrating2="5"></div>
-                                                            <h4 class="title-sin_map"><a href="listing-single.html">Moonlight Hotel</a></h4>
+                                                            <h4 class="title-sin_map"><a href="{% url 'listing-single' %}">Moonlight Hotel</a></h4>
                                                             <div class="geodir-category-location"><a href="#" class="single-map-item" data-newlatitude="40.90261483" data-newlongitude="-74.15737152"><i class="fas fa-map-marker-alt"></i> 75 Prince St,  NY, USA</a></div>
                                                             <div class="rate-class-name">
                                                                 <div class="score"><strong> Good</strong>8 Reviews </div>
@@ -764,12 +766,12 @@
                                             <div class="slick-slide-item">
                                                 <div class="hotel-card fl-wrap title-sin_item">
                                                     <div class="geodir-category-img">
-                                                        <a href="listing-single.html"><img src="{% static 'images/gal/1.jpg' %}" alt=""></a>
+                                                        <a href="{% url 'listing-single' %}"><img src="{% static 'images/gal/1.jpg' %}" alt=""></a>
                                                         <div class="listing-counter">Awg/Night <strong>$80</strong></div>
                                                         <div class="sale-window big-sale">Sale 50%</div>
                                                         <div class="geodir-category-opt">
                                                             <div class="listing-rating card-popup-rainingvis" data-starrating2="5"></div>
-                                                            <h4 class="title-sin_map"><a href="listing-single.html">Holiday Home</a></h4>
+                                                            <h4 class="title-sin_map"><a href="{% url 'listing-single' %}">Holiday Home</a></h4>
                                                             <div class="geodir-category-location"><a href="#" class="single-map-item" data-newlatitude="40.72228267" data-newlongitude="-73.99246214"><i class="fas fa-map-marker-alt"></i> 34-42 Montgomery St , NY, USA</a></div>
                                                             <div class="rate-class-name">
                                                                 <div class="score"><strong> Good</strong>2 Reviews </div>
@@ -784,12 +786,12 @@
                                             <div class="slick-slide-item">
                                                 <div class="hotel-card fl-wrap title-sin_item">
                                                     <div class="geodir-category-img">
-                                                        <a href="listing-single.html"><img src="{% static 'images/gal/1.jpg' %}" alt=""></a>
+                                                        <a href="{% url 'listing-single' %}"><img src="{% static 'images/gal/1.jpg' %}" alt=""></a>
                                                         <div class="listing-counter">Awg/Night <strong>$120</strong></div>
                                                         <div class="sale-window">Sale 10%</div>
                                                         <div class="geodir-category-opt">
                                                             <div class="listing-rating card-popup-rainingvis" data-starrating2="5"></div>
-                                                            <h4 class="title-sin_map"><a href="listing-single.html">Grand Hero Palace</a></h4>
+                                                            <h4 class="title-sin_map"><a href="{% url 'listing-single' %}">Grand Hero Palace</a></h4>
                                                             <div class="geodir-category-location"><a href="#" class="single-map-item" data-newlatitude="40.76221766" data-newlongitude="-73.96511769"><i class="fas fa-map-marker-alt"></i> 70 Bright St New York, USA</a></div>
                                                             <div class="rate-class-name">
                                                                 <div class="score"><strong> Good</strong>31 Reviews </div>
@@ -911,38 +913,7 @@
                         </div>
                     </section>
                     <!-- section end -->
-                    <!--section -->
-                    <section class="color-bg hidden-section">
-                        <div class="wave-bg wave-bg2"></div>
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <!-- -->
-                                    <div class="colomn-text  pad-top-column-text fl-wrap">
-                                        <div class="colomn-text-title">
-                                            <h3>Our App   Available Now</h3>
-                                            <p>In ut odio libero, at vulputate urna. Nulla tristique mi a massa convallis cursus. Nulla eu mi magna. Etiam suscipit commodo gravida. Lorem ipsum dolor sit amet, conse ctetuer adipiscing elit, sed diam nonu mmy nibh euismod tincidunt ut laoreet dolore magna aliquam erat.</p>
-                                            <a href="#" class=" down-btn color3-bg"><i class="fab fa-apple"></i> Download for iPhone</a>
-                                            <a href="#" class=" down-btn color3-bg"><i class="fab fa-android"></i> Download for Android</a>
-                                        </div>
-                                    </div>
-                                    <!--process-wrap   end-->                                
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="collage-image">
-                                        <img src="{% static 'images/api' %}" class="main-collage-image" alt="">
-                                        <div class="images-collage-title color3-bg">Easy<span>Book</span></div>
-                                        <div class="collage-image-min cim_1"><img src="{% static 'images/api/1.jpg' %}" alt=""></div>
-                                        <div class="collage-image-min cim_2"><img src="{% static 'images/api/1.jpg' %}" alt=""></div>
-                                        <div class="collage-image-min cim_3"><img src="{% static 'images/api/1.jpg' %}" alt=""></div>
-                                        <div class="collage-image-input">Search <i class="fa fa-search"></i></div>
-                                        <div class="collage-image-btn color2-bg">Booking now</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                    <!-- section end -->
+                    
                     <!--section -->
                     <section>
                         <div class="container">
@@ -1020,7 +991,7 @@
                                         <div class="colomn-text-title">
                                             <h3>The owner of the hotel or business ?</h3>
                                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla finibus lobortis pulvinar.</p>
-                                            <a href="dashboard-add-listing.html" class="btn  color-bg float-btn">Add your hotel<i class="fal fa-plus"></i></a>
+                                            <a href="{% url 'dashboard-add-listing' %}" class="btn  color-bg float-btn">Add your hotel<i class="fal fa-plus"></i></a>
                                         </div>
                                     </div>
                                     <!--column text   end-->
@@ -1042,10 +1013,10 @@
                                 <div class="col-md-4">
                                     <article class="card-post">
                                         <div class="card-post-img fl-wrap">
-                                            <a href="blog-single.html"><img  src="{% static 'images/all/1.jpg' %}"   alt=""></a>
+                                            <a href="{% url 'blog-single' %}"><img  src="{% static 'images/all/1.jpg' %}"   alt=""></a>
                                         </div>
                                         <div class="card-post-content fl-wrap">
-                                            <h3><a href="blog-single.html">Blog Post Title.</a></h3>
+                                            <h3><a href="{% url 'blog-single' %}">Blog Post Title.</a></h3>
                                             <p>In ut odio libero, at vulputate urna. Nulla tristique mi a massa convallis cursus. Nulla eu mi magna. Etiam suscipit commodo gravida. </p>
                                             <div class="post-author"><a href="#"><img src="{% static 'images/avatar/1.jpg' %}" alt=""><span>By , Mery Lynn</span></a></div>
                                             <div class="post-opt">
@@ -1074,7 +1045,7 @@
                                             </div>
                                         </div>
                                         <div class="card-post-content fl-wrap">
-                                            <h3><a href="blog-single.html">Blog Post Title.</a></h3>
+                                            <h3><a href="{% url 'blog-single' %}">Blog Post Title.</a></h3>
                                             <p>In ut odio libero, at vulputate urna. Nulla tristique mi a massa convallis cursus. Nulla eu mi magna. Etiam suscipit commodo gravida. </p>
                                             <div class="post-author"><a href="#"><img src="{% static 'images/avatar/1.jpg' %}" alt=""><span>By , Mery Lynn</span></a></div>
                                             <div class="post-opt">
@@ -1090,10 +1061,10 @@
                                 <div class="col-md-4">
                                     <article class="card-post">
                                         <div class="card-post-img fl-wrap">
-                                            <a href="blog-single.html"><img  src="{% static 'images/all/1.jpg' %}"   alt=""></a>
+                                            <a href=" {% url 'blog-single' %}"><img  src="{% static 'images/all/1.jpg' %}"   alt=""></a>
                                         </div>
                                         <div class="card-post-content fl-wrap">
-                                            <h3><a href="blog-single.html">Blog Post Title.</a></h3>
+                                            <h3><a href=" {% url 'blog-single' %}">Blog Post Title.</a></h3>
                                             <p>In ut odio libero, at vulputate urna. Nulla tristique mi a massa convallis cursus. Nulla eu mi magna. Etiam suscipit commodo gravida. </p>
                                             <div class="post-author"><a href="#"><img src="{% static 'images/avatar/1.jpg' %}" alt=""><span>By , Mery Lynn</span></a></div>
                                             <div class="post-opt">
@@ -1107,7 +1078,7 @@
                                     </article>
                                 </div>
                             </div>
-                            <a href="blog.html" class="btn    color-bg ">Read All News<i class="fas fa-caret-right"></i></a>
+                            <a href=" {% url 'blog' %}" class="btn    color-bg ">Read All News<i class="fas fa-caret-right"></i></a>
                         </div>
                         <div class="section-decor"></div>
                     </section>
@@ -1115,6 +1086,8 @@
                 <!-- content end-->
             </div>
             <!--wrapper end -->
+            
+            {% endblock %}
             <!--footer -->
             <footer class="main-footer">
                 <!--subscribe-wrap-->
@@ -1263,14 +1236,13 @@
                                 <div class="footer-widget fl-wrap ">
                                     <h3>Helpful links</h3>
                                         <ul class="footer-list fl-wrap">
-                                            <li><a href="about.html">About Our Company</a></li>
-                                            <li><a href="blog.html">Our last News</a></li>
-                                            <li><a href="pricing-tables.html">Pricing Plans</a></li>
-                                            <li><a href="help.html">Help Center</a></li>
-                                            <li><a href="contacts.html">Contacts</a></li>											
+                                            <li><a href="{% url 'about' %}">About Our Company</a></li>
+                                            <li><a href="{% url 'blog' %}">Our last News</a></li>
+                                            <li><a href="{% url 'pricing-tables' %}">Pricing Plans</a></li>
+                                            <li><a href="{% url 'help' %}">Help Center</a></li>
+                                            <li><a href="{% url 'contacts' %}">Contacts</a></li>											
                                         </ul>
-										<a href="#" class=" down-btn color3-bg fl-wrap"><i class="fab fa-apple"></i>  Apple Store </a>
-										<a href="#" class=" down-btn color3-bg fl-wrap"><i class="fab fa-android"></i>  Google Play </a>
+										
                                 </div>
                             </div>
                             <!-- footer-widget end-->
