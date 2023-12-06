@@ -211,7 +211,7 @@
                                 <!-- team-item -->
                                 <div class="team-box">
                                     <div class="team-photo">
-                                        <img src="images/team/1.jpg" alt="" class="respimg">
+                                        <img src="{% static 'images/team/1.jpg' %}" alt="" class="respimg">
                                     </div>
                                     <div class="team-info">
                                         <div class="team-dec"><i class="fal fa-desktop"></i></div>
@@ -242,7 +242,7 @@
                             <div class="intro-item fl-wrap">
                                 <h2>Need more information</h2>
                                 <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</h3>
-                                <a class="btn  color-bg" href="contacts.html">Get in Touch <i class="fal fa-envelope"></i></a>
+                                <a class="btn  color-bg" href="{% url 'contacts'%}">Get in Touch <i class="fal fa-envelope"></i></a>
                             </div>
                         </div>
                     </section>

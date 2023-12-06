@@ -65,7 +65,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <button class="main-search-button color2-bg" onclick="window.location.href='listing.html'">Search <i class="fal fa-search"></i></button>
+                                        <button class="main-search-button color2-bg" onclick="window.location.href='{% url 'listing'%}'">Search <i class="fal fa-search"></i></button>
                                     </div>
                                 </div>
                             </div>
@@ -94,7 +94,7 @@
                                             <div class="listing-counter"><span>79 </span> Hotels</div>
                                             <img  src="images/city/1.jpg"   alt="">
                                             <div class="listing-item-cat">
-                                                <h3><a href="listing.html">Rome</a></h3>
+                                                <h3><a href="{% url 'listing'%}">Rome</a></h3>
                                                 <div class="weather-grid"   data-grcity="Rome"></div>
                                                 <div class="clearfix"></div>
                                                 <p>Constant care and attention to the patients makes good record</p>
@@ -110,7 +110,7 @@
                                             <img  src="images/city/3.jpg"   alt="">
                                             <div class="listing-counter"><span>43 </span> Hotels</div>
                                             <div class="listing-item-cat">
-                                                <h3><a href="listing.html">Paris</a></h3>
+                                                <h3><a href="{% url 'listing'%}">Paris</a></h3>
                                                 <div class="weather-grid"   data-grcity="Paris"></div>
                                                 <div class="clearfix"></div>
                                                 <p>Constant care and attention to the patients makes good record</p>
@@ -126,7 +126,7 @@
                                             <div class="listing-counter"><span>23 </span> Hotels</div>
                                             <img  src="images/city/1.jpg"   alt="">
                                             <div class="listing-item-cat">
-                                                <h3><a href="listing.html">London</a></h3>
+                                                <h3><a href="{% url 'listing'%}">London</a></h3>
                                                 <div class="weather-grid"   data-grcity="London"></div>
                                                 <div class="clearfix"></div>
                                                 <p>Constant care and attention to the patients makes good record</p>
@@ -142,7 +142,7 @@
                                             <div class="listing-counter"><span>57</span> Hotels</div>
                                             <img  src="images/city/1.jpg"   alt="">
                                             <div class="listing-item-cat">
-                                                <h3><a href="listing.html">Dubai</a></h3>
+                                                <h3><a href="{% url 'listing'%}">Dubai</a></h3>
                                                 <div class="weather-grid"   data-grcity="Dubai"></div>
                                                 <div class="clearfix"></div>
                                                 <p>Constant care and attention to the patients makes good record</p>
@@ -158,7 +158,7 @@
                                             <div class="listing-counter"><span>122</span> Hotels</div>
                                             <img  src="images/city/1.jpg"   alt="">
                                             <div class="listing-item-cat">
-                                                <h3><a href="listing.html">New York</a></h3>
+                                                <h3><a href="{% url 'listing'%}">New York</a></h3>
                                                 <div class="weather-grid"   data-grcity="New York"></div>
                                                 <div class="clearfix"></div>
                                                 <p>Constant care and attention to the patients makes good record</p>
@@ -169,7 +169,7 @@
                                 <!-- gallery-item end-->
                             </div>
                             <!-- portfolio end -->
-                            <a href="listing.html" class="btn    color-bg">Explore All Cities<i class="fas fa-caret-right"></i></a>
+                            <a href="{% url 'listing'%}" class="btn    color-bg">Explore All Cities<i class="fas fa-caret-right"></i></a>
                     </section>
                     <!-- section end -->
                     <!-- section-->
@@ -194,8 +194,8 @@
                                     <div class="listing-item">
                                         <article class="geodir-category-listing fl-wrap">
                                             <div class="geodir-category-img">
-                                                <a href="listing-single.html"><img src="images/gal/1.jpg" alt=""></a>
-                                                <div class="listing-avatar"><a href="author-single.html"><img src="images/avatar/1.jpg" alt=""></a>
+                                                <a href="{% url 'listing-single'%}"><img src="images/gal/1.jpg" alt=""></a>
+                                                <div class="listing-avatar"><a href="{% url 'author-single'%}"><img src="images/avatar/1.jpg" alt=""></a>
                                                     <span class="avatar-tooltip">Added By  <strong>Alisa Noory</strong></span>
                                                 </div>
                                                 <div class="sale-window">Sale 20%</div>
@@ -210,7 +210,7 @@
                                             <div class="geodir-category-content fl-wrap title-sin_item">
                                                 <div class="geodir-category-content-title fl-wrap">
                                                     <div class="geodir-category-content-title-item">
-                                                        <h3 class="title-sin_map"><a href="listing-single.html">Premium Plaza Hotel</a></h3>
+                                                        <h3 class="title-sin_map"><a href="{% url 'listing-single'%}">Premium Plaza Hotel</a></h3>
                                                         <div class="geodir-category-location fl-wrap"><a href="#" class="map-item"><i class="fas fa-map-marker-alt"></i> 27th Brooklyn New York, USA</a></div>
                                                     </div>
                                                 </div>
@@ -241,8 +241,8 @@
                                     <div class="listing-item">
                                         <article class="geodir-category-listing fl-wrap">
                                             <div class="geodir-category-img">
-                                                <a href="listing-single.html"><img src="images/gal/1.jpg" alt=""></a>
-                                                <div class="listing-avatar"><a href="author-single.html"><img src="images/avatar/1.jpg" alt=""></a>
+                                                <a href="{% url 'listing-single'%}"><img src="images/gal/1.jpg" alt=""></a>
+                                                <div class="listing-avatar"><a href="{% url 'author-single'%}"><img src="images/avatar/1.jpg" alt=""></a>
                                                     <span class="avatar-tooltip">Added By  <strong>Julie Cramp</strong></span>
                                                 </div>
                                                 <div class="sale-window big-sale">Sale 50%</div>
@@ -257,7 +257,7 @@
                                             <div class="geodir-category-content fl-wrap title-sin_item">
                                                 <div class="geodir-category-content-title fl-wrap">
                                                     <div class="geodir-category-content-title-item">
-                                                        <h3 class="title-sin_map"><a href="listing-single.html">Grand Hero Palace</a></h3>
+                                                        <h3 class="title-sin_map"><a href="{% url 'listing-single'%}">Grand Hero Palace</a></h3>
                                                         <div class="geodir-category-location fl-wrap"><a href="#" class="map-item"><i class="fas fa-map-marker-alt"></i> W 85th St, New York,  USA</a></div>
                                                     </div>
                                                 </div>
@@ -290,8 +290,8 @@
                                     <div class="listing-item">
                                         <article class="geodir-category-listing fl-wrap">
                                             <div class="geodir-category-img">
-                                                <a href="listing-single.html"><img src="images/gal/1.jpg" alt=""></a>
-                                                <div class="listing-avatar"><a href="author-single.html"><img src="images/avatar/1.jpg" alt=""></a>
+                                                <a href="{% url 'listing-single'%}l"><img src="images/gal/1.jpg" alt=""></a>
+                                                <div class="listing-avatar"><a href="{% url 'author-single'%}"><img src="images/avatar/1.jpg" alt=""></a>
                                                     <span class="avatar-tooltip">Added By  <strong>Andy Moore</strong></span>
                                                 </div>
                                                 <div class="geodir-category-opt">
@@ -305,7 +305,7 @@
                                             <div class="geodir-category-content fl-wrap title-sin_item">
                                                 <div class="geodir-category-content-title fl-wrap">
                                                     <div class="geodir-category-content-title-item">
-                                                        <h3 class="title-sin_map"><a href="listing-single.html">Park Central</a></h3>
+                                                        <h3 class="title-sin_map"><a href="{% url 'listing-single'%}">Park Central</a></h3>
                                                         <div class="geodir-category-location fl-wrap"><a href="#" class="map-item"><i class="fas fa-map-marker-alt"></i>40 Journal Square Plaza, NJ,  USA</a></div>
                                                     </div>
                                                 </div>
@@ -338,8 +338,8 @@
                                     <div class="listing-item">
                                         <article class="geodir-category-listing fl-wrap">
                                             <div class="geodir-category-img">
-                                                <a href="listing-single.html"><img src="images/gal/1.jpg" alt=""></a>
-                                                <div class="listing-avatar"><a href="author-single.html"><img src="images/avatar/1.jpg" alt=""></a>
+                                                <a href="{% url 'listing-single'%}"><img src="images/gal/1.jpg" alt=""></a>
+                                                <div class="listing-avatar"><a href="{% url 'author-single'%}"><img src="images/avatar/1.jpg" alt=""></a>
                                                     <span class="avatar-tooltip">Added By  <strong>Mary Jones</strong></span>
                                                 </div>
                                                 <div class="sale-window">Sale 20%</div>
@@ -354,7 +354,7 @@
                                             <div class="geodir-category-content fl-wrap title-sin_item">
                                                 <div class="geodir-category-content-title fl-wrap">
                                                     <div class="geodir-category-content-title-item">
-                                                        <h3 class="title-sin_map"><a href="listing-single.html">Holiday Home</a></h3>
+                                                        <h3 class="title-sin_map"><a href="{% url 'listing-single'%}">Holiday Home</a></h3>
                                                         <div class="geodir-category-location fl-wrap"><a href="#" class="map-item"><i class="fas fa-map-marker-alt"></i> 75 Prince St,  NY, USA</a></div>
                                                     </div>
                                                 </div>
@@ -387,8 +387,8 @@
                                     <div class="listing-item">
                                         <article class="geodir-category-listing fl-wrap">
                                             <div class="geodir-category-img">
-                                                <a href="listing-single.html"><img src="images/gal/1.jpg" alt=""></a>
-                                                <div class="listing-avatar"><a href="author-single.html"><img src="images/avatar/1.jpg" alt=""></a>
+                                                <a href="{% url 'listing-single'%}"><img src="images/gal/1.jpg" alt=""></a>
+                                                <div class="listing-avatar"><a href="{% url 'author-single'%}"><img src="images/avatar/1.jpg" alt=""></a>
                                                     <span class="avatar-tooltip">Added By  <strong>Fider Mamby</strong></span>
                                                 </div>
                                                 <div class="sale-window">Sale 10%</div>
@@ -403,7 +403,7 @@
                                             <div class="geodir-category-content fl-wrap title-sin_item">
                                                 <div class="geodir-category-content-title fl-wrap">
                                                     <div class="geodir-category-content-title-item">
-                                                        <h3 class="title-sin_map"><a href="listing-single.html">Gold Plaza Hotel</a></h3>
+                                                        <h3 class="title-sin_map"><a href="{% url 'author-single'%}">Gold Plaza Hotel</a></h3>
                                                         <div class="geodir-category-location fl-wrap"><a href="#" class="map-item"><i class="fas fa-map-marker-alt"></i> 34-42 Montgomery St , NY, USA</a></div>
                                                     </div>
                                                 </div>
@@ -436,8 +436,8 @@
                                     <div class="listing-item">
                                         <article class="geodir-category-listing fl-wrap">
                                             <div class="geodir-category-img">
-                                                <a href="listing-single.html"><img src="images/gal/1.jpg" alt=""></a>
-                                                <div class="listing-avatar"><a href="author-single.html"><img src="images/avatar/1.jpg" alt=""></a>
+                                                <a href="{% url 'listing-single'%}"><img src="images/gal/1.jpg" alt=""></a>
+                                                <div class="listing-avatar"><a href="{% url 'author-single'%}"><img src="images/avatar/1.jpg" alt=""></a>
                                                     <span class="avatar-tooltip">Added By  <strong>Alisa Noory</strong></span>
                                                 </div>
                                                 <div class="sale-window big-sale">Sale 70%</div>
@@ -452,7 +452,7 @@
                                             <div class="geodir-category-content fl-wrap title-sin_item">
                                                 <div class="geodir-category-content-title fl-wrap">
                                                     <div class="geodir-category-content-title-item">
-                                                        <h3 class="title-sin_map"><a href="listing-single.html">Moonlight Hotel</a></h3>
+                                                        <h3 class="title-sin_map"><a href="{% url 'listing-single'%}">Moonlight Hotel</a></h3>
                                                         <div class="geodir-category-location fl-wrap"><a href="#" class="map-item"><i class="fas fa-map-marker-alt"></i> 70 Bright St New York, USA</a></div>
                                                     </div>
                                                 </div>
@@ -499,7 +499,7 @@
                                         <div class="colomn-text-title">
                                             <h3>Most Popular Hotels</h3>
                                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla finibus lobortis pulvinar.</p>
-                                            <a href="listing.html" class="btn  color2-bg float-btn">View All Hotels<i class="fas fa-caret-right"></i></a>
+                                            <a href="{% url 'listing'%}" class="btn  color2-bg float-btn">View All Hotels<i class="fas fa-caret-right"></i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -512,12 +512,12 @@
                                             <div class="slick-slide-item">
                                                 <div class="hotel-card fl-wrap title-sin_item">
                                                     <div class="geodir-category-img card-post">
-                                                        <a href="listing-single.html"><img src="images/gal/1.jpg" alt=""></a>
+                                                        <a href="{% url 'listing-single'%}"><img src="images/gal/1.jpg" alt=""></a>
                                                         <div class="listing-counter">Awg/Night <strong>$85</strong></div>
                                                         <div class="sale-window">Sale 20%</div>
                                                         <div class="geodir-category-opt">
                                                             <div class="listing-rating card-popup-rainingvis" data-starrating2="5"></div>
-                                                            <h4 class="title-sin_map"><a href="listing-single.html">Moonlight Hotel</a></h4>
+                                                            <h4 class="title-sin_map"><a href="{% url 'listing-single'%}">Moonlight Hotel</a></h4>
                                                             <div class="geodir-category-location"><a href="#" class="single-map-item" data-newlatitude="40.90261483" data-newlongitude="-74.15737152"><i class="fas fa-map-marker-alt"></i> 75 Prince St,  NY, USA</a></div>
                                                             <div class="rate-class-name">
                                                                 <div class="score"><strong> Good</strong>8 Reviews </div>
@@ -532,12 +532,12 @@
                                             <div class="slick-slide-item">
                                                 <div class="hotel-card fl-wrap title-sin_item">
                                                     <div class="geodir-category-img">
-                                                        <a href="listing-single.html"><img src="images/gal/1.jpg" alt=""></a>
+                                                        <a href="{% url 'listing-single'%}"><img src="images/gal/1.jpg" alt=""></a>
                                                         <div class="listing-counter">Awg/Night <strong>$80</strong></div>
                                                         <div class="sale-window big-sale">Sale 50%</div>
                                                         <div class="geodir-category-opt">
                                                             <div class="listing-rating card-popup-rainingvis" data-starrating2="5"></div>
-                                                            <h4 class="title-sin_map"><a href="listing-single.html">Holiday Home</a></h4>
+                                                            <h4 class="title-sin_map"><a href="{% url 'listing-single'%}">Holiday Home</a></h4>
                                                             <div class="geodir-category-location"><a href="#" class="single-map-item" data-newlatitude="40.72228267" data-newlongitude="-73.99246214"><i class="fas fa-map-marker-alt"></i> 34-42 Montgomery St , NY, USA</a></div>
                                                             <div class="rate-class-name">
                                                                 <div class="score"><strong> Good</strong>2 Reviews </div>
@@ -552,12 +552,12 @@
                                             <div class="slick-slide-item">
                                                 <div class="hotel-card fl-wrap title-sin_item">
                                                     <div class="geodir-category-img">
-                                                        <a href="listing-single.html"><img src="images/gal/1.jpg" alt=""></a>
+                                                        <a href="{% url 'listing-single'%}"><img src="images/gal/1.jpg" alt=""></a>
                                                         <div class="listing-counter">Awg/Night <strong>$120</strong></div>
                                                         <div class="sale-window">Sale 10%</div>
                                                         <div class="geodir-category-opt">
                                                             <div class="listing-rating card-popup-rainingvis" data-starrating2="5"></div>
-                                                            <h4 class="title-sin_map"><a href="listing-single.html">Grand Hero Palace</a></h4>
+                                                            <h4 class="title-sin_map"><a href="{% url 'listing-single'%}">Grand Hero Palace</a></h4>
                                                             <div class="geodir-category-location"><a href="#" class="single-map-item" data-newlatitude="40.76221766" data-newlongitude="-73.96511769"><i class="fas fa-map-marker-alt"></i> 70 Bright St New York, USA</a></div>
                                                             <div class="rate-class-name">
                                                                 <div class="score"><strong> Good</strong>31 Reviews </div>
@@ -757,7 +757,7 @@
                                         <div class="colomn-text-title">
                                             <h3>The owner of the hotel or business ?</h3>
                                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla finibus lobortis pulvinar.</p>
-                                            <a href="dashboard-add-listing.html" class="btn  color-bg float-btn">Add your hotel<i class="fal fa-plus"></i></a>
+                                            <a href="{% url 'dashboard-add-listing'%}" class="btn  color-bg float-btn">Add your hotel<i class="fal fa-plus"></i></a>
                                         </div>
                                     </div>
                                     <!--column text   end-->
@@ -779,10 +779,10 @@
                                 <div class="col-md-4">
                                     <article class="card-post">
                                         <div class="card-post-img fl-wrap">
-                                            <a href="blog-single.html"><img  src="images/all/1.jpg"   alt=""></a>
+                                            <a href="{% url 'blog-single'%}"><img  src="images/all/1.jpg"   alt=""></a>
                                         </div>
                                         <div class="card-post-content fl-wrap">
-                                            <h3><a href="blog-single.html">Blog Post Title.</a></h3>
+                                            <h3><a href="{% url 'blog-single'%}">Blog Post Title.</a></h3>
                                             <p>In ut odio libero, at vulputate urna. Nulla tristique mi a massa convallis cursus. Nulla eu mi magna. Etiam suscipit commodo gravida. </p>
                                             <div class="post-author"><a href="#"><img src="images/avatar/1.jpg" alt=""><span>By , Mery Lynn</span></a></div>
                                             <div class="post-opt">
@@ -811,7 +811,7 @@
                                             </div>
                                         </div>
                                         <div class="card-post-content fl-wrap">
-                                            <h3><a href="blog-single.html">Blog Post Title.</a></h3>
+                                            <h3><a href="{% url 'blog-single'%}">Blog Post Title.</a></h3>
                                             <p>In ut odio libero, at vulputate urna. Nulla tristique mi a massa convallis cursus. Nulla eu mi magna. Etiam suscipit commodo gravida. </p>
                                             <div class="post-author"><a href="#"><img src="images/avatar/1.jpg" alt=""><span>By , Mery Lynn</span></a></div>
                                             <div class="post-opt">
@@ -827,10 +827,10 @@
                                 <div class="col-md-4">
                                     <article class="card-post">
                                         <div class="card-post-img fl-wrap">
-                                            <a href="blog-single.html"><img  src="images/all/1.jpg"   alt=""></a>
+                                            <a href="{% url 'blog-single'%}"><img  src="images/all/1.jpg"   alt=""></a>
                                         </div>
                                         <div class="card-post-content fl-wrap">
-                                            <h3><a href="blog-single.html">Blog Post Title.</a></h3>
+                                            <h3><a href="{% url 'blog-single'%}">Blog Post Title.</a></h3>
                                             <p>In ut odio libero, at vulputate urna. Nulla tristique mi a massa convallis cursus. Nulla eu mi magna. Etiam suscipit commodo gravida. </p>
                                             <div class="post-author"><a href="#"><img src="images/avatar/1.jpg" alt=""><span>By , Mery Lynn</span></a></div>
                                             <div class="post-opt">

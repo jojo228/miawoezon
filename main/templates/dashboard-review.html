@@ -23,7 +23,7 @@
                                                 Jessie Manrty
                                             </h3>
                                         </div>
-                                        <a href="dashboard-add-listing.html" class="ed-btn">Add Hotel</a>                                        
+                                        <a href="{% url 'dashboard-add-listing'%}" class="ed-btn">Add Hotel</a>                                        
                                         <div class="user-stats fl-wrap">
                                             <ul>
                                                 <li>
@@ -49,23 +49,23 @@
                                     <div class="dasboard-menu-btn color3-bg">Dashboard Menu <i class="fal fa-bars"></i></div>
                                     <ul class="dasboard-menu-wrap">
                                         <li>
-                                            <a href="dashboard.html"><i class="far fa-user"></i>Profile</a>
+                                            <a href="{% url 'dashboard'%}"><i class="far fa-user"></i>Profile</a>
                                             <ul>
-                                                <li><a href="dashboard-myprofile.html">Edit profile</a></li>
-                                                <li><a href="dashboard-password.html">Change Password</a></li>
+                                                <li><a href="{% url 'dashboard-myprofile'%}">Edit profile</a></li>
+                                                <li><a href="{% url 'dashboard-password'%}">Change Password</a></li>
                                             </ul>
                                         </li>
-                                        <li><a href="dashboard-messages.html"><i class="far fa-envelope"></i> Messages <span>3</span></a></li>
+                                        <li><a href="{% url 'dashboard-messages'%}"><i class="far fa-envelope"></i> Messages <span>3</span></a></li>
                                         <li>
-                                            <a href="dashboard-listing-table.html"><i class="far fa-th-list"></i> My listigs  </a>
+                                            <a href="{% url 'dashboard-listing-table'%}"><i class="far fa-th-list"></i> My listigs  </a>
                                             <ul>
                                                 <li><a href="#">Active</a><span>5</span></li>
                                                 <li><a href="#">Pending</a><span>2</span></li>
                                                 <li><a href="#">Expire</a><span>3</span></li>
                                             </ul>
                                         </li>
-                                        <li><a href="dashboard-bookings.html"> <i class="far fa-calendar-check"></i> Bookings <span>2</span></a></li>
-                                        <li><a href="dashboard-review.html" class="user-profile-act"><i class="far fa-comments"></i> Reviews </a></li>
+                                        <li><a href="{% url 'dashboard-bookings'%}"> <i class="far fa-calendar-check"></i> Bookings <span>2</span></a></li>
+                                        <li><a href="{% url 'dashboard-review'%}" class="user-profile-act"><i class="far fa-comments"></i> Reviews </a></li>
                                     </ul>
                                 </div>
                                 <!--dasboard-menu end-->
@@ -98,7 +98,7 @@
                                                     <img src="images/avatar/1.jpg" alt=""> 
                                                 </div>
                                                 <div class="reviews-comments-item-text">
-                                                    <h4><a href="#">Liza Rose</a> on <a href="listing-single.html" class="reviews-comments-item-link">Holiday Home</a></h4>
+                                                    <h4><a href="#">Liza Rose</a> on <a href="{% url 'listing-single'%}" class="reviews-comments-item-link">Holiday Home</a></h4>
                                                     <div class="review-score-user">
                                                         <span>4.4</span>
                                                         <strong>Good</strong>
@@ -115,7 +115,7 @@
                                                     <img src="images/avatar/1.jpg" alt=""> 
                                                 </div>
                                                 <div class="reviews-comments-item-text">
-                                                    <h4><a href="#">Adam Koncy</a> on <a href="listing-single.html" class="reviews-comments-item-link">Premium Plaza Hotel </a></h4>
+                                                    <h4><a href="#">Adam Koncy</a> on <a href="{% url 'listing-single'%}" class="reviews-comments-item-link">Premium Plaza Hotel </a></h4>
                                                     <div class="review-score-user">
                                                         <span>4.7</span>
                                                         <strong>Very Good</strong>
@@ -132,7 +132,7 @@
                                                     <img src="images/avatar/1.jpg" alt=""> 
                                                 </div>
                                                 <div class="reviews-comments-item-text">
-                                                    <h4><a href="#">Liza Rose </a>on  <a href="listing-single.html" class="reviews-comments-item-link">Park Central </a></h4>
+                                                    <h4><a href="#">Liza Rose </a>on  <a href="{% url 'listing-single'%}" class="reviews-comments-item-link">Park Central </a></h4>
                                                     <div class="review-score-user">
                                                         <span>4.4</span>
                                                         <strong>Good</strong>
@@ -149,7 +149,7 @@
                                                     <img src="images/avatar/1.jpg" alt=""> 
                                                 </div>
                                                 <div class="reviews-comments-item-text">
-                                                    <h4><a href="#">Adam Koncy</a> on  <a href="listing-single.html" class="reviews-comments-item-link">Grand Hero Palace </a></h4>
+                                                    <h4><a href="#">Adam Koncy</a> on  <a href="{% url 'listing-single'%}" class="reviews-comments-item-link">Grand Hero Palace </a></h4>
                                                     <div class="review-score-user">
                                                         <span>4.7</span>
                                                         <strong>Very Good</strong>
