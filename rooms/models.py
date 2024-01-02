@@ -7,9 +7,6 @@ from calendar import Calendar
 
 
 class AbstractItem(main_models.TimeStampedModel):
-
-    """ Abstract Item """
-
     name = models.CharField(max_length=80)
 
     class Meta:
@@ -20,41 +17,26 @@ class AbstractItem(main_models.TimeStampedModel):
 
 
 class RoomType(AbstractItem):
-
-    """ RomeType Model Definition """
-
     class Meta:
         verbose_name = "Room Type"
 
 
 class Amenity(AbstractItem):
-
-    """ Amenity Model Definition """
-
     class Meta:
         verbose_name_plural = "Amenities"
 
 
 class Facility(AbstractItem):
-
-    """ Facility Model Definition """
-
     class Meta:
         verbose_name_plural = "Facilities"
 
 
 class HouseRule(AbstractItem):
-
-    """ HouseRule Model Definition """
-
     class Meta:
         verbose_name = "House Rule"
 
 
 class Photo(main_models.TimeStampedModel):
-
-    """ Photo Model Definition """
-
     caption = models.CharField(max_length=80)
     file = models.ImageField(upload_to="room_photos")
     room = models.ForeignKey("Room", related_name="photos", on_delete=models.CASCADE)
@@ -64,9 +46,6 @@ class Photo(main_models.TimeStampedModel):
 
 
 class Room(main_models.TimeStampedModel):
-
-    """ Room Model Definition """
-
     name = models.CharField(max_length=140)
     description = models.TextField()
     country = CountryField()
