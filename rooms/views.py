@@ -158,7 +158,7 @@ def delete_photo(request, room_pk, photo_pk):
             messages.success(request, "Photo deleted")
         return redirect(reverse("rooms:photos", kwargs={"pk": room_pk}))
     except models.Room.DoesNotExist:
-        return redirect(reverse("main:home"))
+        return redirect(reverse("home"))
 
 
 class EditPhotoView(authentication_mixins.LoggedInOnlyView, SuccessMessageMixin, UpdateView):
@@ -190,7 +190,7 @@ class AddPhotoView(authentication_mixins.LoggedInOnlyView, FormView):
 class CreateRoomView(authentication_mixins.LoggedInOnlyView, FormView):
 
     form_class = forms.CreateRoomForm
-    template_name = "rooms/room_create.html"
+    template_name = "dashboard-add-listing.html"
 
     def form_valid(self, form):
         room = form.save()

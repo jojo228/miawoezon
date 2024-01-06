@@ -20,7 +20,7 @@ def create(request, room, year, month, day):
         raise CreateError()
     except room_models.Room.DoesNotExist:
         messages.error(request, "Can't Reserve That Room'")
-        return redirect(reverse("main:home"))
+        return redirect(reverse("home"))
     except models.BookedDay.DoesNotExist:
         reservation = models.Reservation.objects.create(
             guest=request.user,

@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView
+from blog.models import Post
 
 
 # Create your views here.
@@ -9,8 +10,9 @@ def coming_soon(request):
 
 
 def home(request):
+    posts = Post.objects.all().order_by("-created_on")[:3]
     
-    return render(request, "index.html")
+    return render(request, "index.html", locals())
 
 
 def index2(request):

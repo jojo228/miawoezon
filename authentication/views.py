@@ -5,7 +5,8 @@ from django.http import HttpResponse
 from django.contrib.auth.views import PasswordChangeView
 from django.views.generic import FormView, DetailView, UpdateView
 from django.urls import reverse_lazy
-from django.shortcuts import redirect, reverse
+from django.shortcuts import redirect
+from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.core.files.base import ContentFile
@@ -16,13 +17,14 @@ from . import forms, models, mixins
 
 class LoginView(mixins.LoggedOutOnlyView, FormView):
 
-    template_name = "authentication/login.html"
+    template_name = "index.html"
     form_class = forms.LoginForm
 
     def form_valid(self, form):
         email = form.cleaned_data.get("email")
         password = form.cleaned_data.get("password")
         user = authenticate(self.request, username=email, password=password)
+        print("Success")
         if user is not None:
             login(self.request, user)
         return super().form_valid(form)
@@ -32,20 +34,20 @@ class LoginView(mixins.LoggedOutOnlyView, FormView):
         if next_arg is not None:
             return next_arg
         else:
-            return reverse("main:home")
+            return reverse("home")
 
 
 def log_out(request):
     messages.info(request, "See you later")
     logout(request)
-    return redirect(reverse("main:home"))
+    return redirect(reverse("home"))
 
 
 class SignUpView(FormView):
 
-    template_name = "authentication/signup.html"
+    template_name = "index.html"
     form_class = forms.SignUpForm
-    success_url = reverse_lazy("main:home")
+    success_url = reverse_lazy("home")
 
     def form_valid(self, form):
         form.save()
@@ -68,7 +70,7 @@ def complete_verification(request, key):
     except models.User.DoesNotExist:
         # to do: add error message
         pass
-    return redirect(reverse("main:home"))
+    return redirect(reverse("home"))
 
 
 def github_login(request):
@@ -132,7 +134,7 @@ def github_callback(request):
                         user.save()
                     login(request, user)
                     messages.success(request, f"Welcome back {user.first_name}")
-                    return redirect(reverse("main:home"))
+                    return redirect(reverse("home"))
                 else:
                     raise GithubException("Can't get yout profile")
         else:
@@ -201,7 +203,7 @@ def kakao_callback(request):
                 )
         login(request, user)
         messages.success(request, f"Welcome back {user.first_name}")
-        return redirect(reverse("main:home"))
+        return redirect(reverse("home"))
     except KakaoException as e:
         messages.error(request, e)
         return redirect(reverse("authentication:login"))
@@ -265,7 +267,7 @@ def switch_hosting(request):
         del request.session["is_hosting"]
     except KeyError:
         request.session["is_hosting"] = True
-    return redirect(reverse("main:home"))
+    return redirect(reverse("home"))
 
 
 def switch_language(request):

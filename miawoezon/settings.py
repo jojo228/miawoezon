@@ -47,6 +47,7 @@ THIRD_PARTY_APPS = ["django_countries", "django_seed", "storages"]
 
 PROJECT_APPS = [
     "announcement.apps.AnnouncementConfig",
+    "blog.apps.BlogConfig",
     "main.apps.MainConfig",
     "authentication.apps.AuthenticationConfig",
     "rooms.apps.RoomsConfig",

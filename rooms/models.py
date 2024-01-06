@@ -46,6 +46,20 @@ class Photo(main_models.TimeStampedModel):
 
 
 class Room(main_models.TimeStampedModel):
+
+    CHECK_IN = (
+        ("morning", "Morning"),
+        ("afternoon", "Afternoon"),
+        ("next day", "Next Day"),
+        ("check-in", "Immediately upon Check In"),
+    )
+    CHECK_OUT = (
+        ("morning", "Morning"),
+        ("afternoon", "Afternoon"),
+        ("next day", "Next Day"),
+        ("check-in", "Immediately upon Check In"),
+    )
+
     name = models.CharField(max_length=140)
     description = models.TextField()
     country = CountryField()
@@ -56,8 +70,8 @@ class Room(main_models.TimeStampedModel):
     beds = models.IntegerField()
     bedrooms = models.IntegerField()
     baths = models.IntegerField()
-    check_in = models.TimeField()
-    check_out = models.TimeField()
+    check_in = models.CharField(max_length=20, choices=CHECK_IN)
+    check_out = models.CharField(max_length=20, choices=CHECK_OUT)
     instant_book = models.BooleanField(default=False)
     host = models.ForeignKey(
         "authentication.User", related_name="rooms", on_delete=models.CASCADE
@@ -65,7 +79,7 @@ class Room(main_models.TimeStampedModel):
     room_type = models.ForeignKey(
         "RoomType", related_name="rooms", on_delete=models.SET_NULL, null=True
     )
-    amenities = models.ManyToManyField("Amenity", related_name="rooms", blank=True)
+    amenities = models.ManyToManyField("Amenity", related_name="rooms", blank=True,)
     facilities = models.ManyToManyField("Facility", related_name="rooms", blank=True)
     house_rules = models.ManyToManyField("HouseRule", related_name="rooms", blank=True)
 

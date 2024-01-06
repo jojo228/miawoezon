@@ -9,7 +9,7 @@ def create_review(request, room):
         form = forms.CreateReviewForm(request.POST)
         room = room_models.Room.objects.get_or_none(pk=room)
         if not room:
-            return redirect(reverse("main:home"))
+            return redirect(reverse("home"))
         if form.is_valid():
             review = form.save()
             review.room = room
