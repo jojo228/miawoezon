@@ -51,13 +51,13 @@ class Room(main_models.TimeStampedModel):
         ("morning", "Morning"),
         ("afternoon", "Afternoon"),
         ("next day", "Next Day"),
-        ("check-in", "Immediately upon Check In"),
+        ("check-in", "Immediately upon Check In "),
     )
     CHECK_OUT = (
         ("morning", "Morning"),
         ("afternoon", "Afternoon"),
         ("next day", "Next Day"),
-        ("check-in", "Immediately upon Check In"),
+        ("check-in", "Immediately upon Check In "),
     )
 
     name = models.CharField(max_length=140)
