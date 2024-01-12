@@ -190,6 +190,7 @@ DEFAULT_FROM_EMAIL = os.getenv("EMAIL")
 
 PASSWORD_RESET_TIMEOUT = 14400
 
+AUTH_USER_MODEL = 'auth.User'
 
 AUTHENTICATION_BACKENDS = [
     "django.contrib.auth.backends.ModelBackend",
