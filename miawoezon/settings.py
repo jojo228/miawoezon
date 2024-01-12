@@ -48,13 +48,12 @@ THIRD_PARTY_APPS = ["django_countries", "django_seed", "storages"]
 PROJECT_APPS = [
     "announcement.apps.AnnouncementConfig",
     "blog.apps.BlogConfig",
+    "staff_account.apps.StaffAccountConfig",
     "main.apps.MainConfig",
     "authentication.apps.AuthenticationConfig",
     "rooms.apps.RoomsConfig",
-    "reviews.apps.ReviewsConfig",
     "reservations.apps.ReservationsConfig",
     "lists.apps.ListsConfig",
-    "conversations.apps.ConversationsConfig",
 ]
 
 
@@ -192,8 +191,10 @@ DEFAULT_FROM_EMAIL = os.getenv("EMAIL")
 PASSWORD_RESET_TIMEOUT = 14400
 
 
-AUTH_USER_MODEL = "authentication.User"
-
+AUTHENTICATION_BACKENDS = [
+    "django.contrib.auth.backends.ModelBackend",
+    "authentication.backends.MyBackend",
+]
 
 # Auth
 

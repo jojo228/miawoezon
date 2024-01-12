@@ -1,278 +1,168 @@
-import os
-import requests
-from django.utils import translation
-from django.http import HttpResponse
-from django.contrib.auth.views import PasswordChangeView
-from django.views.generic import FormView, DetailView, UpdateView
+from datetime import date
+from django.shortcuts import render, redirect
+from authentication.forms import (
+    ClientIdentityForm,
+    ClientPersonalDataForm,
+    ClientAddressForm,
+)
+from staff_account.models import User
 from django.urls import reverse_lazy
-from django.shortcuts import redirect
-from django.urls import reverse
-from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
-from django.core.files.base import ContentFile
-from django.contrib import messages
-from django.contrib.messages.views import SuccessMessageMixin
-from . import forms, models, mixins
+from formtools.wizard.views import SessionWizardView
+
+from django.views.generic import UpdateView, DetailView, RedirectView, TemplateView
+
+from django.contrib.auth import login
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+from authentication.models import Client
+
+client_detail_url = "authentication:client_detail"
 
 
-class LoginView(mixins.LoggedOutOnlyView, FormView):
+# Email activation importation
+from django.contrib.sites.shortcuts import get_current_site
+from django.utils.encoding import force_bytes, force_str
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.template.loader import render_to_string
+from .token import account_activation_token
+from django.core.mail import EmailMessage
 
-    template_name = "index.html"
-    form_class = forms.LoginForm
+# -------------------------- ACCOUNT -------------------#
 
-    def form_valid(self, form):
-        email = form.cleaned_data.get("email")
-        password = form.cleaned_data.get("password")
-        user = authenticate(self.request, username=email, password=password)
-        print("Success")
-        if user is not None:
-            login(self.request, user)
-        return super().form_valid(form)
+# CREATE
+class SignupWizardView(SessionWizardView):
+    login_url = reverse_lazy("authentication:login")
+    template_name = "signup.html"
 
-    def get_success_url(self):
-        next_arg = self.request.GET.get("next")
-        if next_arg is not None:
-            return next_arg
-        else:
-            return reverse("home")
+    def send_activation_email(self, user):
+        # We need the user object, so it's an additional parameter
+        # account confirmation mail
+        # to get the domain of the current site
+        current_site = get_current_site(self.request)
+        subject = "Un lien d'activation a été envoyée à votre addresse email"
+        message = render_to_string(
+            "activate_account.html",
+            {
+                "user": user,
+                "domain": current_site.domain,
+                "uid": urlsafe_base64_encode(force_bytes(user.pk)),
+                "token": account_activation_token.make_token(user),
+                "protocol": "https" if self.request.is_secure() else "http",
+            },
+        )
+        user.email_user(subject, message, html_message=message)
 
+    def done(self, form_list, **kwargs):
 
-def log_out(request):
-    messages.info(request, "See you later")
-    logout(request)
-    return redirect(reverse("home"))
+        # save the user created
+        user = form_list[0].save(commit=False)
+        # Automatic assign username to user based on last name, first_name, date joined , and make sure to create unique username
+        username = ""
+        # create username first string
+        for name in user.first_name.split(" "):
+            username += name[0].upper()
+        username += user.last_name[0:2].upper()
+        for name in user.first_name.split(" "):
+            username += name[-1].upper()
 
+        username += date.today().strftime("%y%m%d")
+        next_username_number = "001"
 
-class SignUpView(FormView):
+        while User.objects.filter(username=username):
+            username += next_username_number
+            next_username_number = "{0:04d}".format(int(next_username_number) + 1)
+        user.username = username
 
-    template_name = "index.html"
-    form_class = forms.SignUpForm
-    success_url = reverse_lazy("home")
+        # Add the user as inactive
+        user.is_active = False
 
-    def form_valid(self, form):
-        form.save()
-        email = form.cleaned_data.get("email")
-        password = form.cleaned_data.get("password")
-        user = authenticate(self.request, username=email, password=password)
-        if user is not None:
-            login(self.request, user)
-        user.verify_email()
-        return super().form_valid(form)
+        # create a client linked to the user created and fill its identity data first
+        client_personal_data = form_list[1].save(commit=False)
+        client_personal_data.user = user
 
+        # then use the identity form to complete the model
+        client_personal_data.country = form_list[2].cleaned_data["country"]
+        client_personal_data.city = form_list[2].cleaned_data["city"]
+        client_personal_data.address = form_list[2].cleaned_data["address"]
+        client_personal_data.pincode = form_list[2].cleaned_data["pincode"]
 
-def complete_verification(request, key):
-    try:
-        user = models.User.objects.get(email_secret=key)
-        user.email_verified = True
-        user.email_secret = ""
+        # save forms ad last once everything is correct
         user.save()
-        # to do: add success message
-    except models.User.DoesNotExist:
-        # to do: add error message
-        pass
-    return redirect(reverse("home"))
+        client_personal_data.save()
+        self.send_activation_email(user)
+
+        return redirect("authentication:check_email")
 
 
-def github_login(request):
-    client_id = os.environ.get("GH_ID")
-    url = os.environ.get("URL", "http://127.0.0.1:8000")
-    redirect_uri = f"{url}/authentication/login/github/callback"
-    return redirect(
-        f"https://github.com/login/oauth/authorize?client_id={client_id}&redirect_uri={redirect_uri}&scope=read:user"
-    )
+# The view to activate the user account after the email confirmation
+class ActivateView(RedirectView):
 
+    url = reverse_lazy("authentication:success")
 
-class GithubException(Exception):
-    pass
+    # Custom get method
+    def get(self, request, uidb64, token):
 
-
-def github_callback(request):
-    try:
-        client_id = os.environ.get("GH_ID")
-        client_secret = os.environ.get("GH_SECRET")
-        code = request.GET.get("code", None)
-        if code is not None:
-            token_request = requests.post(
-                f"https://github.com/login/oauth/access_token?client_id={client_id}&client_secret={client_secret}&code={code}",
-                headers={"Accept": "application/json"},
-            )
-            token_json = token_request.json()
-            error = token_json.get("error", None)
-            if error is not None:
-                raise GithubException("Can't get access token")
-            else:
-                access_token = token_json.get("access_token")
-                profile_request = requests.get(
-                    "https://api.github.com/user",
-                    headers={
-                        "Authorization": f"token {access_token}",
-                        "Accept": "application/json",
-                    },
-                )
-                profile_json = profile_request.json()
-                username = profile_json.get("login", None)
-                if username is not None:
-                    name = profile_json.get("name")
-                    email = profile_json.get("email")
-                    bio = profile_json.get("bio")
-                    try:
-                        user = models.User.objects.get(email=email)
-                        if user.login_method != models.User.LOGIN_GITHUB:
-                            raise GithubException(
-                                f"Please log in with: {user.login_method}"
-                            )
-                    except models.User.DoesNotExist:
-                        user = models.User.objects.create(
-                            email=email,
-                            first_name=name,
-                            username=email,
-                            bio=bio,
-                            login_method=models.User.LOGIN_GITHUB,
-                            email_verified=True,
-                        )
-                        user.set_unusable_password()
-                        user.save()
-                    login(request, user)
-                    messages.success(request, f"Welcome back {user.first_name}")
-                    return redirect(reverse("home"))
-                else:
-                    raise GithubException("Can't get yout profile")
-        else:
-            raise GithubException("Can't get code'")
-    except GithubException as e:
-        messages.error(request, e)
-        return redirect(reverse("authentication:login"))
-
-
-def kakao_login(request):
-    client_id = os.environ.get("KAKAO_ID")
-    url = os.environ.get("URL", "http://127.0.0.1:8000")
-    redirect_uri = f"{url}/authentication/login/kakao/callback"
-    return redirect(
-        f"https://kauth.kakao.com/oauth/authorize?client_id={client_id}&redirect_uri={redirect_uri}&response_type=code"
-    )
-
-
-class KakaoException(Exception):
-    pass
-
-
-def kakao_callback(request):
-    try:
-        code = request.GET.get("code")
-        client_id = os.environ.get("KAKAO_ID")
-        url = os.environ.get("URL", "http://127.0.0.1:8000")
-        redirect_uri = f"{url}/authentication/login/kakao/callback"
-        token_request = requests.get(
-            f"https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id={client_id}&redirect_uri={redirect_uri}&code={code}"
-        )
-        token_json = token_request.json()
-        error = token_json.get("error", None)
-        if error is not None:
-            raise KakaoException("Can't get authorization code")
-        access_token = token_json.get("access_token")
-        profile_request = requests.get(
-            "https://kapi.kakao.com/v2/user/me",
-            headers={"Authorization": f"Bearer {access_token}"},
-        )
-        profile_json = profile_request.json()
-        properties = profile_json.get("properties")
-        email = profile_json.get("kakao_account").get("email", None)
-        if email is None:
-            raise KakaoException("Please also give me your email")
-        nickname = properties.get("nickname", None)
-        profile_image = properties.get("profile_image", None)
         try:
-            user = models.User.objects.get(email=email)
-            if user.login_method != models.User.LOGIN_KAKAO:
-                raise KakaoException(f"Please log in with: {user.login_method}")
-        except models.User.DoesNotExist:
-            user = models.User.objects.create(
-                email=email,
-                username=email,
-                first_name=nickname,
-                login_method=models.User.LOGIN_KAKAO,
-                email_verified=True,
-            )
-            user.set_unusable_password()
+            uid = force_str(urlsafe_base64_decode(uidb64))
+            user = User.objects.get(pk=uid)
+        except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+            user = None
+
+        if user is not None and account_activation_token.check_token(user, token):
+            user.is_active = True
             user.save()
-            if profile_image is not None:
-                photo_request = requests.get(profile_image)
-                user.avatar.save(
-                    f"{nickname}-avatar", ContentFile(photo_request.content)
-                )
-        login(request, user)
-        messages.success(request, f"Welcome back {user.first_name}")
-        return redirect(reverse("home"))
-    except KakaoException as e:
-        messages.error(request, e)
-        return redirect(reverse("authentication:login"))
+            login(request, user, backend="gespro.authentication.backends.MyBackend")
+            return super().get(request, uidb64, token)
+        else:
+            return render(request, "activate_account_invalid.html")
 
 
-class UserProfileView(DetailView):
-
-    model = models.User
-    context_object_name = "user_obj"
+class CheckEmailView(TemplateView):
+    template_name = "check_email.html"
 
 
-class UpdateProfileView(mixins.LoggedInOnlyView, SuccessMessageMixin, UpdateView):
-
-    model = models.User
-    template_name = "authentication/update-profile.html"
-    fields = (
-        "first_name",
-        "last_name",
-        "gender",
-        "bio",
-        "birthdate",
-        "language",
-        "currency",
-    )
-    success_message = "Profile Updated"
-
-    def get_object(self, queryset=None):
-        return self.request.user
-
-    def get_form(self, form_class=None):
-        form = super().get_form(form_class=form_class)
-        for key in self.fields:
-            form.fields[key].widget.attrs = {"placeholder": key.capitalize()}
-        return form
+class SuccessView(TemplateView):
+    template_name = "success.html"
 
 
-class UpdatePasswordView(
-    mixins.LoggedInOnlyView,
-    mixins.EmailLoginOnlyView,
-    SuccessMessageMixin,
-    PasswordChangeView,
-):
+# READ
+class ClientDetailView(LoginRequiredMixin, DetailView):
+    model = Client
+    context_object_name = "client"
+    template_name = "client_detail.html"
 
-    template_name = "authentication/update-password.html"
-    success_message = "Password Updated"
 
-    def get_form(self, form_class=None):
-        form = super().get_form(form_class=form_class)
-        form.fields["old_password"].widget.attrs = {"placeholder": "Current Password"}
-        form.fields["new_password1"].widget.attrs = {"placeholder": "New Password"}
-        form.fields["new_password2"].widget.attrs = {"placeholder": "Confirm Password"}
-        return form
+# UPDATE
+class ClientIdentityInformationUpdateView(LoginRequiredMixin, UpdateView):
+    model = User
+    context_object_name = "client"
+    form_class = ClientIdentityForm
+    template_name = "client_identity_information_update.html"
 
     def get_success_url(self):
-        return self.request.user.get_absolute_url()
+        return reverse_lazy(
+            client_detail_url,
+            kwargs={"pk": Client.objects.get(user_id=self.kwargs["pk"]).id},
+        )
 
 
-@login_required
-def switch_hosting(request):
-    try:
-        del request.session["is_hosting"]
-    except KeyError:
-        request.session["is_hosting"] = True
-    return redirect(reverse("home"))
+class ClientPersonalInformationUpdateView(LoginRequiredMixin, UpdateView):
+    login_url = reverse_lazy("staff_account:login")
+    model = Client
+    context_object_name = "client"
+    form_class = ClientPersonalDataForm
+    template_name = "client_personal_information_update.html"
+
+    def get_success_url(self):
+        return reverse_lazy(client_detail_url, kwargs={"pk": self.kwargs["pk"]})
 
 
-def switch_language(request):
-    lang = request.GET.get("lang", None)
-    if lang is not None:
-        request.session[translation.LANGUAGE_SESSION_KEY] = lang
-    print(request.session[translation.LANGUAGE_SESSION_KEY])
-    return HttpResponse(status=200)
+class ClientAddressUpdateView(LoginRequiredMixin, UpdateView):
+    login_url = reverse_lazy("staff_account:login")
+    model = Client
+    context_object_name = "client"
+    form_class = ClientAddressForm
+    template_name = "client_address_update.html"
+
+    def get_success_url(self):
+        return reverse_lazy(client_detail_url, kwargs={"pk": self.kwargs["pk"]})

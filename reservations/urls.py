@@ -5,7 +5,7 @@ app_name = "reservations"
 
 urlpatterns = [
     path(
-        "create/<int:room>/<int:year>-<int:month>-<int:day>",
+        "create/<int:room>/",
         views.create,
         name="create",
     ),

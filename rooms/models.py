@@ -74,7 +74,7 @@ class Room(main_models.TimeStampedModel):
     check_out = models.CharField(max_length=20, choices=CHECK_OUT)
     instant_book = models.BooleanField(default=False)
     host = models.ForeignKey(
-        "authentication.User", related_name="rooms", on_delete=models.CASCADE
+        "authentication.Client", related_name="rooms", on_delete=models.CASCADE
     )
     room_type = models.ForeignKey(
         "RoomType", related_name="rooms", on_delete=models.SET_NULL, null=True
@@ -82,6 +82,8 @@ class Room(main_models.TimeStampedModel):
     amenities = models.ManyToManyField("Amenity", related_name="rooms", blank=True,)
     facilities = models.ManyToManyField("Facility", related_name="rooms", blank=True)
     house_rules = models.ManyToManyField("HouseRule", related_name="rooms", blank=True)
+
+    video = models.FileField(upload_to="room_videos", blank=True)
 
     def __str__(self):
         return self.name

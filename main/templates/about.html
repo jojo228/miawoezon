@@ -7,14 +7,14 @@
                 <div class="content">
                     <!--  section  -->
                     <section class="parallax-section single-par" data-scrollax-parent="true">
-                        <div class="bg par-elem "  data-bg="images/bg/1.jpg" data-scrollax="properties: { translateY: '30%' }"></div>
+                        <div class="bg par-elem "  data-bg="{% static 'images/bg/about.jpeg' %}" data-scrollax="properties: { translateY: '30%' }"></div>
                         <div class="overlay"></div>
                         <div class="container">
                             <div class="section-title center-align big-title">
                                 <div class="section-title-separator"><span></span></div>
                                 <h2><span>About Our Company</span></h2>
                                 <span class="section-separator"></span>
-                                <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut nec tincidunt arcu, sit amet fermentum sem.</h4>
+                                <h4>Découvrez notre entreprise.</h4>
                             </div>
                         </div>
                         <div class="header-sec-link">
@@ -43,9 +43,9 @@
                                         <div class="list-single-main-item-title fl-wrap">
                                             <h3>Our Awesome <span>Story</span></h3>
                                         </div>
-                                        <p>Ut euismod ultricies sollicitudin. Curabitur sed dapibus nulla. Nulla eget iaculis lectus. Mauris ac maximus neque. Nam in mauris quis libero sodales eleifend. Morbi varius, nulla sit amet rutrum elementum, est elit finibus tellus, ut tristique elit risus at metus.</p>
+                                        <p>Miawoezon est une application novatrice de marché de l'hospitalité conçue pour mettre en relation les voyageurs avec des expériences d'hébergement uniques et personnalisées. Fonctionnant comme une plateforme complète, Miawoezon permet aux utilisateurs de parcourir, de découvrir et de réserver de divers types d'hébergements, tels que des maisons, des appartements et des séjours atypiques, directement auprès des hôtes.</p>
                                         <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla finibus lobortis pulvinar. Donec a consectetur nulla. Nulla posuere sapien vitae lectus suscipit, et pulvinar nisi tincidunt. Curabitur convallis fringilla diam sed aliquam. Sed tempor iaculis massa faucibus feugiat. In fermentum facilisis massa, a consequat purus viverra.  Aliquam erat volutpat. Curabitur convallis fringilla diam sed aliquam. Sed tempor iaculis massa faucibus feugiat. In fermentum facilisis massa, a consequat purus viverra.
+                                            Avec une interface conviviale, des filtres de recherche robustes et des options de paiement sécurisées, Miawoezon donne aux hôtes et aux invités la possibilité de participer à un écosystème fiable et pratique, favorisant un sentiment de communauté et facilitant des expériences de voyage mémorables. Que vous recherchiez une retraite confortable, un appartement en ville ou une option d'hébergement originale, Miawoezon est la plateforme incontournable pour explorer et réserver des hébergements distinctifs adaptés à vos préférences.
                                         </p>
                                         <a href="#sec2" class="btn  color-bg float-btn custom-scroll-link">View Our Team <i class="fal fa-users"></i></a>
                                     </div>
@@ -242,7 +242,7 @@
                             <div class="intro-item fl-wrap">
                                 <h2>Need more information</h2>
                                 <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</h3>
-                                <a class="btn  color-bg" href="{% url 'contacts'%}">Get in Touch <i class="fal fa-envelope"></i></a>
+                                <a class="btn  color-bg" href="{% url 'main:contacts'%}">Get in Touch <i class="fal fa-envelope"></i></a>
                             </div>
                         </div>
                     </section>

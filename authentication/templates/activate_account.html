@@ -1,0 +1,14 @@
+{% load i18n %}
+{% autoescape off %}
+
+<h2>Salut {{ user.get_full_name }},</h2>
+{% translate "Veuillez cliquer le lien dessous pour activer votre compte" %} <br>
+Ceci est un lien valable qu'une seule fois. <br>
+{{ protocol }}://{{ domain }}{% url 'authentication:activate' uidb64=uid token=token %} <br>
+<br>
+<br>
+{% translate "Merci de faire confiance à GESPRO Consulting!" %}
+
+{% blocktranslate %}La team GESPRO - CO{% endblocktranslate %} <br>
+
+{% endautoescape %}

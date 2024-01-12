@@ -4,7 +4,7 @@ from django.views.generic import View
 from django.contrib import messages
 from django.shortcuts import render, redirect, reverse
 from rooms import models as room_models
-from reviews import forms as review_forms
+# from reviews import forms as review_forms
 from . import models
 
 
@@ -14,19 +14,20 @@ class CreateError(Exception):
 
 def create(request, room, year, month, day):
     try:
-        date_obj = datetime.datetime(year, month, day)
+        check_in = datetime.datetime(year, month, day)
+        check_out = datetime.datetime(year, month, day)
         room = room_models.Room.objects.get(pk=room)
-        models.BookedDay.objects.get(day=date_obj, reservation__room=room)
+        models.BookedDay.objects.get(day=check_in, reservation__room=room)
         raise CreateError()
     except room_models.Room.DoesNotExist:
         messages.error(request, "Can't Reserve That Room'")
         return redirect(reverse("home"))
     except models.BookedDay.DoesNotExist:
         reservation = models.Reservation.objects.create(
-            guest=request.user,
+            guest=request.user.client,
             room=room,
-            check_in=date_obj,
-            check_out=date_obj + datetime.timedelta(days=1),
+            check_in=check_in,
+            check_out=check_out,
         )
         return redirect(reverse("reservations:detail", kwargs={"pk": reservation.pk}))
 
@@ -40,11 +41,11 @@ class ReservationDetailView(View):
             and reservation.room.host != self.request.user
         ):
             raise Http404()
-        form = review_forms.CreateReviewForm()
+        # form = review_forms.CreateReviewForm()
         return render(
             self.request,
-            "reservations/detail.html",
-            {"reservation": reservation, "form": form},
+            "booking-detail.html",
+            # {"reservation": reservation, "form": form},
         )
 
 

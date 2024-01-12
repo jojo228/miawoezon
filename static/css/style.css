@@ -2535,7 +2535,7 @@ section.hero-section   {
 .custom-form .nice-select {
 	margin-bottom:20px;
 }
-.custom-form  textarea , .custom-form input[type="text"] , .custom-form  input[type=email] , .custom-form  input[type=password] , .custom-form  input[type=button]{
+.custom-form  textarea , .custom-form input[type="text"], .custom-form input[type="number"], .custom-form input[type="checkbox"], .custom-form input[type="file"], .custom-form select, .custom-form  input[type=email] , .custom-form  input[type=password] , .custom-form  input[type=button]{
     float: left;
     border: 1px solid #eee;
     background:#F7F9FB;

@@ -37,7 +37,7 @@ class Reservation(main_models.TimeStampedModel):
     check_in = models.DateField()
     check_out = models.DateField()
     guest = models.ForeignKey(
-        "authentication.User", related_name="reservations", on_delete=models.CASCADE
+        "authentication.Client", related_name="reservations", on_delete=models.CASCADE
     )
     room = models.ForeignKey(
         "rooms.Room", related_name="reservations", on_delete=models.CASCADE

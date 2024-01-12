@@ -1,0 +1,65 @@
+{% extends "index.html" %}
+{% load static %}
+{% block content %}
+            <!--  wrapper  -->
+            <div id="wrapper">
+                <!-- content-->
+                <div class="content">
+                    <!-- section-->
+                    {% include 'dashboard/base.html' %}
+                    <!-- section end-->
+                    <!-- section-->
+                    <section class="middle-padding">
+                        <div class="container">
+                            <!--dasboard-wrap-->
+                            <div class="dasboard-wrap fl-wrap">
+                                <!-- dashboard-content--> 
+                                <div class="dashboard-content fl-wrap">
+                                    <div class="dashboard-list-box fl-wrap">
+                                        <div class="dashboard-header fl-wrap">
+                                            <h3>Your Listings</h3>
+                                        </div>
+                                        <!-- dashboard-list  -->
+                                        {% for room in rooms  %}    
+                                        <div class="dashboard-list">
+                                            <div class="dashboard-message">
+                                                <span class="new-dashboard-item">New</span>
+                                                <div class="dashboard-listing-table-image">
+                                                    <a href="{% url 'rooms:detail' room.id %}"><img src="{{room.first_photo}}" alt=""></a>
+                                                </div>
+                                                <div class="dashboard-listing-table-text">
+                                                    <h4><a href="{% url 'rooms:detail' room.id %}">{{room.name}}</a></h4>
+                                                    <span class="dashboard-listing-table-address"><i class="far fa-map-marker"></i><a  href="#">{{room.address}}</a></span>
+                                                    <ul class="dashboard-listing-table-opt  fl-wrap">
+                                                        <li><a href="{% url 'rooms:edit' room.id %}">Edit <i class="fal fa-edit"></i></a></li>
+                                                        <li><a href="{% url 'rooms:photo-list' room.pk %}">Photos <i class="fal fa-edit"></i></a></li>
+                                                        <li><a href="#" class="del-btn">Delete <i class="fal fa-trash-alt"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                        <!-- dashboard-list end-->    
+                                        
+                                    </div>
+                                    <!-- pagination-->
+                                    <div class="pagination">
+                                        <a href="#" class="prevposts-link"><i class="fa fa-caret-left"></i></a>
+                                        <a href="#">1</a>
+                                        <a href="#" class="current-page">2</a>
+                                        <a href="#">3</a>
+                                        <a href="#">4</a>
+                                        <a href="#" class="nextposts-link"><i class="fa fa-caret-right"></i></a>
+                                    </div>
+                                </div>
+                                <!-- dashboard-list-box end--> 
+                            </div>
+                            <!-- dasboard-wrap end-->
+                        </div>
+                    </section>
+                    <div class="limit-box fl-wrap"></div>
+                </div>
+                <!-- content end-->
+            </div>
+            <!--wrapper end -->
+{% endblock %}

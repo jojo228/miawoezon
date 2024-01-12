@@ -1,0 +1,38 @@
+{% extends 'authentication/client_detail.html' %} 
+{% load static %} 
+
+{% block title %}
+<title>Editer ses informations personnelles</title>
+{% endblock title %} 
+
+{% block content %}
+<div class="l-form">
+    <form action="{% url 'authentication:client_personal_information_update' user.client.id %}" method="post" class="form">
+        {% csrf_token %}
+
+        <h3 class="form__title">Modifier vos informations personnelles</h3> <br>
+
+        {{form.non_field_errors}}
+
+        {% for field in form %}
+        <div class="form__div">
+                    {{field}}
+                <label class="form__label">{{field.label}}</label>  
+        </div>
+        {{field.errors}}
+        {% endfor %}
+
+        <!--==================== BUTTONS ====================-->
+
+        <div class="form__div multistep__form-div">
+            <a href="{% url 'authentication:client_detail' user.client.id %}">
+                <button  class="button button__outlined">
+                    Annuler
+                </button>
+            </a>
+            <input type="submit" class="button" value="Changer">
+        </div>
+
+    </form>
+</div>
+{% endblock %}

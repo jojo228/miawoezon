@@ -6,7 +6,7 @@ from . import models
 class SearchForm(forms.Form):
 
     city = forms.CharField(initial="Anywhere")
-    country = CountryField(default="KR").formfield()
+    country = CountryField(default="TG").formfield()
     room_type = forms.ModelChoiceField(
         required=False, empty_label="Any kind", queryset=models.RoomType.objects.all()
     )
@@ -42,6 +42,12 @@ class CreatePhotoForm(forms.ModelForm):
 
 
 class CreateRoomForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(CreateRoomForm, self).__init__(*args, **kwargs)
+        for visible in self.visible_fields():
+            visible.field.widget.attrs["class"] = "custom-form"
+            visible.field.widget.attrs["placeholder"] = " "
+        
     class Meta:
         model = models.Room
         fields = (
@@ -62,8 +68,7 @@ class CreateRoomForm(forms.ModelForm):
             "amenities",
             "facilities",
             "house_rules",
+            "video",
         )
 
-    def save(self, *args, **kwargs):
-        room = super().save(commit=False)
-        return room
+    

@@ -18,12 +18,10 @@ urlpatterns = [
     path("", include("main.urls")),
     path("rooms/", include("rooms.urls", namespace="rooms")),
     path("authentication/", include("authentication.urls", namespace="authentication")),
-    path("reviews/", include("reviews.urls", namespace="reviews")),
     path("reservations/", include("reservations.urls", namespace="reservations")),
     path("lists/", include("lists.urls", namespace="lists")),
     path("announcements/", include("announcement.urls", namespace="announcement")),
     path("blog/", include("blog.urls")),
-    path("conversations/", include("conversations.urls", namespace="conversations")),
     path(os.environ.get("ADMIN_URL", "admin/"), admin.site.urls),
     path("sentry-debug/", trigger_error),
     

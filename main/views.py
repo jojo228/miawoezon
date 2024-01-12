@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView
+from announcement.models import House
 from blog.models import Post
+from rooms.models import Room
 
 
 # Create your views here.
@@ -11,6 +13,8 @@ def coming_soon(request):
 
 def home(request):
     posts = Post.objects.all().order_by("-created_on")[:3]
+    rooms = Room.objects.all().order_by("-created")[:9]
+    announces = House.objects.all().order_by("-date")[:9]
     
     return render(request, "index.html", locals())
 
