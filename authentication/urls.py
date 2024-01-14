@@ -49,7 +49,7 @@ urlpatterns = [
     path("success/", views.SuccessView.as_view(), name="success"),
     path(
         "logout/",
-        auth_views.LogoutView.as_view(next_page=reverse_lazy("landing_page:index")),
+        auth_views.LogoutView.as_view(next_page=reverse_lazy("main:home")),
         name="logout",
     ),
     # login
