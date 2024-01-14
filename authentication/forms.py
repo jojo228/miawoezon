@@ -99,7 +99,7 @@ class ClientPersonalDataForm(ModelForm):
 
     class Meta:
         model = Client
-        fields = ("date_of_birth", "sex", "matrimonial_status", "contact", "profession")
+        fields = ("date_of_birth", "matrimonial_status", "contact", "profession", "sex",)
         labels = {
             "date_of_birth": "Date de naissance",
             "sex": "Sexe",

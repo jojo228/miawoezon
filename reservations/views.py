@@ -12,24 +12,50 @@ class CreateError(Exception):
     pass
 
 
+from datetime import datetime
+from django.shortcuts import render, redirect
+from django.urls import reverse
+from django.contrib import messages
+from . import models as reservation_models
+from rooms import models as room_models
+
+
 def create(request, room, year, month, day):
     try:
-        check_in = datetime.datetime(year, month, day)
-        check_out = datetime.datetime(year, month, day)
-        room = room_models.Room.objects.get(pk=room)
-        models.BookedDay.objects.get(day=check_in, reservation__room=room)
-        raise CreateError()
+        # Extract start and end dates from the form data
+        start_date = datetime(year, month, day)
+        end_date = datetime.strptime(request.POST.get('bookdates'), '%Y-%m-%d')
+
+        room_instance = room_models.Room.objects.get(pk=room)
+
+        # Check if any booked day exists within the selected range
+        existing_booked_day = reservation_models.BookedDay.objects.filter(
+            day__range=(start_date, end_date),
+            reservation__room=room_instance
+        ).exists()
+
+        if existing_booked_day:
+            raise CreateError()
+
+        reservation = reservation_models.Reservation.objects.create(
+            guest=request.user.client,
+            room=room_instance,
+            check_in=start_date,
+            check_out=end_date,
+        )
+
+        return redirect(reverse("reservations:detail", kwargs={"pk": reservation.pk}))
+
     except room_models.Room.DoesNotExist:
         messages.error(request, "Can't Reserve That Room'")
         return redirect(reverse("home"))
-    except models.BookedDay.DoesNotExist:
-        reservation = models.Reservation.objects.create(
-            guest=request.user.client,
-            room=room,
-            check_in=check_in,
-            check_out=check_out,
-        )
-        return redirect(reverse("reservations:detail", kwargs={"pk": reservation.pk}))
+    except reservation_models.BookedDay.DoesNotExist:
+        messages.error(request, "Selected date range is not available")
+        return redirect(reverse("home"))
+    except CreateError:
+        messages.error(request, "The room is already booked for the selected dates")
+        return redirect(reverse("home"))
+
 
 
 class ReservationDetailView(View):

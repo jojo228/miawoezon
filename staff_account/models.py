@@ -13,7 +13,7 @@ MALE = "M"
 FEMALE = "F"
 SEX_CHOICES = [
     (MALE, "Masculin"),
-    (FEMALE, "Feminin"),
+    (FEMALE, "Féminin"),
 ]
 
 SINGLE = "S"

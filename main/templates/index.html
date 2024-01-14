@@ -35,10 +35,10 @@
                         <div class="logo-holder">
                             <a href="index.html"><img src="{% static 'images/logo 2.png' %}" alt=""></a>
                         </div>
-                        {% if request.user.authenticated %}
+                        {% if request.user.is_authenticated %}
                         <a href="{% url 'rooms:create' %}" class="add-hotel">Add A Listing <span><i class="far fa-plus"></i></span></a>
                         {% endif %}     
-                        {% if not request.user.authenticated %}
+                        {% if not request.user.is_authenticated %}
                         <a href="{% url 'authentication:login' %}">            
                             <div class="show-reg-form"><i class="fa fa-sign-in"></i>Sign In</div>
                         </a>    
@@ -63,7 +63,7 @@
                 <div class="header-inner fl-wrap">
                     <div class="container">
                         <div class="show-search-button"><span>Search</span> <i class="fas fa-search"></i> </div>
-                        {% if request.user.authenticated %}
+                        {% if request.user.is_authenticated %}
                         <div class="wishlist-link"><i class="fal fa-heart"></i><span class="wl_counter">3</span></div>
                         <div class="header-user-menu">
                             <div class="header-user-name">
@@ -791,7 +791,7 @@
                                         <p>Miawoezon est une application novatrice de marché de l'hospitalité conçue pour mettre en relation les voyageurs avec des expériences d'hébergement uniques et personnalisées. Fonctionnant comme une plateforme complète, Miawoezon permet aux utilisateurs de parcourir, de découvrir et de réserver de divers types d'hébergements, tels que des maisons, des appartements et des séjours atypiques, directement auprès des hôtes.</p>
                                         <ul  class="footer-contacts fl-wrap">
                                             <li><span><i class="fal fa-envelope"></i> Mail :</span><a href="#" target="_blank">miawoezon@gmail.com</a></li>
-                                            <li> <span><i class="fal fa-map-marker-alt"></i> Adress :</span><a href="#" target="_blank">Quartier Hedzranawoe, à 100m du marché, Lomé-Togo</a></li>
+                                            <li> <span><i class="fal fa-map-marker-alt"></i> Adress :</span><a href="#" target="_blank">Attiégou à 100m du marché, Lomé-Togo</a></li>
                                             <li><span><i class="fal fa-phone"></i> Phone :</span><a href="#">+228 93 91 86 26</a></li>
                                         </ul>
                                         <div class="footer-social">
