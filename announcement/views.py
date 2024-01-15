@@ -1,15 +1,29 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.views.generic import ListView
-from rooms.models import Room
+from announcement.forms import CommentForm
+from announcement.models import House, Comment
 
 
 # Create your views here.
-class HomeView(ListView):
+def announce_detail(request, pk):
+    house = House.objects.get(pk=pk)
+    form = CommentForm()
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = Comment(
+                author=form.cleaned_data["author"],
+                body=form.cleaned_data["body"],
+                house=house,
+            )
+            comment.save()
+            return HttpResponseRedirect(request.path_info)
 
-    """ HomeView Definition """
-
-    model = Room
-    paginate_by = 12
-    paginate_orphans = 5
-    ordering = "created"
-    context_object_name = "rooms"
+    comments = Comment.objects.filter(house=house)
+    context = {
+        "house": house,
+        "comments": comments,
+        "form": CommentForm(),
+    }
+    return render(request, "detail.html", context)

@@ -17,7 +17,7 @@ class HouseAdmin(admin.ModelAdmin):
     fieldsets = (
         (
             "Basic Info",
-            {"fields": ("type", "prix", "disponibilité", "pour", "ville", "address", )},
+            {"fields": ("type", "description", "prix", "disponibilité", "pour", "ville", "address", )},
         ),
         
     )

@@ -45,12 +45,12 @@ class House(models.Model):
 
 
     type = models.CharField(max_length=100, choices=[(tag.value, tag.name) for tag in HouseType])
+    description = models.TextField()
     disponibilité = models.CharField(max_length=20, choices=HOUSE_AVAILABILITY,)
     pour = models.CharField(max_length=20, choices=HOUSE_FOR,)
     ville = models.CharField(max_length=80)
     prix = models.CharField(max_length=80)
     address = models.CharField(max_length=140)
-    description = models.TextField()
     date = models.DateTimeField(auto_now_add=True, null=True)
 
     def __str__(self):
@@ -73,3 +73,13 @@ class House(models.Model):
     def get_next_four_photos(self):
         photos = self.photos.all()[1:5]
         return photos
+    
+
+class Comment(models.Model):
+    author = models.CharField(max_length=60)
+    body = models.TextField()
+    created_on = models.DateTimeField(auto_now_add=True)
+    house = models.ForeignKey("House", on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.author} on '{self.house}'"

@@ -4,6 +4,7 @@ from django.db import models
 class Post(models.Model):
     title = models.CharField(max_length=300)
     body = models.TextField()
+    image = models.ImageField(null=True, blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
 

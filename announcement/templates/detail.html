@@ -1,0 +1,218 @@
+
+{% extends "index.html" %}
+{% load static %}
+{% block content %}
+            <!--  wrapper  -->
+            <div id="wrapper">
+                <!-- content-->
+                <div class="content">
+                    <!--  section  -->
+                    <section class="grey-blue-bg small-padding scroll-nav-container">
+                        <div class="top-dec"></div>
+                        <!--  scroll-nav-wrapper  -->
+                        <div class="scroll-nav-wrapper fl-wrap">
+                            <div class="hidden-map-container fl-wrap">
+                                <input id="pac-input" class="controls fl-wrap controls-mapwn" type="text" placeholder="What Nearby ?   Bar , Gym , Restaurant ">
+                                <div class="map-container">
+                                    <div id="singleMap" data-latitude="40.7427837" data-longitude="-73.11445617675781"></div>
+                                </div>
+                            </div>
+
+                            <div class="clearfix"></div>
+                            <div class="container">
+                                <nav class="scroll-nav scroll-init">
+                                    <ul>
+                                        <li><a class="act-scrlink" href="#sec1">Gallery</a></li>
+                                        <li><a href="#sec2">Details</a></li>
+                                        <li><a href="#sec3">Amenities</a></li>
+                                        <li><a href="#sec4">Rooms</a></li>
+                                        <li><a href="#sec5">Reviews</a></li>
+                                    </ul>
+                                </nav>
+                                <a href="#" class="show-hidden-map">  <span>On The Map</span> <i class="fal fa-map-marked-alt"></i></a>
+                            </div>
+                        </div>
+                        <!--  scroll-nav-wrapper end  -->                    
+                        <!--   container  -->
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="list-single-main-container ">
+                                        <!-- fixed-scroll-column  -->
+                                        <div class="fixed-scroll-column">
+                                            <div class="fixed-scroll-column-item fl-wrap">
+                                                <div class="showshare sfcs fc-button"><i class="far fa-share-alt"></i><span>Share </span></div>
+                                                <div class="share-holder fixed-scroll-column-share-container">
+                                                    <div class="share-container  isShare"></div>
+                                                </div>
+                                                <a class="fc-button custom-scroll-link" href="#sec6"><i class="far fa-comment-alt-check"></i> <span>  Add review </span></a>
+                                                <a class="fc-button" href="#"><i class="far fa-heart"></i> <span>Save</span></a>
+                                                <a class="fc-button" href="booking-single.html"><i class="far fa-bookmark"></i> <span> Book Now </span></a>
+                                            </div>
+                                        </div>
+                                        <!-- fixed-scroll-column end   -->                                          
+                                        <div class="list-single-main-media fl-wrap" id="sec1">
+                                            <div class="single-slider-wrapper fl-wrap">
+                                                <div class="slider-for fl-wrap"  >
+                                                    <div class="slick-slide-item"><img src="{{house.first_photo}}" alt=""></div>
+                                                    {% for pic in house.get_next_four_photos %}
+                                                    <div class="slick-slide-item"><img src="{{pic.file.url}}" alt=""></div>
+                                                    {% endfor %}
+                                                    
+                                                </div>
+                                                <div class="swiper-button-prev sw-btn"><i class="fal fa-long-arrow-left"></i></div>
+                                                <div class="swiper-button-next sw-btn"><i class="fal fa-long-arrow-right"></i></div>
+                                            </div>
+                                            <div class="single-slider-wrapper fl-wrap">
+                                                <div class="slider-nav fl-wrap">
+                                                    <div class="slick-slide-item"><img src="{{house.first_photo}}" alt=""></div>
+                                                    {% for pic in house.get_next_four_photos %}
+                                                    <div class="slick-slide-item"><img src="{{pic.file.url}}" alt=""></div>
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <!--  flat-hero-container -->
+                                    <div class="flat-hero-container fl-wrap">
+                                        <div class="box-widget-item-header fl-wrap ">
+                                            <h3>{{house.type}} ({{house.pour}})</h3>
+                                            <div class="listing-rating-wrap">
+                                                {{house.disponibilité}}
+                                            </div>
+                                        </div>
+                                        <div class="list-single-hero-price fl-wrap">Prix<span>{{house.prix}}</span></div>
+                                        
+                                        <a href="booking-single.html" class="btn flat-btn color2-bg big-btn float-btn image-popup">Book Now<i class="far fa-bookmark"></i></a>
+                                    </div>
+                                    <!--   flat-hero-container end -->
+                                </div>
+                            </div>
+                            <!--   row  -->
+                            <div class="row">
+                                <!--   datails -->
+                                <div class="col-md-8">
+                                    <div class="list-single-main-container ">
+                                        <!-- list-single-header end -->
+                                        
+                                        <!--   list-single-main-item -->
+                                        <div class="list-single-main-item fl-wrap">
+                                            <div class="list-single-main-item-title fl-wrap">
+                                                <h3>Description</h3>
+                                            </div>
+                                            <p>{{house.description}} </p>
+                                            <a href="" class="btn flat-btn color-bg big-btn float-btn image-popup">Video Presentation <i class="fal fa-play"></i></a>
+                                        </div>
+                                        <!--   list-single-main-item end -->
+                                        
+                                        <!-- list-single-main-item -->   
+                                        <div class="list-single-main-item fl-wrap" id="sec5">
+                                            <div class="list-single-main-item-title fl-wrap">
+                                                <h3>Item Reviews -  <span> 2 </span></h3>
+                                            </div>
+                                            <div class="reviews-comments-wrap">
+                                                
+                                                <!-- reviews-comments-item -->  
+                                                <div class="reviews-comments-item">
+                                                    <div class="review-comments-avatar">
+                                                        <img src="images/avatar/1.jpg" alt=""> 
+                                                    </div>
+                                                    <div class="reviews-comments-item-text">
+                                                        <h4><a href="#">Adam Koncy</a></h4>
+                                                        <div class="review-score-user">
+                                                            <span>4.7</span>
+                                                            <strong>Very Good</strong>
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                        <p>" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc posuere convallis purus non cursus. Cras metus neque, gravida sodales massa ut. "</p>
+                                                        <div class="reviews-comments-item-date"><span><i class="far fa-calendar-check"></i>03 December 2017</span><a href="#"><i class="fal fa-reply"></i> Reply</a></div>
+                                                    </div>
+                                                </div>
+                                                <!--reviews-comments-item end-->                                                                  
+                                            </div>
+                                        </div>
+                                        <!-- list-single-main-item end -->   
+                                        <!-- list-single-main-item -->   
+                                        <div class="list-single-main-item fl-wrap" id="sec6">
+                                            <div class="list-single-main-item-title fl-wrap">
+                                                <h3>Add Review</h3>
+                                            </div>
+                                            <!-- Add Review Box -->
+                                            <div id="add-review" class="add-review-box">
+                                                <!-- Review Comment -->
+                                                <form id="add-comment" class="add-comment  custom-form" name="rangeCalc" >
+                                                    <fieldset>
+                                                        
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <label><i class="fal fa-user"></i></label>
+                                                                <input type="text" placeholder="Your Name *" value=""/>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <label><i class="fal fa-envelope"></i>  </label>
+                                                                <input type="text" placeholder="Email Address*" value=""/>
+                                                            </div>
+                                                        </div>
+                                                        <textarea cols="40" rows="3" placeholder="Your Review:"></textarea>
+                                                    </fieldset>
+                                                    <button class="btn  big-btn flat-btn float-btn color2-bg" style="margin-top:30px">Submit Review <i class="fal fa-paper-plane"></i></button>
+                                                </form>
+                                            </div>
+                                            <!-- Add Review Box / End -->
+                                        </div>
+                                        <!-- list-single-main-item end -->                                    
+                                    </div>
+                                </div>
+                                <!--   datails end  -->
+                                <!--   sidebar  -->
+                                <div class="col-md-4">
+                                    <!--box-widget-wrap -->  
+                                    <div class="box-widget-wrap">
+                                                                            
+                                        <!--box-widget-item -->
+                                        <div class="box-widget-item fl-wrap">
+                                            <div class="box-widget">
+                                                <div class="box-widget-content">
+                                                    <div class="box-widget-item-header">
+                                                        <h3> Contact Information</h3>
+                                                    </div>
+                                                    <div class="box-widget-list">
+                                                        <ul>
+                                                            <li><span><i class="fal fa-map-marker"></i> Ville :</span> <a href="#">{{house.ville}}</a></li>
+                                                            <li><span><i class="fal fa-phone"></i> Adresse :</span> <a href="#">{{house.address}}</a></li>
+                                                            <li><span><i class="fal fa-envelope"></i> Contact :</span> <a href="#">+ 228 93 91 86 26</a></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="list-widget-social">
+                                                        <ul>
+                                                            <li><a href="https://www.facebook.com/profile.php?id=61555214685798" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                                                            <li><a href="https://x.com/Miawoezon3?t=Dicfdfc5f3zDa6U1r4PGcA&s=09" target="_blank"><i class="fab fa-twitter"></i></a></li>
+                                                            <li><a href="https://www.instagram.com/miawoezon3?utm_source=qr&igsh=eGIyZTE2amk0aW1h" target="_blank"><i class="fab fa-instagram"></i></a></li>
+                                                            <li><a href="https://www.tiktok.com/@miawoezon7?_t=8j3ES1ObbXy&_r=1" target="_blank"><i class="fab fa-brands:tiktok"></i></a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--box-widget-item end -->                          
+                                                                
+                                                             
+                                                                
+                                    </div>
+                                    <!--box-widget-wrap end -->  
+                                </div>
+                                <!--   sidebar end  -->
+                            </div>
+                            <!--   row end  -->
+                        </div>
+                        <!--   container  end  -->
+                    </section>
+                    <!--  section  end-->
+                </div>
+                <!-- content end-->
+                <div class="limit-box fl-wrap"></div>
+            </div>
+            <!--wrapper end -->
+{% endblock %}
