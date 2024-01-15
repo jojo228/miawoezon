@@ -337,7 +337,8 @@
                                                     <div class="box-widget-item-header">
                                                         <h3> Book This Room</h3>
                                                     </div>
-                                                    <form name="bookFormCalc"   class="book-form custom-form">
+                                                    <form name="bookFormCalc" class="book-form custom-form" action="{% url 'reservations:create' room.pk %}" method="post">
+                                                        {% csrf_token %}
                                                         <fieldset>
                                                             
                                                             <div class="cal-item">
@@ -353,9 +354,7 @@
                                                         <input type="text" name="item_total" class="hid-input" value="{{room.price}}" data-form="{{room.price}}">
                                                         <input type="number"  id="totaldays" name="qty5" class="hid-input">
                                                         <div class="total-coast fl-wrap"><strong>Total Cost</strong> <span>F <input type="text" name="grand_total" value="" data-form="SUM({item_total}) * {qty5}"></span></div>
-                                                        <a href="{% url 'reservations:create' room.pk %}">
-                                                            <button class="btnaplly color2-bg">Book Now<i class="fal fa-paper-plane"></i></button>
-                                                        </a>
+                                                        <button type="button" class="btnaplly color2-bg" onclick="submitForm()">Book Now<i class="fal fa-paper-plane"></i></button>
                                                         
                                                     </form>
                                                 </div>
@@ -479,4 +478,12 @@
                 <div class="limit-box fl-wrap"></div>
             </div>
             <!--wrapper end -->
+
+
+<script>
+    function submitForm() {
+        document.forms["bookFormCalc"].submit();
+    }
+</script>
+            
 {% endblock %}

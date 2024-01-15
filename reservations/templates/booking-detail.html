@@ -15,25 +15,25 @@
                     <section class="middle-padding gre y-blue-bg">
                         <div class="container">
                             <div class="list-main-wrap-title single-main-wrap-title fl-wrap">
-                                <h2>Booking form for : <span>Park Central</span></h2>
+                                <h2>Reservation pour : <span>{{reservation.room.name}}</span></h2>
                             </div>
                             <div class="row">
                                 <div class="col-md-8">
                                     <div class="bookiing-form-wrap">
                                         <ul id="progressbar">
-                                            <li class="active"><span>01.</span>Personal Info</li>
-                                            <li><span>02.</span>Billing Address</li>
-                                            <li><span>03.</span>Payment Method</li>
-                                            <li><span>04.</span>Confirm</li>
+                                            <!-- <li class="active"><span>01.</span>Personal Info</li> -->
+                                            <li><span>01.</span>Billing Address</li>
+                                            <li><span>02.</span>Payment Method</li>
+                                            <li><span>03.</span>Confirm</li>
                                         </ul>
                                         <!--   list-single-main-item -->
                                         <div class="list-single-main-item fl-wrap hidden-section tr-sec">
                                             <div class="profile-edit-container">
                                                 <div class="custom-form">
                                                     <form>
-                                                        <fieldset class="fl-wrap book_mdf">
+                                                        <!-- <fieldset class="fl-wrap book_mdf">
                                                             <div class="list-single-main-item-title fl-wrap">
-                                                                <h3>Your personal Information</h3>
+                                                                <h3>Informations personelles </h3>
                                                             </div>
                                                             <div class="row">
                                                                 <div class="col-sm-6">
@@ -67,7 +67,7 @@
                                                             </div>
                                                             <span class="fw-separator"></span>
                                                             <a  href="#"  class="next-form action-button btn no-shdow-btn color-bg">Billing Address <i class="fal fa-angle-right"></i></a>
-                                                        </fieldset>
+                                                        </fieldset> -->
                                                         <fieldset class="fl-wrap book_mdf">
                                                             <div class="list-single-main-item-title fl-wrap">
                                                                 <h3>Billing Address</h3>
@@ -165,7 +165,7 @@
                                                                     <h4>Thank you. Your reservation has been received.</h4>
                                                                     <div class="clearfix"></div>
                                                                     <p>Your payment has been processed successfully.</p>
-                                                                    <a href="{% url 'invoice'%}" target="_blank" class="color-bg">View Invoice</a>
+                                                                    <a href="{% url 'reservations:invoice' %}" target="_blank" class="color-bg">View Invoice</a>
                                                                 </div>
                                                             </div>
                                                             <span class="fw-separator"></span>
@@ -197,13 +197,13 @@
                                         <!--ccart-details_text-->          
                                         <div class="cart-details_text">
                                             <ul class="cart_list">
-                                                <li>Room Type <span>Standard Family Room <strong>$81</strong></span></li>
-                                                <li>From <span>02-11-18</span></li>
-                                                <li>To <span>04-11-18</span></li>
-                                                <li>Days<span>3 </span></li>
-                                                <li>Adults <span>2</span></li>
-                                                <li>Childs <span>1 <strong>-10%</strong></span></li>
-                                                <li>Taxes And Fees <span><strong>$12</strong></span></li>
+                                                <li>Type <span>{{reservation.room.room_type}} <strong>{{reservation.room.price}} F</strong></span></li>
+                                                <li>Du <span>{{reservation.check_in|date:"d M Y"}}</span></li>
+                                                <li>Au <span>{{reservation.check_out|date:"d M Y"}}</span></li>
+                                                <li>Jours<span>{{reservation.total_days}}</span></li>
+                                                <li>Personnes <span>2</span></li>
+                                                <!-- <li>Childs <span>1 <strong>-10%</strong></span></li> -->
+                                                <!-- <li>Taxes And Fees <span><strong>$12</strong></span></li> -->
                                             </ul>
                                         </div>
                                         <!--cart-details_text end --> 
@@ -211,8 +211,8 @@
                                     <!--cart-details end --> 
                                     <!--cart-total --> 
                                     <div class="cart-total">
-                                        <span class="cart-total_item_title">Total Cost</span>
-                                        <strong>$690</strong>                                
+                                        <span class="cart-total_item_title">Total</span>
+                                        <strong>{{reservation.total_amount}} F</strong>                                
                                     </div>
                                     <!--cart-total end -->                             
                                 </div>

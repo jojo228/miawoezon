@@ -1,7 +1,11 @@
 import datetime
 from django.db import models
+from django.shortcuts import redirect
 from django.utils import timezone
+from authentication.models import Client
 from main import models as main_models
+from django_countries.fields import CountryField
+
 
 
 class BookedDay(main_models.TimeStampedModel):
@@ -61,6 +65,17 @@ class Reservation(main_models.TimeStampedModel):
 
     is_finished.boolean = True
 
+    def total_days(self):
+        start = self.check_in
+        end = self.check_out
+        difference = end - start
+        return difference.days + 1
+    
+    def total_amount(self):
+        days = self.total_days() 
+        total = days * self.room.price
+        return total
+
     def save(self, *args, **kwargs):
         if self.pk is None:
             start = self.check_in
@@ -76,3 +91,34 @@ class Reservation(main_models.TimeStampedModel):
                     BookedDay.objects.create(day=day, reservation=self)
                 return
         return super().save(*args, **kwargs)
+
+
+
+
+class BillingAddress(models.Model):
+    city = models.CharField(max_length=255)
+    country = CountryField()
+    state = models.CharField(max_length=255)
+    street = models.CharField(max_length=255)
+    postal_code = models.IntegerField()
+    additional_note = models.TextField()
+    
+
+
+class Payment(models.Model):
+    reservation = models.ForeignKey(Reservation, on_delete=models.CASCADE)
+    client = models.ForeignKey(Client, on_delete=models.CASCADE)
+    billing_address = models.OneToOneField(BillingAddress, on_delete=models.CASCADE)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    currency = models.CharField(max_length=3)
+    transaction_id = models.CharField(max_length=255)
+    description = models.TextField()
+    status = models.CharField(max_length=20, default="pending")  # You can add more statuses based on your needs
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.client.user.username} - {self.amount} {self.currency} - {self.status}"
+
+
+
+
