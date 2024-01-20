@@ -15,7 +15,7 @@
 <div class="main-register-holder">
     <div class="main-register fl-wrap">
         <ul class="tabs-menu">
-            <li class="current"><a href="#tab-1"><i class="fal fa-user-plus"></i> Register</a></li>
+            <li class="current"><a href="#tab-1"><i class="fal fa-user-plus"></i> Registre</a></li>
             <!-- <li><a href="#tab-2"><i class="fal fa-sign-in-alt"></i> Login</a></li> -->
             
         </ul>
@@ -24,7 +24,7 @@
             
                 <div class="tab">
                     <div id="tab-1" class="tab-content">
-                        <h3>Sign Up <span>Mia<strong>Woezon</strong></span></h3>
+                        <h3>S'inscrire <span>Mia<strong>Woezon</strong></span></h3>
                         <h4>Etape {{ wizard.steps.step1 }} sur {{ wizard.steps.count }}</h4>
                         <div class="custom-form">
                             <form method="post" enctype="multipart/form-data" action="{% url 'authentication:signup' %}"
@@ -98,7 +98,7 @@
                 <div class="tab">
                 <!--tab -->
                 <div id="tab-2" class="tab-content">
-                    <h3>Sign In <span>Mia<strong>Woezon</strong></span></h3>
+                    <h3>Se connecter <span>Mia<strong>Woezon</strong></span></h3>
                     <div class="custom-form">
                         <form method="post" name="registerform" action="{% url 'authentication:login' %}">
                             {% csrf_token %}
@@ -123,10 +123,10 @@
                 <!--tab -->
             </div>
             <!--tabs end -->
-            <div class="log-separator fl-wrap"><span>or</span></div>
+            <div class="log-separator fl-wrap"><span>ou</span></div>
             <div class="soc-log fl-wrap">
-                <p>For faster login or register use your social account.</p>
-                <a href="#" class="facebook-log"><i class="fab fa-facebook-f"></i>Connect with Facebook</a>
+                <p>Pour une connexion ou un enregistrement plus rapide, utilisez votre compte social.</p>
+                <a href="#" class="facebook-log"><i class="fab fa-facebook-f"></i>Connecter avec Facebook</a>
             </div>
         </div>
     </div>

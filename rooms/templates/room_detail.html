@@ -46,14 +46,14 @@
                             <div class="container">
                                 <nav class="scroll-nav scroll-init">
                                     <ul>
-                                        <li><a class="act-scrlink" href="#sec1">Top</a></li>
-                                        <li><a href="#sec2">Details</a></li>
-                                        <li><a href="#sec3">Amenities</a></li>
-                                        <li><a href="#sec4">Rooms</a></li>
-                                        <li><a href="#sec5">Reviews</a></li>
+                                        <li><a class="act-scrlink" href="#sec1">Haut</a></li>
+                                        <li><a href="#sec2">Détails</a></li>
+                                        <li><a href="#sec3">Agréments</a></li>
+                                        <li><a href="#sec4">Pièces</a></li>
+                                        <li><a href="#sec5">Commentaires</a></li>
                                     </ul>
                                 </nav>
-                                <a href="#" class="show-hidden-map">  <span>On The Map</span> <i class="fal fa-map-marked-alt"></i></a>
+                                <a href="#" class="show-hidden-map">  <span>Sur la carte</span> <i class="fal fa-map-marked-alt"></i></a>
                             </div>
                         </div>
                         <!--  scroll-nav-wrapper end  -->                    
@@ -67,13 +67,13 @@
                                         <!-- fixed-scroll-column  -->
                                         <div class="fixed-scroll-column">
                                             <div class="fixed-scroll-column-item fl-wrap">
-                                                <div class="showshare sfcs fc-button"><i class="far fa-share-alt"></i><span>Share </span></div>
+                                                <div class="showshare sfcs fc-button"><i class="far fa-share-alt"></i><span>Partager </span></div>
                                                 <div class="share-holder fixed-scroll-column-share-container">
                                                     <div class="share-container  isShare"></div>
                                                 </div>
-                                                <a class="fc-button custom-scroll-link" href="#sec6"><i class="far fa-comment-alt-check"></i> <span>  Add review </span></a>
-                                                <a class="fc-button" href="#"><i class="far fa-heart"></i> <span>Save</span></a>
-                                                <a class="fc-button" href="booking-single.html"><i class="far fa-bookmark"></i> <span> Book Now </span></a>
+                                                <a class="fc-button custom-scroll-link" href="#sec6"><i class="far fa-comment-alt-check"></i> <span>  Ajouter un commentaire </span></a>
+                                                <a class="fc-button" href="#"><i class="far fa-heart"></i> <span>Sauvegarder</span></a>
+                                                <a class="fc-button" href="booking-single.html"><i class="far fa-bookmark"></i> <span> Reserve maintenant </span></a>
                                             </div>
                                         </div>
                                         <!-- fixed-scroll-column end   -->
@@ -109,7 +109,7 @@
                                                             {{room.beds}}
                                                         </div>
                                                     </div>
-                                                    <h6>Beds</h6>
+                                                    <h6>Des lits</h6>
                                                 </div>
                                             </div>
                                             <!-- inline-facts end -->
@@ -122,7 +122,7 @@
                                                             {{room.bedrooms}}
                                                         </div>
                                                     </div>
-                                                    <h6>Bedrooms</h6>
+                                                    <h6>Chambres</h6>
                                                 </div>
                                             </div>
                                             <!-- inline-facts end -->
@@ -135,7 +135,7 @@
                                                             {{room.baths}}
                                                         </div>
                                                     </div>
-                                                    <h6>Baths</h6>
+                                                    <h6>Thermes</h6>
                                                 </div>
                                             </div>
                                             <!-- inline-facts end -->
@@ -148,7 +148,7 @@
                                                             {{room.guests}}
                                                         </div>
                                                     </div>
-                                                    <h6>Guests</h6>
+                                                    <h6>Invitées</h6>
                                                 </div>
                                             </div>
                                             <!-- inline-facts end -->                                                                        
@@ -165,19 +165,19 @@
                                           
                                         <!-- accordion-->
                                         <div class="accordion mar-top">
-                                            <a class="toggle" href="#"> Amenities  <span></span></a>
+                                            <a class="toggle" href="#"> Agréments  <span></span></a>
                                             <div class="accordion-inner">
                                                 {% for a in room.amenities.all %}
                                                 <p>{{a}}</p>
                                                 {% endfor %}
                                             </div>
-                                            <a class="toggle act-accordion" href="#"> Facilities   <span></span></a>
+                                            <a class="toggle act-accordion" href="#"> Installations   <span></span></a>
                                             <div class="accordion-inner visible">
                                                 {% for f in room.facilities.all %}
                                                 <p>{{f}}</p>
                                                 {% endfor %}
                                             </div>
-                                            <a class="toggle" href="#"> House Rules  <span></span></a>
+                                            <a class="toggle" href="#"> règles de la maison  <span></span></a>
                                             <div class="accordion-inner">
                                                 {% for rules in room.house_rules.all %}
                                                 <p>{{rules}}</p>
@@ -190,7 +190,7 @@
                                         {% if room.host.rooms.count > 0 %}
                                         <div class="list-single-main-item fl-wrap" id="sec4">
                                             <div class="list-single-main-item-title fl-wrap">
-                                                <h3>Available Rooms</h3>
+                                                <h3>Chambres disponibles</h3>
                                             </div>
                                             <!--   rooms-container -->
                                             <div class="rooms-container fl-wrap">
@@ -231,7 +231,7 @@
                                         <!-- list-single-main-item -->   
                                         <div class="list-single-main-item fl-wrap" id="sec5">
                                             <div class="list-single-main-item-title fl-wrap">
-                                                <h3>Item Reviews -  <span> 2 </span></h3>
+                                                <h3>Avis d'articles -  <span> 2 </span></h3>
                                             </div>
                                             <div class="reviews-comments-wrap">
                                                 <!-- reviews-comments-item -->  
@@ -258,7 +258,7 @@
                                         <!-- list-single-main-item -->   
                                         <div class="list-single-main-item fl-wrap" id="sec6">
                                             <div class="list-single-main-item-title fl-wrap">
-                                                <h3>Add Review</h3>
+                                                <h3>Ajouter un commentaire</h3>
                                             </div>
                                             <!-- Add Review Box -->
                                             <div id="add-review" class="add-review-box">
@@ -269,7 +269,7 @@
                                                             <div class="review-range-container">
                                                                 <!-- review-range-item-->
                                                                 <div class="review-range-item">
-                                                                    <div class="range-slider-title">Cleanliness</div>
+                                                                    <div class="range-slider-title">Propreté</div>
                                                                     <div class="range-slider-wrap ">
                                                                         <input type="text" class="rate-range" data-min="0" data-max="5"  name="rgcl"  data-step="1" value="4">
                                                                     </div>
@@ -277,7 +277,7 @@
                                                                 <!-- review-range-item end --> 
                                                                 <!-- review-range-item-->
                                                                 <div class="review-range-item">
-                                                                    <div class="range-slider-title">Comfort</div>
+                                                                    <div class="range-slider-title">Confort</div>
                                                                     <div class="range-slider-wrap ">
                                                                         <input type="text" class="rate-range" data-min="0" data-max="5"  name="rgcl"  data-step="1"  value="1">
                                                                     </div>
@@ -285,7 +285,7 @@
                                                                 <!-- review-range-item end --> 
                                                                 <!-- review-range-item-->
                                                                 <div class="review-range-item">
-                                                                    <div class="range-slider-title">Staf</div>
+                                                                    <div class="range-slider-title">Étaf</div>
                                                                     <div class="range-slider-wrap ">
                                                                         <input type="text" class="rate-range" data-min="0" data-max="5"  name="rgcl"  data-step="1" value="5" >
                                                                     </div>
@@ -293,7 +293,7 @@
                                                                 <!-- review-range-item end --> 
                                                                 <!-- review-range-item-->
                                                                 <div class="review-range-item">
-                                                                    <div class="range-slider-title">Facilities</div>
+                                                                    <div class="range-slider-title">Installations</div>
                                                                     <div class="range-slider-wrap">
                                                                         <input type="text" class="rate-range" data-min="0" data-max="5"  name="rgcl"  data-step="1" value="3">
                                                                     </div>
@@ -302,7 +302,7 @@
                                                             </div>
                                                             <div class="review-total">
                                                                 <span><input type="text" name="rg_total" value="" data-form="AVG({rgcl})" value="0"></span>    
-                                                                <strong>Your Score</strong>
+                                                                <strong>Ton score</strong>
                                                             </div>
                                                         </div>
                                                         <div class="row">
@@ -317,7 +317,7 @@
                                                         </div>
                                                         <textarea cols="40" rows="3" placeholder="Your Review:"></textarea>
                                                     </fieldset>
-                                                    <button class="btn  big-btn flat-btn float-btn color2-bg" style="margin-top:30px">Submit Review <i class="fal fa-paper-plane"></i></button>
+                                                    <button class="btn  big-btn flat-btn float-btn color2-bg" style="margin-top:30px">Poster le commentaire <i class="fal fa-paper-plane"></i></button>
                                                 </form>
                                             </div>
                                             <!-- Add Review Box / End -->
@@ -335,7 +335,7 @@
                                             <div class="box-widget">
                                                 <div class="box-widget-content">
                                                     <div class="box-widget-item-header">
-                                                        <h3> Book This Room</h3>
+                                                        <h3> Réservez cette pièce</h3>
                                                     </div>
                                                     <form name="bookFormCalc" class="book-form custom-form" action="{% url 'reservations:create' room.pk %}" method="post">
                                                         {% csrf_token %}
@@ -343,9 +343,9 @@
                                                             
                                                             <div class="cal-item">
                                                                 <div class="bookdate-container  fl-wrap">
-                                                                    <label><i class="fal fa-calendar-check"></i> When </label>
+                                                                    <label><i class="fal fa-calendar-check"></i> Quand </label>
                                                                     <input type="text"    placeholder="Date In-Out" name="bookdates"   value=""/>
-                                                                    <div class="bookdate-container-dayscounter"><i class="far fa-question-circle"></i><span>Days : <strong>0</strong></span></div>
+                                                                    <div class="bookdate-container-dayscounter"><i class="far fa-question-circle"></i><span>Jours : <strong>0</strong></span></div>
                                                                 </div>
                                                             </div>
                                                             
@@ -353,8 +353,8 @@
                                                         </fieldset>
                                                         <input type="text" name="item_total" class="hid-input" value="{{room.price}}" data-form="{{room.price}}">
                                                         <input type="number"  id="totaldays" name="qty5" class="hid-input">
-                                                        <div class="total-coast fl-wrap"><strong>Total Cost</strong> <span>F <input type="text" name="grand_total" value="" data-form="SUM({item_total}) * {qty5}"></span></div>
-                                                        <button type="button" class="btnaplly color2-bg" onclick="submitForm()">Book Now<i class="fal fa-paper-plane"></i></button>
+                                                        <div class="total-coast fl-wrap"><strong>Coût total</strong> <span>F <input type="text" name="grand_total" value="" data-form="SUM({item_total}) * {qty5}"></span></div>
+                                                        <button type="button" class="btnaplly color2-bg" onclick="submitForm()">Reserve maintenant<i class="fal fa-paper-plane"></i></button>
                                                         
                                                     </form>
                                                 </div>
@@ -367,7 +367,7 @@
                                             <div class="box-widget">
                                                 <div class="box-widget-content">
                                                     <div class="box-widget-item-header">
-                                                        <h3>Hosted By</h3>
+                                                        <h3>Hébergé par</h3>
                                                     </div>
                                                     <div class="box-widget-author fl-wrap">
                                                         <div class="box-widget-author-title fl-wrap">
@@ -375,9 +375,9 @@
                                                                 <img src="{% if 'room.host.avatar' %} {{room.host.avatar.url}} {% endif %}" alt=""> 
                                                             </div>
                                                             <a href="user-single.html">{{room.host}}</a>
-                                                            <span>4 Places Hosted</span>
+                                                            <span>4 lieux hébergés</span>
                                                         </div>
-                                                        <a href="{% if 'room.host.avatar' %} {{room.host.avatar.url}} {% endif %}" class="btn flat-btn color-bg   float-btn image-popup">View Profile<i class="fal fa-user-alt"></i></a>
+                                                        <a href="{% if 'room.host.avatar' %} {{room.host.avatar.url}} {% endif %}" class="btn flat-btn color-bg   float-btn image-popup">Voir le profil<i class="fal fa-user-alt"></i></a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -389,14 +389,14 @@
                                             <div class="box-widget">
                                                 <div class="box-widget-content">
                                                     <div class="box-widget-item-header">
-                                                        <h3> Contact Information</h3>
+                                                        <h3> Coordonnées</h3>
                                                     </div>
                                                     <div class="box-widget-list">
                                                         <ul>
-                                                            <li><span><i class="fal fa-map-marker"></i> Adress :</span> <a href="#">{{room.host.address}}</a></li>
-                                                            <li><span><i class="fal fa-phone"></i> Phone :</span> <a href="#">{{room.host.contact}}</a></li>
-                                                            <li><span><i class="fal fa-envelope"></i> Mail :</span> <a href="#">{{room.host.user.email}}</a></li>
-                                                            <li><span><i class="fal fa-browser"></i> Country :</span> <a href="#">{{room.host.country}}</a></li>
+                                                            <li><span><i class="fal fa-map-marker"></i> Une robe :</span> <a href="#">{{room.host.address}}</a></li>
+                                                            <li><span><i class="fal fa-phone"></i> Téléphone :</span> <a href="#">{{room.host.contact}}</a></li>
+                                                            <li><span><i class="fal fa-envelope"></i> mail :</span> <a href="#">{{room.host.user.email}}</a></li>
+                                                            <li><span><i class="fal fa-browser"></i> Pays :</span> <a href="#">{{room.host.country}}</a></li>
                                                         </ul>
                                                     </div>
                                                     <div class="list-widget-social">
@@ -425,7 +425,7 @@
                                             <div class="box-widget">
                                                 <div class="box-widget-content">
                                                     <div class="box-widget-item-header">
-                                                        <h3>Similar Listings</h3>
+                                                        <h3>Listes similaires</h3>
                                                     </div>
                                                     <div class="widget-posts fl-wrap">
                                                         <ul>

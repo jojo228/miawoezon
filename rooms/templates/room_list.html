@@ -17,13 +17,13 @@
                                 <div class="dashboard-content fl-wrap">
                                     <div class="dashboard-list-box fl-wrap">
                                         <div class="dashboard-header fl-wrap">
-                                            <h3>Your Listings</h3>
+                                            <h3>Vos annonces</h3>
                                         </div>
                                         <!-- dashboard-list  -->
                                         {% for room in rooms  %}    
                                         <div class="dashboard-list">
                                             <div class="dashboard-message">
-                                                <span class="new-dashboard-item">New</span>
+                                                <span class="new-dashboard-item">Nouvelle</span>
                                                 <div class="dashboard-listing-table-image">
                                                     <a href="{% url 'rooms:detail' room.id %}"><img src="{{room.first_photo}}" alt=""></a>
                                                 </div>
@@ -31,8 +31,8 @@
                                                     <h4><a href="{% url 'rooms:detail' room.id %}">{{room.name}}</a></h4>
                                                     <span class="dashboard-listing-table-address"><i class="far fa-map-marker"></i><a  href="#">{{room.address}}</a></span>
                                                     <ul class="dashboard-listing-table-opt  fl-wrap">
-                                                        <li><a href="{% url 'rooms:edit' room.id %}">Edit <i class="fal fa-edit"></i></a></li>
-                                                        <li><a href="{% url 'rooms:photo-list' room.pk %}">Photos <i class="fal fa-edit"></i></a></li>
+                                                        <li><a href="{% url 'rooms:edit' room.id %}">Modifier <i class="fal fa-edit"></i></a></li>
+                                                        <li><a href="{% url 'rooms:photo-list' room.pk %}">photos <i class="fal fa-edit"></i></a></li>
                                                         <li><a href="#" class="del-btn">Delete <i class="fal fa-trash-alt"></i></a></li>
                                                     </ul>
                                                 </div>

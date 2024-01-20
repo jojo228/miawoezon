@@ -14,6 +14,7 @@ class AbstractItem(main_models.TimeStampedModel):
 
     def __str__(self):
         return self.name
+    
 
 
 class RoomType(AbstractItem):

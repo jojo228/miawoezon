@@ -36,11 +36,11 @@
                             <a href="index.html"><img src="{% static 'images/logo 2.png' %}" alt=""></a>
                         </div>
                         {% if request.user.is_authenticated %}
-                        <a href="{% url 'rooms:create' %}" class="add-hotel">Add A Listing <span><i class="far fa-plus"></i></span></a>
+                        <a href="{% url 'rooms:create' %}" class="add-hotel">Publier<span><i class="far fa-plus"></i></span></a>
                         {% endif %}     
                         {% if not request.user.is_authenticated %}
                         <a href="{% url 'authentication:login' %}">            
-                            <div class="show-reg-form"><i class="fa fa-sign-in"></i>Sign In</div>
+                            <div class="show-reg-form"><i class="fa fa-sign-in"></i>Se connecter</div>
                         </a>    
                         {% endif %}  
                         <div class="lang-wrap">
@@ -62,20 +62,20 @@
                 <!-- header-inner-->
                 <div class="header-inner fl-wrap">
                     <div class="container">
-                        <div class="show-search-button"><span>Search</span> <i class="fas fa-search"></i> </div>
+                        <div class="show-search-button"><span>Recherche</span> <i class="fas fa-search"></i> </div>
                         {% if request.user.is_authenticated %}
                         <div class="wishlist-link"><i class="fal fa-heart"></i><span class="wl_counter">3</span></div>
                         <div class="header-user-menu">
                             <div class="header-user-name">
                                 <span><img src="{% static 'images/avatar/1.jpg' %}" alt=""></span>
-                                My account
+                                Mon Compte
                             </div>
                             <ul>
-                                <li><a href="{% url 'main:dashboard-myprofile' %}"> Edit profile</a></li>
-                                <li><a href="{% url 'rooms:create' %}"> Add Listing</a></li>
-                                <li><a href="{% url 'main:dashboard-bookings' %}">  Bookings  </a></li>
-                                <li><a href="{% url 'main:dashboard-review' %}"> Reviews </a></li>
-                                <li><a href="{% url 'authentication:logout' %}">Log Out</a></li>
+                                <li><a href="{% url 'main:dashboard-myprofile' %}"> Profil</a></li>
+                                <li><a href="{% url 'rooms:create' %}"> Publierg</a></li>
+                                <li><a href="{% url 'main:dashboard-bookings' %}">  Reservations  </a></li>
+                                <li><a href="{% url 'main:dashboard-review' %}"> Revues </a></li>
+                                <li><a href="{% url 'authentication:logout' %}">Se deconnecter</a></li>
                             </ul>
                         </div>
                         {% endif %}  
@@ -92,24 +92,24 @@
                             <nav>
                                 <ul>
                                     <li>
-                                        <a href="{% url 'main:home' %}" class="act-link">Home</a>
+                                        <a href="{% url 'main:home' %}" class="act-link">Accueil</a>
                                         
                                     </li>
                                     <li>
-                                        <a href="#">Listings</a>
+                                        <a href="#">Liste</a>
                                         
                                         <!--second level end-->
                                     </li>
                                     <li>
-                                        <a href="{% url 'main:blog' %}">News</a>
+                                        <a href="{% url 'main:blog' %}">Blogs</a>
                                     </li>
                                     <li>
                                         <a href="#">Plus <i class="fas fa-caret-down"></i></a>
                                         <!--second level -->
                                         <ul>
-                                            <li><a href="{% url 'main:about' %}">About</a></li>
+                                            <li><a href="{% url 'main:about' %}">A Propos</a></li>
                                             <li><a href="{% url 'main:contacts' %}">Contacts</a></li>
-                                            <li><a href="{% url 'main:help' %}">Help FAQ</a></li>
+                                            <li><a href="{% url 'main:help' %}">FAQ</a></li>
                                             
                                         </ul>
                                         <!--second level end-->
@@ -148,7 +148,7 @@
                             <!-- header-search-input-item -->
                             <div class="col-sm-4">
                                 <div class="header-search-input-item fl-wrap location autocomplete-container">
-                                    <label>Destination or Room Type</label>
+                                    <label>Type de destination ou de pièce</label>
                                     <span class="header-search-input-item-icon"><i class="fal fa-map-marker-alt"></i></span>
                                     <input type="text" placeholder="Location" class="autocomplete-input" id="autocompleteid" value=""/>
                                     <a href="#"><i class="fal fa-dot-circle"></i></a>
@@ -158,7 +158,7 @@
                             <!-- header-search-input-item -->
                             <div class="col-sm-3">
                                 <div class="header-search-input-item fl-wrap date-parent">
-                                    <label>Date In-Out </label>
+                                    <label>Date </label>
                                     <span class="header-search-input-item-icon"><i class="fal fa-calendar-check"></i></span>
                                     <input type="text" placeholder="When" name="header-search"   value=""/>
                                 </div>
@@ -168,7 +168,7 @@
                             <!-- header-search-input-item -->
                             <div class="col-sm-2">
                                 <div class="header-search-input-item fl-wrap">
-                                    <button class="header-search-button" onclick="window.location.href='listing.html'">Search <i class="far fa-search"></i></button>
+                                    <button class="header-search-button" onclick="window.location.href='listing.html'">Recherche <i class="far fa-search"></i></button>
                                 </div>
                             </div>
                             <!-- header-search-input-item end -->                                                          
@@ -196,7 +196,7 @@
                                     <div class="section-title-separator"><span></span></div>
                                     <h2>Miawoezon</h2>
                                     <span class="section-separator"></span>                                    
-                                    <h3>Let's start exploring the world together with Miawoezon</h3>
+                                    <h3>Commençons à explorer le monde avec Miawoezon</h3>
                                 </div>
                                 <div class="main-search-input-wrap">
                                     <div class="main-search-input fl-wrap">
@@ -210,16 +210,16 @@
                                         </div>
                                         <div class="main-search-input-item">
                                             <div class="qty-dropdown fl-wrap">
-                                                <div class="qty-dropdown-header fl-wrap"><i class="fal fa-users"></i> Persons</div>
+                                                <div class="qty-dropdown-header fl-wrap"><i class="fal fa-users"></i> Personnes</div>
                                                 <div class="qty-dropdown-content fl-wrap">
                                                     <div class="quantity-item">
-                                                        <label><i class="fas fa-male"></i> Adults</label>
+                                                        <label><i class="fas fa-male"></i> Adultes</label>
                                                         <div class="quantity">
                                                             <input type="number" min="1" max="3" step="1" value="1">
                                                         </div>
                                                     </div>
                                                     <div class="quantity-item">
-                                                        <label><i class="fas fa-child"></i> Children</label>
+                                                        <label><i class="fas fa-child"></i> Enfants</label>
                                                         <div class="quantity">
                                                             <input type="number" min="0" max="3" step="1" value="0">
                                                         </div>
@@ -227,7 +227,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <button class="main-search-button color2-bg" onclick="window.location.href='{% url 'main:listing' %}'">Search <i class="fal fa-search"></i></button>
+                                        <button class="main-search-button color2-bg" onclick="window.location.href='{% url 'main:listing' %}'">Recherche <i class="fal fa-search"></i></button>
 
                                     </div>
                                 </div>
@@ -243,9 +243,9 @@
                         <div class="container">
                             <div class="section-title">
                                 <div class="section-title-separator"><span></span></div>
-                                <h2>Popular Destination</h2>
+                                <h2>Destination populaire</h2>
                                 <span class="section-separator"></span>
-                                <p>Explore some of the best tips from around the city from our partners and friends.</p>
+                                <p>Explorez certains des meilleurs conseils de la ville de nos partenaires et amis.</p>
                             </div>
 						 </div>
                             <!-- portfolio start -->
@@ -332,7 +332,7 @@
                                 <!-- gallery-item end-->
                             </div>
                             <!-- portfolio end -->
-                            <a href="{% url 'main:listing' %}" class="btn    color-bg">Explore All Cities<i class="fas fa-caret-right"></i></a>
+                            <a href="{% url 'main:listing' %}" class="btn    color-bg">Explorez toutes les villes<i class="fas fa-caret-right"></i></a>
                     </section>
                     <!-- section end -->
                     <!-- section-->
@@ -360,7 +360,7 @@
                                             <div class="geodir-category-img">
                                                 <a href="{% url 'rooms:detail' room.id %}"><img src="{{room.first_photo}}" alt=""></a>
                                                 <div class="listing-avatar"><a href="{% url 'main:author-single' %}"><img src="{{room.host.avatar.url}}" alt=""></a>
-                                                    <span class="avatar-tooltip">Added By  <strong>{{room.host}}</strong></span>
+                                                    <span class="avatar-tooltip">Ajouté par  <strong>{{room.host}}</strong></span>
                                                 </div>
                                                 <!-- <div class="geodir-category-opt">
                                                     <div class="listing-rating card-popup-rainingvis" data-starrating2="5"></div>
@@ -385,7 +385,7 @@
                                                     <li><i class="fal fa-utensils"></i><span> Restaurant</span></li>
                                                 </ul> -->
                                                 <div class="geodir-category-footer fl-wrap">
-                                                    <div class="geodir-category-price">Price/Night <span> <br>  {{room.price}} F</span></div>
+                                                    <div class="geodir-category-price">Prix / nuit <span> <br>  {{room.price}} F</span></div>
                                                     <div class="geodir-opt-list">
                                                         <a href="#" class="single-map-item" data-newlatitude="40.72956781" data-newlongitude="-73.99726866"><i class="fal fa-map-marker-alt"></i><span class="geodir-opt-tooltip">On the map</span></a>
                                                         <a href="#" class="geodir-js-favorite"><i class="fal fa-heart"></i><span class="geodir-opt-tooltip">Save</span></a>
@@ -407,7 +407,7 @@
                         </div>
                         <!--  carousel end-->
                         <!-- portfolio end -->
-                        <a href="{% url 'main:listing' %}" class="btn    color-bg">View More<i class="fas fa-caret-right"></i></a>
+                        <a href="{% url 'main:listing' %}" class="btn    color-bg">Voir plus<i class="fas fa-caret-right"></i></a>
                     </section>
                     <section class="grey-blue-bg">
                         <!-- container-->
@@ -431,7 +431,7 @@
                                     <div class="listing-item">
                                         <article class="geodir-category-listing fl-wrap">
                                             <div class="geodir-category-img">
-                                                <a href="{% url 'main:listing-single' %}"><img src="{{announce.first_photo}}" alt=""></a>
+                                                <a href="{% url 'announcement:detail' announce.pk %}"><img src="{{announce.first_photo}}" alt=""></a>
                                                 <div class="sale-window">{{announce.disponibilité}}</div>
                                                 
                                             </div>
@@ -462,7 +462,7 @@
                             <div class="swiper-button-next sw-btn"><i class="fa fa-long-arrow-right"></i></div>
                         </div>
                         <!--  carousel end-->
-                        <a href="{% url 'main:listing' %}" class="btn    color-bg">View More<i class="fas fa-caret-right"></i></a>
+                        <a href="{% url 'main:listing' %}" class="btn    color-bg">Voir plus<i class="fas fa-caret-right"></i></a>
                     </section>
                     <!-- section end -->
                    
@@ -471,7 +471,7 @@
                         <div class="container">
                             <div class="section-title">
                                 <div class="section-title-separator"><span></span></div>
-                                <h2>Why Choose Us</h2>
+                                <h2>Pourquoi nous choisir</h2>
                                 <span class="section-separator"></span>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla finibus lobortis pulvinar.</p>
                             </div>
@@ -482,8 +482,8 @@
                                     <div class="process-item big-pad-pr-item">
                                         <span class="process-count"> </span>
                                         <div class="time-line-icon"><i class="fal fa-headset"></i></div>
-                                        <h4><a href="#"> 24/7 customer support</a></h4>
-                                        <p>If you need help while traveling or hosting, contact us at our toll free number: +1 484-535-5540.</p>
+                                        <h4><a href="#"> Support client 24/7</a></h4>
+                                        <p>Si vous avez besoin d'aide lors de vos déplacements ou de l'hébergement, contactez-nous à notre numéro gratuit: +1 484-535-5540.</p>
                                     </div>
                                     <!-- process-item end -->
                                 </div>
@@ -492,8 +492,8 @@
                                     <div class="process-item big-pad-pr-item">
                                         <span class="process-count"> </span>
                                         <div class="time-line-icon"><i class="fal fa-gift"></i></div>
-                                        <h4> <a href="#">6,00,00,000 host guarantee</a></h4>
-                                        <p>Hosts are protected against property damages for up to 6,00,00,000.</p>
+                                        <h4> <a href="#">6,00,00,00,000 Host Garantie</a></h4>
+                                        <p>Les hôtes sont protégés contre les dommages-intérêts pour une maximum de 6 000 000 000.</p>
                                     </div>
                                     <!-- process-item end -->                                
                                 </div>
@@ -502,8 +502,8 @@
                                     <div class="process-item big-pad-pr-item nodecpre">
                                         <span class="process-count"> </span>
                                         <div class="time-line-icon"><i class="fal fa-credit-card"></i></div>
-                                        <h4><a href="#"> Verified ID</a></h4>
-                                        <p>We aim to build a trusted community by giving you more info when you're deciding who to host or stay with.</p>
+                                        <h4><a href="#"> ID vérifié</a></h4>
+                                        <p>Nous visons à construire une communauté de confiance en vous donnant plus d'informations lorsque vous décidez avec qui héberger ou rester avec.</p>
                                     </div>
                                     <!-- process-item end -->                                
                                 </div>
@@ -519,7 +519,7 @@
                                                 <div class="num" data-content="0" data-num="254">154</div>
                                             </div>
                                         </div>
-                                        <h6>New Visiters Every Week</h6>
+                                        <h6>Nouveaux visiteurs chaque semaine</h6>
                                     </div>
                                 </div>
                                 <!-- inline-facts end -->
@@ -532,7 +532,7 @@
                                                 <div class="num" data-content="0" data-num="12168">12168</div>
                                             </div>
                                         </div>
-                                        <h6>Happy customers every year</h6>
+                                        <h6>Clients satisfaits chaque année</h6>
                                     </div>
                                 </div>
                                 <!-- inline-facts end -->
@@ -545,7 +545,7 @@
                                                 <div class="num" data-content="0" data-num="172">172</div>
                                             </div>
                                         </div>
-                                        <h6>Won Awards</h6>
+                                        <h6>A remporté des prix</h6>
                                     </div>
                                 </div>
                                 <!-- inline-facts end -->
@@ -558,7 +558,7 @@
                                                 <div class="num" data-content="0" data-num="732">732</div>
                                             </div>
                                         </div>
-                                        <h6>New Listing Every Week</h6>
+                                        <h6>Nouvelle annonce chaque semaine</h6>
                                     </div>
                                 </div>
                                 <!-- inline-facts end -->
@@ -572,7 +572,7 @@
                         <div class="container">
                             <div class="section-title">
                                 <div class="section-title-separator"><span></span></div>
-                                <h2>Testimonials</h2>
+                                <h2>Témoignages</h2>
                                 <span class="section-separator"></span>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla finibus lobortis pulvinar.</p>
                             </div>
@@ -588,7 +588,7 @@
                                     <div class="text-carousel-item">
                                         <div class="popup-avatar"><img src="{% static 'images/avatar/1.jpg' %}" alt=""></div>
                                         <div class="listing-rating card-popup-rainingvis" data-starrating2="5"> </div>
-                                        <div class="review-owner fl-wrap">Milka Antony  - <span>Happy Client</span></div>
+                                        <div class="review-owner fl-wrap">Milka Antony  - <span>Client heureux</span></div>
                                         <p> "In ut odio libero, at vulputate urna. Nulla tristique mi a massa convallis cursus. Nulla eu mi magna. Etiam suscipit commodo gravida. Lorem ipsum dolor sit amet, conse ctetuer adipiscing elit, sed diam nonu mmy nibh euismod tincidunt ut laoreet dolore magna aliquam erat."</p>
                                         <a href="#" class="testim-link">Via Facebook</a>
                                     </div>
@@ -599,7 +599,7 @@
                                     <div class="text-carousel-item">
                                         <div class="popup-avatar"><img src="{% static 'images/avatar/1.jpg' %}" alt=""></div>
                                         <div class="listing-rating card-popup-rainingvis" data-starrating2="4"> </div>
-                                        <div class="review-owner fl-wrap">Milka Antony  - <span>Happy Client</span></div>
+                                        <div class="review-owner fl-wrap">Milka Antony  - <span>Client heureux</span></div>
                                         <p> "In ut odio libero, at vulputate urna. Nulla tristique mi a massa convallis cursus. Nulla eu mi magna. Etiam suscipit commodo gravida. Lorem ipsum dolor sit amet, conse ctetuer adipiscing elit, sed diam nonu mmy nibh euismod tincidunt ut laoreet dolore magna aliquam erat."</p>
                                         <a href="#" class="testim-link">Via Facebook</a>
                                     </div>
@@ -610,7 +610,7 @@
                                     <div class="text-carousel-item">
                                         <div class="popup-avatar"><img src="{% static 'images/avatar/1.jpg' %}" alt=""></div>
                                         <div class="listing-rating card-popup-rainingvis" data-starrating2="5"> </div>
-                                        <div class="review-owner fl-wrap">Milka Antony  - <span>Happy Client</span></div>
+                                        <div class="review-owner fl-wrap">Milka Antony  - <span>Client heureux</span></div>
                                         <p> "In ut odio libero, at vulputate urna. Nulla tristique mi a massa convallis cursus. Nulla eu mi magna. Etiam suscipit commodo gravida. Lorem ipsum dolor sit amet, conse ctetuer adipiscing elit, sed diam nonu mmy nibh euismod tincidunt ut laoreet dolore magna aliquam erat."</p>
                                         <a href="#" class="testim-link">Via Facebook</a>
                                     </div>
@@ -621,7 +621,7 @@
                                     <div class="text-carousel-item">
                                         <div class="popup-avatar"><img src="{% static 'images/avatar/1.jpg' %}" alt=""></div>
                                         <div class="listing-rating card-popup-rainingvis" data-starrating2="5"> </div>
-                                        <div class="review-owner fl-wrap">Milka Antony  - <span>Happy Client</span></div>
+                                        <div class="review-owner fl-wrap">Milka Antony  - <span>Client heureux</span></div>
                                         <p> "In ut odio libero, at vulputate urna. Nulla tristique mi a massa convallis cursus. Nulla eu mi magna. Etiam suscipit commodo gravida. Lorem ipsum dolor sit amet, conse ctetuer adipiscing elit, sed diam nonu mmy nibh euismod tincidunt ut laoreet dolore magna aliquam erat."</p>
                                         <a href="#" class="testim-link">Via Facebook</a>
                                     </div>
@@ -642,9 +642,9 @@
                                     <!-- column text-->
                                     <div class="colomn-text fl-wrap">
                                         <div class="colomn-text-title">
-                                            <h3>Become a host ?</h3>
+                                            <h3>Devenir un hôte?</h3>
                                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla finibus lobortis pulvinar.</p>
-                                            <a href="{% url 'rooms:create' %}" class="btn  color-bg float-btn">Add your house<i class="fal fa-plus"></i></a>
+                                            <a href="{% url 'rooms:create' %}" class="btn  color-bg float-btn">Ajoutez votre maison<i class="fal fa-plus"></i></a>
                                         </div>
                                     </div>
                                     <!--column text   end-->
@@ -658,9 +658,9 @@
                         <div class="container">
                             <div class="section-title">
                                 <div class="section-title-separator"><span></span></div>
-                                <h2>Tips & Articles</h2>
+                                <h2>Conseils et articles</h2>
                                 <span class="section-separator"></span>
-                                <p>Browse the latest articles from our blog.</p>
+                                <p>Parcourez les derniers articles de notre blog.</p>
                             </div>
                             <div class="row home-posts">
                                 {% for post in posts %}
@@ -685,7 +685,7 @@
                                 </div>
                                 {% endfor %}
                             </div>
-                            <a href=" {% url 'blog:blog_index' %}" class="btn    color-bg ">Read All News<i class="fas fa-caret-right"></i></a>
+                            <a href=" {% url 'blog:blog_index' %}" class="btn    color-bg ">Lisez toutes les nouvelles<i class="fas fa-caret-right"></i></a>
                         </div>
                         <div class="section-decor"></div>
                     </section>
@@ -704,8 +704,8 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="subscribe-header">
-                                    <h3>Subscribe</h3>
-                                    <p>Want to be notified when we launch a new template or an udpate. Just sign up and we'll send you a notification by email.</p>
+                                    <h3>S'abonner</h3>
+                                    <p>Vous voulez être informé lorsque nous lançons un nouveau modèle ou une mise à jour.Inscrivez-vous et nous vous enverrons un nonification par e-mail.</p>
                                 </div>
                             </div>
                             <div class="col-md-1"></div>
@@ -715,7 +715,7 @@
                                         <div class="subcribe-form">
                                             <form id="subscribe">
                                                 <input class="enteremail fl-wrap" name="email" id="subscribe-email" placeholder="Enter Your Email" spellcheck="false" type="text">
-                                                <button type="submit" id="subscribe-button" class="subscribe-button"><i class="fas fa-rss-square"></i> Subscribe</button>
+                                                <button type="submit" id="subscribe-button" class="subscribe-button"><i class="fas fa-rss-square"></i> S'abonner</button>
                                                 <label for="subscribe-email" class="subscribe-message"></label>
                                             </form>
                                         </div>
@@ -736,7 +736,7 @@
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="footer-carousel-title">
-                                        Our partners
+                                        Nos partenaires
                                     </div>
                                 </div>
                                 <div class="col-md-9">
@@ -786,16 +786,16 @@
                             <!--footer-widget -->
                             <div class="col-md-4">
                                 <div class="footer-widget fl-wrap">
-                                    <h3>About Us</h3>
+                                    <h3>À propos de nous</h3>
                                     <div class="footer-contacts-widget fl-wrap">
                                         <p>Miawoezon est une application novatrice de marché de l'hospitalité conçue pour mettre en relation les voyageurs avec des expériences d'hébergement uniques et personnalisées. Fonctionnant comme une plateforme complète, Miawoezon permet aux utilisateurs de parcourir, de découvrir et de réserver de divers types d'hébergements, tels que des maisons, des appartements et des séjours atypiques, directement auprès des hôtes.</p>
                                         <ul  class="footer-contacts fl-wrap">
-                                            <li><span><i class="fal fa-envelope"></i> Mail :</span><a href="#" target="_blank">miawoezon.gservice@gmail.com</a></li>
-                                            <li> <span><i class="fal fa-map-marker-alt"></i> Adress :</span><a href="#" target="_blank">Attiégou, Lomé-Togo</a></li>
-                                            <li><span><i class="fal fa-phone"></i> Phone :</span><a href="#">+228 93 91 86 26</a></li>
+                                            <li><span><i class="fal fa-envelope"></i> mail :</span><a href="#" target="_blank">gakservices@gmail.com</a></li>
+                                            <li> <span><i class="fal fa-map-marker-alt"></i> Une robe :</span><a href="#" target="_blank">Attiégou, Lomé-Togo</a></li>
+                                            <li><span><i class="fal fa-phone"></i> Téléphone :</span><a href="#">+228 93 91 86 26</a></li>
                                         </ul>
                                         <div class="footer-social">
-                                            <span>Find us : </span>
+                                            <span>Trouve nous : </span>
                                             <ul>
                                                 <li><a href="https://www.facebook.com/profile.php?id=61555214685798" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
                                                 <li><a href="https://x.com/Miawoezon3?t=Dicfdfc5f3zDa6U1r4PGcA&s=09" target="_blank"><i class="fab fa-twitter"></i></a></li>
@@ -810,7 +810,7 @@
                             <!--footer-widget -->
                             <div class="col-md-4">
                                 <div class="footer-widget fl-wrap">
-                                    <h3>Our Last News</h3>
+                                    <h3>Nos dernières nouvelles</h3>
                                     <div class="widget-posts fl-wrap">
                                         <ul>
                                             <li class="clearfix">
@@ -844,11 +844,11 @@
                                 <div class="footer-widget fl-wrap ">
                                     <h3>Helpful links</h3>
                                         <ul class="footer-list fl-wrap">
-                                            <li><a href="{% url 'main:about' %}">About Our Company</a></li>
-                                            <li><a href="{% url 'main:blog' %}">Our last News</a></li>
-                                            <li><a href="{% url 'main:pricing-tables' %}">Pricing Plans</a></li>
-                                            <li><a href="{% url 'main:help' %}">Help Center</a></li>
-                                            <li><a href="{% url 'main:contacts' %}">Contacts</a></li>											
+                                            <li><a href="{% url 'main:about' %}">Au sujet de notre compagnie</a></li>
+                                            <li><a href="{% url 'main:blog' %}">Nos dernières nouvelles</a></li>
+                                            <li><a href="{% url 'main:pricing-tables' %}">Plans de prix</a></li>
+                                            <li><a href="{% url 'main:help' %}">Centre d'aide</a></li>
+                                            <li><a href="{% url 'main:contacts' %}">contacts</a></li>											
                                         </ul>
 										
                                 </div>
@@ -859,12 +859,12 @@
                         <!--footer-widget -->
                         <div class="footer-widget">
                             <div class="row">
-                                <div class="col-md-4"><a class="contact-btn color-bg" href="contacts.html">Get In Touch<i class="fal fa-envelope"></i></a></div>
+                                <div class="col-md-4"><a class="contact-btn color-bg" href="contacts.html">Entrer en contact<i class="fal fa-envelope"></i></a></div>
                                 <div class="col-md-8">
                                     <div class="customer-support-widget fl-wrap">
-                                        <h4>Customer support : </h4>
+                                        <h4>Service client : </h4>
                                         <a href="tel:+22893918626" class="cs-mumber">+228 93 91 86 26</a>
-                                        <a href="tel:+22893918626" class="cs-mumber-button color2-bg">Call Now <i class="far fa-phone-volume"></i></a>
+                                        <a href="tel:+22893918626" class="cs-mumber-button color2-bg">Appelle maintenant <i class="far fa-phone-volume"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -905,7 +905,7 @@
                         <div class="map-modal fl-wrap">
                             <div id="singleMap" data-latitude="40.7" data-longitude="-73.1"></div>
                         </div>
-                        <h3><i class="fal fa-location-arrow"></i><a href="#">Hotel Title</a></h3>
+                        <h3><i class="fal fa-location-arrow"></i><a href="#">Titre de l'hôtel</a></h3>
                         <input id="pac-input" class="controls fl-wrap controls-mapwn" type="text" placeholder="What Nearby ?   Bar , Gym , Restaurant ">
                         <div class="map-modal-close"><i class="fal fa-times"></i></div>
                     </div>

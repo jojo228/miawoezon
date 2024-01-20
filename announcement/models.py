@@ -3,7 +3,6 @@ from enum import Enum
 from django.urls import reverse
 
 
-
 # Create your models here.
 
 class HouseType(Enum):
@@ -21,7 +20,6 @@ class HouseType(Enum):
 
 
 class Photo(models.Model):
-
     caption = models.CharField(max_length=80)
     file = models.ImageField(upload_to="room_photos")
     house = models.ForeignKey("House", related_name="photos", on_delete=models.CASCADE)
@@ -42,7 +40,6 @@ class House(models.Model):
         ("Location", "Location"),
         ("Vente", "Vente"),
     ]
-
 
     type = models.CharField(max_length=100, choices=[(tag.value, tag.name) for tag in HouseType])
     description = models.TextField()
