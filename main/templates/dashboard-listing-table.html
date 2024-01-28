@@ -49,23 +49,23 @@
                                     <div class="dasboard-menu-btn color3-bg">Dashboard Menu <i class="fal fa-bars"></i></div>
                                     <ul class="dasboard-menu-wrap">
                                         <li>
-                                            <a href="{% url 'dashboard'%}"><i class="far fa-user"></i>Profile</a>
+                                            <a href="{% url 'main:dashboard'%}"><i class="far fa-user"></i>Profile</a>
                                             <ul>
-                                                <li><a href="{% url 'dashboard-myprofile'%}">Edit profile</a></li>
-                                                <li><a href="{% url 'dashboard-password'%}">Change Password</a></li>
+                                                <li><a href="{% url 'main:dashboard-myprofile'%}">Edit profile</a></li>
+                                                <li><a href="{% url 'main:dashboard-password'%}">Change Password</a></li>
                                             </ul>
                                         </li>
-                                        <li><a href="{% url 'dashboard-messages'%}"><i class="far fa-envelope"></i> Messages <span>3</span></a></li>
+                                        <li><a href="{% url 'main:dashboard-messages'%}"><i class="far fa-envelope"></i> Messages <span>3</span></a></li>
                                         <li>
-                                            <a href="{% url 'dashboard-listing-table'%}" class="user-profile-act"><i class="far fa-th-list"></i> My listigs  </a>
+                                            <a href="{% url 'rooms:host-list'%}" class="user-profile-act"><i class="far fa-th-list"></i> My listigs  </a>
                                             <ul>
                                                 <li><a href="#">Active</a><span>5</span></li>
                                                 <li><a href="#">Pending</a><span>2</span></li>
                                                 <li><a href="#">Expire</a><span>3</span></li>
                                             </ul>
                                         </li>
-                                        <li><a href="{% url 'dashboard-bookings'%}"> <i class="far fa-calendar-check"></i> Bookings <span>2</span></a></li>
-                                        <li><a href="{% url 'dashboard-review'%}"><i class="far fa-comments"></i> Reviews </a></li>
+                                        <li><a href="{% url 'main:dashboard-bookings'%}"> <i class="far fa-calendar-check"></i> Bookings <span>2</span></a></li>
+                                        <li><a href="{% url 'main:dashboard-review'%}"><i class="far fa-comments"></i> Reviews </a></li>
                                     </ul>
                                 </div>
                                 <!--dasboard-menu end-->
@@ -96,10 +96,10 @@
                                             <div class="dashboard-message">
                                                 <span class="new-dashboard-item">New</span>
                                                 <div class="dashboard-listing-table-image">
-                                                    <a href="{% url 'listing-single'%}"><img src="images/gal/1.jpg" alt=""></a>
+                                                    <a href="{% url 'main:listing-single'%}"><img src="images/gal/1.jpg" alt=""></a>
                                                 </div>
                                                 <div class="dashboard-listing-table-text">
-                                                    <h4><a href="{% url 'listing-single'%}">Premium Plaza Hotel</a></h4>
+                                                    <h4><a href="{% url 'main:listing-single'%}">Premium Plaza Hotel</a></h4>
                                                     <span class="dashboard-listing-table-address"><i class="far fa-map-marker"></i><a  href="#">Attiégou, Lomé-Togo</a></span>
                                                     <ul class="dashboard-listing-table-opt  fl-wrap">
                                                         <li><a href="#">Edit <i class="fal fa-edit"></i></a></li>
@@ -113,10 +113,10 @@
                                         <div class="dashboard-list">
                                             <div class="dashboard-message">
                                                 <div class="dashboard-listing-table-image">
-                                                    <a href="{% url 'listing-single'%}"><img src="images/gal/1.jpg" alt=""></a>
+                                                    <a href="{% url 'main:listing-single'%}"><img src="images/gal/1.jpg" alt=""></a>
                                                 </div>
                                                 <div class="dashboard-listing-table-text">
-                                                    <h4><a href="{% url 'listing-single'%}">Grand Hero Palace</a></h4>
+                                                    <h4><a href="{% url 'main:listing-single'%}">Grand Hero Palace</a></h4>
                                                     <span class="dashboard-listing-table-address"><i class="far fa-map-marker"></i><a  href="#"> W 85th St, New York,  USA</a></span>
                                                     <ul class="dashboard-listing-table-opt  fl-wrap">
                                                         <li><a href="#">Edit <i class="fal fa-edit"></i></a></li>
@@ -130,10 +130,10 @@
                                         <div class="dashboard-list">
                                             <div class="dashboard-message">
                                                 <div class="dashboard-listing-table-image">
-                                                    <a href="{% url 'listing-single'%}"><img src="images/gal/1.jpg" alt=""></a>
+                                                    <a href="{% url 'main:listing-single'%}"><img src="images/gal/1.jpg" alt=""></a>
                                                 </div>
                                                 <div class="dashboard-listing-table-text">
-                                                    <h4><a href="{% url 'listing-single'%}">Park Central</a></h4>
+                                                    <h4><a href="{% url 'main:listing-single'%}">Park Central</a></h4>
                                                     <span class="dashboard-listing-table-address"><i class="far fa-map-marker"></i><a  href="#">40 Journal Square Plaza, NJ,  USA</a></span>
                                                     <ul class="dashboard-listing-table-opt  fl-wrap">
                                                         <li><a href="#">Edit <i class="fal fa-edit"></i></a></li>
@@ -147,10 +147,10 @@
                                         <div class="dashboard-list">
                                             <div class="dashboard-message">
                                                 <div class="dashboard-listing-table-image">
-                                                    <a href="{% url 'listing-single'%}"><img src="images/gal/1.jpg" alt=""></a>
+                                                    <a href="{% url 'main:listing-single'%}"><img src="images/gal/1.jpg" alt=""></a>
                                                 </div>
                                                 <div class="dashboard-listing-table-text">
-                                                    <h4><a href="{% url 'listing-single'%}">Gold Plaza Hotel </a></h4>
+                                                    <h4><a href="{% url 'main:listing-single'%}">Gold Plaza Hotel </a></h4>
                                                     <span class="dashboard-listing-table-address"><i class="far fa-map-marker"></i><a  href="#">34-42 Montgomery St , NY, USA</a></span>
                                                     <ul class="dashboard-listing-table-opt  fl-wrap">
                                                         <li><a href="#">Edit <i class="fal fa-edit"></i></a></li>

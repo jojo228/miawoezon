@@ -5,6 +5,6 @@ app_name = "announcement"
 
 urlpatterns = [
     path("detail/<int:pk>/", views.announce_detail, name="detail"),
-    # path("list/", views.HomeView.as_view(), name="list"),
+    path("list/", views.AnnounceListView.as_view(), name="list"),
    
 ]

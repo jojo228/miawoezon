@@ -51,23 +51,23 @@
                                     <div class="dasboard-menu-btn color3-bg">Dashboard Menu <i class="fal fa-bars"></i></div>
                                     <ul class="dasboard-menu-wrap">
                                         <li>
-                                            <a   href="{% url 'dashboard'%}"  class="user-profile-act"><i class="far fa-user"></i>Profile</a>
+                                            <a   href="{% url 'main:dashboard'%}"  class="user-profile-act"><i class="far fa-user"></i>Profile</a>
                                             <ul>
-                                                <li><a href=" {% url 'dashboard-myprofile'%}">Edit profile</a></li>
-                                                <li><a href="{% url 'dashboard-password'%}">Change Password</a></li>
+                                                <li><a href=" {% url 'main:dashboard-myprofile'%}">Edit profile</a></li>
+                                                <li><a href="{% url 'main:dashboard-password'%}">Change Password</a></li>
                                             </ul>
                                         </li>
-                                        <li><a href="{% url 'dashboard-messages'%}"><i class="far fa-envelope"></i> Messages <span>3</span></a></li>
+                                        <li><a href="{% url 'main:dashboard-messages'%}"><i class="far fa-envelope"></i> Messages <span>3</span></a></li>
                                         <li>
-                                            <a href="{% url 'dashboard-listing-table'%}"><i class="far fa-th-list"></i> My listigs  </a>
+                                            <a href="{% url 'rooms:host-list'%}"><i class="far fa-th-list"></i> My listigs  </a>
                                             <ul>
                                                 <li><a href="#">Active</a><span>5</span></li>
                                                 <li><a href="#">Pending</a><span>2</span></li>
                                                 <li><a href="#">Expire</a><span>3</span></li>
                                             </ul>
                                         </li>
-                                        <li><a href="{% url 'dashboard-bookings'%}"> <i class="far fa-calendar-check"></i> Bookings <span>2</span></a></li>
-                                        <li><a href="{% url 'dashboard-review'%}"><i class="far fa-comments"></i> Reviews </a></li>
+                                        <li><a href="{% url 'main:dashboard-bookings'%}"> <i class="far fa-calendar-check"></i> Bookings <span>2</span></a></li>
+                                        <li><a href="{% url 'main:dashboard-review'%}"><i class="far fa-comments"></i> Reviews </a></li>
                                     </ul>
                                 </div>
                                 <!--dasboard-menu end-->

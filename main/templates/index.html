@@ -33,7 +33,7 @@
                 <div class="header-top fl-wrap">
                     <div class="container">
                         <div class="logo-holder">
-                            <a href="index.html"><img src="{% static 'images/logo 2.png' %}" alt=""></a>
+                            <a href="{% url 'main:home' %}"><img src="{% static 'images/logo 2.png' %}" alt=""></a>
                         </div>
                         {% if request.user.is_authenticated %}
                         <a href="{% url 'rooms:create' %}" class="add-hotel">Publier<span><i class="far fa-plus"></i></span></a>
@@ -72,7 +72,7 @@
                             </div>
                             <ul>
                                 <li><a href="{% url 'main:dashboard-myprofile' %}"> Profil</a></li>
-                                <li><a href="{% url 'rooms:create' %}"> Publierg</a></li>
+                                <li><a href="{% url 'rooms:create' %}"> Publier</a></li>
                                 <li><a href="{% url 'main:dashboard-bookings' %}">  Reservations  </a></li>
                                 <li><a href="{% url 'main:dashboard-review' %}"> Revues </a></li>
                                 <li><a href="{% url 'authentication:logout' %}">Se deconnecter</a></li>
@@ -332,7 +332,7 @@
                                 <!-- gallery-item end-->
                             </div>
                             <!-- portfolio end -->
-                            <a href="{% url 'main:listing' %}" class="btn    color-bg">Explorez toutes les villes<i class="fas fa-caret-right"></i></a>
+                            <a href="{% url 'rooms:list' %}" class="btn    color-bg">Explorez toutes les villes<i class="fas fa-caret-right"></i></a>
                     </section>
                     <!-- section end -->
                     <!-- section-->
@@ -407,7 +407,7 @@
                         </div>
                         <!--  carousel end-->
                         <!-- portfolio end -->
-                        <a href="{% url 'main:listing' %}" class="btn    color-bg">Voir plus<i class="fas fa-caret-right"></i></a>
+                        <a href="{% url 'rooms:list' %}" class="btn    color-bg">Voir plus<i class="fas fa-caret-right"></i></a>
                     </section>
                     <section class="grey-blue-bg">
                         <!-- container-->

@@ -49,23 +49,23 @@
                                     <div class="dasboard-menu-btn color3-bg">Dashboard Menu <i class="fal fa-bars"></i></div>
                                     <ul class="dasboard-menu-wrap">
                                         <li>
-                                            <a href="{% url 'dashboard'%}"><i class="far fa-user"></i>Profile</a>
+                                            <a href="{% url 'main:dashboard'%}"><i class="far fa-user"></i>Profile</a>
                                             <ul>
-                                                <li><a href="{% url 'dashboard-myprofile'%}">Edit profile</a></li>
-                                                <li><a href="{% url 'dashboard-password'%}">Change Password</a></li>
+                                                <li><a href="{% url 'main:dashboard-myprofile'%}">Edit profile</a></li>
+                                                <li><a href="{% url 'main:dashboard-password'%}">Change Password</a></li>
                                             </ul>
                                         </li>
-                                        <li><a href="{% url 'dashboard-messages'%}"><i class="far fa-envelope"></i> Messages <span>3</span></a></li>
+                                        <li><a href="{% url 'main:dashboard-messages'%}"><i class="far fa-envelope"></i> Messages <span>3</span></a></li>
                                         <li>
-                                            <a href="{% url 'dashboard-listing-table'%}"><i class="far fa-th-list"></i> My listigs  </a>
+                                            <a href="{% url 'rooms:host-list'%}"><i class="far fa-th-list"></i> My listigs  </a>
                                             <ul>
                                                 <li><a href="#">Active</a><span>5</span></li>
                                                 <li><a href="#">Pending</a><span>2</span></li>
                                                 <li><a href="#">Expire</a><span>3</span></li>
                                             </ul>
                                         </li>
-                                        <li><a href="{% url 'dashboard-bookings'%}" class="user-profile-act"> <i class="far fa-calendar-check"></i> Bookings <span>2</span></a></li>
-                                        <li><a href="{% url 'dashboard-review'%}"><i class="far fa-comments"></i> Reviews </a></li>
+                                        <li><a href="{% url 'main:dashboard-bookings'%}" class="user-profile-act"> <i class="far fa-calendar-check"></i> Bookings <span>2</span></a></li>
+                                        <li><a href="{% url 'main:dashboard-review'%}"><i class="far fa-comments"></i> Reviews </a></li>
                                     </ul>
                                 </div>
                                 <!--dasboard-menu end-->
@@ -102,7 +102,7 @@
                                                     <h4>Andy Smith - <span>27 December 2018</span></h4>
                                                     <div class="booking-details fl-wrap">
                                                         <span class="booking-title">Listing Item :</span> :
-                                                        <span class="booking-text"><a href="{% url 'listing-single'%}">Premium Plaza Hotel</a></span>
+                                                        <span class="booking-text"><a href="{% url 'main:listing-single'%}">Premium Plaza Hotel</a></span>
                                                     </div>
                                                     <div class="booking-details fl-wrap">
                                                         <span class="booking-title">Persons :</span>   
@@ -140,7 +140,7 @@
                                                     <h4>Andy Smith - <span>27 December 2018</span></h4>
                                                     <div class="booking-details fl-wrap">
                                                         <span class="booking-title">Listing Item :</span>  
-                                                        <span class="booking-text"><a href="{% url 'listing-single'%}">Moonlight Hotel</a></span>
+                                                        <span class="booking-text"><a href="{% url 'main:listing-single'%}">Moonlight Hotel</a></span>
                                                     </div>
                                                     <div class="booking-details fl-wrap">
                                                         <span class="booking-title">Persons :</span>   
@@ -178,7 +178,7 @@
                                                     <h4>Andy Smith - <span>27 December 2018</span></h4>
                                                     <div class="booking-details fl-wrap">
                                                         <span class="booking-title">Listing Item :</span>  
-                                                        <span class="booking-text"><a href="{% url 'listing-single'%}">Moonlight Hotel</a></span>
+                                                        <span class="booking-text"><a href="{% url 'main:listing-single'%}">Moonlight Hotel</a></span>
                                                     </div>
                                                     <div class="booking-details fl-wrap">
                                                         <span class="booking-title">Persons :</span>   

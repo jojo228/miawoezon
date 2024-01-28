@@ -31,7 +31,7 @@ class RoomCreateView(LoginRequiredMixin, CreateView):
     model = Room
     form_class = CreateRoomForm
     template_name = "room_create.html"
-    success_url = reverse_lazy("rooms:list")
+    success_url = reverse_lazy("rooms:host-list")
     login_url = reverse_lazy(user_login_url)
 
     def form_valid(self, form):
@@ -45,7 +45,7 @@ class RoomCreateView(LoginRequiredMixin, CreateView):
     
 
 # LIST
-class RoomListView(LoginRequiredMixin, ListView):
+class RoomHostListView(ListView):
     model = Room
     context_object_name = "rooms"
     template_name = "room_list.html"
@@ -57,12 +57,27 @@ class RoomListView(LoginRequiredMixin, ListView):
         )
 
     def get_context_data(self, **kwargs):
+        context = super(RoomHostListView, self).get_context_data(**kwargs)
+        return context
+    
+    
+class RoomListView(ListView):
+    model = Room
+    paginate_by = 30
+    context_object_name = "rooms"
+    template_name = "listing.html"
+    login_url = reverse_lazy(user_login_url)
+
+    def get_queryset(self):
+        return Room.objects.all().order_by("-created")
+
+    def get_context_data(self, **kwargs):
         context = super(RoomListView, self).get_context_data(**kwargs)
         return context
 
 
 # DETAIL
-class RoomDetailView(LoginRequiredMixin, DetailView):
+class RoomDetailView(DetailView):
     model = Room
     context_object_name = "room"
     template_name = "room_detail.html"
@@ -74,7 +89,7 @@ class RoomUpdateView(LoginRequiredMixin, UpdateView):
     model = Room
     form_class = CreateRoomForm
     template_name = "room_edit.html"
-    success_url = reverse_lazy("rooms:list")
+    success_url = reverse_lazy("rooms:host-list")
     login_url = reverse_lazy(user_login_url)
 
     def get_context_data(self, **kwargs):
