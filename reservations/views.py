@@ -113,8 +113,8 @@ def initiate_payment(request, reservation_id):
         reservation = Reservation.objects.get(pk=reservation_id)
 
         # Your Cinetpay API credentials
-        apikey = "XXXXXXXXXXXXXXXXXX"
-        site_id = "XXXXXX"
+        apikey = "19583603556596c6116b91e6.90506747"
+        site_id = "5867973"
 
         # Initialize Cinetpay
         client = Cinetpay(apikey, site_id)
@@ -161,8 +161,8 @@ def initiate_payment(request, reservation_id):
 
 def check_transaction_by_id(request, transaction_id):
     # Your Cinetpay API credentials
-    apikey = "XXXXXXXXXXXXXXXXXX"
-    site_id = "XXXXXX"
+    apikey = "19583603556596c6116b91e6.90506747"
+    site_id = "5867973"
 
     # Initialize Cinetpay
     client = Cinetpay(apikey, site_id)
@@ -177,8 +177,8 @@ def check_transaction_by_id(request, transaction_id):
 
 def check_transaction_by_token(request, token):
     # Your Cinetpay API credentials
-    apikey = "XXXXXXXXXXXXXXXXXX"
-    site_id = "XXXXXX"
+    apikey = "19583603556596c6116b91e6.90506747"
+    site_id = "5867973"
 
     # Initialize Cinetpay
     client = Cinetpay(apikey, site_id)

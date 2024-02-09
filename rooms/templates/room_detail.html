@@ -346,7 +346,7 @@
                                             </div>
                                         </div>
                                         <!--box-widget-item end -->  
-
+                                        {% if  is_connected and room.isReservedByUser == false %}
                                         <!--box-widget-item -->
                                         <div class="box-widget-item fl-wrap">
                                             <div class="box-widget">
@@ -356,7 +356,7 @@
                                                     </div>
                                                     <div class="box-widget-list">
                                                         <ul>
-                                                            <li><span><i class="fal fa-map-marker"></i> Une robe :</span> <a href="#">{{room.host.address}}</a></li>
+                                                            <li><span><i class="fal fa-map-marker"></i> Adresse :</span> <a href="#">{{room.host.address}}</a></li>
                                                             <li><span><i class="fal fa-phone"></i> Téléphone :</span> <a href="#">{{room.host.contact}}</a></li>
                                                             <li><span><i class="fal fa-envelope"></i> mail :</span> <a href="#">{{room.host.user.email}}</a></li>
                                                             <li><span><i class="fal fa-browser"></i> Pays :</span> <a href="#">{{room.host.country}}</a></li>
@@ -373,7 +373,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <!--box-widget-item end -->                          
+                                        <!--box-widget-item end -->  
+                                        {% endif %}                        
                                                                  
                                         <!--box-widget-item -->
                                         <div class="box-widget-item fl-wrap">
