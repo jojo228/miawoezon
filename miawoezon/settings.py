@@ -228,6 +228,7 @@ SOCIALACCOUNT_PROVIDERS = {
 
 SITE_ID = 2
 
+SOCIALACCOUNT_LOGIN_ON_GET = True
 # Auth
 
 LOGIN_URL = "/authentication/login/"
