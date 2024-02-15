@@ -1,4 +1,5 @@
 {% extends "index.html" %}
+{% load socialaccount %}
 {% load static %}
 {% load i18n %}
 
@@ -49,10 +50,10 @@
             </div>
             <!--tabs end -->
             <div class="log-separator fl-wrap"><span>ou</span></div>
+            <p>Vous n'avez pas de compte? <a href="{% url 'authentication:signup' %}">Cliquez ici</a> </p>
             <div class="soc-log fl-wrap">
-                <p>Vous n'avez pas de compte? </p>
-                <a href="{% url 'authentication:signup' %}" class="facebook-log"><i class="fab fa-user"></i>S'inscrire</a>
-                <a href="#" class="facebook-log"><i class="fab fa-facebook-f"></i>Connecter avec Facebook</a>
+                <a href="{% provider_login_url 'google' %}?next=/" class="google-log"><i class="fab fa-google"></i>Connecter avec Google</a>
+                <!-- <a href="#" class="facebook-log"><i class="fab fa-facebook-f"></i>Connecter avec Facebook</a> -->
             </div>
         </div>
     </div>

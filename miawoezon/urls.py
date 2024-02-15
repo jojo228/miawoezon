@@ -24,6 +24,7 @@ urlpatterns = [
     path("blog/", include("blog.urls")),
     path(os.environ.get("ADMIN_URL", "admin/"), admin.site.urls),
     path("sentry-debug/", trigger_error),
+    path('accounts/', include('allauth.urls')),
     
 ]
 

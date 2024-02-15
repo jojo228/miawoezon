@@ -2427,6 +2427,9 @@ section.hero-section   {
 .soc-log a.facebook-log {
 	background:#3b5998;
 }
+.soc-log a.google-log {
+	background:#dfc412;
+}
 .soc-log a.twitter-log {
 	background:#55acee;
 }
