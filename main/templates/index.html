@@ -198,39 +198,43 @@
                                     <span class="section-separator"></span>                                    
                                     <h3>Commençons à explorer le monde avec Miawoezon</h3>
                                 </div>
-                                <div class="main-search-input-wrap">
-                                    <div class="main-search-input fl-wrap">
-                                        <div class="main-search-input-item location" id="autocomplete-container">
-                                            <span class="inpt_dec"><i class="fal fa-map-marker"></i></span>
-                                            <input type="text" placeholder="Hotel , City..." class="autocomplete-input" id="autocompleteid2"  value=""/>
-                                            <a href="#"><i class="fal fa-dot-circle"></i></a>
-                                        </div>
-                                        <div class="main-search-input-item main-date-parent main-search-input-item_small">
-                                            <span class="inpt_dec"><i class="fal fa-calendar-check"></i></span> <input type="text" placeholder="When" name="main-input-search"   value=""/>
-                                        </div>
-                                        <div class="main-search-input-item">
-                                            <div class="qty-dropdown fl-wrap">
-                                                <div class="qty-dropdown-header fl-wrap"><i class="fal fa-users"></i> Personnes</div>
-                                                <div class="qty-dropdown-content fl-wrap">
-                                                    <div class="quantity-item">
-                                                        <label><i class="fas fa-male"></i> Adultes</label>
-                                                        <div class="quantity">
-                                                            <input type="number" min="1" max="3" step="1" value="1">
-                                                        </div>
-                                                    </div>
-                                                    <div class="quantity-item">
-                                                        <label><i class="fas fa-child"></i> Enfants</label>
-                                                        <div class="quantity">
-                                                            <input type="number" min="0" max="3" step="1" value="0">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <button class="main-search-button color2-bg" onclick="window.location.href='{% url 'main:listing' %}'">Recherche <i class="fal fa-search"></i></button>
+                                
+<div class="main-search-input-wrap">
+    <div class="main-search-input fl-wrap">
+        <form method="GET" action="{% url 'main:search' %}">
+            {% csrf_token %}
+            <div class="main-search-input-item location" id="autocomplete-container">
+                <span class="inpt_dec"><i class="fal fa-map-marker"></i></span>
+                <input type="text" name="city" placeholder="Ville, Quartier..."  value="{{ request.GET.city|default_if_none:'' }}"/>
+                <a href="#"><i class="fal fa-dot-circle"></i></a>
+            </div>
+            <div class="main-search-input-item main-date-parent main-search-input-item_small">
+                <span class="inpt_dec"><i class="fal fa-calendar-check"></i></span> <input type="text" name="main-input-search" placeholder="Check-in" value="{{ request.GET.check_in|default_if_none:'' }}" />
+            </div>
+            <div class="main-search-input-item">
+                <div class="qty-dropdown fl-wrap">
+                    <div class="qty-dropdown-header fl-wrap"><i class="fal fa-users"></i> Personnes</div>
+                    <div class="qty-dropdown-content fl-wrap">
+                        <div class="quantity-item">
+                            <label><i class="fas fa-male"></i> Adultes</label>
+                            <div class="quantity">
+                                <input type="number" name="guests" min="1" max="3" step="1" value="{{ request.GET.guests|default_if_none:'1' }}">
+                            </div>
+                        </div>
+                        <div class="quantity-item">
+                            <label><i class="fas fa-child"></i> Enfants</label>
+                            <div class="quantity">
+                                <input type="number" name="children" min="0" max="3" step="1" value="{{ request.GET.children|default_if_none:'0' }}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="main-search-button color2-bg" type="submit">Recherche <i class="fal fa-search"></i></button>
+        </form>
+    </div>
+</div>
 
-                                    </div>
-                                </div>
                             </div>
                         </div>
                         <div class="header-sec-link">

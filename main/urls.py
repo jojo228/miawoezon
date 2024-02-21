@@ -8,6 +8,9 @@ app_name = "main"
 
 urlpatterns = [
     path("", views.home , name="home"),
+    path("search-results", views.search, name="search"),
+
+
     path("index2", views.index2 , name="index2"),
     path("index3", views.index3 , name="index3"),
     path("index4", views.index4 , name="index4"),
@@ -33,7 +36,6 @@ urlpatterns = [
     path("listing2", views.listing2, name="listing2"),
     path("listing3", views.listing3, name="listing3"),
     path("listing4", views.listing4, name="listing4"),
-    path("listing5", views.listing5, name="listing5"),
     path("listing6", views.listing6, name="listing6"),
     path("room1", views.room1, name="room1"),
     path("room2", views.room2, name="room2"),

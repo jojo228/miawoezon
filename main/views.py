@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views.generic import TemplateView
 from announcement.models import House
 from blog.models import Post
+from main.forms import SearchForm
 from rooms.models import Room
 
 
@@ -17,6 +18,43 @@ def home(request):
     announces = House.objects.all().order_by("-date")[:9]
     
     return render(request, "index.html", locals())
+
+
+
+def search(request):
+    if request.method == 'GET':
+        form = SearchForm(request.GET)
+        if form.is_valid():
+            city = form.cleaned_data.get('city')
+            guests = form.cleaned_data.get('guests')
+            when = form.cleaned_data.get('main-input-search')
+
+            # Perform search logic for Room model
+            rooms = Room.objects.all()
+            if city:
+                rooms = rooms.filter(city__icontains=city)
+            if guests:
+                rooms = rooms.filter(guests=guests)
+            # Add more filtering logic as needed (e.g., when, check_out)
+
+            # Perform search logic for House model
+            houses = House.objects.all()
+            if city:
+                houses = houses.filter(ville__icontains=city)
+            # Add similar filtering logic for House model
+
+            return render(request, 'search_results.html', {
+                'city': city,
+                'rooms': rooms,
+                'houses': houses,
+            })
+
+    # If form is invalid or method is not GET
+    return render(request, 'search_results.html')
+
+
+
+
 
 
 def index2(request):
@@ -157,16 +195,16 @@ def listing6(request):
 
 def room1(request):
     
-    return render(request, "room/room1.html")
+    return render(request, "rooms/room1.html")
 
 def room2(request):
     
-    return render(request, "room/room2.html")
+    return render(request, "rooms/room2.html")
 
 
 def room3(request):
     
-    return render(request, "room/room3.html")
+    return render(request, "rooms/room3.html")
 
 def dashboardaddlisting(request):
     

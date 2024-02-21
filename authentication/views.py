@@ -166,3 +166,35 @@ class ClientAddressUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_success_url(self):
         return reverse_lazy(client_detail_url, kwargs={"pk": self.kwargs["pk"]})
+
+
+
+def complete_profile(request):
+    user = request.user
+    if not hasattr(user, 'client'):  # Check if the user is already associated with a Client model instance
+        if request.method == 'POST':
+            identity_form = ClientIdentityForm(request.POST, instance=user)
+            personal_data_form = ClientPersonalDataForm(request.POST)
+            address_form = ClientAddressForm(request.POST)
+            if identity_form.is_valid() and personal_data_form.is_valid() and address_form.is_valid():
+                client = identity_form.save(commit=False)
+                personal_data = personal_data_form.save(commit=False)
+                address = address_form.save(commit=False)
+                client.user = user
+                client.save()
+                personal_data.user = user
+                personal_data.save()
+                address.user = user
+                address.save()
+                return redirect('main:home')  # Redirect to home page or any other page after profile completion
+        else:
+            identity_form = ClientIdentityForm(instance=user)
+            personal_data_form = ClientPersonalDataForm()
+            address_form = ClientAddressForm()
+        return render(request, 'complete_profile.html', {
+            'identity_form': identity_form,
+            'personal_data_form': personal_data_form,
+            'address_form': address_form,
+        })
+    else:
+        return redirect('main:home')  # Redirect to home page if profile is already completed

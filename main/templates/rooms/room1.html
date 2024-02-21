@@ -1,3 +1,7 @@
+{% extends "index.html" %}
+{% load static %}
+{% block content %}
+
 <!--ajax-modal-wrap -->
 <div class="ajax-modal-wrap fl-wrap">
     <div class="ajax-modal-close"><i class="fal fa-times"></i></div>
@@ -53,9 +57,11 @@
                 </div>
             </div>
             <!--ajax-modal-details-box end-->
-            <a href="{% url 'booking-single'%}" class="btn float-btn color2-bg">Book Now<i class="fas fa-caret-right"></i></a>                            
+            <a href="{% url 'main:booking-single'%}" class="btn float-btn color2-bg">Book Now<i class="fas fa-caret-right"></i></a>                            
         </div>
     </div>
     <!--ajax-modal-item-->
 </div>
 <!--ajax-modal-wrap end -->
+
+{%  endblock %}

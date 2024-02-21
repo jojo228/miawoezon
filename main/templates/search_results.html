@@ -1,0 +1,239 @@
+{% extends "index.html" %} {% load static %} {% block content %}
+
+<!--  wrapper  -->
+<div id="wrapper">
+    <!-- content-->
+    <div class="content">
+        <div class="breadcrumbs-fs fl-wrap">
+            <div class="container">
+                <div class="breadcrumbs fl-wrap">
+                    <a href="#">Home</a><a href="#">Listings</a><span>Listings Without Map</span>
+                </div>
+            </div>
+        </div>
+        <!--section -->
+        <section class="grey-blue-bg small-padding" id="sec1">
+            <div class="container">
+                <div class="row">
+                    <!--listing -->
+                    <div class="col-md-12">
+                        <div class="mobile-list-controls fl-wrap mar-bot-cont">
+                            <div class="mlc show-list-wrap-search fl-wrap">
+                                <i class="fal fa-filter"></i> Filter
+                            </div>
+                        </div>
+                        <!--list-wrap-search   -->
+
+                        <!--list-wrap-search end -->
+                        <!--col-list-wrap -->
+                        <div class="col-list-wrap fw-col-list-wrap">
+                            <!-- list-main-wrap-->
+                            <div class="list-main-wrap fl-wrap card-listing">
+                                <!-- list-main-wrap-opt-->
+                                <div class="list-main-wrap-opt fl-wrap">
+                                    <div class="list-main-wrap-title fl-wrap col-title">
+                                        <h2>Resultats Pour : <span>{{city}} </span></h2>
+                                    </div>
+                                   
+                                </div>
+                                <!-- list-main-wrap-opt end-->
+                                <!-- listing-item-container -->
+                                <div class="listing-item-container init-grid-items fl-wrap three-columns-grid">
+                                    <!-- listing-item  -->
+                                    {% for room in rooms %}
+                                    <div class="listing-item">
+                                        <article class="geodir-category-listing fl-wrap">
+                                            <div class="geodir-category-img">
+                                                <a href="{% url 'rooms:detail' room.id %}"><img
+                                                        src="{{room.first_photo}}" alt="" /></a>
+                                                <div class="listing-avatar">
+                                                    <a href="{% url 'main:author-single' %}"><img
+                                                            src="{{room.host.avatar.url}}" alt="" /></a>
+                                                    <span class="avatar-tooltip">Ajouté par
+                                                        <strong>{{room.host}}</strong></span>
+                                                </div>
+                                                <div class="sale-window">Sale 20%</div>
+                                                <div class="geodir-category-opt">
+                                                    <div class="listing-rating card-popup-rainingvis"
+                                                        data-starrating2="5"></div>
+                                                    <div class="rate-class-name">
+                                                        <div class="score">
+                                                            <strong>Very Good</strong>27 Reviews
+                                                        </div>
+                                                        <span>5.0</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="geodir-category-content fl-wrap">
+                                                <div class="geodir-category-content-title fl-wrap">
+                                                    <div class="geodir-category-content-title-item">
+                                                        <h3 class="title-sin_map">
+                                                            <a href="{% url 'rooms:detail' room.id %}">{{room.name}}</a>
+                                                        </h3>
+                                                        <div class="geodir-category-location fl-wrap">
+                                                            <a href="#0" class="map-item"><i
+                                                                    class="fas fa-map-marker-alt"></i>{{room.city}}, {{room.country.name}} <br> {{room.address}}</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <p>{{room.description}}.</p>
+                                                <ul class="facilities-list fl-wrap">
+                                                    <li>
+                                                        <i class="fal fa-wifi"></i><span>Free WiFi</span>
+                                                    </li>
+                                                    <li>
+                                                        <i class="fal fa-parking"></i><span>Parking</span>
+                                                    </li>
+                                                    <li>
+                                                        <i class="fal fa-smoking-ban"></i><span>Non-smoking Rooms</span>
+                                                    </li>
+                                                    <li>
+                                                        <i class="fal fa-utensils"></i><span> Restaurant</span>
+                                                    </li>
+                                                </ul>
+                                                <div class="geodir-category-footer fl-wrap">
+                                                    <div class="geodir-category-price">
+                                                        Prix/Nuit <span>{{room.price}} F</span>
+                                                    </div>
+                                                    <div class="geodir-opt-list">
+                                                        <a href="#0" class="map-item"><i
+                                                                class="fal fa-map-marker-alt"></i><span
+                                                                class="geodir-opt-tooltip">On the map
+                                                                <strong>1</strong></span></a>
+                                                        <a href="#" class="geodir-js-favorite"><i
+                                                                class="fal fa-heart"></i><span
+                                                                class="geodir-opt-tooltip">Save</span></a>
+                                                        <a href="#" class="geodir-js-booking"><i
+                                                                class="fal fa-exchange"></i><span
+                                                                class="geodir-opt-tooltip">Find Directions</span></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </article>
+                                    </div>
+                                    {% endfor %}
+                                    <!-- listing-item end -->
+                                </div>
+                                <!-- listing-item-container end-->
+                                <!-- pagination-->
+                                <div class="pagination">
+                                    <a href="#" class="prevposts-link"><i class="fa fa-caret-left"></i></a>
+                                    <a href="#">1</a>
+                                    <a href="#" class="current-page">2</a>
+                                    <a href="#">3</a>
+                                    <a href="#">4</a>
+                                    <a href="#" class="nextposts-link"><i class="fa fa-caret-right"></i></a>
+                                </div>
+                                <!-- pagination end-->
+                            </div>
+                            <!-- list-main-wrap end-->
+                        </div>
+                        <!--col-list-wrap end -->
+                    </div>
+                    <!--listing  end-->
+                    
+                </div>
+                
+                <!--row end-->
+
+                <div class="row">
+                    <!--listing -->
+                    <div class="col-md-12">
+                        <div class="mobile-list-controls fl-wrap mar-bot-cont">
+                            <div class="mlc show-list-wrap-search fl-wrap">
+                                <i class="fal fa-filter"></i> Filter
+                            </div>
+                        </div>
+                        <!--list-wrap-search   -->
+
+                        <!--list-wrap-search end -->
+                        <!--col-list-wrap -->
+                        <div class="col-list-wrap fw-col-list-wrap">
+                            <!-- list-main-wrap-->
+                            <div class="list-main-wrap fl-wrap card-listing">
+                                <!-- list-main-wrap-opt-->
+                                <div class="list-main-wrap-opt fl-wrap">
+                                    <div class="list-main-wrap-title fl-wrap col-title">
+                                        <h2>Resultats Pour : <span>{{city}} </span></h2>
+                                    </div>
+                                   
+                                </div>
+                                <!-- list-main-wrap-opt end-->
+                                <!-- listing-item-container -->
+                                <div class="listing-item-container init-grid-items fl-wrap three-columns-grid">
+                                    <!-- listing-item  -->
+                                    {% for house in houses %}
+                                    <div class="listing-item">
+                                        <article class="geodir-category-listing fl-wrap">
+                                            <div class="geodir-category-img">
+                                                <a href="{% url 'announcement:detail' house.pk %}"><img
+                                                        src="{{house.first_photo}}" alt=""></a>
+                                                
+                                                <div class="sale-window">{{house.disponibilité}}</div>
+                                                <div class="geodir-category-opt">
+                                                    <div class="listing-rating card-popup-rainingvis" data-starrating2="5"></div>
+                                                    <div class="rate-class-name">
+                                                        <div class="score"><strong>{{house.pour}}</strong>{{house.ville}} </div>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                                            <div class="geodir-category-content fl-wrap">
+                                                <div class="geodir-category-content-title fl-wrap">
+                                                    <div class="geodir-category-content-title-item">
+                                                        <h3 class="title-sin_map"><a
+                                                                href="{% url 'announcement:detail' house.pk %}">{{house.type}}</a>
+                                                        </h3>
+                                                        <div class="geodir-category-location fl-wrap"><a href="#0"
+                                                                class="map-item"><i
+                                                                    class="fas fa-map-marker-alt"></i>{{house.ville}}, {{house.address}}</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <p>{{house.description}}.</p>
+                                                <ul class="facilities-list fl-wrap">
+                                                    <li><i class="fal fa-wifi"></i><span>Free WiFi</span></li>
+                                                    <li><i class="fal fa-parking"></i><span>Parking</span></li>
+                                                    <li><i class="fal fa-smoking-ban"></i><span>Non-smoking houses</span>
+                                                    </li>
+                                                    <li><i class="fal fa-utensils"></i><span> Restaurant</span></li>
+                                                </ul>
+                                                <div class="geodir-category-footer fl-wrap">
+                                                    <div class="geodir-category-price">Prix/Nuit <span>{{house.prix}}
+                                                            F</span></div>
+                                                   
+                                                </div>
+                                            </div>
+                                        </article>
+                                    </div>
+                                    {% endfor %}
+                                    <!-- listing-item end -->
+                                </div>
+                                <!-- listing-item-container end-->
+                                <!-- pagination-->
+                                <div class="pagination">
+                                    <a href="#" class="prevposts-link"><i class="fa fa-caret-left"></i></a>
+                                    <a href="#">1</a>
+                                    <a href="#" class="current-page">2</a>
+                                    <a href="#">3</a>
+                                    <a href="#">4</a>
+                                    <a href="#" class="nextposts-link"><i class="fa fa-caret-right"></i></a>
+                                </div>
+                                <!-- pagination end-->
+                            </div>
+                            <!-- list-main-wrap end-->
+                        </div>
+                        <!--col-list-wrap end -->
+                    </div>
+                    <!--listing  end-->
+                    
+                </div>
+            </div>
+        </section>
+        <!--section end -->
+    </div>
+    <!-- content end-->
+</div>
+<!--wrapper end -->
+
+{% endblock %}
