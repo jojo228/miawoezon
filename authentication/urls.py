@@ -40,8 +40,7 @@ urlpatterns = [
     path(
         "signup",
         views.SignupWizardView.as_view(
-            [CustomUserCreationForm, ClientPersonalDataForm, ClientAddressForm],
-            next_page=reverse_lazy("authentication:complete_profile")
+            [CustomUserCreationForm, ClientPersonalDataForm, ClientAddressForm]
         ),
         name="signup",
     ),
