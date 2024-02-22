@@ -40,7 +40,8 @@ urlpatterns = [
     path(
         "signup",
         views.SignupWizardView.as_view(
-            [CustomUserCreationForm, ClientPersonalDataForm, ClientAddressForm]
+            [CustomUserCreationForm, ClientPersonalDataForm, ClientAddressForm],
+            next_page=reverse_lazy("authentication:complete_profile")
         ),
         name="signup",
     ),
@@ -58,7 +59,7 @@ urlpatterns = [
         auth_views.LoginView.as_view(
             template_name="login.html",
             authentication_form=AuthenticationFormWithEmail,
-            next_page=reverse_lazy("main:home"),
+            next_page=reverse_lazy("authentication:complete_profile"),
         ),
         name="login",
     ),
