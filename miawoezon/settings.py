@@ -230,7 +230,7 @@ SITE_ID = 2
 
 SOCIALACCOUNT_LOGIN_ON_GET = True
 
-ACCOUNT_ADAPTER = 'miawoezon.authentication.adapter.MyAccountAdapter'
+ACCOUNT_ADAPTER = 'authentication.adapter.MyAccountAdapter'
 # Auth
 
 LOGIN_URL = "/authentication/login/"
