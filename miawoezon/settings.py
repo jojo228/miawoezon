@@ -235,6 +235,9 @@ ACCOUNT_ADAPTER = 'authentication.adapter.MyAccountAdapter'
 
 LOGIN_URL = "/authentication/login/"
 
+LOGIN_REDIRECT_URL = "/authentication/complete_profile/"
+# ACCOUNT_EMAIL_REQUIRED = True
+# ACCOUNT_EMAIL_VERIFICATION = 'mandatory'   # This will force verification
 
 # Locale
 LOCALE_PATHS = (os.path.join(BASE_DIR, "locale"),)

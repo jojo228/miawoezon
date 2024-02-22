@@ -5,4 +5,4 @@ from django.urls import reverse
 class MyAccountAdapter(DefaultAccountAdapter):
     def get_login_redirect_url(self, request):
         # Redirect to the profile completion page after successful signup
-        return reverse('authentication:complete_profile')
+        return ('/authentication/complete_profile')
