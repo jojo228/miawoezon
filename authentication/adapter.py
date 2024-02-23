@@ -6,4 +6,4 @@ from django.shortcuts import redirect
 class MyAccountAdapter(DefaultAccountAdapter):
     def get_login_redirect_url(self, request):
         # Redirect to the profile completion page after successful signup
-        return redirect('/authentication/complete_profile')
+        return reverse('/authentication/complete_profile')
