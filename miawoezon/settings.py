@@ -236,6 +236,7 @@ ACCOUNT_ADAPTER = 'authentication.adapter.MyAccountAdapter'
 LOGIN_URL = "/authentication/login/"
 
 LOGIN_REDIRECT_URL = "/authentication/complete_profile/"
+LOGIN_REDIRECT_URLNAME = "/authentication/complete_profile/"
 # ACCOUNT_EMAIL_REQUIRED = True
 # ACCOUNT_EMAIL_VERIFICATION = 'mandatory'   # This will force verification
 

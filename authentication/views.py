@@ -187,7 +187,7 @@ def complete_profile(request):
                 personal_data.save()
                 address.user = user
                 address.save()
-                return redirect('main:home')  # Redirect to home page or any other page after profile completion
+                return redirect('main:hom')  # Redirect to home page or any other page after profile completion
         else:
             identity_form = ClientIdentityForm(instance=user)
             personal_data_form = ClientPersonalDataForm()
