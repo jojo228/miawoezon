@@ -7,6 +7,7 @@ from authentication.forms import (
 )
 from staff_account.models import User
 from django.urls import reverse_lazy
+from django.http import HttpResponse
 from formtools.wizard.views import SessionWizardView
 
 from django.views.generic import UpdateView, DetailView, RedirectView, TemplateView
@@ -197,4 +198,5 @@ def complete_profile(request):
             'address_form': address_form,
         })
     else:
-        return redirect('main:home')  # Redirect to home page if profile is already completed
+        #return redirect('main:home')  # Redirect to home page if profile is already completed
+        return HttpResponse("Test")
