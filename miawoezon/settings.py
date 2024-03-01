@@ -230,14 +230,13 @@ SITE_ID = 2
 
 SOCIALACCOUNT_LOGIN_ON_GET = True
 
-ACCOUNT_ADAPTER = 'authentication.adapter.MyAccountAdapter'
-# Auth
+SOCIALACCOUNT_ADAPTER = "allauth.socialaccount.adapter.DefaultSocialAccountAdapter"
 
 LOGIN_URL = "/authentication/login/"
 
-LOGIN_REDIRECT_URL = "/authentication/complete_profile/"
-LOGIN_REDIRECT_URLNAME = "/authentication/complete_profile/"
-ACCOUNT_SIGNUP_REDIRECT_URL = "/authentication/complete_profile/"
+LOGIN_REDIRECT_URL = "/authentication/complete-profile/"
+LOGIN_REDIRECT_URLNAME = "/authentication/complete-profile/"
+ACCOUNT_SIGNUP_REDIRECT_URL = "/authentication/complete-profile/"
 # ACCOUNT_EMAIL_REQUIRED = True
 # ACCOUNT_EMAIL_VERIFICATION = 'mandatory'   # This will force verification
 

@@ -172,7 +172,7 @@ class ClientAddressUpdateView(LoginRequiredMixin, UpdateView):
 
 def complete_profile(request):
     user = request.user
-    if hasattr(user, 'client'):  # Check if the user is already associated with a Client model instance
+    if not hasattr(user, 'client'):  # Check if the user is already associated with a Client model instance
         if request.method == 'POST':
             identity_form = ClientIdentityForm(request.POST, instance=user)
             personal_data_form = ClientPersonalDataForm(request.POST)
@@ -198,4 +198,5 @@ def complete_profile(request):
             'address_form': address_form,
         })
     else:
-        return redirect('main:home')  # Redirect to home page if profile is already completed
+        HttpResponse("This account has been completed.")
+        # return redirect('main:home')  # Redirect to home page if profile is already completed
