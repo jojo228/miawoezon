@@ -1,4 +1,5 @@
 from datetime import date
+import os
 from django.shortcuts import render, redirect
 from authentication.forms import (
     ClientIdentityForm,
@@ -14,6 +15,9 @@ from django.views.generic import UpdateView, DetailView, RedirectView, TemplateV
 
 from django.contrib.auth import login
 from django.contrib.auth.mixins import LoginRequiredMixin
+
+from django.conf import settings
+from django.core.files.storage import FileSystemStorage
 
 from authentication.models import Client
 
@@ -34,6 +38,7 @@ from django.core.mail import EmailMessage
 class SignupWizardView(SessionWizardView):
     login_url = reverse_lazy("authentication:login")
     template_name = "signup.html"
+    file_storage = FileSystemStorage(location=os.path.join(settings.MEDIA_ROOT, 'photos'))
 
     def send_activation_email(self, user):
         # We need the user object, so it's an additional parameter
@@ -133,6 +138,25 @@ class ClientDetailView(LoginRequiredMixin, DetailView):
     template_name = "client_detail.html"
 
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        
+        # Retrieve the client object from the context
+        client = context["client"]
+        
+        # Query the Room model to count the rooms associated with the client
+        total_rooms = client.rooms.count()
+
+        # Query the Room model to count the reservations associated with the client
+        total_reservations = client.reservations.count()
+        
+        # Add the total_rooms count to the context
+        context["total_rooms"] = total_rooms
+        context["total_reservations"] = total_reservations
+        
+        return context
+
+
 # UPDATE
 class ClientIdentityInformationUpdateView(LoginRequiredMixin, UpdateView):
     model = User
@@ -167,36 +191,3 @@ class ClientAddressUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_success_url(self):
         return reverse_lazy(client_detail_url, kwargs={"pk": self.kwargs["pk"]})
-
-
-
-def complete_profile(request):
-    user = request.user
-    if not hasattr(user, 'client'):  # Check if the user is already associated with a Client model instance
-        if request.method == 'POST':
-            identity_form = ClientIdentityForm(request.POST, instance=user)
-            personal_data_form = ClientPersonalDataForm(request.POST)
-            address_form = ClientAddressForm(request.POST)
-            if identity_form.is_valid() and personal_data_form.is_valid() and address_form.is_valid():
-                client = identity_form.save(commit=False)
-                personal_data = personal_data_form.save(commit=False)
-                address = address_form.save(commit=False)
-                client.user = user
-                client.save()
-                personal_data.user = user
-                personal_data.save()
-                address.user = user
-                address.save()
-                return redirect('main:home')  # Redirect to home page or any other page after profile completion
-        else:
-            identity_form = ClientIdentityForm(instance=user)
-            personal_data_form = ClientPersonalDataForm()
-            address_form = ClientAddressForm()
-        return render(request, 'complete_profile.html', {
-            'identity_form': identity_form,
-            'personal_data_form': personal_data_form,
-            'address_form': address_form,
-        })
-    else:
-        HttpResponse("This account has been completed.")
-        # return redirect('main:home')  # Redirect to home page if profile is already completed

@@ -114,7 +114,6 @@ urlpatterns = [
         ),
         name="password_reset_complete",
     ),
-    path('complete-profile/', views.complete_profile, name='complete_profile'),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

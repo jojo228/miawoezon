@@ -49,13 +49,13 @@
                                 <li><a href="#"><img src="{% static 'images/lan/1.png' %}" alt=""> Eng</a></li>
                             </ul>
                         </div>
-                        <div class="currency-wrap">
+                        <!-- <div class="currency-wrap">
                             <div class="show-currency-tooltip"><i class="fas fa-dollar-sign"></i> <span>XOF <i class="fa fa-caret-down"></i> </span></div>
                             <ul class="currency-tooltip">
                                 <li><a href="#"><i class="far fa-euro-sign"></i> USD</a></li>
                                
                             </ul>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <!-- header-top end-->
@@ -64,17 +64,16 @@
                     <div class="container">
                         <div class="show-search-button"><span>Recherche</span> <i class="fas fa-search"></i> </div>
                         {% if request.user.is_authenticated %}
-                        <div class="wishlist-link"><i class="fal fa-heart"></i><span class="wl_counter">3</span></div>
+                        <!-- <div class="wishlist-link"><i class="fal fa-heart"></i><span class="wl_counter">3</span></div> -->
                         <div class="header-user-menu">
                             <div class="header-user-name">
                                 <span><img src="{% static 'images/avatar/1.jpg' %}" alt=""></span>
                                 Mon Compte
                             </div>
                             <ul>
-                                <li><a href="{% url 'main:dashboard-myprofile' %}"> Profil</a></li>
+                                <li><a href="{% url 'authentication:client_detail' user.client.id %}"> Profil</a></li>
                                 <li><a href="{% url 'rooms:create' %}"> Publier</a></li>
                                 <li><a href="{% url 'main:dashboard-bookings' %}">  Reservations  </a></li>
-                                <li><a href="{% url 'main:dashboard-review' %}"> Revues </a></li>
                                 <li><a href="{% url 'authentication:logout' %}">Se deconnecter</a></li>
                             </ul>
                         </div>

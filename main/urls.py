@@ -43,7 +43,6 @@ urlpatterns = [
     path("dashboard-bookings", views.dashboardbookings , name="dashboard-bookings"),
     path("dashboard-listing-table", views.dashboardlistingtable , name="dashboard-listing-table"),
     path("dashboard-messages", views.dashboardmessages , name="dashboard-messages"),
-    path("dashboard-myprofile", views.dashboardmyprofile , name="dashboard-myprofile"),
     path("dashboard-password", views.dashboardpassword, name="dashboard-password"),
     path("dashboard-review", views.dashboardreview , name="dashboard-review"),
     path("dashboard-add-listing", views.dashboardaddlisting , name="dashboard-add-listing"),

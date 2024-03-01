@@ -222,9 +222,6 @@ def dashboardmessages(request):
     
     return render(request, "dashboard-messages.html")
 
-def dashboardmyprofile(request):
-    
-    return render(request, "dashboard-myprofile.html")
 
 def dashboardpassword(request):
     

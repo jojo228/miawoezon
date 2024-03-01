@@ -1,116 +1,93 @@
-{% extends 'account_base.html' %} 
+{% extends "index.html" %}
+{% load static %}
+{% block content %}
+            <!--  wrapper  -->
+            <div id="wrapper">
+                <!-- content-->
+                <div class="content">
+                    {% include 'dashboard/base.html' %} 
+                    <!-- section-->
+                    <section class="middle-padding">
+                        <div class="container">
+                            <!--dasboard-wrap-->
+                            <div class="dasboard-wrap fl-wrap">
+                                <!-- dashboard-content--> 
+                                <div class="dashboard-content fl-wrap">
+                                    <div class="box-widget-item-header">
+                                        <h3> Informations sur votre identité</h3>
+                                    </div>
+                                    <!-- profile-edit-container--> 
+                                    <div class="profile-edit-container">
+                                        <div class="custom-form">
+                                            <label>Nom <i class="far fa-user"></i></label>
+                                            <input type="text" placeholder="{{client.user.last_name}}" value=""/>
+                                            <label>Prénom(s) <i class="far fa-user"></i></label>
+                                            <input type="text" placeholder="{{client.user.first_name}}" value=""/>
+                                            <label>Email<i class="far fa-envelope"></i>  </label>
+                                            <input type="text" placeholder="{{client.user.email}}" value=""/>
 
-{% block account %}
-    <a href="{% url 'authentication:client_detail' user.client.id %}" class="nav__link active-link">
-{% endblock %}
+                                            <a href="{% url 'authentication:client_identity_information_update' user.id %}">
+                                            <button class="btn    color2-bg  float-btn">Editer<i class="fal fa-save"></i></button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <!-- profile-edit-container end--> 
+                                    <div class="box-widget-item-header mat-top">
+                                        <h3>Informations Personnelles</h3>
+                                    </div>
+                                    <div class="profile-edit-container">
+                                        <div class="custom-form">
+                                            <label>Sexe <i class="far fa-user"></i></label>
+                                            <input type="text" placeholder="{{client.get_sex_display}}" value=""/>
+                                            <label>Date de Naissance <i class="far fa-user"></i></label>
+                                            <input type="text" placeholder="{{client.date_of_birth}}" value=""/>
+                                            <label>Situation Matrimonial<i class="far fa-envelope"></i>  </label>
+                                            <input type="text" placeholder="{{client.get_matrimonial_status_display}}" value=""/>
+                                            <label>Contact<i class="far fa-phone"></i>  </label>
+                                            <input type="text" placeholder="{{client.contact}}" value=""/>
+                                            <label>Profession <i class="far fa-user"></i></label>
+                                            <input type="text" placeholder="{{client.profession}}" value=""/>
+                                            <label>Photo de profil <i class="far fa-user"></i></label>
+                                            <input type="file" placeholder="{{client.avatar}}" value=""/>
 
-{% block main %}
-<div class="section container">
+                                            <a href="{% url 'authentication:client_personal_information_update' user.client.id %}">
+                                            <button class="btn    color2-bg  float-btn">Editer<i class="fal fa-save"></i></button>
+                                            </a>
+                                        </div>
+                                    </div>
 
-    {% block content %}
-    <div class="section__title">
-        <h3>DETAILS DE VOTRE COMPTE</h3>
-    </div>
+                                    <!-- profile-edit-container end--> 
+                                    <div class="box-widget-item-header mat-top">
+                                        <h3>Localisation</h3>
+                                    </div>
 
-    <div class="account">
+                                    <div class="profile-edit-container">
+                                        <div class="custom-form">
+                                            <label>Pays <i class="far fa-user"></i></label>
+                                            <input type="text" placeholder="{{client.country}}" value=""/>
+                                            <label>Ville <i class="far fa-user"></i></label>
+                                            <input type="text" placeholder="{{client.city}}" value=""/>
+                                            <label> Adress <i class="fas fa-map-marker"></i>  </label>
+                                            <input type="text" placeholder="{{client.address}}" value=""/>
+                                            <label> Pincode <i class="fas fa-map-marker"></i>  </label>
+                                            <input type="text" placeholder="{{client.pincode}}" value=""/>
 
-        <div class="account__container">
-            <h4 class="account__title">Informations sur votre identité</h4>
-
-            <div class="account__content">
-                <div class="account__data">
-                    <div class="account__data-subtitle" >Prénom.s</div>
-                    <div class="account__data-value">{{client.user.first_name}}</div>
+                                            <a href="{% url 'authentication:client_address_update' user.client.id %}">
+                                            <button class="btn    color2-bg  float-btn">Editer<i class="fal fa-save"></i></button>
+                                            </a>
+                                        </div>
+                                    </div>
+ 
+                                    
+                                </div>
+                                <!-- dashboard-list-box end--> 
+                            </div>
+                            <!-- dasboard-wrap end-->
+                        </div>
+                    </section>
+                    <div class="limit-box fl-wrap"></div>
                 </div>
-                <div class="account__data">
-                    <div class="account__data-subtitle">Nom</div>
-                    <div class="account__data-value">{{client.user.last_name}}</div>
-                </div>
-                <div class="account__data">
-                    <div class="account__data-subtitle">Email</div>
-                    <div  class="account__data-value">{{client.user.email}}</div>
-                </div>
-                <div class="account__data" style="display: grid;">
-                    <div class="account__data-subtitle">Mot de passe</div>
-                    <a href="{% url 'authentication:password_change' %}" class="account__data-value" style="padding: 0.65rem;">Changer mon mot de passe</a>
-                </div>
-
-                <a href="{% url 'authentication:client_identity_information_update' user.id %}">
-                    <button class="button form__button">
-                        Editer ses informations d'identité
-                    </button>
-                </a>
-
+                <!-- content end-->
             </div>
-
-        </div>
-
-        <div class="account__container">
-            <h4 class="account__title">Informations Personnelles</h4>
-
-            <div class="account__content">
-                <div class="account__data">
-                    <div class="account__data-subtitle">Sexe</div>
-                    <div class="account__data-value">{{client.get_sex_display}}</div>
-                </div>
-                <div class="account__data">
-                    <div class="account__data-subtitle">Date de Naissance</div>
-                    <div class="account__data-value">{{client.date_of_birth}}</div>
-                </div>
-                <div class="account__data">
-                    <div class="account__data-subtitle">Situation Matrimonial </div>
-                    <div class="account__data-value">{{client.get_matrimonial_status_display}}</div>
-                </div>
-                <div class="account__data">
-                    <div class="account__data-subtitle">Contact</div>
-                    <div class="account__data-value">{{client.contact}}</div>
-                </div>
-                <div class="account__data">
-                    <div class="account__data-subtitle">Profession </div>
-                    <div class="account__data-value">{{client.profession}}</div>
-                </div>
-
-                <a href="{% url 'authentication:client_personal_information_update' user.client.id %}">
-                    <button class="button form__button">
-                        Editer ses informations personnelles
-                    </button>
-                </a>
-                
-            </div>
-        </div>
-
-        <div class="account__container">
-            <h4 class="account__title">Localisation</h4>
-
-            <div class="account__content">
-                <div class="account__data">
-                    <div class="account__data-subtitle">Pays </div>
-                    <div class="account__data-value">{{client.country}}</div>
-                </div>
-                <div class="account__data">
-                    <div class="account__data-subtitle">Ville </div>
-                    <div class="account__data-value">{{client.city}}</div>
-                </div>
-                <div class="account__data">
-                    <div class="account__data-subtitle">Adresse </div>
-                    <div class="account__data-value">{{client.address}}</div>
-                </div>
-                <div class="account__data">
-                    <div class="account__data-subtitle">PINCODE </div>
-                    <div class="account__data-value">{{client.pincode}}</div>
-                </div>
-
-                <a href="{% url 'authentication:client_address_update' user.client.id %}">
-                    <button class="button form__button">
-                        Editer son adresse
-                    </button>
-                </a>
-
-            </div>
-
-        </div>
-
-    </div>
-    {% endblock content %}
-</div>
+            <!--wrapper end -->
 {% endblock %}

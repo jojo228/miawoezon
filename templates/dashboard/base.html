@@ -1,3 +1,4 @@
+{% load static %}
 <section class="flat-header color-bg adm-header">
     <div class="wave-bg wave-bg2"></div>
     <div class="container">
@@ -8,7 +9,7 @@
             <div class="dasboard-sidebar">
                 <div class="dasboard-sidebar-content fl-wrap">
                     <div class="dasboard-avatar">
-                        <img src="images/avatar/1.jpg" alt="">
+                        <img src="{% if client.avatar %} {{client.avatar.url}} {% else %} {% static 'images/avatar/1.jpg' %} {% endif %}" alt="">
                     </div>
                     <div class="dasboard-sidebar-item fl-wrap">
                         <h3>
@@ -16,24 +17,24 @@
                             {{ request.user.client }}
                         </h3>
                     </div>
-                    <a href="{% url 'rooms:create'%}" class="ed-btn">Add Room</a>
+                    <a href="{% url 'rooms:create'%}" class="ed-btn">Publier</a>
                     <div class="user-stats fl-wrap">
                         <ul>
                             <li>
-                                Listings
-                                <span>4</span>
+                                Publications
+                                <span>{{total_rooms}}</span>
                             </li>
                             <li>
-                                Bookings
-                                <span>32</span>
+                                Reservations
+                                <span>{{total_reservations}}</span>
                             </li>
                             <li>
-                                Reviews
-                                <span>9</span>
+                                Revues
+                                <span>0</span>
                             </li>
                         </ul>
                     </div>
-                    <a href="{% url 'authentication:logout' %}" class="log-out-btn color-bg">Log Out <i class="far fa-sign-out"></i></a>
+                    <a href="{% url 'authentication:logout' %}" class="log-out-btn color-bg">Deconnexion <i class="far fa-sign-out"></i></a>
                 </div>
             </div>
             <!--dasboard-sidebar end-->
@@ -42,35 +43,35 @@
                 <div class="dasboard-menu-btn color3-bg">Dashboard Menu <i class="fal fa-bars"></i></div>
                 <ul class="dasboard-menu-wrap">
                     <li>
-                        <a href="{% url 'main:dashboard'%}"><i class="far fa-user"></i>Profile</a>
+                        <a href="{% url 'authentication:client_detail' user.client.id %}" {% if request.resolver_match.url_name == 'client_detail' %} class="user-profile-act" {% endif %}><i class="far fa-user"></i>Profil</a>
                         <ul>
-                            <li><a href="{% url 'main:dashboard-myprofile'%}">Edit profile</a></li>
-                            <li><a href="{% url 'main:dashboard-password'%}">Change Password</a></li>
+                            
+                            <li><a href="{% url 'authentication:client_detail' user.client.id %}" >Editer profil</a></li>
+                            <li><a href="{% url 'authentication:password_change' %}">Mot de passe</a></li>
                         </ul>
                     </li>
-                    <li><a href="{% url 'main:dashboard-messages'%}"><i class="far fa-envelope"></i> Messages
+                    <li><a href="{% url 'main:dashboard-messages'%}" {% if request.resolver_match.url_name == 'dashboard-messages' %} class="user-profile-act" {% endif %}><i class="far fa-envelope"></i> Messages
                             <span>3</span></a></li>
                     <li>
-                        <a href="{% url 'rooms:host-list'%}" class="user-profile-act"><i
-                                class="far fa-th-list"></i> My listigs </a>
-                        <ul>
+                        <a href="{% url 'rooms:host-list'%}" {% if request.resolver_match.url_name == 'host-list' %} class="user-profile-act" {% endif %} ><i
+                                class="far fa-th-list"></i> Mes Publications </a>
+                        <!-- <ul>
                             <li><a href="#">Active</a><span>5</span></li>
                             <li><a href="#">Pending</a><span>2</span></li>
                             <li><a href="#">Expire</a><span>3</span></li>
-                        </ul>
+                        </ul> -->
                     </li>
-                    <li><a href="{% url 'main:dashboard-bookings'%}"> <i class="far fa-calendar-check"></i> Bookings
+                    <li><a href="" {% if request.resolver_match.url_name == 'dashboard-bookings' %} class="user-profile-act" {% endif %}> <i class="far fa-calendar-check"></i> Reservations
                             <span>2</span></a></li>
-                    <li><a href="{% url 'main:dashboard-review'%}"><i class="far fa-comments"></i> Reviews </a></li>
                 </ul>
             </div>
             <!--dasboard-menu end-->
             <!--Tariff Plan menu-->
-            <div class="tfp-btn"><span>Tariff Plan : </span> <strong>Extended</strong></div>
+            <!-- <div class="tfp-btn"><span>Tariff Plan : </span> <strong>Extended</strong></div>
             <div class="tfp-det">
                 <p>You Are on <a href="#">Extended</a> . Use link bellow to view details or upgrade. </p>
                 <a href="#" class="tfp-det-btn color2-bg">Details</a>
-            </div>
+            </div> -->
             <!--Tariff Plan menu end-->
         </div>
     </div>

@@ -1,37 +1,70 @@
-{% extends 'authentication/client_detail.html' %} 
-{% load static %} 
+{% extends "index.html" %}
+{% load static %}
 
 {% block title %}
 <title>Editer ses informations d'identité</title>
-{% endblock title %} 
+{% endblock title %}
 
 {% block content %}
-<div class="l-form">
-    <form  action="{% url 'authentication:client_identity_information_update' user.id %}" method="post" class="form">
-        {% csrf_token %}
 
-            <h3 class="form__title">Modifier vos informations d'identité</h3> <br> 
 
-        {{form.non_field_errors}}
+<div id="wrapper">
+    <!-- content-->
+    <div class="content">
+        {% include 'dashboard/base.html' %}
+        <!-- section-->
+        <section class="middle-padding">
+            <div class="container">
+                <!--dasboard-wrap-->
+                <div class="dasboard-wrap fl-wrap">
+                    <!-- dashboard-content-->
+                    <div class="dashboard-content fl-wrap">
+                        <div class="box-widget-item-header">
+                            <h3>Modifier vos Informations sur votre identité</h3>
+                        </div>
+                        <!-- profile-edit-container-->
+                        <form action="{% url 'authentication:client_identity_information_update' user.id %}"
+                            method="post">
+                            {% csrf_token %}
+                            <div class="profile-edit-container">
+                                <div class="custom-form">
+                                    {{form.non_field_errors}}
 
-        {% for field in form %}
-        <div class="form__div">
-            {{field}}
-            <label class="form__label">{{field.label}}</label>  
-        </div>
-        {{field.errors}}
-        {% endfor %}
+                                    {% for field in form %}
+                                    <label class="form__label">{{field.label}}</label>
+                                    {{field}}
 
-        <!--==================== BUTTONS ====================-->
+                                    {{field.errors}}
+                                    {% endfor %}
 
-        <div class="form__div multistep__form-div">
-            <a href="{% url 'authentication:client_detail' user.client.id %}">
-                <button  class="button button__outlined">
-                    Annuler
-                </button>
-            </a>
-            <input type="submit" class="button" value="Changer">
-        </div>
-    </form>
+                                    <!--==================== BUTTONS ====================-->
+
+                                    <a href="{% url 'authentication:client_detail' user.client.id %}">
+                                        <button class="button">
+                                            Annuler
+                                        </button>
+                                    </a>
+                                    <input type="submit" class="button" value="Changer">
+
+
+
+                                </div>
+                            </div>
+                        </form>
+
+
+
+
+
+                    </div>
+
+
+                </div>
+                <!-- dashboard-list-box end-->
+            </div>
+            <!-- dasboard-wrap end-->
+        </section>
+        <div class="limit-box fl-wrap"></div>
+    </div>
 </div>
 {% endblock %}

@@ -99,12 +99,13 @@ class ClientPersonalDataForm(ModelForm):
 
     class Meta:
         model = Client
-        fields = ("date_of_birth", "matrimonial_status", "contact", "profession", "sex",)
+        fields = ("date_of_birth", "matrimonial_status", "contact", "profession", "sex", "avatar")
         labels = {
             "date_of_birth": "Date de naissance",
             "sex": "Sexe",
             "matrimonial_status": "Statut Matrimonial",
             "profession": "Profession",
+            "avatar": "Photo de profil",
         }
         widgets = {"date_of_birth": DateInput()}
 
