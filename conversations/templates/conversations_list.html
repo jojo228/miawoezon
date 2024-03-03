@@ -1,0 +1,106 @@
+{% extends "index.html" %}
+{% load static %}
+{% block content %}
+            <!--  wrapper  -->
+            <div id="wrapper">
+                <!-- content-->
+                <div class="content">
+                    <!-- section-->
+                    {% include 'dashboard/base.html' %}
+                    <!-- section end-->
+                    <!-- section-->
+                    <section class="middle-padding">
+                        <div class="container">
+                            <!--dasboard-wrap-->
+                            <div class="dasboard-wrap fl-wrap">
+                                <!-- dashboard-content--> 
+                                <div class="dashboard-content fl-wrap">
+                                    <!-- dashboard-list-box-->         
+                                    <div class="dashboard-list-box fl-wrap">
+                                        <div class="dashboard-header fl-wrap">
+                                            <h3>Indox</h3>
+                                        </div>
+                                        <div class="row">
+                                            <!-- chat-box--> 
+                                            <div class="col-sm-8">
+                                                <div class="chat-box fl-wrap grey-blue-bg ">
+                                                    {% if conversation.messages.count == 0 %}
+                                                    Aucun message
+                                                    {% else %}
+                                                    {% for message in conversation.messages.all %}
+                                                    <!-- message--> 
+                                                    {% if message.user.pk == user.pk %}
+                                                    <div class="chat-message chat-message_guest fl-wrap">
+                                                        <div class="dashboard-message-avatar">
+                                                            <img src="{% if message.user.avatar %}{{message.user.avatar.url}}{% else %}{% static 'images/avatar/1.jpg' %}{% endif %}" alt="">
+                                                            <span>{{message.user.user.first_name}}</span>
+                                                        </div>
+                                                        <span class="massage-date">25 may 2018  <span>7.51 PM</span></span>
+                                                        <p>{{message.message}}</p>
+                                                    </div>
+                                                    {% endif %}
+                                                    <!-- message end-->
+                                                    <!-- message-->
+                                                    {% if message.user.pk != user.pk %}
+                                                    <div class="chat-message chat-message_user fl-wrap">
+                                                        <div class="dashboard-message-avatar">
+                                                            <img src="{% if message.user.avatar %}{{message.user.avatar.url}}{% else %}{% static 'images/avatar/1.jpg' %}{% endif %}" alt="">
+                                                            <span>{{message.user.user.first_name}}</span>
+                                                        </div>
+                                                        <span class="massage-date">25 may 2018  <span>7.51 PM</span></span>
+                                                        <p>{{message.message}}</p>
+                                                    </div>
+                                                    {% endif %}
+                                                    <!-- message end-->                                             
+                                                    {% endfor %}
+                                                    {% endif %}                             
+                                                </div>
+                                                <form method="post" action="">
+                                                    {% csrf_token %}
+                                                    <div class="message-input fl-wrap">
+                                                        <textarea name="message" placeholder="Type Message"></textarea>                                                 
+                                                        <button type="submit"><i class="fal fa-paper-plane"></i></button>
+                                                    </div>
+                                                </form>
+                                                
+                                            </div>
+                                            <!-- chat-box end--> 
+                                            <!-- chat-contacts--> 
+                                            <div class="col-sm-4">
+                                                <div class="chat-contacts fl-wrap">
+                                                    <!-- chat-contacts-item-->
+                                                    {% for user in conversation.participants.all %}
+                                                    <a class="chat-contacts-item" href="#">
+                                                        <div class="dashboard-message-avatar">
+                                                            <img src="{% if user.avatar %}{{user.avatar.url}}{% else %}{% static 'images/avatar/1.jpg' %}{% endif %}" alt="">
+                                                            <!-- <div class="message-counter">2</div> -->
+                                                        </div>
+                                                        <div class="chat-contacts-item-text">
+                                                            <h4>{{user.user.get_full_name}}</h4>
+                                                            {% if forloop.first %}
+                                                            <span class="text-2xl font-medium">&</span>
+                                                            {% endif %}
+                                                            <!-- <span>27 Dec 2018 </span> -->
+                                                            <p>{{user.messages.last}}</p>
+                                                        </div>
+                                                    </a>
+                                                    <!-- chat-contacts-item -->
+                                                      {% endfor %}                                        
+                                                </div>
+                                            </div>
+                                            <!-- chat-contacts end--> 
+                                        </div>
+                                    </div>
+                                    <!-- dashboard-list-box end--> 
+                                </div>
+                                <!-- dashboard-list-box end--> 
+                            </div>
+                            <!-- dasboard-wrap end-->
+                        </div>
+                    </section>
+                    <div class="limit-box fl-wrap"></div>
+                </div>
+                <!-- content end-->
+            </div>
+            <!--wrapper end -->
+{% endblock %}

@@ -10,6 +10,7 @@ from django.views.generic import (
     FormView,
 )
 from authentication.models import Client
+from reservations.models import Reservation
 from rooms.forms import CreatePhotoForm, CreateRoomForm
 from rooms.models import Room, Photo
 from django.contrib.messages.views import SuccessMessageMixin
@@ -58,6 +59,10 @@ class RoomHostListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(RoomHostListView, self).get_context_data(**kwargs)
+        
+        # Add the total_rooms count to the context
+        context["total_rooms"] = Room.objects.filter(host=self.request.user.client).count()
+        context["total_reservations"] = Reservation.objects.filter(room__host=self.request.user.client).count()
         return context
     
     

@@ -1,5 +1,77 @@
 
 {% extends "index.html" %}
+{% block css %}
+<!--=============== CinetPay Script ===============-->
+<script src="https://cdn.cinetpay.com/seamless/main.js"></script>
+<style>
+    .sdk {
+        display: block;
+        position: absolute;
+        background-position: center;
+        text-align: center;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+</style>
+
+
+<script>
+
+    
+
+    // Retrieve values from reservation details
+    var roomType = "{{reservation.room.room_type}}";
+    var total_amount = parseInt("{{reservation.total_amount}}");
+    var checkInDate = "{{reservation.check_in|date:'d M Y'}}";
+    var checkOutDate = "{{reservation.check_out|date:'d M Y'}}";
+    var totalDays = "{{reservation.total_days}}";
+    var guests = "{{reservation.room.guests}}";
+    console.log(total_amount)
+
+
+    function checkout() {
+        CinetPay.setConfig({
+            apikey: '19583603556596c6116b91e6.90506747',//   YOUR APIKEY
+            site_id: '5867973',//YOUR_SITE_ID
+            notify_url: 'https://miawoezon.com/reservationsnotify/',
+            mode: 'PRODUCTION'
+        });
+        CinetPay.getCheckout({
+            transaction_id: Math.floor(Math.random() * 100000000).toString(), // YOUR TRANSACTION ID
+            amount: parseInt(total_amount),
+            currency: 'XOF',
+            channels: 'ALL',
+            description: 'Test de paiement',   
+             //Fournir ces variables pour le paiements par carte bancaire
+            customer_name:"Joe",//Le nom du client
+            customer_surname:"Down",//Le prenom du client
+            customer_email: "down@test.com",//l'email du client
+            customer_phone_number: "088767611",//l'email du client
+            customer_address : "BP 0024",//addresse du client
+            customer_city: "Antananarivo",// La ville du client
+            customer_country : "CM",// le code ISO du pays
+            customer_state : "CM",// le code ISO l'état
+            customer_zip_code : "06510", // code postal
+
+        });
+        CinetPay.waitResponse(function(data) {
+            if (data.status == "REFUSED") {
+                if (alert("Votre paiement a échoué")) {
+                    window.location.reload();
+                }
+            } else if (data.status == "ACCEPTED") {
+                if (alert("Votre paiement a été effectué avec succès")) {
+                    window.location.reload();
+                }
+            }
+        });
+        CinetPay.onError(function(data) {
+            console.log(data);
+        });
+    }
+</script>
+{% endblock css %}
 {% load static %}
 {% block content %}
 
@@ -20,158 +92,48 @@
                             <div class="row">
                                 <div class="col-md-8">
                                     <div class="bookiing-form-wrap">
-                                        <ul id="progressbar">
-                                            <!-- <li class="active"><span>01.</span>Personal Info</li> -->
+                                        <!-- <ul id="progressbar">
+                                            <li class="active"><span>01.</span>Personal Info</li>
                                             <li><span>01.</span>adresse de facturation</li>
                                             <li><span>02.</span>Mode de paiement</li>
                                             <li><span>03.</span>Confirmer</li>
-                                        </ul>
+                                        </ul> -->
                                         <!--   list-single-main-item -->
                                         <div class="list-single-main-item fl-wrap hidden-section tr-sec">
                                             <div class="profile-edit-container">
                                                 <div class="custom-form">
-                                                    <form>
-                                                        <!-- <fieldset class="fl-wrap book_mdf">
-                                                            <div class="list-single-main-item-title fl-wrap">
-                                                                <h3>Informations personelles </h3>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col-sm-6">
-                                                                    <label>First Name <i class="far fa-user"></i></label>
-                                                                    <input type="text" placeholder="Your Name" value=""/>                                                  
-                                                                </div>
-                                                                <div class="col-sm-6">
-                                                                    <label>Last Name <i class="far fa-user"></i></label>
-                                                                    <input type="text" placeholder="Your Last Name" value=""/> 
-                                                                </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col-sm-6">
-                                                                    <label>Email Address<i class="far fa-envelope"></i>  </label>
-                                                                    <input type="text" placeholder="gakservices@gmail.com" value=""/>                                                  
-                                                                </div>
-                                                                <div class="col-sm-6">
-                                                                    <label>Phone<i class="far fa-phone"></i>  </label>
-                                                                    <input type="text" placeholder="87945612233" value=""/>
-                                                                </div>
-                                                            </div>
-                                                            <div class="log-massage">Existing Customer? <a href="#" class="modal-open">Click here to login</a></div>
-                                                            <div class="log-separator fl-wrap"><span>or</span></div>
-                                                            <div class="soc-log fl-wrap">
-                                                                <p>For faster login or register use your social account.</p>
-                                                                <a href="#" class="facebook-log"><i class="fab fa-facebook-f"></i>Connect with Facebook</a>
-                                                            </div>
-                                                            <div class="filter-tags">
-                                                                <input id="check-a" type="checkbox" name="check">
-                                                                <label for="check-a">By continuing, you agree to the<a href="#" target="_blank">Terms and Conditions</a>.</label>
-                                                            </div>
-                                                            <span class="fw-separator"></span>
-                                                            <a  href="#"  class="next-form action-button btn no-shdow-btn color-bg">Billing Address <i class="fal fa-angle-right"></i></a>
-                                                        </fieldset> -->
+                                                    <form id="billing-form" method="" action="">
+                                                        {% csrf_token %}
                                                         <fieldset class="fl-wrap book_mdf">
+                                                            <!-- Billing Address -->
+                                                            <!-- Modify this section according to your billing address fields -->
                                                             <div class="list-single-main-item-title fl-wrap">
-                                                                <h3>adresse de facturation</h3>
+                                                                <h3>Adresse de facturation</h3>
                                                             </div>
-                                                            <div class="row">
-                                                                <div class="col-sm-6">
-                                                                    <label>Ville <i class="fal fa-globe-asia"></i></label>
-                                                                    <input type="text" placeholder="Your city" value=""/>                                                  
-                                                                </div>
-                                                                <div class="col-sm-6">
-                                                                    <label>Pays </label>
-                                                                    <div class="listsearch-input-item ">
-                                                                        <select data-placeholder="Your Country" class="chosen-select no-search-select" >
-                                                                            <option>United states</option>
-                                                                            <option>Asia</option>
-                                                                            <option>Australia</option>
-                                                                            <option>Europe</option>
-                                                                            <option>South America</option>
-                                                                            <option>Africa</option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col-sm-12">
-                                                                    <label>Rue <i class="fal fa-road"></i> </label>
-                                                                    <input type="text" placeholder="Your Street" value=""/>                                                  
-                                                                </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col-sm-8">
-                                                                    <label>État<i class="fal fa-street-view"></i></label>
-                                                                    <input type="text" placeholder="Your State" value=""/>                                                  
-                                                                </div>
-                                                                <div class="col-sm-4">
-                                                                    <label>Postal code<i class="fal fa-barcode"></i> </label>
-                                                                    <input type="text" placeholder="123456" value=""/>
-                                                                </div>
-                                                            </div>
-                                                            <div class="list-single-main-item-title fl-wrap">
-                                                                <h3>Notes complémentaires</h3>
-                                                            </div>
-                                                            <textarea cols="40" rows="3" placeholder="Notes"></textarea>
+                                                            <!-- Include billing address input fields here -->
+                                                            <!-- Example: -->
+                                                            <input type="text" name="city" placeholder="City" required>
+                                                            <select name="country" required>
+                                                                <option value="">Select Country</option>
+                                                                <option value="United States">United States</option>
+                                                                <!-- Add other country options -->
+                                                            </select>
+                                                            <input type="text" name="street" placeholder="Street" required>
+                                                            <input type="text" name="state" placeholder="State" required>
+                                                            <input type="text" name="postal_code" placeholder="Postal Code" required>
+                                                            <!-- Additional fields can be added as needed -->
+                                                            <!-- End of Billing Address -->
+                                                            <textarea name="notes" cols="40" rows="3" placeholder="Notes"></textarea>
                                                             <span class="fw-separator"></span>
-                                                            <a  href="#"  class="previous-form action-button back-form   color-bg"><i class="fal fa-angle-left"></i> Back</a>
-                                                            <a  href="#"  class="next-form back-form action-button btn no-shdow-btn color-bg">Payment Step <i class="fal fa-angle-right"></i></a>
-                                                        </fieldset>
-                                                        <fieldset class="fl-wrap book_mdf">
-                                                            <div class="list-single-main-item-title fl-wrap">
-                                                                <h3>Mode de paiement</h3>
+                                                            <!-- <button type="submit" >Payment Step <i class="fal fa-angle-right"></i></button> -->
+                                                            <a onclick="checkout()"  href="#"  class="action-button btn color2-bg no-shdow-btn">Confirmer et payer<i class="fal fa-angle-right"></i></a>
+                                                            <div class="sdk">
+                                                                
                                                             </div>
-                                                            <div class="row">
-                                                                <div class="col-sm-6">
-                                                                    <label>Nom du titulaire de la carte<i class="far fa-user"></i></label>
-                                                                    <input type="text" placeholder="" value="Adam Kowalsky"/>                                                  
-                                                                </div>
-                                                                <div class="col-sm-6">
-                                                                    <label>Numéro de carte <i class="fal fa-credit-card-front"></i></label>
-                                                                    <input type="text" placeholder="xxxx-xxxx-xxxx-xxxx" value=""/> 
-                                                                </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col-sm-3">
-                                                                    <label>Mois d'expiration<i class="fal fa-calendar"></i></label>
-                                                                    <input type="text" placeholder="MM" value=""/>                                                  
-                                                                </div>
-                                                                <div class="col-sm-3">
-                                                                    <label>Expiration<i class="fal fa-calendar"></i></label>
-                                                                    <input type="text" placeholder="YY" value=""/>                                                  
-                                                                </div>
-                                                                <div class="col-sm-2">
-                                                                    <label>CVV / CVC *<i class="fal fa-credit-card"></i></label>
-                                                                    <input type="password" placeholder="***" value=""/> 
-                                                                </div>
-                                                                <div class="col-sm-4">
-                                                                    <p style="padding-top:20px;">*Numéro à trois chiffres au dos de votre carte</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="log-separator fl-wrap"><span>ou</span></div>
-                                                            <div class="soc-log fl-wrap">
-                                                                <p>Sélectionnez un autre mode de paiement</p>
-                                                                <a href="#" class="paypal-log"><i class="fab fa-paypal"></i>Payer avec PayPal</a>
-                                                            </div>
-                                                            <span class="fw-separator"></span>
-                                                            <a  href="#"  class="previous-form  back-form action-button    color-bg"><i class="fal fa-angle-left"></i> Dos</a>
-                                                            <a  href="#"  class="next-form  action-button btn color2-bg no-shdow-btn">Confirmer et payer<i class="fal fa-angle-right"></i></a>                                               
-                                                        </fieldset>
-                                                        <fieldset class="fl-wrap book_mdf">
-                                                            <div class="list-single-main-item-title fl-wrap">
-                                                                <h3>Confirmation</h3>
-                                                            </div>
-                                                            <div class="success-table-container">
-                                                                <div class="success-table-header fl-wrap">
-                                                                    <i class="fal fa-check-circle decsth"></i>
-                                                                    <h4>Merci.Votre réservation a été reçue.</h4>
-                                                                    <div class="clearfix"></div>
-                                                                    <p>Votre paiement a été traité avec succès.</p>
-                                                                    <a href="{% url 'reservations:invoice' %}" target="_blank" class="color-bg">Voir la facture</a>
-                                                                </div>
-                                                            </div>
-                                                            <span class="fw-separator"></span>
-                                                            <a  href="#"  class="previous-form action-button  back-form   color-bg"><i class="fal fa-angle-left"></i> Dos</a>
+                                                            
                                                         </fieldset>
                                                     </form>
+                                                    
                                                 </div>
                                             </div>
                                         </div>
@@ -186,11 +148,11 @@
                                     <div class="cart-details fl-wrap">
                                         <!--cart-details_header--> 
                                         <div class="cart-details_header">
-                                            <a href="#"  class="widget-posts-img"><img src="images/gal/1.jpg" class="respimg" alt=""></a>
+                                            <a href="#"  class="widget-posts-img"><img src="{{reservation.room.first_photo}}" class="respimg" alt=""></a>
                                             <div class="widget-posts-descr">
-                                                <a href="#" title="">Park Central</a>
-                                                <div class="listing-rating card-popup-rainingvis" data-starrating2="5"></div>
-                                                <div class="geodir-category-location fl-wrap"><a href="#"><i class="fas fa-map-marker-alt"></i> 40 JOURNAL SQUARE PLAZA, NJ, US</a></div>
+                                                <a href="#" title="">{{reservation.room.name}}</a>
+                                                <!-- <div class="listing-rating card-popup-rainingvis" data-starrating2="5"></div> -->
+                                                <div class="geodir-category-location fl-wrap"><a href="#"><i class="fas fa-map-marker-alt"></i> {{reservation.room.address}}, {{reservation.room.city}}-{{reservation.room.country.name}}</a></div>
                                             </div>
                                         </div>
                                         <!--cart-details_header end-->       

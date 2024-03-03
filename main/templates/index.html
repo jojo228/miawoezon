@@ -9,13 +9,18 @@
         <meta name="robots" content="index, follow"/>
         <meta name="keywords" content=""/>
         <meta name="description" content=""/>
+
         <!--=============== css  ===============-->
         <link type="text/css" rel="stylesheet" href="{% static 'css/reset.css' %}">
         <link type="text/css" rel="stylesheet" href="{% static 'css/plugins.css' %}">
         <link type="text/css" rel="stylesheet" href="{% static 'css/style.css' %}">
         <link type="text/css" rel="stylesheet" href="{% static 'css/color.css' %}">
+        
         <!--=============== favicons ===============-->
         <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}">
+        {% block css %}
+     
+        {% endblock css %}
     </head>
     <body>
         <!--loader-->
@@ -73,7 +78,7 @@
                             <ul>
                                 <li><a href="{% url 'authentication:client_detail' user.client.id %}"> Profil</a></li>
                                 <li><a href="{% url 'rooms:create' %}"> Publier</a></li>
-                                <li><a href="{% url 'main:dashboard-bookings' %}">  Reservations  </a></li>
+                                <li><a href="{% url 'reservations:bookings'%}">  Reservations  </a></li>
                                 <li><a href="{% url 'authentication:logout' %}">Se deconnecter</a></li>
                             </ul>
                         </div>

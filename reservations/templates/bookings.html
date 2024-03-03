@@ -1,0 +1,86 @@
+{% extends "index.html" %}
+{% load static %}
+{% block content %}
+            <!--  wrapper  -->
+            <div id="wrapper">
+                <!-- content-->
+                <div class="content">
+                    <!-- section-->
+                    {% include 'dashboard/base.html' %}
+                    <!-- section end-->
+                    <!-- section-->
+                    <section class="middle-padding">
+                        <div class="container">
+                            <!--dasboard-wrap-->
+                            <div class="dasboard-wrap fl-wrap">
+                                <!-- dashboard-content--> 
+                                <div class="dashboard-content fl-wrap">
+                                    <div class="dashboard-list-box fl-wrap">
+                                        <div class="dashboard-header fl-wrap">
+                                            <h3>Reservations</h3>
+                                        </div>
+                                        {% for booking in bookings %}
+                                        <div class="dashboard-list">
+                                            <div class="dashboard-message">
+                                                <a href="{% url 'conversations:go' booking.room.host.pk booking.guest.pk %}">
+                                                    <span class="new-dashboard-item">Message</span>
+                                                </a>
+                                                <div class="dashboard-message-avatar">
+                                                    <img src="{{booking.room.host.avatar.url}}" alt="">
+                                                </div>
+                                                <div class="dashboard-message-text">
+                                                    <h4>{{booking.room.host.user.get_full_name}} - <span>{{booking.created|date:"d M Y"}}</span></h4>
+                                                    <div class="booking-details fl-wrap">
+                                                        <span class="booking-title">Listing Item :</span> :
+                                                        <span class="booking-text"><a href="{% url 'main:listing-single'%}">{{booking.room.name}}</a></span>
+                                                    </div>
+                                                    <div class="booking-details fl-wrap">
+                                                        <span class="booking-title">Personnes :</span>   
+                                                        <span class="booking-text">{{booking.room.guests}}</span>
+                                                    </div>
+                                                    <div class="booking-details fl-wrap">
+                                                        <span class="booking-title">Date de reservation :</span>   
+                                                        <span class="booking-text">{{booking.check_in|date:"d M Y"}}  - {{booking.check_out|date:"d M Y"}}</span>
+                                                    </div>
+                                                    <div class="booking-details fl-wrap">                                                               
+                                                        <span class="booking-title">Email :</span>  
+                                                        <span class="booking-text"><a href="#" target="_top">{{booking.room.host.user.email}}</a></span>
+                                                    </div>
+                                                    <div class="booking-details fl-wrap">
+                                                        <span class="booking-title">Tel :</span>   
+                                                        <span class="booking-text"><a href="tel:{{booking.room.host.contact}}" target="_top">{{booking.room.host.contact}}</a></span>
+                                                    </div>
+                                                    <div class="booking-details fl-wrap">
+                                                        <span class="booking-title">Statut du paiement :</span> 
+                                                        <span class="booking-text"> <strong class="done-paid">Paid  </strong>  using Paypal</span>
+                                                    </div>
+                                                    <span class="fw-separator"></span>
+                                                    <p>{{booking.room.description|truncatewords:10}}. </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                        <!-- dashboard-list end-->    
+                                                                                 
+                                    </div>
+                                    <!-- pagination-->
+                                    <div class="pagination">
+                                        <a href="#" class="prevposts-link"><i class="fa fa-caret-left"></i></a>
+                                        <a href="#" class="current-page">1</a>
+                                        <a href="#">2</a>
+                                        <a href="#">3</a>
+                                        <a href="#">4</a>
+                                        <a href="#" class="nextposts-link"><i class="fa fa-caret-right"></i></a>
+                                    </div>
+                                </div>
+                                <!-- dashboard-list-box end--> 
+                            </div>
+                            <!-- dasboard-wrap end-->
+                        </div>
+                    </section>
+                    <div class="limit-box fl-wrap"></div>
+                </div>
+                <!-- content end-->
+            </div>
+            <!--wrapper end -->
+{% endblock %}

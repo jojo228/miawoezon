@@ -9,7 +9,7 @@
             <div class="dasboard-sidebar">
                 <div class="dasboard-sidebar-content fl-wrap">
                     <div class="dasboard-avatar">
-                        <img src="{% if client.avatar %} {{client.avatar.url}} {% else %} {% static 'images/avatar/1.jpg' %} {% endif %}" alt="">
+                        <img src="{{ request.user.client.avatar.url }}" alt="">
                     </div>
                     <div class="dasboard-sidebar-item fl-wrap">
                         <h3>
@@ -50,7 +50,7 @@
                             <li><a href="{% url 'authentication:password_change' %}">Mot de passe</a></li>
                         </ul>
                     </li>
-                    <li><a href="{% url 'main:dashboard-messages'%}" {% if request.resolver_match.url_name == 'dashboard-messages' %} class="user-profile-act" {% endif %}><i class="far fa-envelope"></i> Messages
+                    <li><a href="{% url 'conversations:conversations'%}" {% if request.resolver_match.url_name == 'conversations' %} class="user-profile-act" {% endif %}><i class="far fa-envelope"></i> Messages
                             <span>3</span></a></li>
                     <li>
                         <a href="{% url 'rooms:host-list'%}" {% if request.resolver_match.url_name == 'host-list' %} class="user-profile-act" {% endif %} ><i
@@ -61,8 +61,10 @@
                             <li><a href="#">Expire</a><span>3</span></li>
                         </ul> -->
                     </li>
-                    <li><a href="" {% if request.resolver_match.url_name == 'dashboard-bookings' %} class="user-profile-act" {% endif %}> <i class="far fa-calendar-check"></i> Reservations
-                            <span>2</span></a></li>
+                    <li><a href="{% url 'reservations:bookings'%}" {% if request.resolver_match.url_name == 'bookings' %} class="user-profile-act" {% endif %}> <i class="far fa-calendar-check"></i> Reservations
+                            </a></li>
+                    <li><a href="{% url 'reservations:my_bookings'%}" {% if request.resolver_match.url_name == 'my_bookings' %} class="user-profile-act" {% endif %}> <i class="far fa-calendar-check"></i>Mes Reservations
+                            </a></li>
                 </ul>
             </div>
             <!--dasboard-menu end-->

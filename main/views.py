@@ -210,17 +210,10 @@ def dashboardaddlisting(request):
     
     return render(request, "dashboard-add-listing.html")
 
-def dashboardbookings(request):
-    
-    return render(request, "dashboard-bookings.html")
 
 def dashboardlistingtable(request):
     
     return render(request, "dashboard-listing-table.html")
-
-def dashboardmessages(request):
-    
-    return render(request, "dashboard-messages.html")
 
 
 def dashboardpassword(request):

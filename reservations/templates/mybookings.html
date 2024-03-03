@@ -1,0 +1,158 @@
+{% extends "index.html" %}
+{% load static %}
+{% block content %}
+            <!--  wrapper  -->
+            <div id="wrapper">
+                <!-- content-->
+                <div class="content">
+                    <!-- section-->
+                    {% include 'dashboard/base.html' %}
+                    <!-- section end-->
+                    <!-- section-->
+                    <section class="middle-padding">
+                        <div class="container">
+                            <!--dasboard-wrap-->
+                            <div class="dasboard-wrap fl-wrap">
+                                <!-- dashboard-content--> 
+                                <div class="dashboard-content fl-wrap">
+                                    <div class="dashboard-list-box fl-wrap">
+                                        <div class="dashboard-header fl-wrap">
+                                            <h3>Mes reservations</h3>
+                                        </div>
+                                        <!-- dashboard-list end-->    
+                                        <div class="dashboard-list">
+                                            <div class="dashboard-message">
+                                                <span class="new-dashboard-item">New</span>
+                                                <div class="dashboard-message-avatar">
+                                                    <img src="images/avatar/1.jpg" alt="">
+                                                </div>
+                                                <div class="dashboard-message-text">
+                                                    <h4>Andy Smith - <span>27 December 2018</span></h4>
+                                                    <div class="booking-details fl-wrap">
+                                                        <span class="booking-title">Listing Item :</span> :
+                                                        <span class="booking-text"><a href="{% url 'main:listing-single'%}">Premium Plaza Hotel</a></span>
+                                                    </div>
+                                                    <div class="booking-details fl-wrap">
+                                                        <span class="booking-title">Persons :</span>   
+                                                        <span class="booking-text">4 Peoples</span>
+                                                    </div>
+                                                    <div class="booking-details fl-wrap">
+                                                        <span class="booking-title">Booking Date :</span>   
+                                                        <span class="booking-text">02.03.2018  - 10.03.2018</span>
+                                                    </div>
+                                                    <div class="booking-details fl-wrap">                                                               
+                                                        <span class="booking-title">Mail :</span>  
+                                                        <span class="booking-text"><a href="#" target="_top">yormail@domain.com</a></span>
+                                                    </div>
+                                                    <div class="booking-details fl-wrap">
+                                                        <span class="booking-title">Phone :</span>   
+                                                        <span class="booking-text"><a href="tel:+496170961709" target="_top">+496170961709</a></span>
+                                                    </div>
+                                                    <div class="booking-details fl-wrap">
+                                                        <span class="booking-title">Payment State :</span> 
+                                                        <span class="booking-text"> <strong class="done-paid">Paid  </strong>  using Paypal</span>
+                                                    </div>
+                                                    <span class="fw-separator"></span>
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc posuere convallis purus non cursus. Cras metus neque, gravida sodales massa ut. </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- dashboard-list end-->    
+                                        <!-- dashboard-list end-->    
+                                        <div class="dashboard-list">
+                                            <div class="dashboard-message">
+                                                <div class="dashboard-message-avatar">
+                                                    <img src="images/avatar/1.jpg" alt="">
+                                                </div>
+                                                <div class="dashboard-message-text">
+                                                    <h4>Andy Smith - <span>27 December 2018</span></h4>
+                                                    <div class="booking-details fl-wrap">
+                                                        <span class="booking-title">Listing Item :</span>  
+                                                        <span class="booking-text"><a href="{% url 'main:listing-single'%}">Moonlight Hotel</a></span>
+                                                    </div>
+                                                    <div class="booking-details fl-wrap">
+                                                        <span class="booking-title">Persons :</span>   
+                                                        <span class="booking-text">4 Peoples</span>
+                                                    </div>
+                                                    <div class="booking-details fl-wrap">
+                                                        <span class="booking-title">Booking Date :</span>  
+                                                        <span class="booking-text">02.03.2018  - 10.03.2018</span>
+                                                    </div>
+                                                    <div class="booking-details fl-wrap">                                                               
+                                                        <span class="booking-title">Mail :</span>  
+                                                        <span class="booking-text"><a href="#" target="_top">yormail@domain.com</a></span>
+                                                    </div>
+                                                    <div class="booking-details fl-wrap">
+                                                        <span class="booking-title">Phone :</span>  
+                                                        <span class="booking-text"><a  href="tel:+496170961709" target="_top">+496170961709</a></span>
+                                                    </div>
+                                                    <div class="booking-details fl-wrap">
+                                                        <span class="booking-title">Payment State :</span> 
+                                                        <span class="booking-text"> <strong class="done-paid">Paid  </strong>  using Paypal</span>
+                                                    </div>
+                                                    <span class="fw-separator"></span>
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc posuere convallis purus non cursus. Cras metus neque, gravida sodales massa ut. </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- dashboard-list end-->                                             
+                                        <!-- dashboard-list end-->    
+                                        <div class="dashboard-list">
+                                            <div class="dashboard-message">
+                                                <div class="dashboard-message-avatar">
+                                                    <img src="images/avatar/avatar-bg.png" alt="">
+                                                </div>
+                                                <div class="dashboard-message-text">
+                                                    <h4>Andy Smith - <span>27 December 2018</span></h4>
+                                                    <div class="booking-details fl-wrap">
+                                                        <span class="booking-title">Listing Item :</span>  
+                                                        <span class="booking-text"><a href="{% url 'main:listing-single'%}">Moonlight Hotel</a></span>
+                                                    </div>
+                                                    <div class="booking-details fl-wrap">
+                                                        <span class="booking-title">Persons :</span>   
+                                                        <span class="booking-text">4 Peoples</span>
+                                                    </div>
+                                                    <div class="booking-details fl-wrap">
+                                                        <span class="booking-title">Booking Date :</span>   
+                                                        <span class="booking-text">02.03.2018  - 10.03.2018</span>
+                                                    </div>
+                                                    <div class="booking-details fl-wrap">                                                               
+                                                        <span class="booking-title">Mail :</span>  
+                                                        <span class="booking-text"><a href="#" target="_top">yormail@domain.com</a></span>
+                                                    </div>
+                                                    <div class="booking-details fl-wrap">
+                                                        <span class="booking-title">Phone :</span>  
+                                                        <span class="booking-text"><a  href="tel:+496170961709" target="_top">+496170961709</a></span>
+                                                    </div>
+                                                    <div class="booking-details fl-wrap">
+                                                        <span class="booking-title">Payment State :</span> 
+                                                        <span class="booking-text"> <strong class="done-paid">Paid  </strong>  using Paypal</span>
+                                                    </div>
+                                                    <span class="fw-separator"></span>
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc posuere convallis purus non cursus. Cras metus neque, gravida sodales massa ut. </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- dashboard-list end-->                                            
+                                    </div>
+                                    <!-- pagination-->
+                                    <div class="pagination">
+                                        <a href="#" class="prevposts-link"><i class="fa fa-caret-left"></i></a>
+                                        <a href="#" class="current-page">1</a>
+                                        <a href="#">2</a>
+                                        <a href="#">3</a>
+                                        <a href="#">4</a>
+                                        <a href="#" class="nextposts-link"><i class="fa fa-caret-right"></i></a>
+                                    </div>
+                                </div>
+                                <!-- dashboard-list-box end--> 
+                            </div>
+                            <!-- dasboard-wrap end-->
+                        </div>
+                    </section>
+                    <div class="limit-box fl-wrap"></div>
+                </div>
+                <!-- content end-->
+            </div>
+            <!--wrapper end -->
+{% endblock %}

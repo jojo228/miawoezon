@@ -22,6 +22,7 @@ urlpatterns = [
     path("lists/", include("lists.urls", namespace="lists")),
     path("announcements/", include("announcement.urls", namespace="announcement")),
     path("blog/", include("blog.urls")),
+    path("conversations/", include("conversations.urls")),
     path(os.environ.get("ADMIN_URL", "admin/"), admin.site.urls),
     path("sentry-debug/", trigger_error),
     path('accounts/', include('allauth.urls')),
