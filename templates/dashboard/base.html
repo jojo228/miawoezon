@@ -9,11 +9,11 @@
             <div class="dasboard-sidebar">
                 <div class="dasboard-sidebar-content fl-wrap">
                     <div class="dasboard-avatar">
-                        <img src="{{ request.user.client.avatar.url }}" alt="">
+                        <img src="{% if request.user.client.avatar %}{{ request.user.client.avatar.url }}{% else %}{% static 'images/avatar/1.jpg' %}{% endif %}" alt="">
                     </div>
                     <div class="dasboard-sidebar-item fl-wrap">
                         <h3>
-                            <span>Welcome </span>
+                            <span>Miawoezon </span>
                             {{ request.user.client }}
                         </h3>
                     </div>
