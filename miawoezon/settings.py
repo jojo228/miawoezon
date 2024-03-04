@@ -235,11 +235,8 @@ SOCIALACCOUNT_ADAPTER = "allauth.socialaccount.adapter.DefaultSocialAccountAdapt
 
 LOGIN_URL = "/authentication/login/"
 
-LOGIN_REDIRECT_URL = "/authentication/complete-profile/"
-LOGIN_REDIRECT_URLNAME = "/authentication/complete-profile/"
-ACCOUNT_SIGNUP_REDIRECT_URL = "/authentication/complete-profile/"
-# ACCOUNT_EMAIL_REQUIRED = True
-# ACCOUNT_EMAIL_VERIFICATION = 'mandatory'   # This will force verification
+# LOGIN_REDIRECT_URL = ""
+
 
 # Locale
 LOCALE_PATHS = (os.path.join(BASE_DIR, "locale"),)
