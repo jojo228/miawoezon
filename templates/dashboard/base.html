@@ -43,7 +43,7 @@
                 <div class="dasboard-menu-btn color3-bg">Dashboard Menu <i class="fal fa-bars"></i></div>
                 <ul class="dasboard-menu-wrap">
                     <li>
-                        <a href="{% url 'authentication:client_detail' user.client.id %}" {% if request.resolver_match.url_name == 'client_detail' %} class="user-profile-act" {% endif %}><i class="far fa-user"></i>Profil</a>
+                        <a href="{% url 'authentication:client_detail' user.client.id %}" {% if request.resolver_match.url_name == 'authentication:client_detail' %} class="user-profile-act" {% endif %}><i class="far fa-user"></i>Profil</a>
                         <ul>
                             
                             <li><a href="{% url 'authentication:client_detail' user.client.id %}" >Editer profil</a></li>
