@@ -9,7 +9,7 @@
             <div class="dasboard-sidebar">
                 <div class="dasboard-sidebar-content fl-wrap">
                     <div class="dasboard-avatar">
-                        <img src="{% if request.user.client.avatar %}{{ request.user.client.avatar.url }}{% else %}{% static 'images/avatar/1.jpg' %}{% endif %}" alt="">
+                        <img src="{% if client.avatar %}{{ request.user.client.avatar.url }}{% else %}{% static 'images/avatar/1.jpg' %}{% endif %}" alt="">
                     </div>
                     <div class="dasboard-sidebar-item fl-wrap">
                         <h3>

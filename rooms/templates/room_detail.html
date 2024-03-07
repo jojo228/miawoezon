@@ -335,12 +335,12 @@
                                                     <div class="box-widget-author fl-wrap">
                                                         <div class="box-widget-author-title fl-wrap">
                                                             <div class="box-widget-author-title-img">
-                                                                <img src="{% if 'room.host.avatar' %} {{room.host.avatar.url}} {% endif %}" alt=""> 
+                                                                <img src="{% if 'room.host.avatar' %}{{room.host.avatar.url}}{% else %}{% static 'images/avatar/1.jpg' %}{% endif %}" alt=""> 
                                                             </div>
                                                             <a href="user-single.html">{{room.host}}</a>
                                                             <span>4 lieux hébergés</span>
                                                         </div>
-                                                        <a href="{% if 'room.host.avatar' %} {{room.host.avatar.url}} {% endif %}" class="btn flat-btn color-bg   float-btn image-popup">Voir le profil<i class="fal fa-user-alt"></i></a>
+                                                        <a href="{% if 'room.host.avatar' %}{{room.host.avatar.url}}{% else %}{% static 'images/avatar/1.jpg' %}{% endif %}" class="btn flat-btn color-bg   float-btn image-popup">Voir le profil<i class="fal fa-user-alt"></i></a>
                                                     </div>
                                                 </div>
                                             </div>
