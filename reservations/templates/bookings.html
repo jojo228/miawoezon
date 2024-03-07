@@ -26,7 +26,7 @@
                                                     <span class="new-dashboard-item">Message</span>
                                                 </a>
                                                 <div class="dashboard-message-avatar">
-                                                    <img src="{% if 'booking.room.host.avatar' %}{{booking.room.host.avatar.url}}{% else %}{% static 'images/avatar/1.jpg' %}{% endif %}" alt="">
+                                                    <img src="{% if booking.room.host.avatar %}{{booking.room.host.avatar.url}}{% else %}{% static 'images/avatar/1.jpg' %}{% endif %}" alt="">
                                                 </div>
                                                 <div class="dashboard-message-text">
                                                     <h4>{{booking.room.host.user.get_full_name}} - <span>{{booking.created|date:"d M Y"}}</span></h4>

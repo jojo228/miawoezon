@@ -3,7 +3,7 @@ from cinetpay_sdk.s_d_k import Cinetpay
 from commande import Commande  # Assuming you have a Commande class in commande.py
 from marchand import marchand  # Assuming you have a marchand dictionary in marchand.py
 
-if 'cpm_trans_id' in request.POST:
+if cpm_trans_id' in request.POST:
     try:
         # Création d'un fichier log pour s'assurer que les éléments sont bien exécutés
         log = "User: " + request.META.get('REMOTE_ADDR') + ' - ' + datetime.now().strftime("%B %d, %Y, %I:%M %p") + '\n'
