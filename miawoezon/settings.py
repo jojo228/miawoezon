@@ -96,6 +96,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.request',
             ],
         },
     },
@@ -223,13 +224,14 @@ SOCIALACCOUNT_PROVIDERS = {
         },
         'AUTH_PARAMS': {
             'access_type':'online',
-        }
+        },
+        'OAUTH_PKCE_ENABLED': True,
     }
 }
 
 SITE_ID = 2
 
-SOCIALACCOUNT_LOGIN_ON_GET = True
+# SOCIALACCOUNT_LOGIN_ON_GET = True
 
 SOCIALACCOUNT_ADAPTER = "allauth.socialaccount.adapter.DefaultSocialAccountAdapter"
 
