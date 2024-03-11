@@ -70,5 +70,26 @@ class CreateRoomForm(forms.ModelForm):
             "house_rules",
             "video",
         )
+        labels = {
+            "name": "Titre",
+            "description": "Description",
+            "price": "Prix par nuit (xof)",
+            "address": "Adresse",
+            "guests": "Nombre d'invités autorisés",
+            "amenities": "Agréments",
+            "facilities": "Installations",
+            "house_rules": "règles de la maison",
+            "city": "ville",
+            "beds": "Nombre de lits",
+            "bedrooms": "chambres",
+            "check_in": "Période d'entrée",
+            "check_out": "Période de sortie",
+            "room_type": "Type",
+            "video": "Vidéo de presentation",
+            "country": "Pays",
+            "baths": "Douches",
+            "instant_book": "Réservation instantanée",
+
+        }
 
     

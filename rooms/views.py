@@ -6,6 +6,7 @@ from django.views.generic import (
     CreateView,
     DetailView,
     UpdateView,
+    DeleteView,
     ListView,
     FormView,
 )
@@ -101,6 +102,12 @@ class RoomUpdateView(LoginRequiredMixin, UpdateView):
         context = super(RoomUpdateView, self).get_context_data(**kwargs)
         return context
     
+
+# DELETE
+class RoomDeleteView(LoginRequiredMixin, DeleteView):
+    model = Room
+    success_url = reverse_lazy("rooms:host-list")
+    template_name = "room_confirm_delete.html"
 
 # -------------------------- ROOMS PHTOS -------------------#
 

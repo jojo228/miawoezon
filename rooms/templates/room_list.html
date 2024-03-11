@@ -33,7 +33,7 @@
                                                     <ul class="dashboard-listing-table-opt  fl-wrap">
                                                         <li><a href="{% url 'rooms:edit' room.id %}">Modifier <i class="fal fa-edit"></i></a></li>
                                                         <li><a href="{% url 'rooms:photo-list' room.pk %}">photos <i class="fal fa-edit"></i></a></li>
-                                                        <li><a href="#" class="del-btn">Delete <i class="fal fa-trash-alt"></i></a></li>
+                                                        <li><a href="{% url 'rooms:delete_room' room.id %}" class="del-btn">Supprimer <i class="fal fa-trash-alt"></i></a></li>
                                                     </ul>
                                                 </div>
                                             </div>

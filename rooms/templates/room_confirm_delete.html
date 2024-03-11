@@ -1,0 +1,49 @@
+{% extends "index.html" %}
+{% load static %}
+{% block content %}
+            <!--  wrapper  -->
+            <div id="wrapper">
+                <!-- content-->
+                <div class="content">
+                    <!-- section-->
+                    {% include 'dashboard/base.html' %}
+                    <!-- section end-->
+                    <!-- section-->
+                    <section class="middle-padding">
+                        <div class="container">
+                            <!--dasboard-wrap-->
+                            <div class="dasboard-wrap fl-wrap">
+                                <!-- dashboard-content--> 
+                                <div class="dashboard-content fl-wrap">
+                                    <div class="dashboard-list-box fl-wrap">
+                                        <div class="dashboard-header fl-wrap">
+                                            <h3>Supprimer</h3>
+                                        </div>
+                                        <!-- dashboard-list  -->
+                                        <h3>Suprimer la publication</h3>
+
+                                            <p>Voulez vous supprimer cette <em>publication</em>?</p>
+                                            
+                                            <form onsubmit="option.disabled = true; return true;" method="POST">
+                                                {% csrf_token %}
+                                                <div class="add__buttons">
+                                                    <a class="btn-sqr-lg btn-green" href="{{ supply.get_absolute_url }}">Annuler</a>
+                                                    <button type="submit" class="btn color2-bg">Supprimer <i class="fal fa-trash-alt"></i></button>
+                                                </div>
+                                            </form>
+                                        <!-- dashboard-list end-->    
+                                        
+                                    </div>
+                                    
+                                </div>
+                                <!-- dashboard-list-box end--> 
+                            </div>
+                            <!-- dasboard-wrap end-->
+                        </div>
+                    </section>
+                    <div class="limit-box fl-wrap"></div>
+                </div>
+                <!-- content end-->
+            </div>
+            <!--wrapper end -->
+{% endblock %}
