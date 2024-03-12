@@ -73,7 +73,7 @@
                         <div class="header-user-menu">
                             <div class="header-user-name">
                                 <span><img src="{% static 'images/avatar/1.jpg' %}" alt=""></span>
-                                Mon Compte
+                                {{request.user.get_full_name}}
                             </div>
                             <ul>
                                 <li><a href="{% url 'authentication:client_detail' user.client.id %}"> Profil</a></li>
