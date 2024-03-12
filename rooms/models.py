@@ -7,7 +7,7 @@ from calendar import Calendar
 
 
 class AbstractItem(main_models.TimeStampedModel):
-    name = models.CharField(max_length=80)
+    name = models.CharField(max_length=500)
 
     class Meta:
         abstract = True

@@ -76,7 +76,7 @@ class CreateRoomForm(forms.ModelForm):
             "price": "Prix par nuit (xof)",
             "address": "Adresse",
             "guests": "Nombre d'invités autorisés",
-            "amenities": "Agréments",
+            "amenities": "Commodités",
             "facilities": "Installations",
             "house_rules": "règles de la maison",
             "city": "ville",
