@@ -12,6 +12,16 @@ def coming_soon(request):
     return render(request, "coming-soon.html")
 
 
+def term_condition(request):
+    
+    return render(request, "term_&_condition.html")
+
+
+def police_prive(request):
+    
+    return render(request, "police_prive.html")
+
+
 def home(request):
     posts = Post.objects.all().order_by("-created_on")[:3]
     rooms = Room.objects.all().order_by("-created")[:9]
@@ -197,6 +207,7 @@ def room1(request):
     
     return render(request, "rooms/room1.html")
 
+
 def room2(request):
     
     return render(request, "rooms/room2.html")
@@ -219,6 +230,7 @@ def dashboardlistingtable(request):
 def dashboardpassword(request):
     
     return render(request, "dashboard-password.html")
+
 
 def dashboardreview(request):
     

@@ -9,6 +9,8 @@ app_name = "main"
 urlpatterns = [
     path("", views.home , name="home"),
     path("search-results", views.search, name="search"),
+    path("term_condition", views.term_condition , name="term_condition"),
+    path("police_prive", views.police_prive , name="police_prive"),
 
 
     path("index2", views.index2 , name="index2"),
