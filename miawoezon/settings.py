@@ -228,15 +228,15 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
-SITE_ID = 2
+SITE_ID = 3
 
-# SOCIALACCOUNT_LOGIN_ON_GET = True
+SOCIALACCOUNT_LOGIN_ON_GET = True
 
 SOCIALACCOUNT_ADAPTER = "allauth.socialaccount.adapter.DefaultSocialAccountAdapter"
 
 LOGIN_URL = "/authentication/login/"
 
-# LOGIN_REDIRECT_URL = ""
+LOGIN_REDIRECT_URL = ""
 
 
 # Locale
