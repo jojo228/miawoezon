@@ -43,11 +43,11 @@
                 <div class="dasboard-menu-btn color3-bg">Dashboard Menu <i class="fal fa-bars"></i></div>
                 <ul class="dasboard-menu-wrap">
                     <li>
-                        <a href="{% url 'authentication:client_detail' user.client.id %}" ><i class="far fa-user"></i>Profil</a>
+                        <a href="{% url 'authentication:profil'  %}" ><i class="far fa-user"></i>Profil</a>
                         <ul>
                             
-                            <li><a href="{% url 'authentication:client_detail' user.client.id %}" >Editer profil</a></li>
-                            <li><a href="{% url 'authentication:password_change' %}">Mot de passe</a></li>
+                            <li><a href="{% url 'authentication:profil'  %}" >Editer profil</a></li>
+                            <li><a href="{% url 'authentication:password_reset' %}">Mot de passe</a></li>
                         </ul>
                     </li>
                     <li><a href="{% url 'conversations:conversations'%}" {% if request.resolver_match.url_name == 'conversations' %} class="user-profile-act" {% endif %}><i class="far fa-envelope"></i> Messages

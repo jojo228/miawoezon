@@ -76,7 +76,7 @@
                                                 <div class="clearfix"></div>
                                                 <h3>Discover London - City  is Never Sleeps</h3>
                                                 <h5>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque.  </h5>
-                                                <a href="{% url 'listing'%}" class="btn  color2-bg float-btn">View All Hotels<i class="fas fa-caret-right"></i></a>
+                                                <a href="{% url 'main:listing'%}" class="btn  color2-bg float-btn">View All Hotels<i class="fas fa-caret-right"></i></a>
                                             </div>
                                         </div>
                                     </div>
@@ -131,7 +131,7 @@
                                             <div class="listing-counter"><span>79 </span> Hotels</div>
                                             <img  src="images/city/1.jpg"   alt="">
                                             <div class="listing-item-cat">
-                                                <h3><a href="{% url 'listing'%}">Rome</a></h3>
+                                                <h3><a href="{% url 'main:listing'%}">Rome</a></h3>
                                                 <div class="weather-grid"   data-grcity="Rome"></div>
                                                 <div class="clearfix"></div>
                                                 <p>Constant care and attention to the patients makes good record</p>
@@ -147,7 +147,7 @@
                                             <img  src="images/city/3.jpg"   alt="">
                                             <div class="listing-counter"><span>43 </span> Hotels</div>
                                             <div class="listing-item-cat">
-                                                <h3><a href="{% url 'listing'%}">Paris</a></h3>
+                                                <h3><a href="{% url 'main:listing'%}">Paris</a></h3>
                                                 <div class="weather-grid"   data-grcity="Paris"></div>
                                                 <div class="clearfix"></div>
                                                 <p>Constant care and attention to the patients makes good record</p>
@@ -163,7 +163,7 @@
                                             <div class="listing-counter"><span>23 </span> Hotels</div>
                                             <img  src="images/city/1.jpg"   alt="">
                                             <div class="listing-item-cat">
-                                                <h3><a href="{% url 'listing'%}">London</a></h3>
+                                                <h3><a href="{% url 'main:listing'%}">London</a></h3>
                                                 <div class="weather-grid"   data-grcity="London"></div>
                                                 <div class="clearfix"></div>
                                                 <p>Constant care and attention to the patients makes good record</p>
@@ -179,7 +179,7 @@
                                             <div class="listing-counter"><span>57</span> Hotels</div>
                                             <img  src="images/city/1.jpg"   alt="">
                                             <div class="listing-item-cat">
-                                                <h3><a href="{% url 'listing'%}">Dubai</a></h3>
+                                                <h3><a href="{% url 'main:listing'%}">Dubai</a></h3>
                                                 <div class="weather-grid"   data-grcity="Dubai"></div>
                                                 <div class="clearfix"></div>
                                                 <p>Constant care and attention to the patients makes good record</p>
@@ -195,7 +195,7 @@
                                             <div class="listing-counter"><span>122</span> Hotels</div>
                                             <img  src="images/city/1.jpg"   alt="">
                                             <div class="listing-item-cat">
-                                                <h3><a href="{% url 'listing'%}">New York</a></h3>
+                                                <h3><a href="{% url 'main:listing'%}">New York</a></h3>
                                                 <div class="weather-grid"   data-grcity="New York"></div>
                                                 <div class="clearfix"></div>
                                                 <p>Constant care and attention to the patients makes good record</p>
@@ -206,7 +206,7 @@
                                 <!-- gallery-item end-->
                             </div>
                             <!-- portfolio end -->
-                            <a href="{% url 'listing'%}" class="btn    color-bg">Explore All Cities<i class="fas fa-caret-right"></i></a>
+                            <a href="{% url 'main:listing'%}" class="btn    color-bg">Explore All Cities<i class="fas fa-caret-right"></i></a>
                     </section>
                     <!-- section end -->
                     <!-- section-->
@@ -231,8 +231,8 @@
                                     <div class="listing-item">
                                         <article class="geodir-category-listing fl-wrap">
                                             <div class="geodir-category-img">
-                                                <a href="{% url 'listing'%}"><img src="images/gal/1.jpg" alt=""></a>
-                                                <div class="listing-avatar"><a href="{% url 'author-single'%}"><img src="images/avatar/1.jpg" alt=""></a>
+                                                <a href="{% url 'main:listing'%}"><img src="images/gal/1.jpg" alt=""></a>
+                                                <div class="listing-avatar"><a href="{% url 'main:author-single'%}"><img src="images/avatar/1.jpg" alt=""></a>
                                                     <span class="avatar-tooltip">Added By  <strong>Alisa Noory</strong></span>
                                                 </div>
                                                 <div class="sale-window">Sale 20%</div>
@@ -279,7 +279,7 @@
                                         <article class="geodir-category-listing fl-wrap">
                                             <div class="geodir-category-img">
                                                 <a href="{% url 'main:listing-single'%}"><img src="images/gal/1.jpg" alt=""></a>
-                                                <div class="listing-avatar"><a href="{% url 'author-single'%}"><img src="images/avatar/1.jpg" alt=""></a>
+                                                <div class="listing-avatar"><a href="{% url 'main:author-single'%}"><img src="images/avatar/1.jpg" alt=""></a>
                                                     <span class="avatar-tooltip">Added By  <strong>Julie Cramp</strong></span>
                                                 </div>
                                                 <div class="sale-window big-sale">Sale 50%</div>
@@ -328,7 +328,7 @@
                                         <article class="geodir-category-listing fl-wrap">
                                             <div class="geodir-category-img">
                                                 <a href="{% url 'main:listing-single'%}"><img src="images/gal/1.jpg" alt=""></a>
-                                                <div class="listing-avatar"><a href="{% url 'author-single'%}"><img src="images/avatar/1.jpg" alt=""></a>
+                                                <div class="listing-avatar"><a href="{% url 'main:author-single'%}"><img src="images/avatar/1.jpg" alt=""></a>
                                                     <span class="avatar-tooltip">Added By  <strong>Andy Moore</strong></span>
                                                 </div>
                                                 <div class="geodir-category-opt">
@@ -376,7 +376,7 @@
                                         <article class="geodir-category-listing fl-wrap">
                                             <div class="geodir-category-img">
                                                 <a href="{% url 'main:listing-single'%}"><img src="images/gal/1.jpg" alt=""></a>
-                                                <div class="listing-avatar"><a href="{% url 'author-single'%}"><img src="images/avatar/1.jpg" alt=""></a>
+                                                <div class="listing-avatar"><a href="{% url 'main:author-single'%}"><img src="images/avatar/1.jpg" alt=""></a>
                                                     <span class="avatar-tooltip">Added By  <strong>Mary Jones</strong></span>
                                                 </div>
                                                 <div class="sale-window">Sale 20%</div>
@@ -425,7 +425,7 @@
                                         <article class="geodir-category-listing fl-wrap">
                                             <div class="geodir-category-img">
                                                 <a href="{% url 'main:listing-single'%}"><img src="images/gal/1.jpg" alt=""></a>
-                                                <div class="listing-avatar"><a href="{% url 'author-single'%}"><img src="images/avatar/1.jpg" alt=""></a>
+                                                <div class="listing-avatar"><a href="{% url 'main:author-single'%}"><img src="images/avatar/1.jpg" alt=""></a>
                                                     <span class="avatar-tooltip">Added By  <strong>Fider Mamby</strong></span>
                                                 </div>
                                                 <div class="sale-window">Sale 10%</div>
@@ -474,7 +474,7 @@
                                         <article class="geodir-category-listing fl-wrap">
                                             <div class="geodir-category-img">
                                                 <a href="{% url 'main:listing-single'%}"><img src="images/gal/1.jpg" alt=""></a>
-                                                <div class="listing-avatar"><a href="{% url 'author-single'%}"><img src="images/avatar/1.jpg" alt=""></a>
+                                                <div class="listing-avatar"><a href="{% url 'main:author-single'%}"><img src="images/avatar/1.jpg" alt=""></a>
                                                     <span class="avatar-tooltip">Added By  <strong>Alisa Noory</strong></span>
                                                 </div>
                                                 <div class="sale-window big-sale">Sale 70%</div>
@@ -536,7 +536,7 @@
                                         <div class="colomn-text-title">
                                             <h3>Most Popular Hotels</h3>
                                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla finibus lobortis pulvinar.</p>
-                                            <a href="{% url 'listing'%}" class="btn  color2-bg float-btn">View All Hotels<i class="fas fa-caret-right"></i></a>
+                                            <a href="{% url 'main:listing'%}" class="btn  color2-bg float-btn">View All Hotels<i class="fas fa-caret-right"></i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -816,10 +816,10 @@
                                 <div class="col-md-4">
                                     <article class="card-post">
                                         <div class="card-post-img fl-wrap">
-                                            <a href="{% url 'blog-single'%}"><img  src="images/all/1.jpg"   alt=""></a>
+                                            <a href=""><img  src="images/all/1.jpg"   alt=""></a>
                                         </div>
                                         <div class="card-post-content fl-wrap">
-                                            <h3><a href="{% url 'blog-single'%}">Blog Post Title.</a></h3>
+                                            <h3><a href="">Blog Post Title.</a></h3>
                                             <p>In ut odio libero, at vulputate urna. Nulla tristique mi a massa convallis cursus. Nulla eu mi magna. Etiam suscipit commodo gravida. </p>
                                             <div class="post-author"><a href="#"><img src="images/avatar/1.jpg" alt=""><span>By , Mery Lynn</span></a></div>
                                             <div class="post-opt">
@@ -848,7 +848,7 @@
                                             </div>
                                         </div>
                                         <div class="card-post-content fl-wrap">
-                                            <h3><a href="{% url 'blog-single'%}">Blog Post Title.</a></h3>
+                                            <h3><a href="">Blog Post Title.</a></h3>
                                             <p>In ut odio libero, at vulputate urna. Nulla tristique mi a massa convallis cursus. Nulla eu mi magna. Etiam suscipit commodo gravida. </p>
                                             <div class="post-author"><a href="#"><img src="images/avatar/1.jpg" alt=""><span>By , Mery Lynn</span></a></div>
                                             <div class="post-opt">
@@ -864,10 +864,10 @@
                                 <div class="col-md-4">
                                     <article class="card-post">
                                         <div class="card-post-img fl-wrap">
-                                            <a href="{% url 'blog-single'%}"><img  src="images/all/1.jpg"   alt=""></a>
+                                            <a href=""><img  src="images/all/1.jpg"   alt=""></a>
                                         </div>
                                         <div class="card-post-content fl-wrap">
-                                            <h3><a href="{% url 'blog-single'%}">Blog Post Title.</a></h3>
+                                            <h3><a href="">Blog Post Title.</a></h3>
                                             <p>In ut odio libero, at vulputate urna. Nulla tristique mi a massa convallis cursus. Nulla eu mi magna. Etiam suscipit commodo gravida. </p>
                                             <div class="post-author"><a href="#"><img src="images/avatar/1.jpg" alt=""><span>By , Mery Lynn</span></a></div>
                                             <div class="post-opt">
@@ -881,7 +881,7 @@
                                     </article>
                                 </div>
                             </div>
-                            <a href="{% url 'blog'%} class="btn-color-bg >Read All News<i class="fas fa-caret-right"></i></a>
+                            <a href="" class=btn-color-bg >Read All News<i class="fas fa-caret-right"></i></a>
                         </div>
                         <div class="section-decor"></div>
                     </section>

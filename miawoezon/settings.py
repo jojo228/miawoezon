@@ -57,9 +57,8 @@ THIRD_PARTY_APPS = [
 PROJECT_APPS = [
     "announcement.apps.AnnouncementConfig",
     "blog.apps.BlogConfig",
-    "staff_account.apps.StaffAccountConfig",
-    "main.apps.MainConfig",
     "authentication.apps.AuthenticationConfig",
+    "main.apps.MainConfig",
     "rooms.apps.RoomsConfig",
     "reservations.apps.ReservationsConfig",
     "lists.apps.ListsConfig",
@@ -177,7 +176,6 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles/")
@@ -193,21 +191,20 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # SMTP Configuration (Its working fine, just add the mail and its password)
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = os.getenv("EMAIL_HOST")
-EMAIL_PORT = 465
-EMAIL_USE_TLS = False
-EMAIL_USE_SSL = True
-EMAIL_HOST_USER = os.getenv("EMAIL")
-EMAIL_HOST_PASSWORD = os.getenv("EMAIL_PASSWORD")
-DEFAULT_FROM_EMAIL = os.getenv("EMAIL")
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'gmail.googleapis.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+EMAIL_HOST_USER = 'gakservices228@gmail.com'
+# EMAIL_HOST_PASSWORD = "qaqqmkhnajckxboq"
 
 PASSWORD_RESET_TIMEOUT = 14400
 
 
 AUTHENTICATION_BACKENDS = [
     "django.contrib.auth.backends.ModelBackend",
-    "authentication.backends.MyBackend",
+    "authentication.backends.EmailBackend",
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
@@ -236,33 +233,11 @@ SOCIALACCOUNT_ADAPTER = "allauth.socialaccount.adapter.DefaultSocialAccountAdapt
 
 LOGIN_URL = "/authentication/login/"
 
-LOGIN_REDIRECT_URL = ""
+LOGIN_REDIRECT_URL = "main:home"
 
 
 # Locale
 LOCALE_PATHS = (os.path.join(BASE_DIR, "locale"),)
 
 
-# if not DEBUG:
 
-#     # AWS S3 collectstatic
-
-#     DEFAULT_FILE_STORAGE = "config.custom_storages.UploadStorage"
-#     STATICFILES_STORAGE = "config.custom_storages.StaticStorage"
-#     AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
-#     AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
-#     AWS_STORAGE_BUCKET_NAME = "airbnb-clone-ssayebee"
-#     AWS_AUTO_CREATE_BUCKET = True
-#     AWS_BUCKET_ACL = "public_read"
-#     AWS_S3_REGION_NAME = "ap-northeast-2"
-#     AWS_S3_OBJECT_PARAMETERS = {"CacheControl": "max-age=86400"}
-#     AWS_S3_CUSTOM_DOMAIN = f"{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com"
-#     STATIC_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/static/"
-
-#     # Sentry
-
-#     sentry_sdk.init(
-#         dsn=os.environ.get("SENTRY_URL"),
-#         integrations=[DjangoIntegration()],
-#         send_default_pii=True,
-#     )

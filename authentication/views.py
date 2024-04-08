@@ -1,193 +1,117 @@
-from datetime import date
-import os
-from django.shortcuts import render, redirect
-from authentication.forms import (
-    ClientIdentityForm,
-    ClientPersonalDataForm,
-    ClientAddressForm,
-)
-from staff_account.models import User
-from django.urls import reverse_lazy
-from django.http import HttpResponse
-from formtools.wizard.views import SessionWizardView
-
-from django.views.generic import UpdateView, DetailView, RedirectView, TemplateView
-
-from django.contrib.auth import login
-from django.contrib.auth.mixins import LoginRequiredMixin
-
 from django.conf import settings
-from django.core.files.storage import FileSystemStorage
-
-from authentication.models import Client
-
-client_detail_url = "authentication:client_detail"
-
-
-# Email activation importation
-from django.contrib.sites.shortcuts import get_current_site
-from django.utils.encoding import force_bytes, force_str
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render, redirect
+from django.contrib.auth import logout, login, authenticate
+from django.contrib.auth import login as auth_login
+from django.contrib.auth.forms import AuthenticationForm
+from django.core.mail import send_mail, BadHeaderError
+from django.contrib.auth.forms import PasswordResetForm
+from django.contrib.auth.models import User, Group
+from django.template import RequestContext
 from django.template.loader import render_to_string
-from .token import account_activation_token
-from django.core.mail import EmailMessage
+from django.utils.http import urlsafe_base64_encode
+from django.contrib.auth.tokens import default_token_generator
+from django.utils.encoding import force_bytes
+from django.db.models.query_utils import Q
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from authentication.forms.login_form import LoginForm
+from authentication.forms.profil_form import ClientForm, ClientUserForm
 
-# -------------------------- ACCOUNT -------------------#
-
-# CREATE
-class SignupWizardView(SessionWizardView):
-    login_url = reverse_lazy("authentication:login")
-    template_name = "signup.html"
-    file_storage = FileSystemStorage(location=os.path.join(settings.MEDIA_ROOT, 'photos'))
-
-    def send_activation_email(self, user):
-        # We need the user object, so it's an additional parameter
-        # account confirmation mail
-        # to get the domain of the current site
-        current_site = get_current_site(self.request)
-        subject = "Un lien d'activation a été envoyée à votre addresse email"
-        message = render_to_string(
-            "activate_account.html",
-            {
-                "user": user,
-                "domain": current_site.domain,
-                "uid": urlsafe_base64_encode(force_bytes(user.pk)),
-                "token": account_activation_token.make_token(user),
-                "protocol": "https" if self.request.is_secure() else "http",
-            },
-        )
-        user.email_user(subject, message, html_message=message)
-
-    def done(self, form_list, **kwargs):
-
-        # save the user created
-        user = form_list[0].save(commit=False)
-        # Automatic assign username to user based on last name, first_name, date joined , and make sure to create unique username
-        username = ""
-        # create username first string
-        for name in user.first_name.split(" "):
-            username += name[0].upper()
-        username += user.last_name[0:2].upper()
-        for name in user.first_name.split(" "):
-            username += name[-1].upper()
-
-        username += date.today().strftime("%y%m%d")
-        next_username_number = "001"
-
-        while User.objects.filter(username=username):
-            username += next_username_number
-            next_username_number = "{0:04d}".format(int(next_username_number) + 1)
-        user.username = username
-
-        # Add the user as inactive
-        user.is_active = False
-
-        # create a client linked to the user created and fill its identity data first
-        client_personal_data = form_list[1].save(commit=False)
-        client_personal_data.user = user
-
-        # then use the identity form to complete the model
-        client_personal_data.country = form_list[2].cleaned_data["country"]
-        client_personal_data.city = form_list[2].cleaned_data["city"]
-        client_personal_data.address = form_list[2].cleaned_data["address"]
-        client_personal_data.pincode = form_list[2].cleaned_data["pincode"]
-
-        # save forms ad last once everything is correct
-        user.save()
-        client_personal_data.save()
-        self.send_activation_email(user)
-
-        return redirect("authentication:check_email")
+from rest_framework import viewsets
+from rest_framework import permissions
+from .tokens import account_activation_token
+from django.contrib.sites.shortcuts import get_current_site
 
 
-# The view to activate the user account after the email confirmation
-class ActivateView(RedirectView):
+def signout(request):
+    logout(request)
+    return redirect("main:home")
 
-    url = reverse_lazy("authentication:success")
 
-    # Custom get method
-    def get(self, request, uidb64, token):
+@login_required(login_url="authentication:login")
+def client_profil(request):
+    user = request.user
+    client = request.user.client
+    form = ClientForm(instance=client)
+    user_form = ClientUserForm(instance=user)
 
-        try:
-            uid = force_str(urlsafe_base64_decode(uidb64))
-            user = User.objects.get(pk=uid)
-        except (TypeError, ValueError, OverflowError, User.DoesNotExist):
-            user = None
+    if request.method == "POST":
+        form = ClientForm(request.POST, instance=client)
+        user_form = ClientUserForm(request.POST, instance=user)
+        if form.is_valid() and user_form.is_valid():
+            form.save()
+            user_form.save()
 
-        if user is not None and account_activation_token.check_token(user, token):
-            user.is_active = True
-            user.save()
-            login(request, user, backend="gespro.authentication.backends.MyBackend")
-            return super().get(request, uidb64, token)
+            messages.success(request, "Profil mis à jour avec succès")
+
+    context = {"form": form, "form2": user_form}
+
+    return render(request, "client_profil.html", context)
+
+
+def password_reset_request(request):
+    if request.method == "POST":
+        password_reset_form = PasswordResetForm(request.POST)
+        if password_reset_form.is_valid():
+            data = password_reset_form.cleaned_data["email"]
+            associated_users = User.objects.filter(Q(email=data))
+            if associated_users.exists():
+                for user in associated_users:
+                    subject = "Password Reset Requested"
+                    email_template_name = "password_reset_email.txt"
+                    c = {
+                        "email": user.email,
+                        "domain": get_current_site(request).domain,
+                        "site_name": "Miawoezon",
+                        "uid": urlsafe_base64_encode(force_bytes(user.pk)),
+                        "user": user,
+                        "token": account_activation_token.make_token(user),
+                        "protocol": "https" if request.is_secure() else "http",
+                    }
+                    email = render_to_string(email_template_name, c)
+                    try:
+                        send_mail(
+                            subject,
+                            email,
+                            "gakservices228@gmail.com",
+                            [user.email],
+                            fail_silently=False,
+                        )
+                    except BadHeaderError:
+                        return HttpResponse("Invalid header found.")
+    password_reset_form = PasswordResetForm()
+    return render(
+        request=request,
+        template_name="password_reset.html",
+        context={"password_reset_form": password_reset_form},
+    )
+
+
+def login(request):
+    redirect_to = request.POST.get("next")
+    form = AuthenticationForm()
+    if request.method == "POST":
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get("username")
+            password = form.cleaned_data.get("password")
+            user = authenticate(username=username, password=password)
+
+            if user is not None:
+                auth_login(request, user)
+            if "next" in request.POST:
+                return HttpResponseRedirect(redirect_to)
+            else:
+                return redirect(settings.LOGIN_REDIRECT_URL)
         else:
-            return render(request, "activate_account_invalid.html")
+            messages.error(
+                request, "Email/Nom d'utilisateur ou mot de passe incorrect !"
+            )
+
+    context = {"form": form}
+
+    return render(request=request, template_name="login.html", context=context)
 
 
-class CheckEmailView(TemplateView):
-    template_name = "check_email.html"
 
-
-class SuccessView(TemplateView):
-    template_name = "success.html"
-
-
-# READ
-class ClientDetailView(LoginRequiredMixin, DetailView):
-    model = Client
-    context_object_name = "client"
-    template_name = "client_detail.html"
-
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        
-        # Retrieve the client object from the context
-        client = context["client"]
-        
-        # Query the Room model to count the rooms associated with the client
-        total_rooms = client.rooms.count()
-
-        # Query the Room model to count the reservations associated with the client
-        total_reservations = client.reservations.count()
-        
-        # Add the total_rooms count to the context
-        context["total_rooms"] = total_rooms
-        context["total_reservations"] = total_reservations
-        
-        return context
-
-
-# UPDATE
-class ClientIdentityInformationUpdateView(LoginRequiredMixin, UpdateView):
-    model = User
-    context_object_name = "client"
-    form_class = ClientIdentityForm
-    template_name = "client_identity_information_update.html"
-
-    def get_success_url(self):
-        return reverse_lazy(
-            client_detail_url,
-            kwargs={"pk": Client.objects.get(user_id=self.kwargs["pk"]).id},
-        )
-
-
-class ClientPersonalInformationUpdateView(LoginRequiredMixin, UpdateView):
-    login_url = reverse_lazy("staff_account:login")
-    model = Client
-    context_object_name = "client"
-    form_class = ClientPersonalDataForm
-    template_name = "client_personal_information_update.html"
-
-    def get_success_url(self):
-        return reverse_lazy(client_detail_url, kwargs={"pk": self.kwargs["pk"]})
-
-
-class ClientAddressUpdateView(LoginRequiredMixin, UpdateView):
-    login_url = reverse_lazy("staff_account:login")
-    model = Client
-    context_object_name = "client"
-    form_class = ClientAddressForm
-    template_name = "client_address_update.html"
-
-    def get_success_url(self):
-        return reverse_lazy(client_detail_url, kwargs={"pk": self.kwargs["pk"]})

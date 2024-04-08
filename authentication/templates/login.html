@@ -3,9 +3,6 @@
 {% load static %}
 {% load i18n %}
 
-{% block head %}
-{{ wizard.form.media }}
-{% endblock %}
 
 
 {% block content %}
@@ -25,6 +22,16 @@
                 <!--tab -->
                 <div id="tab-1" class="tab-content">
                     <h3>Se connecter <span>Mia<strong>Woezon</strong></span></h3>
+                    {% if messages %}
+                    {% for message in messages %}
+                    <div class="alert alert-warning d-flex align-items-center" role="alert">
+                        <div style="margin-left: 2%;">
+                            {{message}}
+                        </div>
+                    </div>
+
+                    {% endfor %}
+                    {% endif %}
                     <div class="custom-form">
                         <form method="post" name="registerform" action="{% url 'authentication:login' %}">
                             {% csrf_token %}
@@ -33,6 +40,9 @@
                             {{field}}
                             {{field.errors}}
                             {% endfor %}
+                            {% if request.GET.next %}
+                            <input type="hidden" name="next" value="{{ request.GET.next }}">
+                            {% endif %}
                             <button type="submit" class="log-submit-btn color-bg"><span>Se connecter</span></button>
                             <div class="clearfix"></div>
                             <div class="filter-tags">
@@ -41,18 +51,19 @@
                             </div>
                         </form>
                         <div class="lost_password">
-                            <a href="#">Mot de passe perdu?</a>
+                            <a href="{% url 'authentication:password_reset' %}">Mot de passe perdu?</a>
                         </div>
                     </div>
                 </div>
                 <!--tab end -->
-                
+
             </div>
             <!--tabs end -->
             <div class="log-separator fl-wrap"><span>ou</span></div>
             <p>Vous n'avez pas de compte? <a href="{% url 'authentication:signup' %}">Cliquez ici</a> </p>
             <div class="soc-log fl-wrap">
-                <a href="{% provider_login_url 'google' %}?next=/" class="google-log"><i class="fab fa-google"></i>Connecter avec Google</a>
+                <a href="{% provider_login_url 'google' %}?next=/" class="google-log"><i
+                        class="fab fa-google"></i>Connecter avec Google</a>
                 <!-- <a href="#" class="facebook-log"><i class="fab fa-facebook-f"></i>Connecter avec Facebook</a> -->
             </div>
         </div>

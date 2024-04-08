@@ -76,7 +76,7 @@
                                 {{request.user.get_full_name}}
                             </div>
                             <ul>
-                                <li><a href="{% url 'authentication:client_detail' user.client.id %}"> Profil</a></li>
+                                <li><a href="{% url 'authentication:profil' %}"> Profil</a></li>
                                 <li><a href="{% url 'rooms:create' %}"> Publier</a></li>
                                 <li><a href="{% url 'reservations:bookings'%}">  Reservations  </a></li>
                                 <li><a href="{% url 'authentication:logout' %}">Se deconnecter</a></li>

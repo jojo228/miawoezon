@@ -3,9 +3,7 @@
 {% load socialaccount %}
 {% load i18n %}
 
-{% block head %}
-{{ wizard.form.media }}
-{% endblock %}
+
 
 
 {% block content %}
@@ -26,71 +24,31 @@
                 <div class="tab">
                     <div id="tab-1" class="tab-content">
                         <h3>S'inscrire <span>Mia<strong>Woezon</strong></span></h3>
-                        <h4>Etape {{ wizard.steps.step1 }} sur {{ wizard.steps.count }}</h4>
+                        {% for message in messages %}
+                        <div class="alert alert-success d-flex align-items-center" role="alert">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                class="bi flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Success:">
+                                <path
+                                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                            </svg>
+                            <div style="margin-left: 2%;">
+                                {{message}}
+                            </div>
+                        </div>
+
+                        {% endfor %}
                         <div class="custom-form">
                             <form method="post" enctype="multipart/form-data" action="{% url 'authentication:signup' %}"
                                 name="registerform" class="main-register-form" id="main-register-form2">
                                 {% csrf_token %}
-
-                            {{ wizard.management_form }}
-
-                            {% if wizard.form.forms %}
-
-                                {{ wizard.form.management_form }}
-
-                                {% for form in wizard.form.forms %}
-                                <fieldset>
-
-                                        {{form.non_field_errors}}
-
-                                        {% for field in form %}
-                                        <label>{{field.label}} <span>*</span> </label>
-                                        {{field}}
-                                        {% if field.help_text %}
-                                        {% endif %}
-                                        {{field.errors}}
-                                        {% endfor %}
-
-                                </fieldset> 
-                                {% endfor %} 
-
-                            {% else %}
-
-                                    {{form.non_field_errors}}
-
-                                    {% for field in form %}
-                                        <label>{{field.label}} <span>*</span> </label>
-                                        {{field}}
-                                        {% if field.help_text %}
-                                        {% endif %}
-                                        {{field.errors}}
-                                    {% endfor %}
-
-                                {% endif %}
-
-
-                                    <div class="form__div multistep__form-div">
-                                        {% if wizard.steps.prev %}
-                                        <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}"
-                                        class="log-submit-btn color-bg">{% trans "Etape précédente"%}</button>
-                                        {% if wizard.steps.step1 == wizard.steps.count %}
-                                        <input type="submit" class="log-submit-btn color-bg"
-                                            value="{% trans ' Soumettre ' %}" />
-                                        {% else %}
-                                        <input type="submit" class="log-submit-btn color-bg"
-                                            value="{% trans ' Etape suivante ' %}" />
-                                        {% endif %}
-                                        {% elif wizard.steps.step1 == 1 %}
-                                        <a href="{% url 'authentication:login' %}" class="log-submit-btn color-bg">
-                                            Annuler
-                                        </a>
-                                        <input type="submit" class="log-submit-btn color-bg"
-                                            value="{% trans ' Etape suivante ' %}" />
-                                        {% endif %}
-                                    </div>
-
-
-                                    <!-- <button type="submit" class="log-submit-btn color-bg"><span>Register</span></button> -->
+                                {% for field in form %}
+                                <label>{{field.label}} <span>*</span> </label>
+                                {{field}}
+                                {{field.errors}}
+                                {% endfor %}
+                                <br>
+                                <span class="helptext"><ul><li>Your password can’t be too similar to your other personal information.</li><li>Your password must contain at least 8 characters.</li><li>Your password can’t be a commonly used password.</li><li>Your password can’t be entirely numeric.</li></ul></span>
+                                <button type="submit" class="log-submit-btn color-bg"><span>Register</span></button>
                             </form>
                         </div>
                     </div>
@@ -101,13 +59,8 @@
                 <div id="tab-2" class="tab-content">
                     <h3>Se connecter <span>Mia<strong>Woezon</strong></span></h3>
                     <div class="custom-form">
-                        <form method="post" name="registerform" action="{% url 'authentication:login' %}">
-                            {% csrf_token %}
-                            {% for field in form %}
-                            <label>{{field.label}} <span>*</span> </label>
-                            {{field}}
-                            {{field.errors}}
-                            {% endfor %}
+                        <form method="post" name="" action="">
+                            
                             <button type="submit" class="log-submit-btn color-bg"><span>Log In</span></button>
                             <div class="clearfix"></div>
                             <div class="filter-tags">

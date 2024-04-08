@@ -1,0 +1,12 @@
+{% autoescape off %}
+Salut {{ user.username }},
+
+Nous sommes ravis de vous compter parmi nos nombreux utilisateurs.
+
+Veuillez svp cliquer sur le lien ci-dessous pour confirmer votre inscription :
+
+http://{{ domain }}{% url 'authentication:activate' uidb64=uid token=token %}
+
+
+Equipe Miawoezon.
+{% endautoescape %}

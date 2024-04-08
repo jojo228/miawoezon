@@ -1,0 +1,84 @@
+{% extends "index.html" %}
+{% load static %}
+{% block content %}
+            <!--  wrapper  -->
+            <div id="wrapper">
+                <!-- content-->
+                <div class="content">
+                    {% include 'dashboard/base.html' %} 
+                    <!-- section-->
+                    <section class="middle-padding">
+                        <div class="container">
+                            <!--dasboard-wrap-->
+                            <div class="dasboard-wrap fl-wrap">
+                                <!-- dashboard-content--> 
+                                <div class="dashboard-content fl-wrap">
+                                    <div class="box-widget-item-header">
+                                        <h3> Informations sur votre identité</h3>
+                                    </div>
+                                    <!-- profile-edit-container--> 
+                                    <div class="profile-edit-container">
+                                        <div class="custom-form">
+                                            <label>Nom <i class="far fa-user"></i></label>
+                                            <input type="text" placeholder="{{user.last_name}}" value=""/>
+                                            <label>Prénom(s) <i class="far fa-user"></i></label>
+                                            <input type="text" placeholder="{{user.first_name}}" value=""/>
+                                            <label>Email<i class="far fa-envelope"></i>  </label>
+                                            <input type="text" placeholder="{{user.email}}" value=""/>
+                                        </div>
+                                    </div>
+                                    <!-- profile-edit-container end--> 
+                                    <div class="box-widget-item-header mat-top">
+                                        <h3>Informations Personnelles</h3>
+                                    </div>
+                                    <div class="profile-edit-container">
+                                        <div class="custom-form">
+                                            <label>Sexe <i class="far fa-user"></i></label>
+                                            <input type="text" placeholder="{{user.client.get_sex_display}}" value=""/>
+                                            <label>Date de Naissance <i class="far fa-user"></i></label>
+                                            <input type="text" placeholder="{{user.client.date_of_birth}}" value=""/>
+                                            <label>Situation Matrimonial<i class="far fa-envelope"></i>  </label>
+                                            <input type="text" placeholder="{{user.client.get_matrimonial_status_display}}" value=""/>
+                                            <label>Contact<i class="far fa-phone"></i>  </label>
+                                            <input type="text" placeholder="{{user.client.contact}}" value=""/>
+                                            <label>Profession <i class="far fa-user"></i></label>
+                                            <input type="text" placeholder="{{user.client.profession}}" value=""/>
+                                            
+                                        </div>
+                                    </div>
+
+                                    <!-- profile-edit-container end--> 
+                                    <div class="box-widget-item-header mat-top">
+                                        <h3>Localisation</h3>
+                                    </div>
+
+                                    <div class="profile-edit-container">
+                                        <div class="custom-form">
+                                            <label>Pays <i class="far fa-user"></i></label>
+                                            <input type="text" placeholder="{{user.client.country}}" value=""/>
+                                            <label>Ville <i class="far fa-user"></i></label>
+                                            <input type="text" placeholder="{{user.client.city}}" value=""/>
+                                            <label> Adress <i class="fas fa-map-marker"></i>  </label>
+                                            <input type="text" placeholder="{{user.client.address}}" value=""/>
+                                            <label> Pincode <i class="fas fa-map-marker"></i>  </label>
+                                            <input type="text" placeholder="{{user.client.pincode}}" value=""/>
+
+                                            <a href="">
+                                            <button class="btn    color2-bg  float-btn">Editer<i class="fal fa-save"></i></button>
+                                            </a>
+                                        </div>
+                                    </div>
+ 
+                                    
+                                </div>
+                                <!-- dashboard-list-box end--> 
+                            </div>
+                            <!-- dasboard-wrap end-->
+                        </div>
+                    </section>
+                    <div class="limit-box fl-wrap"></div>
+                </div>
+                <!-- content end-->
+            </div>
+            <!--wrapper end -->
+{% endblock %}
