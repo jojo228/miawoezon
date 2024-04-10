@@ -4,7 +4,7 @@ from django.shortcuts import redirect
 from django.utils import timezone
 from authentication.models import Client
 from main import models as main_models
-from django_countries.fields import CountryField
+from django_countries.fields import CountryField # type: ignore
 
 
 
@@ -71,9 +71,20 @@ class Reservation(main_models.TimeStampedModel):
         difference = end - start
         return difference.days + 1
     
-    def total_amount(self):
+    def subtotal(self):
         days = self.total_days() 
         total = days * self.room.price
+        return total
+    
+
+    def service_fees(self):
+        total = self.subtotal()
+        fee_percentage = 3 / 100
+        fees = (total * fee_percentage)
+        return fees
+    
+    def total_amount(self):
+        total = self.subtotal() + self.service_fees()
         return total
 
     def save(self, *args, **kwargs):
@@ -101,7 +112,6 @@ class BillingAddress(models.Model):
     state = models.CharField(max_length=255)
     street = models.CharField(max_length=255)
     postal_code = models.IntegerField()
-    additional_note = models.TextField()
     
 
 

@@ -10,13 +10,12 @@ urlpatterns = [
 
     #Authentication urls
     path('login', login , name = 'login'),
+    
     path('logout', signout , name = 'logout'),
 
     path('password_reset', password_reset_request, name='password_reset'),
 
     path('signup', signup , name = 'signup'),
-
-
 
     path('profil', client_profil, name='profil'),
 

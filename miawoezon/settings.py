@@ -231,7 +231,7 @@ SOCIALACCOUNT_LOGIN_ON_GET = True
 
 SOCIALACCOUNT_ADAPTER = "allauth.socialaccount.adapter.DefaultSocialAccountAdapter"
 
-LOGIN_URL = "/authentication/login/"
+LOGIN_URL = "authentication:login"
 
 LOGIN_REDIRECT_URL = "main:home"
 

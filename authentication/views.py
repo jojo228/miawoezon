@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
-from django.contrib.auth import logout, login, authenticate
+from django.contrib.auth import logout, authenticate
 from django.contrib.auth import login as auth_login
 from django.contrib.auth.forms import AuthenticationForm
 from django.core.mail import send_mail, BadHeaderError

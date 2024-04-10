@@ -32,8 +32,8 @@
 
     function checkout() {
         CinetPay.setConfig({
-            apikey: '19583603556596c6116b91e6.90506747',//   YOUR APIKEY
-            site_id: '5867973',//YOUR_SITE_ID
+            apikey: '19583603556596c6116b91e6.90506747',
+            site_id: '5867973',
             notify_url: 'https://miawoezon.com/reservations/notify/',
             mode: 'PRODUCTION'
         });
@@ -167,11 +167,12 @@
                                         <!--ccart-details_text-->          
                                         <div class="cart-details_text">
                                             <ul class="cart_list">
-                                                <li>Type <span>{{reservation.room.room_type}} <strong>{{reservation.room.price}} F</strong></span></li>
-                                                <li>Du <span>{{reservation.check_in|date:"d M Y"}}</span></li>
-                                                <li>Au <span>{{reservation.check_out|date:"d M Y"}}</span></li>
+                                                <li>Type <span>{{reservation.room.room_type}} <strong>({{reservation.room.price}} xof)</strong></span></li>
+                                                <li>Date <span>{{reservation.check_in|date:"d M Y"}} - {{reservation.check_out|date:"d M Y"}}</span></li>
                                                 <li>Jours<span>{{reservation.total_days}}</span></li>
                                                 <li>Personnes <span>{{reservation.room.guests}}</span></li>
+                                                <li>Sous Total <span><strong>{{reservation.subtotal}} xof</strong></span></li>
+                                                <li>Frais de service (3%) <span><strong>{{reservation.service_fees|floatformat:0}} xof</strong></span></li>
                                                 <!-- <li>Childs <span>1 <strong>-10%</strong></span></li> -->
                                                 <!-- <li>Taxes And Fees <span><strong>$12</strong></span></li> -->
                                             </ul>
@@ -182,7 +183,7 @@
                                     <!--cart-total --> 
                                     <div class="cart-total">
                                         <span class="cart-total_item_title">Total</span>
-                                        <strong>{{reservation.total_amount}} F</strong>                                
+                                        <strong>{{reservation.total_amount|floatformat:0}} XOF</strong>                                
                                     </div>
                                     <!--cart-total end -->                             
                                 </div>
