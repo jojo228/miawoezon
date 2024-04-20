@@ -1,4 +1,5 @@
 import datetime
+from django.conf import settings
 from django.db import models
 from django.shortcuts import redirect
 from django.utils import timezone
@@ -104,31 +105,53 @@ class Reservation(main_models.TimeStampedModel):
         return super().save(*args, **kwargs)
 
 
-
-
-class BillingAddress(models.Model):
-    city = models.CharField(max_length=255)
-    country = CountryField()
-    state = models.CharField(max_length=255)
-    street = models.CharField(max_length=255)
-    postal_code = models.IntegerField()
-    
-
-
-class Payment(models.Model):
-    reservation = models.ForeignKey(Reservation, on_delete=models.CASCADE)
-    client = models.ForeignKey(Client, on_delete=models.CASCADE)
-    billing_address = models.OneToOneField(BillingAddress, on_delete=models.CASCADE)
+class PaymentInformation(models.Model):
+    transaction_id = models.CharField(max_length=100, unique=True)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     currency = models.CharField(max_length=3)
-    transaction_id = models.CharField(max_length=255)
     description = models.TextField()
-    status = models.CharField(max_length=20, default="pending")  # You can add more statuses based on your needs
-    timestamp = models.DateTimeField(auto_now_add=True)
+    trans_date = models.DateTimeField(null=True)
+    payment_method = models.CharField(max_length=50, null=True)
+    phone_number = models.CharField(max_length=50, null=True)
+    phone_prefixe = models.CharField(max_length=50, null=True)
+    language = models.CharField(max_length=50, null=True)
+    phone_prefixe = models.CharField(max_length=50, null=True)
+    notify_url = models.URLField()
+    return_url = models.URLField()
+    status = models.CharField(max_length=50, null=True)
+    reservation = models.OneToOneField(Reservation, on_delete=models.CASCADE)
+    message = models.CharField(max_length=500, null=True)
+    def __str__(self):
+        return self.transaction_id
+    
+
+class BillingInformation(models.Model):
+    email = models.EmailField()
+    phone_number = models.CharField(max_length=20)
+    address = models.CharField(max_length=255)
+    city = models.CharField(max_length=100)
+    country = models.CharField(max_length=2)  # Utilisez ISO 3166-1 alpha-2 codes
+    state = models.CharField(max_length=100, blank=True)
+    zip_code = models.CharField(max_length=20)
 
     def __str__(self):
-        return f"{self.client.user.username} - {self.amount} {self.currency} - {self.status}"
+        return self.email
 
 
+class TransactionCounter(models.Model):
+    counter = models.IntegerField(default=1)
 
-
+    @classmethod
+    def get_next_counter(cls):
+        # Obtenez l'instance de compteur unique ou créez-en une si elle n'existe pas encore
+        counter_instance, created = cls.objects.get_or_create(pk=1)
+        
+        # Récupérez la valeur actuelle du compteur et incrémentez-la
+        current_counter = counter_instance.counter
+        next_counter = current_counter + 1
+        
+        # Mettez à jour le compteur dans la base de données
+        counter_instance.counter = next_counter
+        counter_instance.save()
+        
+        return current_counter
