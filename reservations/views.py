@@ -65,7 +65,6 @@ class CreateReservationView(LoginRequiredMixin, View):
             if existing_booked_day:
                 raise CreateError()
             
-            paymemt = handle_payment_notification()
 
             # Créez une instance Reservation sans la sauvegarder pour le moment
             reservation = Reservation(
