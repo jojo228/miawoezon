@@ -9,7 +9,7 @@ class Conversation(main_models.TimeStampedModel):
     def __str__(self):
         usernames = []
         for user in self.participants.all():
-            usernames.append(user.username)
+            usernames.append(user.user.username)
         return ", ".join(usernames)
 
     def count_messages(self):

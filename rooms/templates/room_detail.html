@@ -91,7 +91,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-5">
-                                                    <div class="list-single-hero-price fl-wrap">Average Price<span> {{room.price}}</span></div>
+                                                    <div class="list-single-hero-price fl-wrap">Prix<span> {{room.price}} XOF</span></div>
                                                 </div>
                                             </div>
                                             <span class="fw-separator"></span>
@@ -207,7 +207,7 @@
                                                             <h3>{{room.name}}</h3>
                                                             <h5>Max Guests: <span>3 persons</span></h5>
                                                         </div>
-                                                        <p>{{room.description}}</p>
+                                                        <p>{{room.description|truncatewords:12}}</p>
                                                         <div class="facilities-list fl-wrap">
                                                             <ul>
                                                                 <li><i class="fal fa-wifi"></i><span>Free WiFi</span></li>
@@ -307,7 +307,7 @@
                                                             <div class="cal-item">
                                                                 <div class="bookdate-container  fl-wrap">
                                                                     <label><i class="fal fa-calendar-check"></i> Quand </label>
-                                                                    <input type="text"    placeholder="Date In-Out" name="bookdates"   value=""/>
+                                                                    <input type="text"    placeholder="Choisissez la période" name="bookdates"   value=""/>
                                                                     <div class="bookdate-container-dayscounter"><i class="far fa-question-circle"></i><span>Jours : <strong>0</strong></span></div>
                                                                 </div>
                                                             </div>
