@@ -305,6 +305,7 @@ def handle_payment_notification(request, cpm_trans_id):
 
         # Retrieve form values
         cpm_site_id = request.POST.get('cpm_site_id')
+        cpm_trans_id = request.POST.get('cpm_trans_id')
         cpm_trans_date = request.POST.get('cpm_trans_date')
         cpm_amount = request.POST.get('cpm_amount')
         cpm_currency = request.POST.get('cpm_currency')
@@ -319,6 +320,7 @@ def handle_payment_notification(request, cpm_trans_id):
         cpm_designation = request.POST.get('cpm_designation')
         cpm_error_message = request.POST.get('cpm_error_message')
         signature = request.POST.get('signature')
+        print(cpm_trans_id)
 
         # Check if cpm_site_id and cpm_trans_id are provided
         if cpm_site_id is None or cpm_trans_id is None:
