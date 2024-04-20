@@ -16,7 +16,7 @@ urlpatterns = [
     # path('initialize-payment/', views.initiate_payment, name='initiate_payment'),
     # path('checkout/<int:payment_id>/', views.checkout, name='checkout'),
     path('handle-payment-return/', views.handle_payment_return, name='handle_payment_return'),
-    path('handle-payment-notification/', views.handle_payment_notification, name='handle_payment_notification'),
+    path('payment/notification/<str:cpm_trans_id>/', views.handle_payment_notification, name='handle_payment_notification'),
 
     path("bookings/", views.bookings, name="bookings"),
     path("my_bookings/", views.my_bookings, name="my_bookings"),

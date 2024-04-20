@@ -292,67 +292,71 @@ def invoice(request):
 #             # ...
 
 
-def handle_payment_notification(request):
-    
-    if request.method == 'GET':
+def handle_payment_notification(request, cpm_trans_id):
+    if request.method == 'POST':
+        # Check if the request contains the required headers
+        if 'x-token' not in request.headers:
+            return JsonResponse({'error': 'Missing HMAC token'}, status=400)
+        
+        # Retrieve the HMAC token from the header
+        hmac_token = request.headers['x-token']
+        
+        # Perform HMAC token verification (implementation not provided here)
+
+        # Retrieve form values
+        cpm_site_id = request.POST.get('cpm_site_id')
+        cpm_trans_date = request.POST.get('cpm_trans_date')
+        cpm_amount = request.POST.get('cpm_amount')
+        cpm_currency = request.POST.get('cpm_currency')
+        payment_method = request.POST.get('payment_method')
+        cel_phone_num = request.POST.get('cel_phone_num')
+        cpm_phone_prefixe = request.POST.get('cpm_phone_prefixe')
+        cpm_language = request.POST.get('cpm_language')
+        cpm_version = request.POST.get('cpm_version')
+        cpm_payment_config = request.POST.get('cpm_payment_config')
+        cpm_page_action = request.POST.get('cpm_page_action')
+        cpm_custom = request.POST.get('cpm_custom')
+        cpm_designation = request.POST.get('cpm_designation')
+        cpm_error_message = request.POST.get('cpm_error_message')
+        signature = request.POST.get('signature')
+
+        # Check if cpm_site_id and cpm_trans_id are provided
+        if cpm_site_id is None or cpm_trans_id is None:
+            return JsonResponse({'error': 'Missing cpm_site_id or cpm_trans_id'}, status=400)
+
+        # Check if payment status is already successful in your database
         try:
-            # Récupération des données de la notification
-            cpm_trans_id = request.GET['cpm_trans_id']
-            cpm_site_id = request.GET['cpm_site_id']
-            phone_number = request.GET['cel_phone_num']
-            payment_method = request.GET['payment_method']
-
-            # Initialisation de CinetPay et vérification du statut de paiement
-            apikey = os.getenv("CINETPAY_APIKEY") 
-            site_id = os.getenv("CINETPAY_SITEID")
-            data = {
-                 "apikey": apikey,
-                "site_id": site_id,
-                "transaction_id": cpm_trans_id,
-            }
-            payment = requests.post(
-            url = "https://api-checkout.cinetpay.com/v2/payment/check",
-            data = data
-            )
-
-
-            print(payment.text)
-            client = Cinetpay(apikey, site_id)
-            client.getPayStatus(cpm_trans_id, site_id)
-
-            # Récupération des informations de paiement de CinetPay
-            amount = client.chk_amount
-            currency = client.chk_currency
-            message = client.chk_message
-            code = client.chk_code
-            user = request.user
-
-            # Récupération des informations de paiement de la base de données
-            payment_info = PaymentInformation.objects.create(
-                transaction_id=cpm_trans_id,
-                amount=amount,
-                currency=currency,
-                reservation__guest=user,
-                payment_method=payment_method,
-                phone_number=phone_number)
-
-            # Mise à jour des informations de paiement dans la base de données
-            if code == '00':
-                # Paiement réussi, mettre à jour le statut de la transaction
-                payment_info.status = 'COMPLETED'
-                payment_info.save()
-                return HttpResponse(status=200)  # Réponse de succès à CinetPay
-            else:
-                # Paiement échoué, mettre à jour le statut de la transaction avec un échec
-                payment_info.status = 'FAILED'
-                payment_info.save()
-                return HttpResponse(status=200)  # Réponse de succès à CinetPay
+            payment_info = PaymentInformation.objects.get(transaction_id=cpm_trans_id)
+            if payment_info.status == 'COMPLETED':
+                return JsonResponse({'message': 'Payment already completed'}, status=200)
         except PaymentInformation.DoesNotExist:
-            # La transaction n'existe pas dans la base de données, renvoyer une réponse d'erreur à CinetPay
-            return HttpResponse(status=404)  # Réponse d'erreur à CinetPay
+            pass  # Payment information does not exist, proceed to verification
+
+        # Call transaction verification API to obtain transaction status from CinetPay
+        apikey = os.getenv("CINETPAY_APIKEY") 
+        site_id = os.getenv("CINETPAY_SITEID")
+        data = {
+            "apikey": apikey,
+            "site_id": site_id,
+            "transaction_id": cpm_trans_id,
+        }
+        verification_response = requests.post(
+            url="https://api-checkout.cinetpay.com/v2/payment/check",
+            data=data
+        )
+        
+        print(verification_response)
+        # Handle verification response (implementation not provided here)
+
+        # Update payment status in your database based on verification response
+        # For example, if verification_response indicates successful payment:
+        # payment_info.status = 'COMPLETED'
+        # payment_info.save()
+
+        return JsonResponse({'message': 'Payment notification processed'}, status=200)
+
     else:
-        # Accès direct à l'URL de notification IPN
-        return HttpResponse("cpm_trans_id non fourni", status=400)  # Réponse d'erreur à CinetPay
+        return JsonResponse({'error': 'Method not allowed'}, status=405)
     
 
 
