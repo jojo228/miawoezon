@@ -1,6 +1,7 @@
 
 {% extends "index.html" %}
 {% load static %}
+{% load humanize %}
 {% block content %}
             <!--  wrapper  -->
             <div id="wrapper">
@@ -53,7 +54,7 @@
                                         <li><a href="#sec5">Commentaires</a></li>
                                     </ul>
                                 </nav>
-                                <a href="#" class="show-hidden-map">  <span>Sur la carte</span> <i class="fal fa-map-marked-alt"></i></a>
+                                <a href="#" class="show-hidden-map" onclick="submitForm()">  <span>Reserver</span> <i class="fal fa-paper-plane"></i></a>
                             </div>
                         </div>
                         <!--  scroll-nav-wrapper end  -->                    
@@ -65,7 +66,7 @@
                                 <div class="col-md-8">
                                     <div class="list-single-main-container ">
                                         <!-- fixed-scroll-column  -->
-                                        <div class="fixed-scroll-column">
+                                        <!-- <div class="fixed-scroll-column">
                                             <div class="fixed-scroll-column-item fl-wrap">
                                                 <div class="showshare sfcs fc-button"><i class="far fa-share-alt"></i><span>Partager </span></div>
                                                 <div class="share-holder fixed-scroll-column-share-container">
@@ -75,10 +76,10 @@
                                                 <a class="fc-button" href="#"><i class="far fa-heart"></i> <span>Sauvegarder</span></a>
                                                 <a class="fc-button" href="booking-single.html"><i class="far fa-bookmark"></i> <span> Reserve maintenant </span></a>
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <!-- fixed-scroll-column end   -->
                                         <div class="breadcrumbs inline-breadcrumbs fl-wrap">
-                                            <a href="#">Accueil</a><a href="#">Listings</a><a href="#">New York</a><span>Listing Single</span> 
+                                            <a href="#">Accueil</a><a href="#">Listings</a><a href="#"></a><span>Listing Single</span> 
                                         </div>
                                         <!--   list-single-main-item -->
                                         <div class="list-single-main-item fl-wrap list-single-hero-header " id="sec2">
@@ -86,12 +87,13 @@
                                                 <div class="col-sm-7">
                                                     <div class="list-single-main-item-title fl-wrap">
                                                         <h3>{{room.name}}</h3>
+                                                        <h3 style="font-size: 15px;">Disponible du {{room.check_in|date:"d-m-Y"}} au {{room.check_out|date:"d-m-Y"}} </h3>
                                                         <div class="listing-rating card-popup-rainingvis" data-starrating2="0">{{room.room_type}}</div>
                                                         <div class="geodir-category-location fl-wrap"><a href="#"><i class="fas fa-map-marker-alt"></i>{{room.country}} - {{room.city}}, {{room.address}}</a></div>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-5">
-                                                    <div class="list-single-hero-price fl-wrap">Prix<span> {{room.price}} XOF</span></div>
+                                                    <div class="list-single-hero-price fl-wrap">Prix<span>{{room.price|intcomma}} XOF</span></div>
                                                 </div>
                                             </div>
                                             <span class="fw-separator"></span>
@@ -203,7 +205,7 @@
                                                     </div>
                                                     <div class="rooms-details">
                                                         <div class="rooms-details-header fl-wrap">
-                                                            <span class="rooms-price">{{room.price}} f</span>
+                                                            <span class="rooms-price">{{room.price|intcomma}} f</span>
                                                             <h3>{{room.name}}</h3>
                                                             <h5>Max Guests: <span>3 persons</span></h5>
                                                         </div>
@@ -298,7 +300,7 @@
                                             <div class="box-widget">
                                                 <div class="box-widget-content">
                                                     <div class="box-widget-item-header">
-                                                        <h3> Réservez cette pièce</h3>
+                                                        <h3>Réservation </h3>
                                                     </div>
                                                     <form name="bookFormCalc" class="book-form custom-form" action="{% url 'reservations:create' room.pk %}" method="post">
                                                         {% csrf_token %}
@@ -330,15 +332,15 @@
                                             <div class="box-widget">
                                                 <div class="box-widget-content">
                                                     <div class="box-widget-item-header">
-                                                        <h3>Hébergé par</h3>
+                                                        <h3>Publié par</h3>
                                                     </div>
                                                     <div class="box-widget-author fl-wrap">
                                                         <div class="box-widget-author-title fl-wrap">
                                                             <div class="box-widget-author-title-img">
                                                                 <img src="{% if room.host.avatar %} {{room.host.avatar.url}} {% else %} {% static 'images/avatar/1.jpg' %} {% endif %}" alt=""> 
                                                             </div>
-                                                            <a href="user-single.html">{{room.host}}</a>
-                                                            <span>4 lieux hébergés</span>
+                                                            <a href="#">{{room.host}}</a>
+                                                            <span>{{room.host.rooms.count}} publications</span>
                                                         </div>
                                                         <a href="{% if room.host.avatar %} {{room.host.avatar.url}} {% else %} {% static 'images/avatar/1.jpg' %} {% endif %}" class="btn flat-btn color-bg   float-btn image-popup">Voir le profil<i class="fal fa-user-alt"></i></a>
                                                     </div>

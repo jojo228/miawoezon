@@ -54,7 +54,7 @@ class RoomHostListView(ListView):
     login_url = reverse_lazy(user_login_url)
 
     def get_queryset(self):
-        return Room.objects.filter(host=self.request.user.client).order_by(
+        return Room.objects.filter(host=self.request.user.client, statut="Vérifié").order_by(
             "-created"
         )
 
@@ -75,7 +75,7 @@ class RoomListView(ListView):
     login_url = reverse_lazy(user_login_url)
 
     def get_queryset(self):
-        return Room.objects.all().order_by("-created")
+        return Room.objects.filter(statut="Vérifié").order_by("-created")
 
     def get_context_data(self, **kwargs):
         context = super(RoomListView, self).get_context_data(**kwargs)
@@ -100,6 +100,7 @@ class RoomUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super(RoomUpdateView, self).get_context_data(**kwargs)
+        context["pk"] = self.kwargs["pk"]
         return context
     
 

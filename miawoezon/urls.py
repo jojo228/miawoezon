@@ -26,6 +26,7 @@ urlpatterns = [
     path(os.environ.get("ADMIN_URL", "admin/"), admin.site.urls),
     path("sentry-debug/", trigger_error),
     path('accounts/', include('allauth.urls')),
+    path("i18n/", include("django.conf.urls.i18n")),
     
 ]
 

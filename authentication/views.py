@@ -74,7 +74,7 @@ def password_reset_request(request):
                         send_mail(
                             subject,
                             email,
-                            "gakservices228@gmail.com",
+                            "contact@miawoezon.com",
                             [user.email],
                             fail_silently=False,
                         )

@@ -1,6 +1,7 @@
 
 {% extends "index.html" %}
 {% load static %}
+{% load humanize %}
 {% block content %}
             <!--  wrapper  -->
             <div id="wrapper">
@@ -242,7 +243,7 @@
                                                     <li><i class="fal fa-utensils"></i><span> Restaurant</span></li>
                                                 </ul>
                                                 <div class="geodir-category-footer fl-wrap">
-                                                    <div class="geodir-category-price">Prix/Nuit <span>{{announce.prix}}
+                                                    <div class="geodir-category-price">Prix/Nuit <span>{{announce.prix|intcomma}}
                                                             F</span></div>
                                                    
                                                 </div>

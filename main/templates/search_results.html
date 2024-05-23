@@ -1,4 +1,7 @@
-{% extends "index.html" %} {% load static %} {% block content %}
+{% extends "index.html" %}
+{% load static %}
+{% load humanize %}
+{% block content %}
 
 <!--  wrapper  -->
 <div id="wrapper">
@@ -93,7 +96,7 @@
                                                 </ul>
                                                 <div class="geodir-category-footer fl-wrap">
                                                     <div class="geodir-category-price">
-                                                        Prix/Nuit <span>{{room.price}} F</span>
+                                                        Prix/Nuit <span>{{room.price|intcomma}} F</span>
                                                     </div>
                                                     <div class="geodir-opt-list">
                                                         <a href="#0" class="map-item"><i
@@ -199,7 +202,7 @@
                                                     <li><i class="fal fa-utensils"></i><span> Restaurant</span></li>
                                                 </ul>
                                                 <div class="geodir-category-footer fl-wrap">
-                                                    <div class="geodir-category-price">Prix/Nuit <span>{{house.prix}}
+                                                    <div class="geodir-category-price">Prix/Nuit <span>{{house.prix|intcomma}}
                                                             F</span></div>
                                                    
                                                 </div>

@@ -1,6 +1,7 @@
 
 {% extends "index.html" %}
 {% load static %}
+{% load humanize %}
 {% block content %}
             <!--  wrapper  -->
             <div id="wrapper">
@@ -83,7 +84,7 @@
                                                 {{house.disponibilité}}
                                             </div>
                                         </div>
-                                        <div class="list-single-hero-price fl-wrap">Prix<span>{{house.prix}}</span></div>
+                                        <div class="list-single-hero-price fl-wrap">Prix<span>{{house.prix|intcomma}} XOF</span></div>
                                         
                                         <!-- <a href="booking-single.html" class="btn flat-btn color2-bg big-btn float-btn image-popup">Book Now<i class="far fa-bookmark"></i></a> -->
                                     </div>

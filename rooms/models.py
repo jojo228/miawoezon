@@ -48,17 +48,9 @@ class Photo(main_models.TimeStampedModel):
 
 class Room(main_models.TimeStampedModel):
 
-    CHECK_IN = (
-        ("morning", "Morning"),
-        ("afternoon", "Afternoon"),
-        ("next day", "Next Day"),
-        ("check-in", "Immediately upon Check In "),
-    )
-    CHECK_OUT = (
-        ("morning", "Morning"),
-        ("afternoon", "Afternoon"),
-        ("next day", "Next Day"),
-        ("check-in", "Immediately upon Check In "),
+    STATUT = (
+        ("Vérifié", "Vérifié"),
+        ("Non Vérifié", "Non Vérifié"),
     )
 
     name = models.CharField(max_length=140)
@@ -71,8 +63,8 @@ class Room(main_models.TimeStampedModel):
     beds = models.IntegerField()
     bedrooms = models.IntegerField()
     baths = models.IntegerField()
-    check_in = models.CharField(max_length=20, choices=CHECK_IN)
-    check_out = models.CharField(max_length=20, choices=CHECK_OUT)
+    check_in = models.DateField()
+    check_out = models.DateField()
     instant_book = models.BooleanField(default=False)
     host = models.ForeignKey(
         "authentication.Client", related_name="rooms", on_delete=models.CASCADE
@@ -83,8 +75,8 @@ class Room(main_models.TimeStampedModel):
     amenities = models.ManyToManyField("Amenity", related_name="rooms", blank=True,)
     facilities = models.ManyToManyField("Facility", related_name="rooms", blank=True)
     house_rules = models.ManyToManyField("HouseRule", related_name="rooms", blank=True)
-
     video = models.FileField(upload_to="room_videos", blank=True)
+    statut = models.CharField(max_length=50, choices=STATUT, default="Non Vérifié")
 
     def __str__(self):
         return self.name

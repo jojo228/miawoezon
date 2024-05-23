@@ -24,7 +24,7 @@
                         <!-- profile-edit-container-->
                         <div class="profile-edit-container">
                             <div class="custom-form">
-                                <form method="post" enctype="multipart/form-data" action="{% url 'rooms:create' %}">
+                                <form method="post" enctype="multipart/form-data" action="{% url 'rooms:edit' pk=pk %}">
                                     {% csrf_token %}
                                     <div class="room-add-item">
                                         {{form.non_field_errors}}
@@ -106,13 +106,17 @@
                                         <div class="row">
                                             
                                             <div class="col-md-4">
-                                                <label for="baths">{{form.check_in.label}} <i class="fal fa-bath"></i></label>
-                                                {{form.check_in}}
-                                             </div>
-                                             <div class="col-md-4">
-                                                <label for="baths">{{form.check_out.label}} <i class="fal fa-bath"></i></label>
-                                                {{form.check_out}}
-                                             </div>
+                                                <label for="baths">Début de disponibilité <i
+                                                        class="fal fa-bath"></i></label>
+                                                <input type="date" name="check_in" value="2024-05-16"
+                                                    class="custom-form" placeholder=" " required="" id="id_check_in">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="baths">Fin de disponibilité <i
+                                                        class="fal fa-bath"></i></label>
+                                                <input type="date" name="check_out" value="2024-05-16"
+                                                    class="custom-form" placeholder=" " required="" id="id_check_out">
+                                            </div>
                                              <div class="col-md-4">
                                                 <ul class="fl-wrap filter-tags">
                                                     <li>
@@ -131,15 +135,17 @@
                                                 {{form.description}}
                                             </div>
                                             <div class="col-md-6">
-                                                <label for="room-photos">Photos</label>
+                                                <label for="room-photos">Video Descriptive</label>
                                                 <div class="add-list-media-wrap">
                                                     <div class="fuzone">
                                                         <div class="fu-text">
-                                                            <span><i class="far fa-cloud-upload-alt"></i> Cliquez ici ou déposez des fichiers pour télécharger</span>
+                                                            <span><i class="far fa-cloud-upload-alt"></i> Click here or
+                                                                drop files to upload</span>
                                                             <div class="photoUpload-files fl-wrap"></div>
                                                         </div>
-                                                    <input type="file" name="file" id="room-photos" class="upload" multiple />
-                                                    <div id="preview-container"></div>
+                                                        {{form.video}}
+                                                        <div id="preview-container"></div>
+                                                    </div>
                                                 </div>
                                             </div>
                                             
@@ -166,50 +172,6 @@
     <!-- content end-->
 </div>
 
-<script>
-    document.getElementById('room-photos').addEventListener('change', handleFileSelect);
-    
-    function handleFileSelect(event) {
-        const previewContainer = document.getElementById('preview-container');
-        previewContainer.innerHTML = '';
-    
-        const files = event.target.files;
-        let rowDiv;
-    
-        for (let i = 0; i < files.length; i++) {
-            if (i % 3 === 0) {
-                // Start a new row after every 3 images
-                rowDiv = document.createElement('div');
-                rowDiv.className = 'image-row';
-                previewContainer.appendChild(rowDiv);
-            }
-    
-            const reader = new FileReader();
-    
-            reader.onload = function (e) {
-                const img = document.createElement('img');
-                img.src = e.target.result;
-                img.className = 'preview-image';
-                rowDiv.appendChild(img);
-            };
-    
-            reader.readAsDataURL(files[i]);
-        }
-    }
-    </script>
-    
-    <style>
-        .image-row {
-            display: flex;
-            margin-bottom: 10px;
-        }
-    
-        .preview-image {
-            width: 200px; /* Set the desired width */
-            height: 100px;
-            margin-right: 10px;
-        }
-    </style>
-    
+
 
 {% endblock %}

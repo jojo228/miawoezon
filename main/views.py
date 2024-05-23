@@ -4,6 +4,8 @@ from announcement.models import House
 from blog.models import Post
 from main.forms import SearchForm
 from rooms.models import Room
+from datetime import datetime, timezone
+
 
 
 # Create your views here.
@@ -24,7 +26,7 @@ def police_prive(request):
 
 def home(request):
     posts = Post.objects.all().order_by("-created_on")[:3]
-    rooms = Room.objects.all().order_by("-created")[:9]
+    rooms = Room.objects.filter(statut="Vérifié").order_by("-created")[:9]
     announces = House.objects.all().order_by("-date")[:9]
     
     return render(request, "index.html", locals())
@@ -37,7 +39,9 @@ def search(request):
         if form.is_valid():
             city = form.cleaned_data.get('city')
             guests = form.cleaned_data.get('guests')
-            when = form.cleaned_data.get('main-input-search')
+            
+            check_in = form.cleaned_data.get('check_in')
+            check_out = form.cleaned_data.get('check_out')
 
             # Perform search logic for Room model
             rooms = Room.objects.all()
@@ -45,7 +49,8 @@ def search(request):
                 rooms = rooms.filter(city__icontains=city)
             if guests:
                 rooms = rooms.filter(guests=guests)
-            # Add more filtering logic as needed (e.g., when, check_out)
+            if check_in and check_out:
+                rooms = rooms.filter(check_in__lte=check_in, check_out__gte=check_out)
 
             # Perform search logic for House model
             houses = House.objects.all()
@@ -55,8 +60,11 @@ def search(request):
 
             return render(request, 'search_results.html', {
                 'city': city,
+                'guests': guests,
                 'rooms': rooms,
                 'houses': houses,
+                'check_in': check_in,
+                'check_out': check_out,
             })
 
     # If form is invalid or method is not GET
@@ -106,6 +114,7 @@ def invoice(request):
 
 
 def authorsingle(request):
+    user = request.user
     
     return render(request, "author-single.html")
 

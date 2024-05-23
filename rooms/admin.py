@@ -42,7 +42,7 @@ class RoomAdmin(admin.ModelAdmin):
                 "fields": ("amenities", "facilities", "house_rules"),
             },
         ),
-        ("Last Details", {"fields": ("host",)}),
+        ("Last Details", {"fields": ("host", "statut")}),
     )
 
     ordering = ("name", "price", "bedrooms")
@@ -56,15 +56,14 @@ class RoomAdmin(admin.ModelAdmin):
         "beds",
         "bedrooms",
         "baths",
-        "check_in",
-        "check_out",
         "instant_book",
         "count_amenities",
         "count_photos",
-        # "total_rating",
+        "statut",
     )
 
     list_filter = (
+        "statut",
         "instant_book",
         "room_type",
         "amenities",

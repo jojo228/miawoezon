@@ -1,4 +1,5 @@
 {% load static %}
+{% load humanize %}
 <!DOCTYPE HTML>
 <html lang="en">
     <head>
@@ -203,41 +204,49 @@
                                     <h3>Commençons à explorer le monde avec Miawoezon</h3>
                                 </div>
                                 
-<div class="main-search-input-wrap">
-    <div class="main-search-input fl-wrap">
-        <form method="GET" action="{% url 'main:search' %}">
-            {% csrf_token %}
-            <div class="main-search-input-item location" id="autocomplete-container">
-                <span class="inpt_dec"><i class="fal fa-map-marker"></i></span>
-                <input type="text" name="city" placeholder="Ville, Quartier..."  value="{{ request.GET.city|default_if_none:'' }}"/>
-                <a href="#"><i class="fal fa-dot-circle"></i></a>
-            </div>
-            <div class="main-search-input-item main-date-parent main-search-input-item_small">
-                <span class="inpt_dec"><i class="fal fa-calendar-check"></i></span> <input type="text" name="main-input-search" placeholder="Check-in" value="{{ request.GET.check_in|default_if_none:'' }}" />
-            </div>
-            <div class="main-search-input-item">
-                <div class="qty-dropdown fl-wrap">
-                    <div class="qty-dropdown-header fl-wrap"><i class="fal fa-users"></i> Personnes</div>
-                    <div class="qty-dropdown-content fl-wrap">
-                        <div class="quantity-item">
-                            <label><i class="fas fa-male"></i> Adultes</label>
-                            <div class="quantity">
-                                <input type="number" name="guests" min="1" max="3" step="1" value="{{ request.GET.guests|default_if_none:'1' }}">
-                            </div>
-                        </div>
-                        <div class="quantity-item">
-                            <label><i class="fas fa-child"></i> Enfants</label>
-                            <div class="quantity">
-                                <input type="number" name="children" min="0" max="3" step="1" value="{{ request.GET.children|default_if_none:'0' }}">
-                            </div>
+                    <div class="main-search-input-wrap">
+                        <div class="main-search-input fl-wrap">
+                            <form method="GET" action="{% url 'main:search' %}">
+                                {% csrf_token %}
+                                <div class="main-search-input-item location" id="autocomplete-container">
+                                    <span class="inpt_dec"><i class="fal fa-map-marker"></i></span>
+                                    <input type="text" name="city" placeholder="Ville, Quartier..."  value="{{ request.GET.city|default_if_none:'' }}"/>
+                                    <a href="#"><i class="fal fa-dot-circle"></i></a>
+                                </div>
+                                <div class="main-search-input-item">
+                                    <span class="inpt_dec"><i class="fal fa-calendar-check"></i></span>
+                                    <input type="date" name="check_in" placeholder="Check-in" value="{{ request.GET.check_in|default_if_none:'' }}" />
+                                </div>
+                                <div class="main-search-input-item">
+                                    <span class="inpt_dec"><i class="fal fa-calendar-check"></i></span>
+                                    <input type="date" name="check_out" placeholder="Check-out" value="{{ request.GET.check_out|default_if_none:'' }}" />
+                                </div>
+                                <!-- <div class="main-search-input-item">
+                                    <div class="qty-dropdown fl-wrap">
+                                        <div class="qty-dropdown-header fl-wrap"><i class="fal fa-users"></i> Personnes</div>
+                                        <div class="qty-dropdown-content fl-wrap">
+                                            <div class="quantity-item">
+                                                <label><i class="fas fa-male"></i> Adultes</label>
+                                                <div class="quantity">
+                                                    <input type="number" name="guests" min="1" max="3" step="1" value="{{ request.GET.guests|default_if_none:'1' }}">
+                                                </div>
+                                            </div>
+                                            <div class="quantity-item">
+                                                <label><i class="fas fa-child"></i> Enfants</label>
+                                                <div class="quantity">
+                                                    <input type="number" name="children" min="0" max="3" step="1" value="{{ request.GET.children|default_if_none:'0' }}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> -->
+                                <!-- <div class="main-search-input-item">
+                                    <input type="text" name="guests" placeholder="Nbre de personnes"  value="{{ request.GET.guests|default_if_none:'' }}"/>
+                                </div> -->
+                                <button class="main-search-button color2-bg" type="submit">Recherche <i class="fal fa-search"></i></button>
+                            </form>
                         </div>
                     </div>
-                </div>
-            </div>
-            <button class="main-search-button color2-bg" type="submit">Recherche <i class="fal fa-search"></i></button>
-        </form>
-    </div>
-</div>
 
                             </div>
                         </div>
@@ -392,7 +401,7 @@
                                                     <li><i class="fal fa-utensils"></i><span> Restaurant</span></li>
                                                 </ul> -->
                                                 <div class="geodir-category-footer fl-wrap">
-                                                    <div class="geodir-category-price">Prix / nuit <span> <br>  {{room.price}} F</span></div>
+                                                    <div class="geodir-category-price">Prix / nuit <span> <br>  {{room.price|intcomma}} F</span></div>
                                                     <div class="geodir-opt-list">
                                                         <a href="#" class="single-map-item" data-newlatitude="40.72956781" data-newlongitude="-73.99726866"><i class="fal fa-map-marker-alt"></i><span class="geodir-opt-tooltip">On the map</span></a>
                                                         <a href="#" class="geodir-js-favorite"><i class="fal fa-heart"></i><span class="geodir-opt-tooltip">Save</span></a>
@@ -451,7 +460,7 @@
                                                 <p>{{announce.description}}.</p>
                                                 
                                                 <div class="geodir-category-footer fl-wrap">
-                                                    <div class="geodir-category-price">Prix <br> <span> {{announce.prix}}</span></div>
+                                                    <div class="geodir-category-price">Prix <br> <span>{{announce.prix|intcomma}} xof</span></div>
                                                     
                                                 </div>
                                             </div>
@@ -794,7 +803,7 @@
                                     <div class="footer-contacts-widget fl-wrap">
                                         <p>Miawoezon est une application novatrice de marché de l'hospitalité conçue pour mettre en relation les voyageurs avec des expériences d'hébergement uniques et personnalisées. Fonctionnant comme une plateforme complète, Miawoezon permet aux utilisateurs de parcourir, de découvrir et de réserver de divers types d'hébergements, tels que des maisons, des appartements et des séjours atypiques, directement auprès des hôtes.</p>
                                         <ul  class="footer-contacts fl-wrap">
-                                            <li><span><i class="fal fa-envelope"></i> mail :</span><a href="#" target="_blank">gakservices228@gmail.com</a></li>
+                                            <li><span><i class="fal fa-envelope"></i> mail :</span><a href="#" target="_blank">contact@miawoezon.com</a></li>
                                             <li> <span><i class="fal fa-map-marker-alt"></i> Une robe :</span><a href="#" target="_blank">DJAGBLE Koklossoukopé, Togo</a></li>
                                             <li><span><i class="fal fa-phone"></i> Téléphone :</span><a href="#">+228 92 56 56 09</a></li>
                                         </ul>

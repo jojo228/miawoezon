@@ -1,5 +1,6 @@
 
 {% extends "index.html" %}
+{% load humanize %}
 {% block css %}
 <!--=============== CinetPay Script ===============-->
 <script src="https://cdn.cinetpay.com/seamless/main.js"></script>
@@ -124,9 +125,10 @@
                                                             </div>
                                                             <!-- Include billing address input fields here -->
                                                             <!-- Example: -->
-                                                            <input type="text" name="city" placeholder="City" required>
-                                                            <select name="country" required>
-                                                                <option value="">Select Country</option>
+                                                            <input type="text" name="country" placeholder="Pays" required>
+                                                            <input type="text" name="city" placeholder="Ville" required>
+                                                            <!-- <select name="country" required>
+                                                                <option value="">Pays</option>
                                                                 <option value="United States">United States</option>
                                                                 <option value="New York" >New York</option>
                                                                 <option value="London" >London</option>
@@ -136,9 +138,8 @@
                                                                 <option value="Dubai" >Dubai</option>
                                                                 <option value="Rome" >Rome</option>
                                                                 <option value="Beijing" >Beijing</option>
-                                                                <!-- Add other country options -->
-                                                            </select>
-                                                            <input type="text" name="address" placeholder="Addresse" required>
+                                                            </select> -->
+                                                            <input type="text" name="address" placeholder="Adresse" required>
                                                             <!-- <input type="text" name="state" placeholder="State" required>
                                                             <input type="text" name="postal_code" placeholder="Postal Code" required> -->
                                                             <!-- Additional fields can be added as needed -->
@@ -179,12 +180,12 @@
                                         <!--ccart-details_text-->          
                                         <div class="cart-details_text">
                                             <ul class="cart_list">
-                                                <li>Type <span>{{reservation.room.room_type}} <strong>({{reservation.room.price}} xof)</strong></span></li>
+                                                <li>Type <span>{{reservation.room.room_type}} <strong>({{reservation.room.price|intcomma}} xof)</strong></span></li>
                                                 <li>Date <span>{{reservation.check_in|date:"d M Y"}} - {{reservation.check_out|date:"d M Y"}}</span></li>
                                                 <li>Jours<span>{{reservation.total_days}}</span></li>
                                                 <li>Personnes <span>{{reservation.room.guests}}</span></li>
-                                                <li>Sous Total <span><strong>{{reservation.subtotal}} xof</strong></span></li>
-                                                <li>Frais de service (3%) <span><strong>{{reservation.service_fees|floatformat:0}} xof</strong></span></li>
+                                                <li>Sous Total <span><strong>{{reservation.subtotal|intcomma}} xof</strong></span></li>
+                                                <li>Frais de service (3%) <span><strong>{{reservation.service_fees|floatformat:0|intcomma}} xof</strong></span></li>
                                                 <!-- <li>Childs <span>1 <strong>-10%</strong></span></li> -->
                                                 <!-- <li>Taxes And Fees <span><strong>$12</strong></span></li> -->
                                             </ul>
@@ -195,7 +196,7 @@
                                     <!--cart-total --> 
                                     <div class="cart-total">
                                         <span class="cart-total_item_title">Total</span>
-                                        <strong>{{reservation.total_amount|floatformat:0}} XOF</strong>                                
+                                        <strong>{{reservation.total_amount|floatformat:0|intcomma}} XOF</strong>                                
                                     </div>
                                     <!--cart-total end -->                             
                                 </div>

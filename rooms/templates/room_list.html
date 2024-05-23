@@ -1,5 +1,6 @@
 {% extends "index.html" %}
 {% load static %}
+{% load humanize %}
 {% block content %}
             <!--  wrapper  -->
             <div id="wrapper">
@@ -31,8 +32,8 @@
                                                     <h4><a href="{% url 'rooms:detail' room.id %}">{{room.name}}</a></h4>
                                                     <span class="dashboard-listing-table-address"><i class="far fa-map-marker"></i><a  href="#">{{room.address}}</a></span>
                                                     <ul class="dashboard-listing-table-opt  fl-wrap">
+                                                        <li><a href="{% url 'rooms:photo-list' room.pk %}">Ajouter images <i class="fal fa-edit"></i></a></li>
                                                         <li><a href="{% url 'rooms:edit' room.id %}">Modifier <i class="fal fa-edit"></i></a></li>
-                                                        <li><a href="{% url 'rooms:photo-list' room.pk %}">photos <i class="fal fa-edit"></i></a></li>
                                                         <li><a href="{% url 'rooms:delete_room' room.id %}" class="del-btn">Supprimer <i class="fal fa-trash-alt"></i></a></li>
                                                     </ul>
                                                 </div>
