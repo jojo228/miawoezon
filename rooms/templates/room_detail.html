@@ -160,7 +160,7 @@
                                             <div class="list-single-main-item-title fl-wrap">
                                                 <h3>Description </h3>
                                             </div>
-                                            <p>{{room.description}}</p>
+                                            <p>{{room.description|truncatewords:5}}</p>
                                             <a href="{% if room.video %} {{room.video.url}} {% endif %}" class="btn flat-btn color-bg big-btn float-btn image-popup">Video Presentation <i class="fal fa-play"></i></a>
                                         </div>
                                         <!--   list-single-main-item end -->
@@ -207,7 +207,7 @@
                                                         <div class="rooms-details-header fl-wrap">
                                                             <span class="rooms-price">{{room.price|intcomma}} f</span>
                                                             <h3>{{room.name}}</h3>
-                                                            <h5>Max Guests: <span>3 persons</span></h5>
+                                                            <h5>Max Guests: <span>{{room.guests}}</span></h5>
                                                         </div>
                                                         <p>{{room.description|truncatewords:12}}</p>
                                                         <div class="facilities-list fl-wrap">

@@ -28,8 +28,14 @@ def home(request):
     posts = Post.objects.all().order_by("-created_on")[:3]
     rooms = Room.objects.filter(statut="Vérifié").order_by("-created")[:9]
     announces = House.objects.all().order_by("-date")[:9]
+    cities = Room.objects.values_list('city', flat=True).distinct()
     
     return render(request, "index.html", locals())
+
+
+def author_detail(request, pk):
+    room = Room.objects.get(id=pk)
+    return render(request, "author-single.html", locals())
 
 
 

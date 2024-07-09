@@ -3,6 +3,91 @@
 {% load static %}
 {% load humanize %}
 {% block content %}
+
+{% block css %}
+<!--=============== CinetPay Script ===============-->
+<script src="https://cdn.cinetpay.com/seamless/main.js"></script>
+<style>
+    .sdk {
+        display: block;
+        position: absolute;
+        background-position: center;
+        text-align: center;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+</style>
+
+
+<script>
+
+    
+
+    // Retrieve values from reservation details
+    var roomType = "{{reservation.room.room_type}}";
+    var total_amount = parseInt("{{reservation.total_amount}}");
+    var checkInDate = "{{reservation.check_in|date:'d M Y'}}";
+    var checkOutDate = "{{reservation.check_out|date:'d M Y'}}";
+    var totalDays = "{{reservation.total_days}}";
+    var description = "{{reservation.room.name}}";
+    var transaction_id = Math.floor(Math.random() * 100000000).toString()
+
+    // Retrieve values from user details
+    var customer_name = "{{reservation.room.guest.user.first_name}}";
+    var customer_surname = "{{reservation.room..user.last_name}}";
+    var customer_email = "{{reservation.room..user.email}}";
+    var customer_phone_number = "{{reservation.room.guest.contact}}";
+    var customer_address = "{{reservation.room.guest.address}}";
+    var customer_city = "{{reservation.room.guest.city}}";
+    var customer_country = "{{reservation.room.guest.country}}";
+    var customer_zip_code = "{{reservation.room.guest.pincode}}";
+
+
+    function checkout() {
+        CinetPay.setConfig({
+            apikey: '167837621065f9bc1762a003.17505002',
+            site_id: '5867973',
+            notify_url: 'https://miawoezon.com/payment/notification/',
+            mode: 'PRODUCTION'
+        });
+        CinetPay.getCheckout({
+            transaction_id: transaction_id, // YOUR TRANSACTION ID
+            amount: parseInt(total_amount),
+            currency: 'XOF',
+            channels: 'ALL',
+            description: 'Paiement pour ' + description,   
+             //Fournir ces variables pour le paiements par carte bancaire
+            customer_name: customer_name,
+            customer_surname: customer_surname,
+            customer_email: customer_email,
+            customer_phone_number: customer_phone_number,
+            customer_address : customer_address,
+            customer_city: customer_city,
+            customer_country : customer_country,
+            customer_state : "",// le code ISO l'état
+            customer_zip_code : customer_zip_code,
+
+        });
+        // CinetPay.waitResponse(function(data) {
+        //     if (data.status == "REFUSED") {
+        //         if (alert("Votre paiement a échoué")) {
+        //             window.location.reload();
+        //             
+        //         }
+        //     } else if (data.status == "ACCEPTED") {
+        //         if (alert("Votre paiement a été effectué avec succès")) {
+        //             window.location.reload();
+        //             
+        //         }
+        //     }
+        // });
+        CinetPay.onError(function(data) {
+            console.log(data);
+        });
+    }
+</script>
+{% endblock css %}
             <!--  wrapper  -->
             <div id="wrapper">
                 <!-- content-->
@@ -86,10 +171,37 @@
                                         </div>
                                         <div class="list-single-hero-price fl-wrap">Prix<span>{{house.prix|intcomma}} XOF</span></div>
                                         
-                                        <!-- <a href="booking-single.html" class="btn flat-btn color2-bg big-btn float-btn image-popup">Book Now<i class="far fa-bookmark"></i></a> -->
+                                        <a href="booking-single.html" class="btn flat-btn color2-bg big-btn float-btn image-popup" onclick="submitForm()">Obtenir le contact<i class="far fa-phone"></i></a>
                                     </div>
                                     <!--   flat-hero-container end -->
+                                    <!--box-widget-item -->
+                                    <div class="box-widget-item fl-wrap">
+                                        <div class="box-widget">
+                                            <div class="box-widget-content">
+                                                <div class="box-widget-item-header">
+                                                    <h3> Coordonnées</h3>
+                                                </div>
+                                                <div class="box-widget-list">
+                                                    <ul>
+                                                        <li><span><i class="fal fa-map-marker"></i> Ville :</span> <a href="#">{{house.ville}}</a></li>
+                                                        <li><span><i class="fal fa-phone"></i> Adresse :</span> <a href="#">{{house.address}}</a></li>
+                                                        <li><span><i class="fal fa-envelope"></i> Contact :</span> <a href="#">+ 228 93 91 86 26</a></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="list-widget-social">
+                                                    <ul>
+                                                        <li><a href="https://www.facebook.com/profile.php?id=61555214685798" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                                                        <li><a href="https://x.com/Miawoezon3?t=Dicfdfc5f3zDa6U1r4PGcA&s=09" target="_blank"><i class="fab fa-twitter"></i></a></li>
+                                                        <li><a href="https://www.instagram.com/miawoezon3?utm_source=qr&igsh=eGIyZTE2amk0aW1h" target="_blank"><i class="fab fa-instagram"></i></a></li>
+                                                        <li><a href="https://www.tiktok.com/@miawoezon7?_t=8j3ES1ObbXy&_r=1" target="_blank"><i class="fab fa-brands:tiktok"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--box-widget-item end -->          
                                 </div>
+                                
                             </div>
                             <!--   row  -->
                             <div class="row">
@@ -171,34 +283,6 @@
                                 <div class="col-md-4">
                                     <!--box-widget-wrap -->  
                                     <div class="box-widget-wrap">
-                                                                            
-                                        <!--box-widget-item -->
-                                        <div class="box-widget-item fl-wrap">
-                                            <div class="box-widget">
-                                                <div class="box-widget-content">
-                                                    <div class="box-widget-item-header">
-                                                        <h3> Coordonnées</h3>
-                                                    </div>
-                                                    <div class="box-widget-list">
-                                                        <ul>
-                                                            <li><span><i class="fal fa-map-marker"></i> Ville :</span> <a href="#">{{house.ville}}</a></li>
-                                                            <li><span><i class="fal fa-phone"></i> Adresse :</span> <a href="#">{{house.address}}</a></li>
-                                                            <li><span><i class="fal fa-envelope"></i> Contact :</span> <a href="#">+ 228 93 91 86 26</a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="list-widget-social">
-                                                        <ul>
-                                                            <li><a href="https://www.facebook.com/profile.php?id=61555214685798" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
-                                                            <li><a href="https://x.com/Miawoezon3?t=Dicfdfc5f3zDa6U1r4PGcA&s=09" target="_blank"><i class="fab fa-twitter"></i></a></li>
-                                                            <li><a href="https://www.instagram.com/miawoezon3?utm_source=qr&igsh=eGIyZTE2amk0aW1h" target="_blank"><i class="fab fa-instagram"></i></a></li>
-                                                            <li><a href="https://www.tiktok.com/@miawoezon7?_t=8j3ES1ObbXy&_r=1" target="_blank"><i class="fab fa-brands:tiktok"></i></a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!--box-widget-item end -->                          
-                                                                
                                                              
                                                                 
                                     </div>
@@ -216,4 +300,10 @@
                 <div class="limit-box fl-wrap"></div>
             </div>
             <!--wrapper end -->
+
+<script>
+    function submitForm() {
+        document.forms["bookFormCalc"].submit();
+    }
+</script>
 {% endblock %}

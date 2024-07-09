@@ -1,6 +1,7 @@
 
 {% extends "index.html" %}
 {% load static %}
+{% load humanize %}
 {% block content %}
             <!--  wrapper  -->
             <div id="wrapper">
@@ -11,7 +12,7 @@
                         <div class="wave-bg wave-bg2"></div>
                         <div class="container">
                             <div class="flat-title-wrap">
-                                <h2><span>User  : <strong>Jessie Manrty</strong></span></h2>
+                                <h2><span>User  : <strong>{{room.host}}</strong></span></h2>
                                 <span class="section-separator"></span>
                                 <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut nec tincidunt arcu, sit amet fermentum sem.</h4>
                             </div>
@@ -40,8 +41,8 @@
                                                         <div class="box-widget-author-title-img">
                                                             <img src="images/avatar/1.jpg" alt=""> 
                                                         </div>
-                                                        <a href="{% url 'main:author-single'%}">Jessie Manrty</a>
-                                                        <span>Co-manager associated</span>
+                                                        <a href="#">{{room.host}}</a>
+                                                        <span>{{room.host.profession}}</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -53,14 +54,14 @@
                                         <div class="box-widget">
                                             <div class="box-widget-content">
                                                 <div class="box-widget-item-header">
-                                                    <h3>User Contacts</h3>
+                                                    <h3>Contacts</h3>
                                                 </div>
                                                 <div class="box-widget-list">
                                                     <ul>
-                                                        <li><span><i class="fal fa-map-marker"></i> Adress :</span> <a href="#">DJAGBLE Koklossoukopé, Togo</a></li>
-                                                        <li><span><i class="fal fa-phone"></i> Phone :</span> <a href="#">+228 92 56 56 09</a></li>
-                                                        <li><span><i class="fal fa-envelope"></i> Mail :</span> <a href="#">AlisaNoory@domain.com</a></li>
-                                                        <li><span><i class="fal fa-browser"></i> Website :</span> <a href="#">themeforest.net</a></li>
+                                                        <li><span><i class="fal fa-map-marker"></i> Adresse :</span> <a href="#">{{room.host.address}}</a></li>
+                                                        <li><span><i class="fal fa-phone"></i> Téléphone :</span> <a href="#">{{room.host.contact}}</a></li>
+                                                        <li><span><i class="fal fa-envelope"></i> mail :</span> <a href="#">{{room.host.user.email}}</a></li>
+                                                        <li><span><i class="fal fa-browser"></i> Pays :</span> <a href="#">{{room.host.country}}</a></li>
                                                     </ul>
                                                 </div>
                                                 <div class="list-widget-social">
@@ -105,7 +106,7 @@
                                 <div class="col-md-8">
                                     <div class="list-single-main-item fl-wrap no-mar-bottom ">
                                         <div class="list-single-main-item-title fl-wrap">
-                                            <h3>About Jessie .</h3>
+                                            <h3>A propos de {{room.host}} .</h3>
                                         </div>
                                         <p>
                                             Vestibulum orci felis, ullamcorper non condimentum non, ultrices ac nunc. Mauris non ligula suscipit, vulputate mi accumsan, dapibus felis. Nullam sed sapien dui. Nulla auctor sit amet sem non porta. Integer iaculis tellus nulla, quis imperdiet magna venenatis vitae..
@@ -118,18 +119,19 @@
                                     </div>
                                     <div class="list-main-wrap-opt fl-wrap">
                                         <div class="list-main-wrap-title fl-wrap">
-                                            <h2>Hotels added by <span> Jessie</span></h2>
+                                            <h2>Hotels added by <span> {{room.host}} ({{room.host.rooms.count}})</span></h2>
                                         </div>
                                     </div>
                                     <!-- listing-item-container -->
                                     <div class="listing-item-container init-grid-items fl-wrap">
                                         <!-- listing-item  -->
+                                        {% for room in room.host.rooms.all  %}
                                         <div class="listing-item">
                                             <article class="geodir-category-listing fl-wrap">
                                                 <div class="geodir-category-img">
-                                                    <a href="{% url 'main:listing-single'%}"><img src="images/gal/1.jpg" alt=""></a>
-                                                    <div class="listing-avatar"><a href="{% url 'main:author-single'%}"><img src="images/avatar/1.jpg" alt=""></a>
-                                                        <span class="avatar-tooltip">Added By  <strong>Alisa Noory</strong></span>
+                                                    <a href="{% url 'rooms:detail' room.pk %}"><img src="{{room.first_photo}}" alt=""></a>
+                                                    <div class="listing-avatar"><a href="#"><img src="images/avatar/1.jpg" alt=""></a>
+                                                        <span class="avatar-tooltip">Ajouter par  <strong>{{room.host}}</strong></span>
                                                     </div>
                                                     <div class="sale-window">Sale 20%</div>
                                                     <div class="geodir-category-opt">
@@ -143,11 +145,11 @@
                                                 <div class="geodir-category-content fl-wrap title-sin_item">
                                                     <div class="geodir-category-content-title fl-wrap">
                                                         <div class="geodir-category-content-title-item">
-                                                            <h3 class="title-sin_map"><a href="{% url 'main:listing-single'%}">Premium Plaza Hotel</a></h3>
-                                                            <div class="geodir-category-location fl-wrap"><a href="#" class="map-item"><i class="fas fa-map-marker-alt"></i> 27th Brooklyn New York, USA</a></div>
+                                                            <h3 class="title-sin_map"><a href="{% url 'main:listing-single'%}">{{room.name}}</a></h3>
+                                                            <div class="geodir-category-location fl-wrap"><a href="#" class="map-item"><i class="fas fa-map-marker-alt"></i> {{room.country}} - {{room.city}}, {{room.address}}</a></div>
                                                         </div>
                                                     </div>
-                                                    <p>Sed interdum metus at nisi tempor laoreet. Integer gravida orci a justo sodales.</p>
+                                                    <p>{{room.description|truncatewords:5}}.</p>
                                                     <ul class="facilities-list fl-wrap">
                                                         <li><i class="fal fa-wifi"></i><span>Free WiFi</span></li>
                                                         <li><i class="fal fa-parking"></i><span>Parking</span></li>
@@ -155,151 +157,19 @@
                                                         <li><i class="fal fa-utensils"></i><span> Restaurant</span></li>
                                                     </ul>
                                                     <div class="geodir-category-footer fl-wrap">
-                                                        <div class="geodir-category-price">Awg/Night <span>$ 320</span></div>
-                                                        <div class="geodir-opt-list">
+                                                        <div class="geodir-category-price">Prix/Nuit <span>{{room.price|intcomma}} XOF</span></div>
+                                                        <!-- <div class="geodir-opt-list">
                                                             <a href="#" class="single-map-item" data-newlatitude="40.72956781" data-newlongitude="-73.99726866"><i class="fal fa-map-marker-alt"></i><span class="geodir-opt-tooltip">On the map</span></a>
                                                             <a href="#" class="geodir-js-favorite"><i class="fal fa-heart"></i><span class="geodir-opt-tooltip">Save</span></a>
                                                             <a href="#" class="geodir-js-booking"><i class="fal fa-exchange"></i><span class="geodir-opt-tooltip">Find Directions</span></a>
-                                                        </div>
+                                                        </div> -->
                                                     </div>
                                                 </div>
                                             </article>
                                         </div>
+                                        {% endfor %}
                                         <!-- listing-item end -->
-                                        <!-- listing-item  -->
-                                        <div class="listing-item">
-                                            <article class="geodir-category-listing fl-wrap">
-                                                <div class="geodir-category-img">
-                                                    <a href="{% url 'main:listing-single'%}"><img src="images/gal/1.jpg" alt=""></a>
-                                                    <div class="listing-avatar"><a href="{% url 'main:author-single'%}.html"><img src="images/avatar/1.jpg" alt=""></a>
-                                                        <span class="avatar-tooltip">Added By  <strong>Julie Cramp</strong></span>
-                                                    </div>
-                                                    <div class="sale-window big-sale">Sale 50%</div>
-                                                    <div class="geodir-category-opt">
-                                                        <div class="listing-rating card-popup-rainingvis" data-starrating2="4"></div>
-                                                        <div class="rate-class-name">
-                                                            <div class="score"><strong>Good</strong>12 Reviews </div>
-                                                            <span>4.2</span>                                             
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="geodir-category-content fl-wrap title-sin_item">
-                                                    <div class="geodir-category-content-title fl-wrap">
-                                                        <div class="geodir-category-content-title-item">
-                                                            <h3 class="title-sin_map"><a href="{% url 'main:listing-single'%}">Grand Hero Palace</a></h3>
-                                                            <div class="geodir-category-location fl-wrap"><a href="#" class="map-item"><i class="fas fa-map-marker-alt"></i> W 85th St, New York,  USA</a></div>
-                                                        </div>
-                                                    </div>
-                                                    <p> Morbi suscipit erat in diam bibendum rutrum in nisl. Aliquam et purus ante.</p>
-                                                    <ul class="facilities-list fl-wrap">
-                                                        <li><i class="fal fa-wifi"></i><span>Free WiFi</span></li>
-                                                        <li><i class="fal fa-parking"></i><span>Parking</span></li>
-                                                        <li><i class="fal fa-smoking-ban"></i><span>Non-smoking Rooms</span></li>
-                                                        <li><i class="fal fa-utensils"></i><span> Restaurant</span></li>
-                                                    </ul>
-                                                    <div class="geodir-category-footer fl-wrap">
-                                                        <div class="geodir-opt-link">
-                                                            <div class="geodir-category-price">Awg/Night <span>$ 120</span></div>
-                                                        </div>
-                                                        <div class="geodir-opt-list">
-                                                            <a href="#" class="single-map-item" data-newlatitude="40.76221766" data-newlongitude="-73.96511769"><i class="fal fa-map-marker-alt"></i><span class="geodir-opt-tooltip">On the map</span></a>
-                                                            <a href="#" class="geodir-js-favorite"><i class="fal fa-heart"></i><span class="geodir-opt-tooltip">Save</span></a>
-                                                            <a href="#" class="geodir-js-booking"><i class="fal fa-exchange"></i><span class="geodir-opt-tooltip">Find Directions</span></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </article>
-                                        </div>
-                                        <!-- listing-item end -->                                                  
-                                        <!-- listing-item  -->
-                                        <div class="listing-item">
-                                            <article class="geodir-category-listing fl-wrap">
-                                                <div class="geodir-category-img">
-                                                    <a href="{% url 'main:listing-single'%}"><img src="images/gal/1.jpg" alt=""></a>
-                                                    <div class="listing-avatar"><a href="{% url 'main:author-single'%}"><img src="images/avatar/1.jpg" alt=""></a>
-                                                        <span class="avatar-tooltip">Added By  <strong>Andy Moore</strong></span>
-                                                    </div>
-                                                    <div class="geodir-category-opt">
-                                                        <div class="listing-rating card-popup-rainingvis" data-starrating2="5"></div>
-                                                        <div class="rate-class-name">
-                                                            <div class="score"><strong>Good</strong>6 Reviews </div>
-                                                            <span>4.7</span>                                             
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="geodir-category-content fl-wrap title-sin_item">
-                                                    <div class="geodir-category-content-title fl-wrap">
-                                                        <div class="geodir-category-content-title-item">
-                                                            <h3 class="title-sin_map"><a href="{% url 'main:listing-single'%}">Park Central</a></h3>
-                                                            <div class="geodir-category-location fl-wrap"><a href="#" class="map-item"><i class="fas fa-map-marker-alt"></i>40 Journal Square Plaza, NJ,  USA</a></div>
-                                                        </div>
-                                                    </div>
-                                                    <p> Sed tempor iaculis massa faucibus feugiat. In fermentum facilisis massa.</p>
-                                                    <ul class="facilities-list fl-wrap">
-                                                        <li><i class="fal fa-wifi"></i><span>Free WiFi</span></li>
-                                                        <li><i class="fal fa-parking"></i><span>Parking</span></li>
-                                                        <li><i class="fal fa-smoking-ban"></i><span>Non-smoking Rooms</span></li>
-                                                        <li><i class="fal fa-utensils"></i><span> Restaurant</span></li>
-                                                    </ul>
-                                                    <div class="geodir-category-footer fl-wrap">
-                                                        <div class="geodir-opt-link">
-                                                            <div class="geodir-category-price">Awg/Night <span>$ 80</span></div>
-                                                        </div>
-                                                        <div class="geodir-opt-list">
-                                                            <a href="#" class="single-map-item" data-newlatitude="40.88496706" data-newlongitude="-73.88191222"><i class="fal fa-map-marker-alt"></i><span class="geodir-opt-tooltip">On the map</span></a>
-                                                            <a href="#" class="geodir-js-favorite"><i class="fal fa-heart"></i><span class="geodir-opt-tooltip">Save</span></a>
-                                                            <a href="#" class="geodir-js-booking"><i class="fal fa-exchange"></i><span class="geodir-opt-tooltip">Find Directions</span></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </article>
-                                        </div>
-                                        <!-- listing-item end --> 
-                                        <!-- listing-item  -->
-                                        <div class="listing-item">
-                                            <article class="geodir-category-listing fl-wrap">
-                                                <div class="geodir-category-img">
-                                                    <a href="{% url 'main:listing-single'%}"><img src="images/gal/1.jpg" alt=""></a>
-                                                    <div class="listing-avatar"><a href="{% url 'main:author-single'%}"><img src="images/avatar/1.jpg" alt=""></a>
-                                                        <span class="avatar-tooltip">Added By  <strong>Mary Jones</strong></span>
-                                                    </div>
-                                                    <div class="sale-window">Sale 20%</div>
-                                                    <div class="geodir-category-opt">
-                                                        <div class="listing-rating card-popup-rainingvis" data-starrating2="3"></div>
-                                                        <div class="rate-class-name">
-                                                            <div class="score"><strong>Pleasant</strong>10 Reviews </div>
-                                                            <span>3.2</span>                                             
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="geodir-category-content fl-wrap title-sin_item">
-                                                    <div class="geodir-category-content-title fl-wrap">
-                                                        <div class="geodir-category-content-title-item">
-                                                            <h3 class="title-sin_map"><a href="{% url 'main:listing-single'%}">Holiday Accueil</a></h3>
-                                                            <div class="geodir-category-location fl-wrap"><a href="#" class="map-item"><i class="fas fa-map-marker-alt"></i> 75 Prince St,  NY, USA</a></div>
-                                                        </div>
-                                                    </div>
-                                                    <p>  Mauris ac maximus neque. Nam in mauris quis libero sodales eleifend.</p>
-                                                    <ul class="facilities-list fl-wrap">
-                                                        <li><i class="fal fa-wifi"></i><span>Free WiFi</span></li>
-                                                        <li><i class="fal fa-parking"></i><span>Parking</span></li>
-                                                        <li><i class="fal fa-smoking-ban"></i><span>Non-smoking Rooms</span></li>
-                                                        <li><i class="fal fa-utensils"></i><span> Restaurant</span></li>
-                                                    </ul>
-                                                    <div class="geodir-category-footer fl-wrap">
-                                                        <div class="geodir-opt-link">
-                                                            <div class="geodir-category-price">Awg/Night <span>$ 50</span></div>
-                                                        </div>
-                                                        <div class="geodir-opt-list">
-                                                            <a href="#" class="single-map-item" data-newlatitude="40.72228267" data-newlongitude="-73.99246214"><i class="fal fa-map-marker-alt"></i><span class="geodir-opt-tooltip">On the map</span></a>
-                                                            <a href="#" class="geodir-js-favorite"><i class="fal fa-heart"></i><span class="geodir-opt-tooltip">Save</span></a>
-                                                            <a href="#" class="geodir-js-booking"><i class="fal fa-exchange"></i><span class="geodir-opt-tooltip">Find Directions</span></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </article>
-                                        </div>
-                                        <!-- listing-item end --> 
+                                       
                                         <div class="pagination">
                                             <a href="#" class="prevposts-link"><i class="fa fa-caret-left"></i></a>
                                             <a href="#">1</a>

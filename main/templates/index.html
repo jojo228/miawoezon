@@ -271,103 +271,7 @@
                         </div>
                     </section>
                     <!-- section end -->
-                    <!--section -->
-                    <section id="sec2">
-                        <div class="container">
-                            <div class="section-title">
-                                <div class="section-title-separator"><span></span></div>
-                                <h2>Destination populaire</h2>
-                                <span class="section-separator"></span>
-                                <p>Explorez certains des meilleurs conseils de la ville de nos partenaires et amis.</p>
-                            </div>
-						 </div>
-                            <!-- portfolio start -->
-                            <div class="gallery-items fl-wrap mr-bot spad home-grid">
-                                <!-- gallery-item-->
-                                <div class="gallery-item">
-                                    <div class="grid-item-holder">
-                                        <div class="listing-item-grid">
-                                            <div class="listing-counter"><span>79 </span> Rooms</div>
-                                            <img  src="{% static 'images/city/lome.jpeg' %}"   alt="">
-                                            <div class="listing-item-cat">
-                                                <h3><a href="{% url 'main:listing' %}">Lomé</a></h3>
-                                                <div class="weather-grid"   data-grcity="Lomé"></div>
-                                                <div class="clearfix"></div>
-                                                <p>Constant care and attention to the patients makes good record</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- gallery-item end-->
-                                <!-- gallery-item-->
-                                <div class="gallery-item gallery-item-second">
-                                    <div class="grid-item-holder">
-                                        <div class="listing-item-grid">
-                                            <img  src="{% static 'images/city/kpalime2.png' %}"   alt="">
-                                            <div class="listing-counter"><span>43 </span> Rooms</div>
-                                            <div class="listing-item-cat">
-                                                <h3><a href="{% url 'main:listing' %}">Kpalimé</a></h3>
-                                                <div class="weather-grid"   data-grcity="Kpalimé"></div>
-                                                <div class="clearfix"></div>
-                                                <p>Constant care and attention to the patients makes good record</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- gallery-item end-->
-                                <!-- gallery-item-->
-                                <div class="gallery-item">
-                                    <div class="grid-item-holder">
-                                        <div class="listing-item-grid">
-                                            <div class="listing-counter"><span>23 </span> Rooms</div>
-                                            <img  src="{% static 'images/city/aneho.jpeg' %}"   alt="">
-                                            <div class="listing-item-cat">
-                                                <h3><a href="{% url 'main:listing' %}">Aného</a></h3>
-                                                <div class="weather-grid"   data-grcity="Aného"></div>
-                                                <div class="clearfix"></div>
-                                                <p>Constant care and attention to the patients makes good record</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- gallery-item end-->
-                                <!-- gallery-item-->
-                                <div class="gallery-item">
-                                    <div class="grid-item-holder">
-                                        <div class="listing-item-grid">
-                                            <div class="listing-counter"><span>57</span> Rooms</div>
-                                            <img  src="{% static 'images/city/kara.jpeg' %}"   alt="">
-                                            <div class="listing-item-cat">
-                                                <h3><a href="{% url 'main:listing' %}">Kara</a></h3>
-                                                <div class="weather-grid"   data-grcity="Kara"></div>
-                                                <div class="clearfix"></div>
-                                                <p>Constant care and attention to the patients makes good record</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- gallery-item end-->
-                                <!-- gallery-item-->
-                                <div class="gallery-item">
-                                    <div class="grid-item-holder">
-                                        <div class="listing-item-grid">
-                                            <div class="listing-counter"><span>122</span> Rooms</div>
-                                            <img  src="{% static 'images/city/atakpame.jpeg' %}"   alt="">
-                                            <div class="listing-item-cat">
-                                                <h3><a href="{% url 'main:listing' %}">Atakpamé</a></h3>
-                                                <div class="weather-grid"   data-grcity="Atakpamé"></div>
-                                                <div class="clearfix"></div>
-                                                <p>Constant care and attention to the patients makes good record</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- gallery-item end-->
-                            </div>
-                            <!-- portfolio end -->
-                            <a href="{% url 'rooms:list' %}" class="btn    color-bg">Explorez toutes les villes<i class="fas fa-caret-right"></i></a>
-                    </section>
-                    <!-- section end -->
+                    
                     <!-- section-->
                     <section class="grey-blue-bg">
                         <!-- container-->
@@ -390,8 +294,8 @@
                                     <div class="listing-item">
                                         <article class="geodir-category-listing fl-wrap">
                                             <div class="geodir-category-img">
-                                                <a href="{% url 'rooms:detail' room.id %}"><img src="{{room.first_photo}}" alt=""></a>
-                                                <div class="listing-avatar"><a href="{% url 'main:author-single' %}"><img src="{% if room.host.avatar %} {{room.host.avatar.url}} {% else %} {% static 'images/avatar/1.jpg' %} {% endif %}" alt=""></a>
+                                                <img src="{{room.first_photo}}" alt="">
+                                                <div class="listing-avatar"><a href="{% url 'rooms:detail' room.id %}"><img src="{% if room.host.avatar %} {{room.host.avatar.url}} {% else %} {% static 'images/avatar/1.jpg' %} {% endif %}" alt=""></a>
                                                     <span class="avatar-tooltip">Ajouté par  <strong>{{room.host}}</strong></span>
                                                 </div>
                                                 <!-- <div class="geodir-category-opt">
@@ -496,7 +400,103 @@
                         <a href="{% url 'main:listing' %}" class="btn    color-bg">Voir plus<i class="fas fa-caret-right"></i></a>
                     </section>
                     <!-- section end -->
-                   
+                   <!--section -->
+                   <section id="sec2">
+                    <div class="container">
+                        <div class="section-title">
+                            <div class="section-title-separator"><span></span></div>
+                            <h2>Destination populaire</h2>
+                            <span class="section-separator"></span>
+                            <p>Explorez certains des meilleurs conseils de la ville de nos partenaires et amis.</p>
+                        </div>
+                     </div>
+                        <!-- portfolio start -->
+                        <div class="gallery-items fl-wrap mr-bot spad home-grid">
+                            <!-- gallery-item-->
+                            <div class="gallery-item">
+                                <div class="grid-item-holder">
+                                    <div class="listing-item-grid">
+                                        <!-- <div class="listing-counter"><span>79 </span> Rooms</div> -->
+                                        <img  src="{% static 'images/city/lome.jpeg' %}"   alt="">
+                                        <div class="listing-item-cat">
+                                            <h3><a href="{% url 'main:listing' %}">Lomé</a></h3>
+                                            <div class="weather-grid"   data-grcity="Lomé"></div>
+                                            <div class="clearfix"></div>
+                                            <p>Constant care and attention to the patients makes good record</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- gallery-item end-->
+                            <!-- gallery-item-->
+                            <div class="gallery-item gallery-item-second">
+                                <div class="grid-item-holder">
+                                    <div class="listing-item-grid">
+                                        <img  src="{% static 'images/city/kpalime2.png' %}"   alt="">
+                                        <!-- <div class="listing-counter"><span>43 </span> Rooms</div> -->
+                                        <div class="listing-item-cat">
+                                            <h3><a href="{% url 'main:listing' %}">Kpalimé</a></h3>
+                                            <div class="weather-grid"   data-grcity="Kpalimé"></div>
+                                            <div class="clearfix"></div>
+                                            <p>Constant care and attention to the patients makes good record</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- gallery-item end-->
+                            <!-- gallery-item-->
+                            <div class="gallery-item">
+                                <div class="grid-item-holder">
+                                    <div class="listing-item-grid">
+                                        <!-- <div class="listing-counter"><span>23 </span> Rooms</div> -->
+                                        <img  src="{% static 'images/city/aneho.jpeg' %}"   alt="">
+                                        <div class="listing-item-cat">
+                                            <h3><a href="{% url 'main:listing' %}">Aného</a></h3>
+                                            <div class="weather-grid"   data-grcity="Aného"></div>
+                                            <div class="clearfix"></div>
+                                            <p>Constant care and attention to the patients makes good record</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- gallery-item end-->
+                            <!-- gallery-item-->
+                            <div class="gallery-item">
+                                <div class="grid-item-holder">
+                                    <div class="listing-item-grid">
+                                        <!-- <div class="listing-counter"><span>57</span> Rooms</div> -->
+                                        <img  src="{% static 'images/city/kara.jpeg' %}"   alt="">
+                                        <div class="listing-item-cat">
+                                            <h3><a href="{% url 'main:listing' %}">Kara</a></h3>
+                                            <div class="weather-grid"   data-grcity="Kara"></div>
+                                            <div class="clearfix"></div>
+                                            <p>Constant care and attention to the patients makes good record</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- gallery-item end-->
+                            <!-- gallery-item-->
+                            <div class="gallery-item">
+                                <div class="grid-item-holder">
+                                    <div class="listing-item-grid">
+                                        <!-- <div class="listing-counter"><span>122</span> Rooms</div> -->
+                                        <img  src="{% static 'images/city/atakpame.jpeg' %}"   alt="">
+                                        <div class="listing-item-cat">
+                                            <h3><a href="{% url 'main:listing' %}">Atakpamé</a></h3>
+                                            <div class="weather-grid"   data-grcity="Atakpamé"></div>
+                                            <div class="clearfix"></div>
+                                            <p>Constant care and attention to the patients makes good record</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- gallery-item end-->
+                        </div>
+                        <!-- portfolio end -->
+                        <a href="{% url 'rooms:list' %}" class="btn    color-bg">Explorez toutes les villes<i class="fas fa-caret-right"></i></a>
+                </section>
+                <!-- section end -->
                     <!--section -->
                     <section>
                         <div class="container">
