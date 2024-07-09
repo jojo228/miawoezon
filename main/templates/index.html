@@ -294,7 +294,7 @@
                                     <div class="listing-item">
                                         <article class="geodir-category-listing fl-wrap">
                                             <div class="geodir-category-img">
-                                                <img src="{{room.first_photo}}" alt="">
+                                                <a href="{% url 'rooms:detail' room.id %}"><img src="{{room.first_photo}}" alt=""></a>
                                                 <div class="listing-avatar"><a href="{% url 'rooms:detail' room.id %}"><img src="{% if room.host.avatar %} {{room.host.avatar.url}} {% else %} {% static 'images/avatar/1.jpg' %} {% endif %}" alt=""></a>
                                                     <span class="avatar-tooltip">Ajouté par  <strong>{{room.host}}</strong></span>
                                                 </div>
