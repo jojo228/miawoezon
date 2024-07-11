@@ -1,0 +1,144 @@
+{% extends "index.html" %}
+{% load static %}
+{% block content %}
+
+
+<!--  wrapper  -->
+<div id="wrapper">
+    <!-- content-->
+    <div class="content">
+        <!-- section-->
+        {% include 'dashboard/base.html' %}
+
+        <!-- section end-->
+        <!-- section  -->
+        <section class="middle-padding">
+            <div class="container">
+                <!--dasboard-wrap-->
+                <div class="dasboard-wrap fl-wrap">
+                    <!-- dashboard-content-->
+                    <div class="dashboard-content fl-wrap">
+                        <div class="box-widget-item-header mat-top">
+                            <h3>Ajouter une nouvelle publication</h3>
+                        </div>
+                        <!-- profile-edit-container-->
+                        <div class="profile-edit-container">
+                            <div class="custom-form">
+                                <form id="myForm" method="post" enctype="multipart/form-data"
+                                    action="{% url 'announcement:create' %}">
+                                    {% csrf_token %}
+                                    <div class="room-add-item">
+                                        {{form.non_field_errors}}
+
+                                        <div class="row">
+
+                                            <div class="col-md-3">
+                                                <label for="room-type">{{form.type.label}}</label>
+                                                {{form.type}}
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label for="room-price">{{form.prix.label}} <i
+                                                        class="fal fa-dollar-sign"></i></label>
+                                                {{form.prix}}
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label for="room-price">{{form.caution.label}} <i
+                                                        class="fal fa-dollar-sign"></i></label>
+                                                {{form.caution}}
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label for="room-title">{{form.pour.label}} <i
+                                                        class="fal fa-warehouse-alt"></i></label>
+                                                {{form.pour}}
+                                            </div>
+                                        </div>
+
+
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label for="beds">{{form.ville.label}} <i
+                                                        class="fal fa-bed"></i></label>
+                                                {{form.ville}}
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label for="bedrooms">{{form.disponibilité.label}} <i
+                                                        class="fal fa-bed"></i></label>
+                                                {{form.disponibilité}}
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="baths">{{form.address.label}} <i
+                                                        class="fal fa-bath"></i></label>
+                                                {{form.address}}
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label for="room-details">{{form.description.label}}</label>
+                                                {{form.description}}
+                                            </div>
+                                            {{field.errors}}
+
+                                        </div>
+                                        <br>
+
+
+                                        <div class="fl-wrap filter-tags">
+                                            <label for="agreeTerms">
+                                                <input type="checkbox" id="agreeTerms" name="agreeTerms">
+                                                J'accepte les <a href="{% url 'main:term_condition' %}">termes et
+                                                    conditions</a> avant de procéder
+                                            </label>
+                                        </div>
+
+
+
+                                        <button type="submit" class="btn color2-bg float-btn" id="submitButton"
+                                            disabled>Publier<i class="fal fa-save"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- dashboard-list-box end-->
+                </div>
+                <!-- dasboard-wrap end-->
+            </div>
+
+        </section>
+
+        <div class="limit-box fl-wrap"></div>
+    </div>
+    <!-- content end-->
+</div>
+
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const termsDiv = document.getElementById("terms");
+        const agreeTermsCheckbox = document.getElementById("agreeTerms");
+        const submitButton = document.getElementById("submitButton");
+
+
+        // Listen for changes in the checkbox
+        agreeTermsCheckbox.addEventListener("change", function () {
+            if (this.checked) {
+                submitButton.disabled = false; // Enable submit button if checkbox is checked
+            } else {
+                submitButton.disabled = true; // Disable submit button if checkbox is unchecked
+            }
+        });
+
+        // Listen for form submission
+        document.getElementById("myForm").addEventListener("submit", function (event) {
+            if (!agreeTermsCheckbox.checked) {
+                event.preventDefault(); // Prevent form submission if terms are not agreed
+                alert("Please accept the terms and conditions.");
+            }
+        });
+    });
+
+
+</script>
+{% endblock %}

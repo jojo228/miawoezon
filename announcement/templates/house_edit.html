@@ -1,0 +1,177 @@
+{% extends "index.html" %}
+{% load static %}
+{% block content %}
+
+
+<!--  wrapper  -->
+<div id="wrapper">
+    <!-- content-->
+    <div class="content">
+        <!-- section-->
+        {% include 'dashboard/base.html' %}
+
+        <!-- section end-->
+        <!-- section  -->
+        <section class="middle-padding">
+            <div class="container">
+                <!--dasboard-wrap-->
+                <div class="dasboard-wrap fl-wrap">
+                    <!-- dashboard-content-->
+                    <div class="dashboard-content fl-wrap">
+                        <div class="box-widget-item-header mat-top">
+                            <h3>Pièces</h3>
+                        </div>
+                        <!-- profile-edit-container-->
+                        <div class="profile-edit-container">
+                            <div class="custom-form">
+                                <form method="post" enctype="multipart/form-data" action="{% url 'announcement:edit' pk=pk %}">
+                                    {% csrf_token %}
+                                    <div class="room-add-item">
+                                        {{form.non_field_errors}}
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label for="room-title">{{form.name.label}} <i class="fal fa-warehouse-alt"></i></label>
+                                                {{form.name}}
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label for="room-type">{{form.room_type.label}}</label>
+                                                {{form.room_type}}
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label for="room-price">{{form.price.label}} <i class="fal fa-dollar-sign"></i></label>
+                                                {{form.price}}
+                                            </div>
+                                        </div>        
+                                        
+        
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label for="beds">{{form.beds.label}} <i class="fal fa-bed"></i></label>
+                                                {{form.beds}}
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label for="bedrooms">{{form.bedrooms.label}} <i class="fal fa-bed"></i></label>
+                                                {{form.bedrooms}}
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label for="baths">{{form.baths.label}} <i class="fal fa-bath"></i></label>
+                                                {{form.baths}}
+                                             </div>
+                                             <div class="col-md-3">
+                                                <label for="guests">{{form.guests.label}} <i class="fal fa-briefcase"></i></label>
+                                                {{form.guests}}
+                                            </div>
+                                             
+
+                                        </div>
+
+                                        <div class="row">
+                                            
+                                            
+                                            
+                                            <div class="col-md-3">
+                                                <label for="baths">{{form.country.label}} <i class="fal fa-bath"></i></label>
+                                                {{form.country}}
+                                             </div>
+                                             <div class="col-md-3">
+                                                <label for="baths">{{form.city.label}} <i class="fal fa-bath"></i></label>
+                                                {{form.city}}
+                                             </div>
+                                             <div class="col-md-6">
+                                                <label for="room-type">{{form.address.label}}</label>
+                                                {{form.address}}
+                                            </div>
+                                        </div>
+
+                                        <div class="profile-edit-container" style="margin-top:30px">
+                                            <div class="row">
+                                                
+                                                <div class="col-md-4">
+                                                    <label for="amenities">{{form.amenities.label}}</label>
+                                                    {{form.amenities}}
+                                                    
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label for="facilities">{{form.facilities.label}}</label>
+                                                    {{form.facilities}}
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label for="house-rules">{{form.house_rules.label}}</label>
+                                                    {{form.house_rules}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="row">
+                                            
+                                            <div class="col-md-4">
+                                                <label for="baths">Début de disponibilité <i
+                                                        class="fal fa-bath"></i></label>
+                                                <input type="date" name="check_in" value="2024-05-16"
+                                                    class="custom-form" placeholder=" " required="" id="id_check_in">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="baths">Fin de disponibilité <i
+                                                        class="fal fa-bath"></i></label>
+                                                <input type="date" name="check_out" value="2024-05-16"
+                                                    class="custom-form" placeholder=" " required="" id="id_check_out">
+                                            </div>
+                                             <div class="col-md-4">
+                                                <ul class="fl-wrap filter-tags">
+                                                    <li>
+                                                        <label for="house-rules">{{form.instant_book.label}}</label>
+                                                        {{form.instant_book}}
+                                                    </li>
+                                                
+                                                </ul>
+                                            </div>
+                                            
+                                        </div>
+                                                
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label for="room-details">{{form.description.label}}</label>
+                                                {{form.description}}
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="room-photos">Video Descriptive</label>
+                                                <div class="add-list-media-wrap">
+                                                    <div class="fuzone">
+                                                        <div class="fu-text">
+                                                            <span><i class="far fa-cloud-upload-alt"></i> Click here or
+                                                                drop files to upload</span>
+                                                            <div class="photoUpload-files fl-wrap"></div>
+                                                        </div>
+                                                        {{form.video}}
+                                                        <div id="preview-container"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                        {{field.errors}}
+                                        
+
+                                            
+                                    </div>
+                                    <button type="submit" class="btn color2-bg float-btn">Sauvegarder<i
+                                        class="fal fa-save"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- dashboard-list-box end-->
+                </div>
+                <!-- dasboard-wrap end-->
+            </div>
+        </section>
+        
+        <div class="limit-box fl-wrap"></div>
+    </div>
+    <!-- content end-->
+</div>
+
+
+
+{% endblock %}

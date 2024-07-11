@@ -46,8 +46,12 @@ class House(models.Model):
     disponibilité = models.CharField(max_length=20, choices=HOUSE_AVAILABILITY,)
     pour = models.CharField(max_length=20, choices=HOUSE_FOR,)
     ville = models.CharField(max_length=80)
-    prix = models.CharField(max_length=80)
+    prix = models.CharField(max_length=80, default=0)
+    caution = models.CharField(max_length=80, default=0)
     address = models.CharField(max_length=140)
+    host = models.ForeignKey(
+        "authentication.Client", related_name="houses", on_delete=models.CASCADE
+    )
     date = models.DateTimeField(auto_now_add=True, null=True)
 
     def __str__(self):

@@ -27,7 +27,8 @@ def police_prive(request):
 def home(request):
     posts = Post.objects.all().order_by("-created_on")[:3]
     rooms = Room.objects.filter(statut="Vérifié").order_by("-created")[:9]
-    announces = House.objects.all().order_by("-date")[:9]
+    terrains = House.objects.filter(type="Terrain Rural", disponibilité="Disponible").order_by("-date")[:9]
+    announces = House.objects.filter(disponibilité="Disponible").order_by("-date")[:9]
     cities = Room.objects.values_list('city', flat=True).distinct()
     
     return render(request, "index.html", locals())
@@ -75,6 +76,11 @@ def search(request):
 
     # If form is invalid or method is not GET
     return render(request, 'search_results.html')
+
+
+def post_choice(request):
+    
+    return render(request, "post-choice.html")
 
 
 

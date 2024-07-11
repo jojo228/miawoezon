@@ -1,0 +1,119 @@
+{% extends "index.html" %}
+{% load static %}
+{% block content %}
+
+
+<!--  wrapper  -->
+<div id="wrapper">
+    <!-- content-->
+    <div class="content">
+        <!-- section-->
+        {% include 'dashboard/base.html' %}
+
+        <!-- section end-->
+        <!-- section  -->
+        <section class="middle-padding">
+            <div class="container">
+                <!--dasboard-wrap-->
+                <div class="dasboard-wrap fl-wrap">
+                    <!-- dashboard-content-->
+                    <div class="dashboard-content fl-wrap">
+                        <div class="box-widget-item-header mat-top">
+                            <h3>Pièces</h3>
+                        </div>
+                        <!-- profile-edit-container-->
+                        <div class="profile-edit-container">
+                            <div class="custom-form">
+                                <form method="post" enctype="multipart/form-data" action="">
+                                    {% csrf_token %}
+                                    <div class="room-add-item">
+                                        
+                                                
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label for="room-photos">Ajouter une nouvelle photo</label>
+                                                <div class="add-list-media-wrap">
+                                                    <div class="fuzone">
+                                                        <div class="fu-text">
+                                                            <span><i class="far fa-cloud-upload-alt"></i> Cliquez ici ou déposez des fichiers pour télécharger</span>
+                                                            <div class="photoUpload-files fl-wrap"></div>
+                                                        </div>
+                                                        {{form.file}}
+                                                    <div id="preview-container"></div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <label for="room-details">{{form.caption.label}}</label>
+                                                {{form.caption}}
+                                            </div>
+                                            
+                                        </div>
+                                        
+
+                                            
+                                    </div>
+                                    <button type="submit" class="btn color2-bg float-btn">Ajouter<i
+                                        class="fal fa-save"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- dashboard-list-box end-->
+                </div>
+                <!-- dasboard-wrap end-->
+            </div>
+        </section>
+        
+        <div class="limit-box fl-wrap"></div>
+    </div>
+    <!-- content end-->
+</div>
+
+<script>
+    document.getElementById('room-photos').addEventListener('change', handleFileSelect);
+    
+    function handleFileSelect(event) {
+        const previewContainer = document.getElementById('preview-container');
+        previewContainer.innerHTML = '';
+    
+        const files = event.target.files;
+        let rowDiv;
+    
+        for (let i = 0; i < files.length; i++) {
+            if (i % 3 === 0) {
+                // Start a new row after every 3 images
+                rowDiv = document.createElement('div');
+                rowDiv.className = 'image-row';
+                previewContainer.appendChild(rowDiv);
+            }
+    
+            const reader = new FileReader();
+    
+            reader.onload = function (e) {
+                const img = document.createElement('img');
+                img.src = e.target.result;
+                img.className = 'preview-image';
+                rowDiv.appendChild(img);
+            };
+    
+            reader.readAsDataURL(files[i]);
+        }
+    }
+    </script>
+    
+    <style>
+        .image-row {
+            display: flex;
+            margin-bottom: 10px;
+        }
+    
+        .preview-image {
+            width: 200px; /* Set the desired width */
+            height: 100px;
+            margin-right: 10px;
+        }
+    </style>
+    
+
+{% endblock %}

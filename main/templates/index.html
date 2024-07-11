@@ -42,7 +42,7 @@
                             <a href="{% url 'main:home' %}"><img src="{% static 'images/logo 2.png' %}" alt=""></a>
                         </div>
                         {% if request.user.is_authenticated %}
-                        <a href="{% url 'rooms:create' %}" class="add-hotel">Publier<span><i class="far fa-plus"></i></span></a>
+                        <a href="{% url 'main:post_choice' %}" class="add-hotel">Publier<span><i class="far fa-plus"></i></span></a>
                         {% endif %}     
                         {% if not request.user.is_authenticated %}
                         <a href="{% url 'authentication:login' %}">            
@@ -77,8 +77,8 @@
                                 {{request.user.get_full_name}}
                             </div>
                             <ul>
+                                <li><a href="{% url 'main:post_choice' %}"> Publier</a></li>
                                 <li><a href="{% url 'authentication:profil' %}"> Profil</a></li>
-                                <li><a href="{% url 'rooms:create' %}"> Publier</a></li>
                                 <li><a href="{% url 'reservations:bookings'%}">  Reservations  </a></li>
                                 <li><a href="{% url 'authentication:logout' %}">Se deconnecter</a></li>
                             </ul>
@@ -278,7 +278,7 @@
                         <div class="container">
                             <div class="section-title">
                                 <div class="section-title-separator"><span></span></div>
-                                <h2>Nouveautés</h2>
+                                <h2>Appartements Meublés</h2>
                                 <span class="section-separator"></span>
                             </div>
                         </div>
@@ -345,12 +345,13 @@
                         <!-- portfolio end -->
                         <a href="{% url 'rooms:list' %}" class="btn    color-bg">Voir plus<i class="fas fa-caret-right"></i></a>
                     </section>
+                    
                     <section class="grey-blue-bg">
                         <!-- container-->
                         <div class="container">
                             <div class="section-title">
                                 <div class="section-title-separator"><span></span></div>
-                                <h2>Annonces</h2>
+                                <h2>Appartements Non Meublés</h2>
                                 <span class="section-separator"></span>
                             </div>
                         </div>
@@ -377,7 +378,61 @@
                                                         <div class="geodir-category-location fl-wrap"><a href="#" class="map-item"><i class="fas fa-map-marker-alt"></i> {{announce.address}}</a></div>
                                                     </div>
                                                 </div>
-                                                <p>{{announce.description}}.</p>
+                                                <p>{{announce.description|truncatewords:10}}.</p>
+                                                
+                                                <div class="geodir-category-footer fl-wrap">
+                                                    <div class="geodir-category-price">Prix <br> <span>{{announce.prix|intcomma}} xof</span></div>
+                                                    
+                                                </div>
+                                            </div>
+                                        </article>
+                                    </div>
+                                    <!-- listing-item end -->
+                                </div>
+                                {% endfor %}
+                                <!--slick-slide-item end-->
+                                
+                            </div>
+                            <!--listing-carousel end-->
+                            <div class="swiper-button-prev sw-btn"><i class="fa fa-long-arrow-left"></i></div>
+                            <div class="swiper-button-next sw-btn"><i class="fa fa-long-arrow-right"></i></div>
+                        </div>
+                        <!--  carousel end-->
+                        <a href="{% url 'main:listing' %}" class="btn    color-bg">Voir plus<i class="fas fa-caret-right"></i></a>
+                    </section>
+                    <section class="grey-blue-bg">
+                        <!-- container-->
+                        <div class="container">
+                            <div class="section-title">
+                                <div class="section-title-separator"><span></span></div>
+                                <h2>Terrains Ruraux</h2>
+                                <span class="section-separator"></span>
+                            </div>
+                        </div>
+                        <!-- container end-->
+                        <!-- carousel -->
+                        <div class="list-carousel fl-wrap card-listing ">
+                            <!--listing-carousel-->
+                            <div class="listing-carousel  fl-wrap ">
+                                <!--slick-slide-item-->
+                                {% for announce in terrains %}
+                                <div class="slick-slide-item">
+                                    <!-- listing-item  -->
+                                    <div class="listing-item">
+                                        <article class="geodir-category-listing fl-wrap">
+                                            <div class="geodir-category-img">
+                                                <a href="{% url 'announcement:detail' announce.pk %}"><img src="{{announce.first_photo}}" alt=""></a>
+                                                <div class="sale-window">{{announce.disponibilité}}</div>
+                                                
+                                            </div>
+                                            <div class="geodir-category-content fl-wrap title-sin_item">
+                                                <div class="geodir-category-content-title fl-wrap">
+                                                    <div class="geodir-category-content-title-item">
+                                                        <h3 class="title-sin_map"><a href="{% url 'announcement:detail' announce.pk %}">{{announce.type}}</a></h3>
+                                                        <div class="geodir-category-location fl-wrap"><a href="#" class="map-item"><i class="fas fa-map-marker-alt"></i> {{announce.address}}</a></div>
+                                                    </div>
+                                                </div>
+                                                <p>{{announce.description|truncatewords:10}}.</p>
                                                 
                                                 <div class="geodir-category-footer fl-wrap">
                                                     <div class="geodir-category-price">Prix <br> <span>{{announce.prix|intcomma}} xof</span></div>
@@ -673,7 +728,7 @@
                                         <div class="colomn-text-title">
                                             <h3>Devenir un hôte?</h3>
                                             <p>Peu importe qui vous êtes ou le type de logement que vous offrez, la communauté Airbnb vous accueille à bras ouverts.</p>
-                                            <a href="{% url 'rooms:create' %}" class="btn  color-bg float-btn">Ajoutez votre maison<i class="fal fa-plus"></i></a>
+                                            <a href="{% url 'main:post_choice' %}" class="btn  color-bg float-btn">Ajoutez votre maison<i class="fal fa-plus"></i></a>
                                         </div>
                                     </div>
                                     <!--column text   end-->
@@ -819,9 +874,9 @@
                                     <div class="footer-contacts-widget fl-wrap">
                                         <p>Miawoezon est une application novatrice de marché de l'hospitalité conçue pour mettre en relation les voyageurs avec des expériences d'hébergement uniques et personnalisées. Fonctionnant comme une plateforme complète, Miawoezon permet aux utilisateurs de parcourir, de découvrir et de réserver de divers types d'hébergements, tels que des maisons, des appartements et des séjours atypiques, directement auprès des hôtes.</p>
                                         <ul  class="footer-contacts fl-wrap">
-                                            <li><span><i class="fal fa-envelope"></i> mail :</span><a href="#" target="_blank">contact@miawoezon.com</a></li>
-                                            <li> <span><i class="fal fa-map-marker-alt"></i> Une robe :</span><a href="#" target="_blank">DJAGBLE Koklossoukopé, Togo</a></li>
-                                            <li><span><i class="fal fa-phone"></i> Téléphone :</span><a href="#">+228 92 56 56 09</a></li>
+                                            <li><span><i class="fal fa-envelope"></i></span><a href="#" target="_blank">contact@miawoezon.com</a></li>
+                                            <li> <span><i class="fal fa-map-marker-alt"></i></span><a href="#" target="_blank">DJAGBLE Koklossoukopé, Togo</a></li>
+                                            <li><span><i class="fal fa-phone"></i></span><a href="#">+228 92 56 56 09</a></li>
                                         </ul>
                                         <div class="footer-social">
                                             <span>Trouve nous : </span>

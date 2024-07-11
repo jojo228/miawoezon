@@ -1,0 +1,57 @@
+{% extends "index.html" %}
+{% load static %}
+{% block content %}
+            <!--  wrapper  -->
+            <div id="wrapper">
+                <!-- content-->
+                <div class="content">
+                    <!-- section-->
+                    {% include 'dashboard/base.html' %}
+                    <!-- section end-->
+                    <!-- section-->
+                    <section class="middle-padding">
+                        <div class="container">
+                            <!--dasboard-wrap-->
+                            <div class="dasboard-wrap fl-wrap">
+                                <!-- dashboard-content--> 
+                                <div class="dashboard-content fl-wrap">
+                                    <div class="dashboard-list-box fl-wrap">
+                                        <div class="dashboard-header fl-wrap">
+                                            <h3>Photos ( total: {{house.photos.all.count}} )</h3>
+                                        </div>
+                                        <a href="{% url 'announcement:add-photo' pk=house.pk %}"><button type="submit" class="btn color2-bg float-btn">Ajouter<i
+                                          class="fal fa-angle-double-up"></i></button></a>
+                                        <!-- dashboard-list  -->
+                                        {% for photo in house.photos.all %}
+                                        <div class="dashboard-list">
+                                            <div class="dashboard-message">
+                                                <div class="dashboard-listing-table-image">
+                                                  <img src="{{photo.file.url}}" alt="">
+                                                </div>
+                                                <div class="dashboard-listing-table-text">
+                                                    <h4>{{photo.caption}}</h4>
+                                                    <ul class="dashboard-listing-table-opt  fl-wrap">
+                                                        <li><a href="{% url 'announcement:edit-photo' house.pk photo.pk %}">Modifier <i class="fal fa-edit"></i></a></li>
+                                                        <li><a href="{% url 'announcement:delete-photo' house.pk photo.pk %}" class="del-btn">Supprimer <i class="fal fa-trash-alt"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                        
+                                        <!-- dashboard-list end-->    
+                                        
+                                    </div>
+                                    
+                                </div>
+                                <!-- dashboard-list-box end--> 
+                            </div>
+                            <!-- dasboard-wrap end-->
+                        </div>
+                    </section>
+                    <div class="limit-box fl-wrap"></div>
+                </div>
+                <!-- content end-->
+            </div>
+            <!--wrapper end -->
+{% endblock %}

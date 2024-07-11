@@ -164,20 +164,3 @@ class AddPhotoView(LoginRequiredMixin, FormView):
         messages.success(self.request, "Photo Uploaded")
         return redirect(reverse("rooms:photo-list", kwargs={"pk": pk}))
 
-
-# -------------------------- ROOMS PHTOS -------------------#
-
-class CityRoomListView(ListView):
-    model = Room
-    paginate_by = 30
-    context_object_name = "cities"
-    template_name = "city_room_listing.html"
-    login_url = reverse_lazy(user_login_url)
-
-    def get_queryset(self):
-        return Room.objects.filter(statut="Vérifié").order_by("-created")
-
-    def get_context_data(self, **kwargs):
-        context = super(RoomListView, self).get_context_data(**kwargs)
-        return context
-

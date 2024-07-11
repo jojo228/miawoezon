@@ -1,0 +1,110 @@
+{% extends "index.html" %}
+{% load static %}
+{% block content %}
+<div id="wrapper">
+    <!-- content-->
+    <div class="content">
+
+<section>
+    <div class="container">
+        <div class="section-title">
+            <div class="section-title-separator"><span></span></div>
+            <h2>Que voulez vous publier ?</h2>
+            <span class="section-separator"></span>
+        </div>
+        <!-- -->
+        <div class="row">
+            <div class="col-md-4">
+                <!-- process-item-->
+                 <a href="{% url 'rooms:create' %}">
+                <div class="process-item big-pad-pr-item">
+                    <span class="process-count"> </span>
+                    <div class="time-line-icon"><i class="fal fa-hotel"></i></div>
+                    <h4><a href="{% url 'rooms:create' %}"> Appartements Meublé</a></h4>
+                    <!-- <p>Découvrez notre sélection d'appartements entièrement meublés, prêts à vous accueillir. Parfait pour ceux qui cherchent une solution clé en main, nos appartements sont équipés de tout le nécessaire pour votre confort. Que ce soit pour un séjour court ou de longue durée, profitez d'un espace fonctionnel sans souci d'ameublement.</p> -->
+                </div></a>
+                <!-- process-item end -->
+            </div>
+            <div class="col-md-4">
+                <!-- process-item-->
+                 <a href="{% url 'announcement:create' %}">
+                <div class="process-item big-pad-pr-item">
+                    <span class="process-count"> </span>
+                    <div class="time-line-icon"><i class="fal fa-home"></i></div>
+                    <h4> <a href="{% url 'announcement:create' %}">Appartements Non Meublé</a></h4>
+                    <!-- <p>Test nos appartements non meublés, idéals pour ceux qui souhaitent créer un espace à leur image. Avec une toile vierge à votre disposition, vous avez la liberté d'aménager et de décorer selon vos goûts et besoins. C'est la solution parfaite pour un projet à long terme où vous pouvez vraiment vous sentir chez vous.</p> -->
+                </div></a>
+                <!-- process-item end -->                                
+            </div>
+            <div class="col-md-4">
+                <!-- process-item-->
+                <div class="process-item big-pad-pr-item nodecpre">
+                    <span class="process-count"> </span>
+                    <div class="time-line-icon"><i class="fal fa-bullhorn"></i></div>
+                    <h4><a href="#"> Annonces</a></h4>
+                    <!-- <p>Nous visons à construire une communauté de confiance en vous donnant plus d'informations lorsque vous décidez avec qui héberger ou rester avec.</p> -->
+                </div>
+                <!-- process-item end -->                                
+            </div>
+        </div>
+        <!--process-wrap   end-->
+        <div class=" single-facts fl-wrap mar-top">
+            <!-- inline-facts -->
+            <div class="inline-facts-wrap">
+                <div class="inline-facts">
+                    <i class="fal fa-hotel"></i>
+                    <div class="milestone-counter">
+                        <div class="stats animaper">
+                            <div class="num" data-content="0" data-num="254">154</div>
+                        </div>
+                    </div>
+                    <h6>Appartements Meublés</h6>
+                </div>
+            </div>
+            <!-- inline-facts end -->
+            <!-- inline-facts  -->
+            <div class="inline-facts-wrap">
+                <div class="inline-facts">
+                    <i class="fal fa-hotel"></i>
+                    <div class="milestone-counter">
+                        <div class="stats animaper">
+                            <div class="num" data-content="0" data-num="121">121</div>
+                        </div>
+                    </div>
+                    <h6>Appartements Non Meublés</h6>
+                </div>
+            </div>
+            <!-- inline-facts end -->
+            <!-- inline-facts  -->
+            <div class="inline-facts-wrap">
+                <div class="inline-facts">
+                    <i class="fal fa-bullhorn"></i>
+                    <div class="milestone-counter">
+                        <div class="stats animaper">
+                            <div class="num" data-content="0" data-num="172">172</div>
+                        </div>
+                    </div>
+                    <h6>Annonces</h6>
+                </div>
+            </div>
+            <!-- inline-facts end -->
+            <!-- inline-facts  -->
+            <div class="inline-facts-wrap">
+                <div class="inline-facts">
+                    <i class="fal fa-users"></i>
+                    <div class="milestone-counter">
+                        <div class="stats animaper">
+                            <div class="num" data-content="0" data-num="732">732</div>
+                        </div>
+                    </div>
+                    <h6>Utilisateurs</h6>
+                </div>
+            </div>
+            <!-- inline-facts end -->
+        </div>
+    </div>
+</section>
+
+    </div>
+</div>
+{% endblock %}

@@ -11,6 +11,7 @@ urlpatterns = [
     path("search-results", views.search, name="search"),
     path("term_condition", views.term_condition , name="term_condition"),
     path("police_prive", views.police_prive , name="police_prive"),
+    path("post_choice", views.post_choice , name="post_choice"),
 
 
     path("index2", views.index2 , name="index2"),

@@ -17,7 +17,7 @@
                             {{ request.user.client }}
                         </h3>
                     </div>
-                    <a href="{% url 'rooms:create'%}" class="ed-btn">Publier</a>
+                    <a href="{% url 'main:post_choice'%}" class="ed-btn">Publier</a>
                     <div class="user-stats fl-wrap">
                         <ul>
                             <li>
@@ -53,13 +53,13 @@
                     <li><a href="{% url 'conversations:conversations'%}" {% if request.resolver_match.url_name == 'conversations' %} class="user-profile-act" {% endif %}><i class="far fa-envelope"></i> Messages
                             <span>3</span></a></li>
                     <li>
-                        <a href="{% url 'rooms:host-list'%}" {% if request.resolver_match.url_name == 'host-list' %} class="user-profile-act" {% endif %} ><i
+                        <a href="#" {% if request.resolver_match.url_name == 'host-list' %} class="user-profile-act" {% endif %} ><i
                                 class="far fa-th-list"></i> Mes Publications </a>
-                        <!-- <ul>
-                            <li><a href="#">Active</a><span>5</span></li>
-                            <li><a href="#">Pending</a><span>2</span></li>
-                            <li><a href="#">Expire</a><span>3</span></li>
-                        </ul> -->
+                        <ul>
+                            <li><a href="{% url 'rooms:host-list'%}">Appart Meublés</a><span>{{total_houses}}</span></li>
+                            <li><a href="{% url 'announcement:host-list'%}">Non Meublés</a><span></span></li>
+                            <li><a href="#">Annonces</a><span></span></li>
+                        </ul>
                     </li>
                     <li><a href="{% url 'reservations:bookings'%}" {% if request.resolver_match.url_name == 'bookings' %} class="user-profile-act" {% endif %}> <i class="far fa-calendar-check"></i> Reservations
                             </a></li>
