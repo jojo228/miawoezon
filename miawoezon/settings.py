@@ -311,4 +311,5 @@ JAZZMIN_SETTINGS: Dict[str, Any] = {
     "show_ui_builder": True,
 }
 
-
+CINETPAY_API_KEY = "167837621065f9bc1762a003.17505002"
+CINETPAY_SITE_ID = "5867973"

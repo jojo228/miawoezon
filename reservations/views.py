@@ -16,7 +16,10 @@ from cinetpay_sdk.s_d_k import Cinetpay
 from reservations.models import Reservation  # Assuming you have a Commande class in commande.py
 import os, requests
 from .models import TransactionCounter
-
+from django.views.decorators.csrf import csrf_exempt
+import uuid
+from django.utils.decorators import method_decorator
+from django.conf import settings
 
 class CreateError(Exception):
     pass
@@ -73,23 +76,6 @@ class CreateReservationView(LoginRequiredMixin, View):
                 check_in=start_date,
                 check_out=end_date,
             )
-
-            # # Obtenez le prochain numéro de compteur pour l'identifiant de transaction
-            # transaction_id_counter = TransactionCounter.get_next_counter()
-            
-            # # Utilisez transaction_id_counter pour générer le transaction_id
-            # transaction_id = generate_transaction_id(request.user, transaction_id_counter)
-
-            # # Créez une instance PaymentInformation et liez-la à la réservation
-            # payment_info = PaymentInformation.objects.create(
-            #     transaction_id=transaction_id,
-            #     amount=reservation.total_amount(),
-            #     currency='XOF',  # Remplacez par la devise réelle
-            #     # Ajoutez d'autres champs requis pour PaymentInformation
-            # )
-            # reservation.payment = payment_info
-
-            # Enregistrez la réservation et le paiement
             reservation.save()
 
 
@@ -152,237 +138,202 @@ def invoice(request):
     return render(request, "invoice.html")
 
 
-# def initiate_payment(request):
-#     if request.method == 'POST':
-#         try:
-#             # Récupération des données du formulaire
-#             data = json.loads(request.body)
+@method_decorator(csrf_exempt, name='dispatch')
+class PaymentInitializationView(View):
 
-#             # Récupération des données requises pour initier le paiement
-#             apikey = "19583603556596c6116b91e6.90506747"
-#             site_id = "5867973"
-#             transaction_id = data['transaction_id']
-#             amount = data['amount']
-#             currency = data['currency']
-#             customer_name = data['customer_name']
-#             customer_surname = data['customer_surname']
-#             description = data['description']
-#             notify_url = data['notify_url']
-#             return_url = data['return_url']
-#             channels = data.get('channels', 'ALL')
-#             alternative_currency = data.get('alternative_currency', '')
-#             customer_email = data.get('customer_email', '')
-#             customer_phone_number = data.get('customer_phone_number', '')
-#             customer_address = data.get('customer_address', '')
-#             customer_city = data.get('customer_city', '')
-#             customer_country = data.get('customer_country', '')
-#             customer_state = data.get('customer_state', '')
-#             customer_zip_code = data.get('customer_zip_code', '')
-
-#             # Enregistrement des informations de paiement dans la base de données
-#             payment_info = PaymentInformation.objects.create(
-#                 transaction_id=transaction_id,
-#                 amount=amount,
-#                 currency=currency,
-#                 customer_name=customer_name,
-#                 customer_surname=customer_surname,
-#                 description=description,
-#                 notify_url=notify_url,
-#                 return_url=return_url
-#                 # Ajoutez d'autres champs si nécessaire
-#             )
-
-#             # Données pour générer le lien de paiement
-#             payment_data = {
-#                 "apikey": apikey,
-#                 "site_id": site_id,
-#                 "transaction_id": transaction_id,
-#                 "amount": amount,
-#                 "currency": currency,
-#                 "customer_name": customer_name,
-#                 "customer_surname": customer_surname,
-#                 "description": description,
-#                 "notify_url": notify_url,
-#                 "return_url": return_url,
-#                 "channels": channels,
-#                 "alternative_currency": alternative_currency,
-#                 "customer_email": customer_email,
-#                 "customer_phone_number": customer_phone_number,
-#                 "customer_address": customer_address,
-#                 "customer_city": customer_city,
-#                 "customer_country": customer_country,
-#                 "customer_state": customer_state,
-#                 "customer_zip_code": customer_zip_code
-#             }
-
-#             # Réponse avec le lien de paiement généré
-#             return JsonResponse({"payment_url": generate_payment_link(payment_data)})
-
-#         except Exception as e:
-#             return JsonResponse({"error": str(e)}, status=400)
-
-#     else:
-#         return JsonResponse({"error": "Method not allowed"}, status=405)
-
-# def generate_payment_link(data):
-#     # Votre logique pour générer le lien de paiement avec CinetPay
-#     # Utilisez les données fournies pour construire le lien de paiement
-#     # et retournez le lien généré
-#     return "URL_DU_PAIEMENT_GÉNÉRÉ"
-
-
-# def checkout(request, payment_id):
-#     payment_info = PaymentInformation.objects.get(pk=payment_id)
-#     # Initialize Paygate client
-#     apikey = os.getenv("CINETPAY_APIKEY") 
-#     site_id = os.getenv("CINETPAY_SITEID")
-#     client = Cinetpay(apikey, site_id)
-#     # Initialize payment with Paygate
-#     response = client.initiate_payment(payment_info)
-#     # Process response and redirect user to Paygate checkout page
-#     return redirect(response['redirect_url'])
-
-
-
-# def initiate_payment(request, reservation_id):
-#         # Retrieve the reservation
-#         reservation = Reservation.objects.get(pk=reservation_id)
-
-#         # Your Cinetpay API credentials
-#         apikey = os.getenv("CINETPAY_APIKEY") 
-#         site_id = os.getenv("CINETPAY_SITEID")
-
-#         # Initialize Cinetpay
-#         client = Cinetpay(apikey, site_id)
-        
-
-#         # Assuming you have retrieved the necessary data for the payment
-#         payment_data = {
-#             'amount': int(reservation.room.price),  # Replace with the actual amount
-#             'currency': 'XOF',
-#             'channels': 'ALL',
-#             'transaction_id': TransactionCounter.get_next_counter(),
-#             'description': 'Payment for reservation',
-#             # ... (other required data)
-#         }
-
-#         # Make the payment initialization request
-#         payment_response = client.PaymentInitialization(payment_data)
-#         print(payment_response)
-
-#         # Check the payment_response and handle accordingly (e.g., redirect to payment gateway)
-
-#         # Save the payment information in your database
-#         if payment_response.get('code') == '00':
-#             payment = PaymentInformation.objects.create(
-#                 reservation=reservation,  # Associate payment with the reservation
-#                 amount=payment_data['amount'],
-#                 currency=payment_data['currency'],
-#                 transaction_id=payment_data['transaction_id'],
-#                 description=payment_data['description'],
-#                 status='pending'  # You may update the status based on the payment response
-#             )
-#             payment.save()
-
-#             # Redirect to a payment confirmation or gateway URL
-#             return redirect(payment_response.get('payment_url'))
-#         else:
-#             return HttpResponse("Echec !!!")
-#             # Handle the case when the payment initialization fails
-#             # ...
-
-
-def handle_payment_notification(request, cpm_trans_id):
-    if request.method == 'POST':
-        # Check if the request contains the required headers
-        if 'x-token' not in request.headers:
-            return JsonResponse({'error': 'Missing HMAC token'}, status=400)
-        
-        # Retrieve the HMAC token from the header
-        hmac_token = request.headers['x-token']
-        
-        # Perform HMAC token verification (implementation not provided here)
-
-        # Retrieve form values
-        cpm_site_id = request.POST.get('cpm_site_id')
-        cpm_trans_id = request.POST.get('cpm_trans_id')
-        cpm_trans_date = request.POST.get('cpm_trans_date')
-        cpm_amount = request.POST.get('cpm_amount')
-        cpm_currency = request.POST.get('cpm_currency')
-        payment_method = request.POST.get('payment_method')
-        cel_phone_num = request.POST.get('cel_phone_num')
-        cpm_phone_prefixe = request.POST.get('cpm_phone_prefixe')
-        cpm_language = request.POST.get('cpm_language')
-        cpm_version = request.POST.get('cpm_version')
-        cpm_payment_config = request.POST.get('cpm_payment_config')
-        cpm_page_action = request.POST.get('cpm_page_action')
-        cpm_custom = request.POST.get('cpm_custom')
-        cpm_designation = request.POST.get('cpm_designation')
-        cpm_error_message = request.POST.get('cpm_error_message')
-        signature = request.POST.get('signature')
-        print(cpm_trans_id)
-
-        # Check if cpm_site_id and cpm_trans_id are provided
-        if cpm_site_id is None or cpm_trans_id is None:
-            return JsonResponse({'error': 'Missing cpm_site_id or cpm_trans_id'}, status=400)
-
-        # Check if payment status is already successful in your database
+    def get(self, request, *args, **kwargs):
         try:
-            payment_info = PaymentInformation.objects.get(transaction_id=cpm_trans_id)
-            if payment_info.status == 'COMPLETED':
-                return JsonResponse({'message': 'Payment already completed'}, status=200)
-        except PaymentInformation.DoesNotExist:
-            pass  # Payment information does not exist, proceed to verification
+            # Fetch the reservation using the pk from the URL
+            pk = kwargs.get("pk")
+            if not pk:
+                return JsonResponse({'error': 'Reservation ID is missing.'}, status=400)
 
-        # Call transaction verification API to obtain transaction status from CinetPay
-        apikey = os.getenv("CINETPAY_APIKEY") 
-        site_id = os.getenv("CINETPAY_SITEID")
-        data = {
-            "apikey": apikey,
-            "site_id": site_id,
-            "transaction_id": cpm_trans_id,
-        }
-        verification_response = requests.post(
-            url="https://api-checkout.cinetpay.com/v2/payment/check",
-            data=data
-        )
-        
-        print(verification_response)
-        # Handle verification response (implementation not provided here)
+            reservation = Reservation.objects.get(pk=pk)
 
-        # Update payment status in your database based on verification response
-        # For example, if verification_response indicates successful payment:
-        # payment_info.status = 'COMPLETED'
-        # payment_info.save()
+            # Return reservation details for confirmation
+            reservation_data = {
+                'reservation_id': reservation.id,
+                'room': str(reservation.room),
+                'total_amount': reservation.total_amount(),
+                'status': reservation.status,
+                'check_in': reservation.check_in,
+                'check_out': reservation.check_out
+            }
+            return JsonResponse(reservation_data, status=200)
 
-        return JsonResponse({'message': 'Payment notification processed'}, status=200)
+        except Reservation.DoesNotExist:
+            return JsonResponse({'error': 'Reservation not found'}, status=404)
 
-    else:
-        return JsonResponse({'error': 'Method not allowed'}, status=405)
-    
-
-
-def handle_payment_return(request):
-    if 'cpm_trans_id' in request.POST or 'token' in request.POST:
+    def post(self, request, *args, **kwargs):
         try:
-            id_transaction = request.POST.get('transaction_id') or request.POST.get('token')
+            # Retrieve data and process payment (POST request to initiate payment)
+            pk = kwargs.get("pk")
+            if not pk:
+                return JsonResponse({'error': 'Reservation ID is missing.'}, status=400)
 
-            # Initialisation de CinetPay et vérification du statut de paiement
-            apikey = os.getenv("CINETPAY_APIKEY") 
-            site_id = os.getenv("CINETPAY_SITEID")
-            client = Cinetpay(apikey, site_id)
-            client.getPayStatus(id_transaction, site_id)    
+            reservation = Reservation.objects.get(pk=pk)
 
-            # Récupération du message et du code de statut de CinetPay
-            message = client.chk_message
-            code = client.chk_code
+            # Total amount for payment
+            total_amount = reservation.total_amount()
+            if total_amount <= 0:
+                return JsonResponse({'error': 'Le montant total doit être supérieur à zéro.'}, status=400)
 
-            # Redirection vers une page en fonction de l'état de la transaction
-            if code == '00':
-                return redirect("reservations:invoice")
+            # Process payment initialization with CinetPay (same as before)
+            transaction_id = str(uuid.uuid4())
+            cinetpay_data = {
+                'apikey': settings.CINETPAY_API_KEY,
+                'site_id': settings.CINETPAY_SITE_ID,
+                'transaction_id': transaction_id,
+                'amount': str(total_amount),
+                'currency': 'XOF',
+                'channels': 'ALL',
+                'description': 'Paiement de commande',
+                'return_url': request.build_absolute_uri('/payment/return/'),
+                'notify_url': request.build_absolute_uri('/payment/notify/'),
+                'customer_name': request.user.username if request.user.is_authenticated else 'Anonymous',
+                'customer_email': request.user.email if request.user.is_authenticated else 'anonymous@example.com',
+                'customer_phone_number': '00000000',  # Update as needed
+                'customer_address': request.POST.get('address'),
+                'customer_city': request.POST.get('city'),
+                'customer_country': request.POST.get('country'),
+            }
+
+            # Send payment request to CinetPay
+            response = requests.post('https://api-checkout.cinetpay.com/v2/payment', json=cinetpay_data)
+            response_data = response.json()
+
+            if response.status_code == 200 and response_data.get('code') == '201':
+                payment_url = response_data['data']['payment_url']
+                return JsonResponse({'payment_url': payment_url})
+
             else:
-                return redirect("reservations:invoice")
+                error_message = response_data.get('description', 'Une erreur est survenue lors de l\'initialisation du paiement.')
+                return JsonResponse({'error': error_message}, status=400)
+
+        except Reservation.DoesNotExist:
+            return JsonResponse({'error': 'Reservation not found'}, status=404)
         except Exception as e:
-            return HttpResponse("Erreur : " + str(e))
-    else:
-        return HttpResponse('transaction_id non transmis')
+            return JsonResponse({'error': str(e)}, status=500)
+
+
+
+
+@csrf_exempt
+def payment_notify(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+
+            # Extraire les données importantes de la notification
+            transaction_id = data.get('cpm_trans_id')
+            amount = data.get('cpm_amount')
+            status = data.get('cpm_trans_status')
+
+            # Vérifiez que les données nécessaires sont présentes
+            if not transaction_id or not amount or not status:
+                return JsonResponse({'error': 'Missing transaction data.'}, status=400)
+
+            # Récupérer le paiement correspondant
+            try:
+                payment = PaymentInformation.objects.get(transaction_id=transaction_id)
+            except PaymentInformation.DoesNotExist:
+                return JsonResponse({'error': 'Transaction not found.'}, status=404)
+
+            # Mise à jour du statut en fonction du statut de la transaction
+            if status == '00':
+                payment.status = 'COMPLETED'
+                payment.order.ordered = True  # Marquer la commande comme complète
+                payment.order.save()
+            else:
+                payment.status = 'FAILED'
+
+            payment.save()
+
+            return JsonResponse({'status': 'success'})
+
+        except json.JSONDecodeError:
+            return JsonResponse({'error': 'Invalid JSON data.'}, status=400)
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+
+    return JsonResponse({'error': 'Méthode non autorisée'}, status=405)
+
+
+
+@method_decorator(csrf_exempt, name='dispatch')
+class PaymentReturnView(View):
+    def post(self, request, *args, **kwargs):
+        transaction_id = request.POST.get('transaction_id')
+        
+        if not transaction_id:
+            return JsonResponse({"error": "Transaction ID not provided."}, status=400)
+
+        # Configuration de l'API CinetPay
+        api_url = "https://api.cinetpay.com/v1/?method=checkPayStatus"
+        site_id = settings.CINETPAY_SITE_ID
+        api_key = settings.CINETPAY_API_KEY
+
+        # Préparation des données pour la requête à CinetPay
+        data = {
+            "apikey": api_key,
+            "site_id": site_id,
+            "transaction_id": transaction_id,
+        }
+
+        # Faire la requête à l'API de CinetPay
+        response = requests.post(api_url, json=data)
+        result = response.json()
+        print(result)
+
+        # Vérifiez que 'amount' et 'status' sont présents dans la réponse
+        amount = result.get('amount')
+        status = result.get('status')
+
+        if amount is None or status is None:
+            return JsonResponse({"error": "Invalid response from CinetPay. 'amount' or 'status' not found."}, status=400)
+
+        payment, created = PaymentInformation.objects.create(
+            transaction_id=transaction_id,
+            defaults={
+                'user': request.user,  # Relier le paiement à l'utilisateur
+                'amount': amount,
+                'status': status,
+            }
+        )
+
+        # Vérifier le statut de la réponse
+        if response.status_code == 200 and result.get('status') == '00':
+            # Paiement réussi
+            payment_status = "Success"
+
+            # Mettre à jour ou créer les informations de paiement dans la base de données
+            payment_info, created = PaymentInformation.objects.update_or_create(
+                transaction_id=transaction_id,
+                defaults={
+                    'user': request.user,  # Relier le paiement à l'utilisateur
+                    'amount': result['amount'],
+                    'status': payment_status,  # Statut du paiement
+                }
+            )
+
+            # Mise à jour du statut de la réservation liée à la commande (order dans PaymentInformation)
+            reservation = payment_info.order
+            reservation.status = Reservation.STATUS_CONFIRMED  # Statut de la réservation confirmé
+            reservation.save()
+
+
+
+        else:
+            # Paiement échoué ou en attente
+            payment_status = "Failed"
+            PaymentInformation.objects.update_or_create(
+            transaction_id=transaction_id,
+            defaults={
+                'user': request.user,  # Relier le paiement à l'utilisateur
+                'amount': result['amount'],
+                'status': result['status'],
+            }
+        )
+
+        # Rediriger vers une page de confirmation de paiement avec le statut
+        return render(request, 'payment_return.html', {'payment_status': payment_status})

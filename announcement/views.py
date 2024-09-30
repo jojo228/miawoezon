@@ -1,16 +1,22 @@
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView, FormView
-from announcement.forms import CommentForm, CreateHouseForm, CreatePhotoForm
+from announcement.forms import CommentForm, CreateHouseForm, CreatePhotoForm, PhotoUploadForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from announcement.models import House, Comment, Photo
 from django.urls import reverse, reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
+from django.forms import modelformset_factory
 
-from reservations.models import Reservation
+from django.shortcuts import render, redirect
+from django.forms import inlineformset_factory
+from .models import House, Photo
+from .forms import CreateHouseForm, PhotoFormSet
+
 
 user_login_url = "authentication:login"
+PhotoFormSet = modelformset_factory(Photo, form=PhotoUploadForm, extra=1, can_delete=True)
 
 # Create your views here.
 def announce_detail(request, pk):
@@ -44,16 +50,27 @@ class HouseCreateView(LoginRequiredMixin, CreateView):
     form_class = CreateHouseForm
     template_name = "house_create.html"
     success_url = reverse_lazy("announcement:host-list")
-    login_url = reverse_lazy(user_login_url)
-
-    def form_valid(self, form):
-        form.instance.host = self.request.user.client
-        print("success")
-        return super(HouseCreateView, self).form_valid(form)
+    login_url = reverse_lazy("user_login_url")
 
     def get_context_data(self, **kwargs):
-        context = super(HouseCreateView, self).get_context_data(**kwargs)
-        return context
+        data = super().get_context_data(**kwargs)
+        if self.request.POST:
+            data['formset'] = PhotoFormSet(self.request.POST, self.request.FILES)
+        else:
+            data['formset'] = PhotoFormSet()
+        return data
+
+    def form_valid(self, form):
+        context = self.get_context_data()
+        photos = context['formset']
+        form.instance.host = self.request.user.client
+        if form.is_valid() and photos.is_valid():
+            self.object = form.save()
+            photos.instance = self.object
+            photos.save()
+            return redirect(self.success_url)
+        else:
+            return self.render_to_response(self.get_context_data(form=form))
     
 
 # LIST

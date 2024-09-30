@@ -1,90 +1,7 @@
 
 {% extends "index.html" %}
 {% load humanize %}
-{% block css %}
-<!--=============== CinetPay Script ===============-->
-<script src="https://cdn.cinetpay.com/seamless/main.js"></script>
-<style>
-    .sdk {
-        display: block;
-        position: absolute;
-        background-position: center;
-        text-align: center;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-    }
-</style>
 
-
-<script>
-
-    
-
-    // Retrieve values from reservation details
-    var roomType = "{{reservation.room.room_type}}";
-    var total_amount = parseInt("{{reservation.total_amount}}");
-    var checkInDate = "{{reservation.check_in|date:'d M Y'}}";
-    var checkOutDate = "{{reservation.check_out|date:'d M Y'}}";
-    var totalDays = "{{reservation.total_days}}";
-    var description = "{{reservation.room.name}}";
-    var transaction_id = Math.floor(Math.random() * 100000000).toString()
-
-    // Retrieve values from user details
-    var customer_name = "{{reservation.room.guest.user.first_name}}";
-    var customer_surname = "{{reservation.room..user.last_name}}";
-    var customer_email = "{{reservation.room..user.email}}";
-    var customer_phone_number = "{{reservation.room.guest.contact}}";
-    var customer_address = "{{reservation.room.guest.address}}";
-    var customer_city = "{{reservation.room.guest.city}}";
-    var customer_country = "{{reservation.room.guest.country}}";
-    var customer_zip_code = "{{reservation.room.guest.pincode}}";
-
-
-    function checkout() {
-        CinetPay.setConfig({
-            apikey: '167837621065f9bc1762a003.17505002',
-            site_id: '5867973',
-            notify_url: 'https://miawoezon.com/payment/notification/',
-            mode: 'PRODUCTION'
-        });
-        CinetPay.getCheckout({
-            transaction_id: transaction_id, // YOUR TRANSACTION ID
-            amount: parseInt(total_amount),
-            currency: 'XOF',
-            channels: 'ALL',
-            description: 'Paiement pour ' + description,   
-             //Fournir ces variables pour le paiements par carte bancaire
-            customer_name: customer_name,
-            customer_surname: customer_surname,
-            customer_email: customer_email,
-            customer_phone_number: customer_phone_number,
-            customer_address : customer_address,
-            customer_city: customer_city,
-            customer_country : customer_country,
-            customer_state : "",// le code ISO l'état
-            customer_zip_code : customer_zip_code,
-
-        });
-        // CinetPay.waitResponse(function(data) {
-        //     if (data.status == "REFUSED") {
-        //         if (alert("Votre paiement a échoué")) {
-        //             window.location.reload();
-        //             
-        //         }
-        //     } else if (data.status == "ACCEPTED") {
-        //         if (alert("Votre paiement a été effectué avec succès")) {
-        //             window.location.reload();
-        //             
-        //         }
-        //     }
-        // });
-        CinetPay.onError(function(data) {
-            console.log(data);
-        });
-    }
-</script>
-{% endblock css %}
 {% load static %}
 {% block content %}
 
@@ -115,7 +32,7 @@
                                         <div class="list-single-main-item fl-wrap hidden-section tr-sec">
                                             <div class="profile-edit-container">
                                                 <div class="custom-form">
-                                                    <form id="billing-form" method="" action="">
+                                                    <form id="billing-form" method="post" action="">
                                                         {% csrf_token %}
                                                         <fieldset class="fl-wrap book_mdf">
                                                             <!-- Billing Address -->
@@ -147,13 +64,16 @@
                                                             <!-- <textarea name="notes" cols="40" rows="3" placeholder="Notes"></textarea> -->
                                                             <span class="fw-separator"></span>
                                                             <!-- <button type="submit" >Payment <i class="fal fa-angle-right"></i></button> -->
-                                                            <a onclick="checkout()"  href="#"  class="action-button btn color2-bg no-shdow-btn">Confirmer et payer<i class="fal fa-angle-right"></i></a>
+                                                            <button id="pay_button" >Payment <i class="fal fa-angle-right"></i></button>
                                                             <div class="sdk">
                                                                 
                                                             </div>
                                                             
                                                         </fieldset>
                                                     </form>
+                                                    <!-- <a id="pay_button"  href="#"  class="action-button btn color2-bg no-shdow-btn">Confirmer et payer<i class="fal fa-angle-right"></i></a> -->
+                                                    <!-- <button id="pay_button" type="submit" >Payment <i class="fal fa-angle-right"></i></button> -->
+
                                                     
                                                 </div>
                                             </div>
@@ -185,7 +105,7 @@
                                                 <li>Jours<span>{{reservation.total_days}}</span></li>
                                                 <li>Personnes <span>{{reservation.room.guests}}</span></li>
                                                 <li>Sous Total <span><strong>{{reservation.subtotal|intcomma}} xof</strong></span></li>
-                                                <li>Frais de service (3%) <span><strong>{{reservation.service_fees|floatformat:0|intcomma}} xof</strong></span></li>
+                                                <li>Frais de service (14%) <span><strong>{{reservation.service_fees|floatformat:0|intcomma}} xof</strong></span></li>
                                                 <!-- <li>Childs <span>1 <strong>-10%</strong></span></li> -->
                                                 <!-- <li>Taxes And Fees <span><strong>$12</strong></span></li> -->
                                             </ul>
@@ -208,5 +128,46 @@
                 <!-- content end-->
             </div>
             <!--wrapper end -->
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#pay_button').on('click', function(event) {
+            event.preventDefault(); // Empêcher la redirection automatique
+
+            // Récupérer les données du formulaire
+            var formData = {
+                address: $('#address').val(),
+                country: $('#country').val(),
+                city: $('#city').val(),
+                
+            };
+
+            console.log('Données du formulaire:', formData); // Pour débogage
+
+            $.ajax({
+                url: "{% url 'reservations:payment_initialize' reservation.id %}",
+                method: "POST",
+                data: formData,
+                dataType: "json",
+                success: function(response) {
+                    if (response.payment_url) {
+                        window.location.href = response.payment_url; // Rediriger vers CinetPay
+                    } else if (response.error) {
+                        alert('Erreur: ' + response.error);
+                    } else {
+                        alert('Une erreur inconnue est survenue.');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('Erreur AJAX:', error);
+                    alert('Une erreur est survenue lors de l\'initialisation du paiement.');
+                }
+            });
+        });
+    });
+</script>
+
 
 {% endblock %}

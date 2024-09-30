@@ -76,12 +76,17 @@
                                 <span><img src="{% static 'images/avatar/1.jpg' %}" alt=""></span>
                                 {{request.user.get_full_name}}
                             </div>
+                            <div class="nav-holder main-menu">
+                                <nav>
                             <ul>
                                 <li><a href="{% url 'main:post_choice' %}"> Publier</a></li>
+                                <li><a href="{% url 'main:type_publication' %}"> Mes publications</a></li>
                                 <li><a href="{% url 'authentication:profil' %}"> Profil</a></li>
                                 <li><a href="{% url 'reservations:bookings'%}">  Reservations  </a></li>
                                 <li><a href="{% url 'authentication:logout' %}">Se deconnecter</a></li>
                             </ul>
+                        </nav>
+                    </div>
                         </div>
                         {% endif %}  
                         <div class="home-btn"><a href="{% url 'main:home' %}"><i class="fas fa-home"></i></a></div>

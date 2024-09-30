@@ -83,6 +83,11 @@ def post_choice(request):
     return render(request, "post-choice.html")
 
 
+def type_publication(request):
+    
+    return render(request, "type_publication.html")
+
+
 
 
 

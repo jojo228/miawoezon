@@ -80,7 +80,7 @@ class Reservation(main_models.TimeStampedModel):
 
     def service_fees(self):
         total = self.subtotal()
-        fee_percentage = 3 / 100
+        fee_percentage = 14 / 100
         fees = (total * fee_percentage)
         return fees
     
@@ -106,23 +106,15 @@ class Reservation(main_models.TimeStampedModel):
 
 
 class PaymentInformation(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    order = models.ForeignKey('Reservation', on_delete=models.CASCADE)
     transaction_id = models.CharField(max_length=100, unique=True)
-    amount = models.DecimalField(max_digits=10, decimal_places=2)
-    currency = models.CharField(max_length=3)
-    description = models.TextField()
-    trans_date = models.DateTimeField(null=True)
-    payment_method = models.CharField(max_length=50, null=True)
-    phone_number = models.CharField(max_length=50, null=True)
-    phone_prefixe = models.CharField(max_length=50, null=True)
-    language = models.CharField(max_length=50, null=True)
-    phone_prefixe = models.CharField(max_length=50, null=True)
-    notify_url = models.URLField()
-    return_url = models.URLField()
-    status = models.CharField(max_length=50, null=True)
-    reservation = models.OneToOneField(Reservation, on_delete=models.CASCADE)
-    message = models.CharField(max_length=500, null=True)
+    amount = models.FloatField()
+    status = models.CharField(max_length=20, default='pending')  # pending, successful, failed
+    payment_date = models.DateTimeField(auto_now_add=True)
+
     def __str__(self):
-        return self.transaction_id
+        return f"PaymentInformation {self.transaction_id} - {self.status}"
     
 
 class BillingInformation(models.Model):

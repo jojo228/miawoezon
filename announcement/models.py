@@ -4,7 +4,6 @@ from django.urls import reverse
 
 
 # Create your models here.
-
 class HouseType(Enum):
     PIECE = "Pièce"
     DEUX_CHAMBRE_SALON = "Deux chambres salon"
@@ -21,7 +20,7 @@ class HouseType(Enum):
 
 class Photo(models.Model):
     caption = models.CharField(max_length=80)
-    file = models.ImageField(upload_to="room_photos")
+    file = models.FileField(upload_to="room_photos")
     house = models.ForeignKey("House", related_name="photos", on_delete=models.CASCADE)
 
     def __str__(self):

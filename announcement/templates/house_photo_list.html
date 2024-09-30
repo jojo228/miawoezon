@@ -19,8 +19,18 @@
                                         <div class="dashboard-header fl-wrap">
                                             <h3>Photos ( total: {{house.photos.all.count}} )</h3>
                                         </div>
-                                        <a href="{% url 'announcement:add-photo' pk=house.pk %}"><button type="submit" class="btn color2-bg float-btn">Ajouter<i
-                                          class="fal fa-angle-double-up"></i></button></a>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <a href="{% url 'announcement:add-photo' pk=house.pk %}"><button type="submit" class="btn color2-bg float-btn">Ajouter<i
+                                                    class="fal fa-angle-double-up"></i></button></a>
+                                            </div>
+                                            <div>
+                                                <a href="{% url 'announcement:host-list' %}"><button type="submit" class="btn color3-bg float-btn">Terminé<i
+                                                    class="fal fa-check"></i></button></a>
+                                            </div>
+
+                                        </div>
+                                        
                                         <!-- dashboard-list  -->
                                         {% for photo in house.photos.all %}
                                         <div class="dashboard-list">

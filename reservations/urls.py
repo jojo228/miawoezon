@@ -13,10 +13,10 @@ urlpatterns = [
     path("<int:pk>/<str:verb>", views.edit_reservation, name="edit"),
     path("invoice/", views.invoice, name="invoice"),
 
-    # path('initialize-payment/', views.initiate_payment, name='initiate_payment'),
-    # path('checkout/<int:payment_id>/', views.checkout, name='checkout'),
-    path('handle-payment-return/', views.handle_payment_return, name='handle_payment_return'),
-    path('payment/notification/<str:cpm_trans_id>/', views.handle_payment_notification, name='handle_payment_notification'),
+    # Payment Successful
+    path('payment/initialize/<int:pk>/', views.PaymentInitializationView.as_view(), name='payment_initialize'),
+    path('payment/notify/', views.payment_notify, name='payment_notify'),
+    path('payment/return/', views.PaymentReturnView.as_view(), name='payment_return'),
 
     path("bookings/", views.bookings, name="bookings"),
     path("my_bookings/", views.my_bookings, name="my_bookings"),

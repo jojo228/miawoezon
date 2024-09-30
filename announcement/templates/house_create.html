@@ -78,11 +78,35 @@
                                                 <label for="room-details">{{form.description.label}}</label>
                                                 {{form.description}}
                                             </div>
-                                            {{field.errors}}
 
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label for="room-photos">Photos</label>
+                                                    <div class="add-list-media-wrap">
+                                                        <div class="fuzone">
+                                                            <div class="fu-text">
+                                                                <span><i class="far fa-cloud-upload-alt"></i> Click here or drop files to upload</span>
+                                                            </div>
+                                                            {{ formset.management_form }} <!-- Render management form -->
+                                                                {% for form in formset %}
+                                                                    <div class="photo-form">
+                                                                        {{ form.file }} <!-- Render file input -->
+                                                                        
+                                                                    </div>
+                                                                {% endfor %}
+                                                            <div id="preview-container"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    
                                         </div>
-                                        <br>
 
+                                        {% for error in form.description.errors %}
+                                        <div class="alert alert-danger">{{ error }}</div>
+                                        {% endfor %}
+                                        
+                                        <br>
 
                                         <div class="fl-wrap filter-tags">
                                             <label for="agreeTerms">
@@ -138,7 +162,31 @@
             }
         });
     });
-
-
 </script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('input[type="file"]').forEach(input => {
+            input.addEventListener('change', function(event) {
+                const previewContainer = document.getElementById('preview-container');
+                previewContainer.innerHTML = ''; // Clear the current preview
+                const files = event.target.files;
+                for (let i = 0; i < files.length; i++) {
+                    const file = files[i];
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const img = document.createElement('img');
+                        img.src = e.target.result;
+                        img.width = 150;
+                        img.height = 150;
+                        img.style.margin = '10px';
+                        previewContainer.appendChild(img);
+                    }
+                    reader.readAsDataURL(file);
+                }
+            });
+        });
+    });
+</script>
+    
 {% endblock %}
